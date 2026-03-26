@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}How to Optimize Images for the Web in 2026 | imgpact{% endblock %}
+{% block meta_description %}A complete guide to web image optimization: choose the right format, compress without quality loss, implement lazy loading, responsive images, and CDN delivery.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Web Optimization</a>
+    <span>›</span>
+    Optimize Images
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Web Optimization</div>
+    <h1>How to Optimize Images for the Web in 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 8 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Images account for 50–70% of the average web page weight. Poorly optimized images are the single biggest cause of slow websites, high bounce rates, and poor Core Web Vitals scores. This guide covers every technique you need to deliver images that are fast, lean, and SEO-friendly.</p>
+
+    <h2>Step 1: Choose the right format</h2>
+    <p>Format selection has the biggest impact on file size, even before any compression is applied:</p>
+    <ul>
+      <li><strong>AVIF</strong>: best compression for photos (2026 default for modern browsers)</li>
+      <li><strong>WebP</strong>: excellent compression, 97% browser support, use as fallback for AVIF</li>
+      <li><strong>JPEG</strong>: universal fallback for photographs</li>
+      <li><strong>PNG</strong>: when transparency is required and WebP is not an option</li>
+      <li><strong>SVG</strong>: logos, icons, any vector content, infinitely scalable</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Quick rule:</strong> Photos → AVIF (with WebP/JPEG fallback). Graphics with transparency → WebP (with PNG fallback). Logos and icons → SVG.
+    </div>
+
+    <h2>Step 2: Resize to the display dimensions</h2>
+    <p>Never upload a 4000×3000 pixel photo to display at 800×600. The browser downloads the full resolution, then scales it down, wasting bandwidth with zero visible benefit. Always resize images to their maximum display dimensions before uploading.</p>
+    <p>For responsive images that display at different sizes on mobile vs desktop, use the <code>srcset</code> and <code>sizes</code> attributes to provide multiple resolutions and let the browser choose the right one.</p>
+
+    <h2>Step 3: Compress aggressively</h2>
+    <p>Most images can tolerate much more compression than people assume. Practical targets:</p>
+    <table>
+      <thead>
+        <tr><th>Image type</th><th>Recommended quality</th><th>Expected file size</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hero / banner photo</td><td>AVIF q60–70 / JPEG q75–85</td><td>50–150 KB</td></tr>
+        <tr><td>Product photo (e-commerce)</td><td>AVIF q70 / JPEG q80–85</td><td>30–100 KB</td></tr>
+        <tr><td>Thumbnail</td><td>AVIF q60 / JPEG q75</td><td>5–20 KB</td></tr>
+        <tr><td>PNG graphic (transparency)</td><td>WebP q80 / PNG 8-bit</td><td>10–50 KB</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Step 4: Implement lazy loading</h2>
+    <p>Images below the fold should not be downloaded until the user scrolls near them. The native HTML attribute makes this trivial:</p>
+    <pre><code>&lt;img src="photo.jpg" alt="Description" loading="lazy"&gt;</code></pre>
+    <p>Always add <code>loading="eager"</code> (or omit the attribute) for above-the-fold images, especially your LCP (Largest Contentful Paint) image. Lazy-loading your hero image will hurt your LCP score.</p>
+
+    <h2>Step 5: Add width and height attributes</h2>
+    <p>Always specify <code>width</code> and <code>height</code> on every <code>&lt;img&gt;</code> tag. This allows the browser to reserve the correct space before the image loads, eliminating Cumulative Layout Shift (CLS), a Core Web Vitals metric:</p>
+    <pre><code>&lt;img src="photo.jpg" alt="Description" width="800" height="600" loading="lazy"&gt;</code></pre>
+
+    <h2>Step 6: Use a CDN</h2>
+    <p>A Content Delivery Network serves images from servers geographically close to your users, reducing latency. Modern image CDNs (Cloudflare Images, Fastly, Imgix, Cloudinary) also automate:</p>
+    <ul>
+      <li>Format conversion (serve AVIF to supported browsers, WebP otherwise, JPEG as last resort)</li>
+      <li>Responsive resizing on demand</li>
+      <li>Aggressive caching with proper headers</li>
+    </ul>
+
+    <h2>Step 7: Preload your LCP image</h2>
+    <p>The Largest Contentful Paint image (usually your hero image) has the biggest impact on user experience. Tell the browser to fetch it as early as possible:</p>
+    <pre><code>&lt;link rel="preload" as="image" href="hero.avif" type="image/avif"
+      imagesrcset="hero-400.avif 400w, hero-800.avif 800w, hero-1200.avif 1200w"
+      imagesizes="100vw"&gt;</code></pre>
+
+    <h2>Image optimization checklist</h2>
+    <ul>
+      <li>✅ Correct format for each image type</li>
+      <li>✅ Resized to maximum display dimensions</li>
+      <li>✅ Compressed to target quality (not at 100%)</li>
+      <li>✅ <code>loading="lazy"</code> on all below-fold images</li>
+      <li>✅ <code>width</code> and <code>height</code> attributes on every &lt;img&gt;</li>
+      <li>✅ Descriptive <code>alt</code> text for every image</li>
+      <li>✅ Served over HTTPS from a CDN</li>
+      <li>✅ LCP image preloaded</li>
+      <li>✅ <code>&lt;picture&gt;</code> element with AVIF + WebP + JPEG sources</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Image optimization is not a single action, it is a pipeline. Choose the right format, resize to display dimensions, compress aggressively, lazy-load below-fold images, and use a CDN. Together, these steps typically reduce total page image weight by 60–80%.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimize Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images and Core Web Vitals</strong>
+        <span>LCP, CLS, FID: how images affect your Google ranking.</span>
+      </a>
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy Loading Images</strong>
+        <span>Everything about native lazy loading and best practices.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Responsive Images: srcset and sizes</strong>
+        <span>Serve the right image to every screen size automatically.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Optimize Images for the Web in 2026",
+  "description": "A complete guide to web image optimization: choose the right format, compress without quality loss, implement lazy loading, responsive images, and CDN delivery.",
+  "url": "https://imgpact.com/guides/optimize-website-images",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

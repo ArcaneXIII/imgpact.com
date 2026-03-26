@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Cookie Policy, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Cookie Policy</h1>
+    <p class="info-lead">Last updated: March 2026</p>
+  </div>
+  <div class="info-body">
+
+    <h2>What are cookies?</h2>
+    <p>Cookies are small text files stored in your browser. We also use <code>localStorage</code>, a similar browser mechanism that works without cookies but serves the same purpose of remembering your preferences.</p>
+
+    <h2>Cookies and storage we use</h2>
+    <table class="info-table">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>imgpact-theme</code></td>
+          <td>localStorage</td>
+          <td>Remembers your light/dark mode preference</td>
+          <td>Until manually cleared</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-lang</code></td>
+          <td>Cookie</td>
+          <td>Remembers your language preference (EN, FR, ES, RU)</td>
+          <td>365 days</td>
+        </tr>
+        <tr>
+          <td><code>imgpact_consent</code></td>
+          <td>localStorage</td>
+          <td>Saves your cookie consent choices</td>
+          <td>365 days</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-sid</code></td>
+          <td>localStorage</td>
+          <td>Random anonymous session ID used to count unique tool users. Sent to imgpact servers (alongside tool name only) when a tool is used. No personal data, no IP address.</td>
+          <td>Until manually cleared</td>
+        </tr>
+        <tr>
+          <td>Google Analytics (GA4)</td>
+          <td>Cookie / localStorage</td>
+          <td>Measures visits and tool usage to understand which features are most useful. Data is aggregated and anonymous. Only loaded with your consent.</td>
+          <td>Up to 2 years</td>
+        </tr>
+        <tr>
+          <td>Microsoft Clarity</td>
+          <td>Cookie / localStorage</td>
+          <td>Records anonymised session replays and heatmaps to understand how tools are used and improve the interface. Only loaded with your consent.</td>
+          <td>Up to 1 year</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Analytics, what data is collected?</h2>
+    <p>If you consent, we collect <strong>anonymous, aggregated</strong> data such as:</p>
+    <ul>
+      <li>Pages visited and tools used</li>
+      <li>Time spent on each tool</li>
+      <li>Country (not city or IP address)</li>
+      <li>Browser and device type</li>
+    </ul>
+    <p>We <strong>never</strong> collect your images, file names, or any file content, all image processing happens locally in your browser and nothing is ever uploaded to our servers.</p>
+
+    <h2>Your choices</h2>
+    <p>You can manage your preferences at any time using the <strong>Cookies</strong> button in the bottom-left corner of every page. You can accept all, refuse all, or choose individually between Google Analytics and Microsoft Clarity.</p>
+    <p>If you refuse analytics, Google Analytics still loads in <strong>anonymous mode</strong> (no cookies, IP anonymised, no cross-site tracking). Microsoft Clarity is not loaded at all.</p>
+
+    <h2>How to clear cookies</h2>
+    <p>You can clear all cookies and local storage for imgpact at any time through your browser's developer tools: <strong>DevTools → Application → Storage → Clear site data</strong>.</p>
+
+    <h2>Third-party privacy policies</h2>
+    <ul>
+      <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+      <li><a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Microsoft Privacy Statement</a></li>
+    </ul>
+
+  </div>
+</div>
+{% endblock %}

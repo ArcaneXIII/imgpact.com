@@ -1,0 +1,89 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="{{ url_gif_maker }}">{{ t.breadcrumb_gif_tools }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_gif_to_mov_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="film"></i> {{ t.tool_gif_to_mov_title }}</h1>
+    <p>{{ t.tool_gif_to_mov_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="film"></i></div>
+    <div class="upload-text">{{ t.upload_drop_gif }}</div>
+    <div class="upload-hint">Animated GIF</div>
+    <input type="file" id="file-input" accept="image/gif" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <p style="font-size:0.875rem;color:var(--text-secondary);margin:0">
+        {{ t.tool_gif_to_mov_note }}
+      </p>
+
+      <div id="progress-wrap" style="display:none;margin-top:0.75rem">
+        <div id="progress-label" style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.35rem">{{ t.label_loading_ffmpeg }}</div>
+        <div class="ffmpeg-progress-bar"><div id="progress-fill" class="ffmpeg-progress-fill"></div></div>
+      </div>
+
+      <button class="btn-process" id="btn-convert"><i data-lucide="film"></i> {{ t.btn_convert_to_mov }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="controls-panel" style="padding:1rem;text-align:center">
+      <div style="margin-bottom:0.5rem"><i data-lucide="film" style="width:2rem;height:2rem"></i></div>
+      <p style="color:var(--text-secondary);font-size:0.875rem">
+        {{ t.label_mov_no_preview }}
+      </p>
+    </div>
+    <div class="stats-bar" id="stats-bar" style="margin-top:0.75rem"></div>
+    <button class="btn-download" id="btn-download" style="margin-top:0.5rem"><i data-lucide="download"></i> {{ t.btn_download_mov }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/gif-to-mov.js" type="module"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/gif-to-mov/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/gif-to-mov/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/gif-to-mov/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/gif-to-mov/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF to MOV Converter",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/gif-to-mov",
+    "description": "Convert animated GIFs to QuickTime MOV format. Free, browser-based with FFmpeg.wasm.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "GIF Tools",  "item": "https://imgpact.com/tools/gif-maker" },
+      { "@type": "ListItem", "position": 3, "name": "GIF to MOV", "item": "https://imgpact.com/tools/gif-to-mov" }
+    ]
+  }
+]
+</script>
+{% endblock %}

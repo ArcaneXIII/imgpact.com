@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Política de privacidad, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Política de privacidad</h1>
+    <p class="info-lead">Última actualización: marzo de 2026</p>
+  </div>
+  <div class="info-body">
+
+    <h2>Sus archivos permanecen en su dispositivo</h2>
+    <p>imgpact procesa todas las imágenes y archivos <strong>íntegramente en su navegador</strong> mediante WebAssembly. Ningún dato de imagen, nombre de archivo ni contenido se transmite jamás a nuestros servidores. No tenemos capacidad técnica para acceder a sus archivos.</p>
+
+    <h2>Estadísticas de uso de herramientas</h2>
+    <p>Cuando usa una herramienta, imgpact envía un evento anónimo ligero a nuestro servidor que contiene:</p>
+    <ul>
+      <li>El nombre de la herramienta utilizada (p. ej. <code>crop</code>, <code>gif-maker</code>)</li>
+      <li>Un ID de sesión aleatorio generado por su navegador (<code>imgpact-sid</code>, almacenado en <code>localStorage</code>)</li>
+      <li>Una marca de tiempo</li>
+    </ul>
+    <p>Estos datos no contienen <strong>ningún dato de archivo, ninguna dirección IP ni información personal identificable</strong>. Se usan únicamente para contar los usos de herramientas y estimar el número de usuarios únicos. Los resultados agregados son visibles públicamente en la <a href="/es/stats">página de Estadísticas</a>. Este seguimiento está siempre activo, no requiere consentimiento de analytics porque no se recopilan datos personales.</p>
+
+    <h2>Análisis de audiencia (opt-in)</h2>
+    <p>Con su consentimiento, utilizamos <strong>Google Analytics (GA4)</strong> y <strong>Microsoft Clarity</strong> para recopilar estadísticas de uso anónimas y agregadas, por ejemplo, qué herramientas se usan más, la duración de las visitas o los tipos de dispositivos. Esto nos ayuda a mejorar imgpact y priorizar nuevas funcionalidades.</p>
+    <p>Estos datos no contienen <strong>ninguna información personal</strong> ni datos de archivos. Su consentimiento se solicita en la primera visita, y puede modificar sus preferencias en cualquier momento con el botón <strong>Cookies</strong> en la parte inferior izquierda de la página.</p>
+    <p>Si rechaza, Google Analytics se carga en <strong>modo anónimo</strong> (sin cookies, IP anonimizada, sin seguimiento publicitario). Microsoft Clarity no se carga en absoluto.</p>
+
+    <h2>Almacenamiento local</h2>
+    <p>Almacenamos los siguientes datos localmente en su navegador:</p>
+    <ul>
+      <li><code>imgpact-theme</code>, su preferencia de tema claro/oscuro (nunca se envía a nuestros servidores)</li>
+      <li><code>imgpact-lang</code>, su idioma preferido (cookie, 365 días, no se transmite más allá de las solicitudes de página)</li>
+      <li><code>imgpact_consent</code>, sus elecciones de consentimiento (365 días, nunca se envían a nuestros servidores)</li>
+      <li><code>imgpact-sid</code>, un ID de sesión aleatorio y anónimo usado para el conteo de usos (se envía a nuestro servidor solo al usar una herramienta, junto con el nombre de la herramienta)</li>
+    </ul>
+
+    <h2>Servicios de terceros</h2>
+    <p>Utilizamos los siguientes servicios externos que pueden registrar su dirección IP en el marco del manejo estándar de solicitudes HTTP:</p>
+    <ul>
+      <li><strong>Cloudflare</strong>, CDN y protección DDoS</li>
+      <li><strong>Google Fonts</strong>, tipografía</li>
+      <li><strong>jsDelivr</strong>, biblioteca de iconos</li>
+    </ul>
+
+    <h2>Retención de datos</h2>
+    <p>Los eventos de uso de herramientas (nombre de herramienta + ID de sesión anónimo + marca de tiempo) se conservan indefinidamente en nuestro servidor y contribuyen a las estadísticas públicas. Los datos de analytics se conservan 14 meses en Google Analytics (configuración predeterminada) y 90 días en Microsoft Clarity.</p>
+
+    <h2>Sus derechos (RGPD)</h2>
+    <p>Si reside en la UE/EEE, tiene derecho de acceso, rectificación y supresión de sus datos, así como a retirar su consentimiento en cualquier momento. Los únicos datos que almacenamos en nuestros servidores son un ID de sesión aleatorio anónimo vinculado a un nombre de herramienta, sin posibilidad de relacionarlos con una persona real. Puede retirar su consentimiento de analytics en cualquier momento mediante el botón Cookies.</p>
+
+    <h2>Contacto</h2>
+    <p>Para preguntas relacionadas con la privacidad, visite nuestra <a href="/{{ lang }}/help">página de ayuda</a>.</p>
+
+  </div>
+</div>
+{% endblock %}

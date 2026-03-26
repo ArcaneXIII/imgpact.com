@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Размеры изображений для Instagram 2026: все форматы | imgpact{% endblock %}
+{% block meta_description %}Точные размеры изображений Instagram для 2026 года: квадратные и портретные посты, Истории, Reels, карусель, фото профиля. Избегайте пикселизации и нежелательной обрезки.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/social-media-image-sizes-2026">Социальные сети</a>
+    <span>›</span>
+    Размеры Instagram
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📱 Социальные сети</div>
+    <h1>Размеры изображений для Instagram 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Instagram. одна из наиболее визуально требовательных платформ: изображения являются её основным продуктом. Загрузка изображений неправильных размеров означает, что платформа автоматически обрежет их, нередко удаляя важный контент. В этом руководстве рассмотрены все форматы Instagram с точными размерами для 2026 года.</p>
+
+    <h2>Размеры постов в ленте Instagram</h2>
+    <table>
+      <thead><tr><th>Формат</th><th>Размеры</th><th>Соотношение сторон</th><th>Примечания</th></tr></thead>
+      <tbody>
+        <tr><td>Квадратный</td><td>1080 × 1080 пикселей</td><td>1:1</td><td>Классический формат Instagram, самый безопасный выбор</td></tr>
+        <tr><td>Портретный (рекомендуется)</td><td>1080 × 1350 пикселей</td><td>4:5</td><td>Занимает больше всего места на экране в ленте</td></tr>
+        <tr><td>Альбомный</td><td>1080 × 566 пикселей</td><td>1,91:1</td><td>Наименьшая площадь на экране</td></tr>
+      </tbody>
+    </table>
+    <p>Instagram отображает изображения шириной 1080 пикселей в ленте. Всегда экспортируйте при ширине ровно 1080 пикселей, чтобы избежать двойного масштабирования. Портретные посты (4:5) занимают больше всего вертикального пространства в ленте, обеспечивая более высокую видимость для каждого поста.</p>
+
+    <h2>Истории и Reels в Instagram</h2>
+    <table>
+      <thead><tr><th>Формат</th><th>Размеры</th><th>Примечания</th></tr></thead>
+      <tbody>
+        <tr><td>Истории</td><td>1080 × 1920 пикселей</td><td>Вертикальный полный экран 9:16</td></tr>
+        <tr><td>Reels</td><td>1080 × 1920 пикселей</td><td>Держите ключевой контент в зоне 1080×1420 (безопасная зона)</td></tr>
+        <tr><td>Миниатюра истории (в ленте)</td><td>161 × 161 пикселей</td><td>Автоматически генерируется круговая обрезка из центра</td></tr>
+      </tbody>
+    </table>
+    <p>Для Reels нижние ~250 пикселей перекрыты подписью и кнопками действий. Держите важный визуальный контент в <strong>безопасной зоне</strong>: примерно 1080×1420, отцентрированной по вертикали, оставляя около 250 пикселей свободными сверху и снизу.</p>
+
+    <h2>Карусельные посты в Instagram</h2>
+    <p>Карусельные альбомы могут смешивать разные соотношения сторон, но лучше держать все слайды в одном формате. Instagram обрезает все слайды под соотношение сторон первого слайда при просмотре в ленте (хотя пользователи могут прокрутить, чтобы увидеть полное изображение каждого слайда). Рекомендация: используйте 1:1 или 4:5 для каруселей.</p>
+
+    <h2>Фото профиля</h2>
+    <table>
+      <thead><tr><th>Настройка</th><th>Значение</th></tr></thead>
+      <tbody>
+        <tr><td>Размер загрузки</td><td>минимум 320 × 320 пикселей</td></tr>
+        <tr><td>Размер отображения (мобильный)</td><td>110 × 110 пикселей</td></tr>
+        <tr><td>Размер отображения (настольный)</td><td>150 × 150 пикселей</td></tr>
+        <tr><td>Форма</td><td>Обрезается Instagram в круг</td></tr>
+      </tbody>
+    </table>
+    <p>Загружайте минимум 320×320 пикселей. Фото профиля всегда отображается как круг, поэтому убедитесь, что ваш логотип или лицо расположены по центру, и оставьте поля вокруг ключевого контента для круговой обрезки.</p>
+
+    <h2>Советы по сжатию в Instagram</h2>
+    <p>Instagram повторно сжимает каждое загружаемое изображение. Чтобы получить наилучшее качество после сжатия Instagram:</p>
+    <ul>
+      <li>Загружайте JPEG с качеством <strong>85–90</strong> (не 100, Instagram всё равно снова сожмёт)</li>
+      <li>Экспортируйте при ширине ровно <strong>1080 пикселей</strong> для постов в ленте (не 2160 пикселей. большее разрешение не помогает)</li>
+      <li>Используйте <strong>цветовой профиль sRGB</strong>, Instagram игнорирует встроенные ICC-профили и конвертирует в sRGB, вызывая цветовые сдвиги при использовании AdobeRGB</li>
+      <li>Избегайте загрузки PNG для фотографий, Instagram конвертирует их в JPEG с дополнительным сжатием</li>
+    </ul>
+
+    <h2>Проверка размеров перед публикацией</h2>
+    <p>Быстрый способ проверки: щёлкните правой кнопкой мыши по изображению в Windows → Свойства → вкладка Подробно, или в macOS → Просмотр сведений. Убедитесь, что «Размеры» совпадают с целевым значением перед загрузкой.</p>
+
+    <div class="tip-box">
+      <strong>Рекомендуемый рабочий процесс:</strong> Экспортируйте из Photoshop/Lightroom при ширине 1080 пикселей, качество JPEG 85, цветовое пространство sRGB. Обрезайте до 4:5 (1080×1350) для максимальной видимости в ленте. Для Историй/Reels используйте 1080×1920 и держите ключевой контент в центральной зоне 1080×1420.
+    </div>
+
+    <div class="info-box">
+      <strong>Главный вывод:</strong> Используйте 1080×1350 (4:5) для постов в ленте. это занимает больше всего места. Используйте 1080×1920 для Историй и Reels, держа важный контент в центральной безопасной зоне. Экспортируйте JPEG с качеством 85–90 в sRGB для наилучшего результата после повторного сжатия Instagram.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Изменить размер под Instagram</a>
+      <a href="/tools/crop" class="guide-cta-link secondary">Обрезать до 4:5</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/social-media-image-sizes-2026" class="guide-related-card">
+        <strong>Размеры изображений для соцсетей 2026</strong>
+        <span>Полный справочник по всем платформам: Instagram, Facebook, YouTube, LinkedIn.</span>
+      </a>
+      <a href="/{{ lang }}/guides/facebook-image-dimensions" class="guide-related-card">
+        <strong>Размеры изображений для Facebook</strong>
+        <span>Размеры обложки, ленты, историй и мероприятий для Facebook.</span>
+      </a>
+      <a href="/{{ lang }}/guides/linkedin-image-sizes" class="guide-related-card">
+        <strong>Оптимальные изображения для LinkedIn</strong>
+        <span>Размеры и лучшие практики для постов и профилей LinkedIn.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Instagram Image Dimensions 2026",
+  "description": "The exact Instagram image sizes for 2026: square and portrait posts, Stories, Reels, carousel, profile picture. Avoid pixelation and unwanted cropping.",
+  "url": "https://imgpact.com/guides/ru/dimensions-images-instagram",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

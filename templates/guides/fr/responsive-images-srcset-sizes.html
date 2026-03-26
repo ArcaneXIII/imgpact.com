@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% block title %}Images responsive avec srcset et sizes : guide pratique | imgpact{% endblock %}
+{% block meta_description %}Maîtrisez srcset, sizes et l'élément picture pour servir la bonne image à chaque écran. Exemples pratiques : hero, fiche produit, avatar. Erreurs fréquentes à éviter.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimiser-images-site-web">Optimisation web</a>
+    <span>›</span>
+    Images responsives srcset et sizes
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimisation web</div>
+    <h1>Images responsive avec srcset et sizes : guide pratique</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Servir une image de 2 000 pixels à un mobile affichant 375 px CSS est l'une des erreurs les plus répandues sur le web. Le visiteur télécharge 5 à 10 fois plus de données que nécessaire, dégradant le LCP et consommant inutilement la bande passante mobile. Les attributs HTML <code>srcset</code> et <code>sizes</code>, ainsi que l'élément <code>&lt;picture&gt;</code>, permettent de résoudre ce problème avec élégance, sans JavaScript, sans serveur.</p>
+
+    <h2>Le problème fondamental : une image, tous les écrans</h2>
+    <p>Sans images responsives, votre HTML ressemble à ceci :</p>
+    <pre><code>&lt;img src="photo-1920.jpg" alt="Photo de produit"&gt;</code></pre>
+    <p>Le navigateur télécharge systématiquement <code>photo-1920.jpg</code> quel que soit l'écran. Sur un iPhone 14 (375 px CSS, DPR 3), voici ce qui se passe :</p>
+    <ul>
+      <li>L'image s'affiche sur 375 px CSS de large</li>
+      <li>En Retina (Device Pixel Ratio 3), le navigateur a besoin de 375 × 3 = <strong>1 125 pixels physiques</strong></li>
+      <li>Vous servez 1 920 px : plus de 40 % des pixels sont téléchargés inutilement</li>
+      <li>Sur une connexion 4G moyenne, cette image superflue retarde l'affichage de 0,5 à 1,5 secondes</li>
+    </ul>
+    <p>Les attributs <code>srcset</code> et <code>sizes</code> permettent au navigateur de choisir lui-même la variante la plus adaptée à son contexte (taille du viewport, densité d'écran, vitesse de connexion).</p>
+
+    <h2>L'attribut srcset : décrire les variantes disponibles</h2>
+    <p><code>srcset</code> liste les versions de l'image disponibles, avec leur largeur en pixels via le descripteur <code>w</code> :</p>
+    <pre><code>&lt;img
+  src="photo-800.webp"
+  srcset="photo-400.webp  400w,
+          photo-800.webp  800w,
+          photo-1200.webp 1200w,
+          photo-1600.webp 1600w"
+  alt="Photo de produit"
+  width="800"
+  height="600"&gt;</code></pre>
+    <p>L'attribut <code>src</code> sert de fallback pour les navigateurs très anciens ne supportant pas <code>srcset</code>, un cas quasi inexistant en 2026 (couverture &gt; 97 %).</p>
+
+    <h3>Le descripteur x : pour les images à taille fixe</h3>
+    <p>Pour des images dont la taille CSS est fixe quelle que soit la fenêtre (logo, avatar, miniature fixe), utilisez le descripteur de densité <code>x</code> plutôt que <code>w</code> :</p>
+    <pre><code>&lt;!-- Logo 200 px CSS fixe : servir 2x sur les écrans Retina --&gt;
+&lt;img
+  src="logo-200.webp"
+  srcset="logo-200.webp 1x,
+          logo-400.webp 2x,
+          logo-600.webp 3x"
+  alt="Logo de la marque"
+  width="200"
+  height="50"&gt;</code></pre>
+
+    <div class="info-box">
+      <strong>Descripteur w vs x :</strong> Utilisez <code>w</code> (avec <code>sizes</code>) pour les images fluides dont la taille varie selon le viewport. Utilisez <code>x</code> pour les images à dimensions CSS fixes (logos, avatars, vignettes de taille fixe).
+    </div>
+
+    <h2>L'attribut sizes : indiquer la taille d'affichage prévue</h2>
+    <p>Sans <code>sizes</code>, le navigateur doit deviner à quelle taille l'image sera affichée au moment du préchargement (avant même d'analyser le CSS). Il suppose par défaut <strong>100 vw</strong> (pleine largeur), ce qui l'incite à télécharger une variante trop grande pour les images dans des colonnes étroites.</p>
+    <p><code>sizes</code> décrit, via des media conditions, la largeur d'affichage de l'image selon la largeur du viewport :</p>
+    <pre><code>&lt;img
+  src="photo-800.webp"
+  srcset="photo-400.webp  400w,
+          photo-800.webp  800w,
+          photo-1200.webp 1200w"
+  sizes="(max-width: 600px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw"
+  alt="Vignette dans une grille 3 colonnes"
+  width="400"
+  height="300"&gt;</code></pre>
+    <p>Lecture : en dessous de 600 px de viewport, l'image occupe 100 % de la largeur ; entre 600 et 1024 px, 50 % (grille 2 colonnes) ; au-delà de 1024 px, 33 % (grille 3 colonnes). Le navigateur utilise ces informations et la densité d'écran pour choisir la variante la plus économe.</p>
+
+    <div class="tip-box">
+      <strong>Règle d'or :</strong> La valeur de <code>sizes</code> doit refléter exactement votre CSS de mise en page. Si votre grille passe de 1 à 2 à 3 colonnes selon les breakpoints, <code>sizes</code> doit utiliser exactement les mêmes breakpoints. Un outil comme <a href="https://ausi.github.io/respimagelint/" rel="noopener">RespImageLint</a> peut auditer vos attributs <code>sizes</code> automatiquement.
+    </div>
+
+    <h2>L'élément &lt;picture&gt; : art direction et formats modernes</h2>
+    <p>L'élément <code>&lt;picture&gt;</code> sert deux objectifs distincts :</p>
+
+    <h3>1. Art direction : servir une composition différente selon l'écran</h3>
+    <p>L'art direction consiste à servir une image <em>différente</em> (recadrée, recadrée sur le sujet, orientation différente) selon la taille de l'écran, pas juste une image plus petite :</p>
+    <pre><code>&lt;picture&gt;
+  &lt;!-- Mobile : version portrait, recadrée sur le sujet principal --&gt;
+  &lt;source
+    media="(max-width: 600px)"
+    srcset="hero-portrait-600.webp 600w,
+            hero-portrait-1200.webp 1200w"&gt;
+
+  &lt;!-- Desktop : version paysage pleine largeur --&gt;
+  &lt;source
+    media="(min-width: 601px)"
+    srcset="hero-paysage-800.webp  800w,
+            hero-paysage-1600.webp 1600w"&gt;
+
+  &lt;!-- Fallback obligatoire --&gt;
+  &lt;img
+    src="hero-paysage-800.webp"
+    alt="Visuel principal"
+    width="1600"
+    height="900"
+    fetchpriority="high"&gt;
+&lt;/picture&gt;</code></pre>
+
+    <h3>2. Formats modernes avec fallback gracieux</h3>
+    <p>Le navigateur essaie les <code>&lt;source&gt;</code> dans l'ordre et s'arrête au premier supporté. Aucune logique côté serveur n'est nécessaire :</p>
+    <pre><code>&lt;picture&gt;
+  &lt;!-- AVIF pour les navigateurs récents (~93 % en 2026) --&gt;
+  &lt;source
+    type="image/avif"
+    srcset="photo-400.avif  400w,
+            photo-800.avif  800w,
+            photo-1600.avif 1600w"
+    sizes="(max-width: 600px) 100vw, 50vw"&gt;
+
+  &lt;!-- WebP pour les navigateurs modernes (~97 %) --&gt;
+  &lt;source
+    type="image/webp"
+    srcset="photo-400.webp  400w,
+            photo-800.webp  800w,
+            photo-1600.webp 1600w"
+    sizes="(max-width: 600px) 100vw, 50vw"&gt;
+
+  &lt;!-- JPEG : fallback universel, toujours présent --&gt;
+  &lt;img
+    src="photo-800.jpg"
+    alt="Description de la photo"
+    width="800"
+    height="600"
+    loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+
+    <div class="warning-box">
+      <strong>Important :</strong> L'élément <code>&lt;picture&gt;</code> doit <em>toujours</em> contenir un <code>&lt;img&gt;</code> comme dernier enfant. C'est lui qui porte les attributs <code>alt</code>, <code>width</code>, <code>height</code>, <code>loading</code> et <code>fetchpriority</code>. Les <code>&lt;source&gt;</code> ne peuvent pas exister sans lui.
+    </div>
+
+    <h2>Exemples concrets par type d'image</h2>
+
+    <h3>Image hero (above-the-fold, LCP)</h3>
+    <pre><code>&lt;picture&gt;
+  &lt;source
+    type="image/avif"
+    srcset="/img/hero-800.avif   800w,
+            /img/hero-1440.avif 1440w,
+            /img/hero-1920.avif 1920w"
+    sizes="100vw"&gt;
+  &lt;source
+    type="image/webp"
+    srcset="/img/hero-800.webp   800w,
+            /img/hero-1440.webp 1440w,
+            /img/hero-1920.webp 1920w"
+    sizes="100vw"&gt;
+  &lt;img
+    src="/img/hero-1440.jpg"
+    alt="Bannière principale"
+    width="1920"
+    height="800"
+    fetchpriority="high"&gt;
+    &lt;!-- PAS de loading="lazy" sur l'image LCP ! --&gt;
+&lt;/picture&gt;</code></pre>
+
+    <h3>Vignette produit dans une grille e-commerce</h3>
+    <pre><code>&lt;picture&gt;
+  &lt;source
+    type="image/webp"
+    srcset="/img/produit-300.webp  300w,
+            /img/produit-600.webp  600w,
+            /img/produit-900.webp  900w"
+    sizes="(max-width: 480px) 50vw,
+           (max-width: 1024px) 33vw,
+           25vw"&gt;
+  &lt;img
+    src="/img/produit-300.jpg"
+    alt="Nom du produit"
+    width="300"
+    height="300"
+    loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+
+    <h3>Avatar utilisateur (taille fixe)</h3>
+    <pre><code>&lt;img
+  src="/avatars/user-48.webp"
+  srcset="/avatars/user-48.webp 1x,
+          /avatars/user-96.webp 2x"
+  alt="Avatar de Jean Dupont"
+  width="48"
+  height="48"
+  loading="lazy"&gt;</code></pre>
+
+    <h2>Erreurs fréquentes à éviter</h2>
+    <ul>
+      <li><strong>Oublier sizes avec srcset w</strong> : sans <code>sizes</code>, le navigateur suppose 100 vw et télécharge systématiquement une variante trop grande pour les images dans des colonnes</li>
+      <li><strong>Mettre loading="lazy" sur l'image LCP</strong> : c'est l'une des causes les plus fréquentes d'un mauvais score LCP</li>
+      <li><strong>Oublier width et height</strong> : sans dimensions, le CLS (Cumulative Layout Shift) est garanti pour toutes les images</li>
+      <li><strong>Des variantes aux tailles trop proches</strong> : proposer 800w, 900w et 1000w n'a aucun intérêt. Espacez les variantes d'au moins 50 % (ex. 400w, 800w, 1600w)</li>
+      <li><strong>Ne pas inclure le &lt;img&gt; dans &lt;picture&gt;</strong> : les <code>&lt;source&gt;</code> sans <code>&lt;img&gt;</code> ne s'affichent pas, le fallback est obligatoire</li>
+      <li><strong>Dupliquer sizes dans chaque &lt;source&gt;</strong> : dans une balise <code>&lt;picture&gt;</code> multi-format, répétez bien <code>sizes</code> sur chaque <code>&lt;source&gt;</code> car certains navigateurs ne l'héritent pas du <code>&lt;img&gt;</code></li>
+    </ul>
+
+    <h2>Support navigateur et outils</h2>
+    <p>En 2026, <code>srcset</code>, <code>sizes</code> et <code>&lt;picture&gt;</code> sont supportés par plus de 97 % des navigateurs en usage actif. Les navigateurs non compatibles ignorent ces attributs et chargent l'image dans <code>src</code>, le fallback est automatique et fonctionnel.</p>
+    <p>Pour générer les variantes responsives, utilisez imgpact (redimensionnement par lot) ou un CDN d'images comme Cloudinary, ImageKit ou imgix qui génère les variantes à la volée via les paramètres d'URL, sans pré-générer chaque taille.</p>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Générez toutes vos variantes responsives (400 px, 800 px, 1600 px) et convertissez-les en WebP en quelques secondes, sans installation, directement dans le navigateur.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Redimensionner mes images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/optimiser-images-site-web" class="guide-related-card">
+        <strong>Comment optimiser les images pour votre site web</strong>
+        <span>Toutes les techniques d'optimisation des images web en un seul guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy loading des images : le guide complet 2026</strong>
+        <span>Différer le chargement des images hors-viewport pour des pages plus rapides.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images et Core Web Vitals : LCP, CLS et FID</strong>
+        <span>Comment les images impactent vos métriques Google et comment les améliorer.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Images responsive avec srcset et sizes : guide pratique",
+  "description": "Maîtrisez srcset, sizes et l'élément picture pour servir la bonne image à chaque écran. Exemples pratiques : hero, fiche produit, avatar. Erreurs fréquentes à éviter.",
+  "url": "https://imgpact.com/guides/responsive-images-srcset-sizes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

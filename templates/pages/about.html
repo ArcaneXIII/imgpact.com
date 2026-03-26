@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}About imgpact. Free Browser-Based Image Tools{% endblock %}
+{% block meta_description %}imgpact is a free collection of browser-based image, GIF, and video tools powered by WebAssembly. No uploads, no signup, 100% private.{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>About imgpact</h1>
+    <p class="info-lead">imgpact is a collection of free, browser-based image and GIF tools. No accounts, no uploads, no limits.</p>
+  </div>
+  <div class="info-body">
+    <h2>How it works</h2>
+    <p>Every tool on imgpact runs entirely in your browser using <strong>WebAssembly (WASM)</strong>. Your files never leave your device, there are no servers processing your images, no cloud storage, and no data collection tied to your files.</p>
+
+    <h2>Why imgpact?</h2>
+    <ul>
+      <li><strong>No file size limits</strong>, process files as large as your browser's memory allows.</li>
+      <li><strong>No file count limits</strong>, batch-convert or optimize as many files as you want.</li>
+      <li><strong>100% private</strong>, your images stay on your machine.</li>
+      <li><strong>Instant</strong>, no upload wait times, no queues.</li>
+      <li><strong>Free</strong>, all tools are free, forever.</li>
+    </ul>
+
+    <h2>Tools</h2>
+    <p><strong>Image tools</strong></p>
+    <ul>
+      <li><a href="/tools/optimize">Compress &amp; Optimize</a>, reduce file size while preserving quality (JPEG, PNG, WebP)</li>
+      <li><a href="/tools/resize">Resize Image</a>, resize by dimensions or percentage</li>
+      <li><a href="/tools/crop">Crop Image</a>, free-form or ratio-constrained crop</li>
+      <li><a href="/tools/add-text">Add Text to Image</a>, overlay custom text with font and color controls</li>
+      <li><a href="/tools/effects">Image Effects</a>, grayscale, blur, brightness, contrast, sepia, and more</li>
+      <li><a href="/tools/transform">Transform Image</a>, rotate, flip, and convert image format</li>
+    </ul>
+    <p><strong>GIF &amp; video tools</strong></p>
+    <ul>
+      <li><a href="/tools/gif-maker">GIF Maker</a>, create an animated GIF from a sequence of images</li>
+      <li><a href="/tools/gif-editor">GIF Editor</a>, reorder frames, adjust timing, crop, rotate, flip, and reverse</li>
+      <li><a href="/tools/gif-analyzer">GIF Analyzer</a>, inspect frame count, delays, dimensions, and palette</li>
+      <li><a href="/tools/gif-split">GIF Split</a>, extract individual frames from an animated GIF</li>
+      <li><a href="/tools/gif-to-mp4">GIF to MP4</a>, convert an animated GIF to MP4 video</li>
+      <li><a href="/tools/gif-to-webm">GIF to WebM</a>, convert an animated GIF to WebM video</li>
+      <li><a href="/tools/gif-to-mov">GIF to MOV</a>, convert an animated GIF to QuickTime MOV</li>
+      <li><a href="/tools/video-to-gif">Video to GIF</a>, convert a video clip (MP4, WebM, MOV) to an animated GIF</li>
+    </ul>
+
+    <h2>Usage statistics</h2>
+    <p>imgpact tracks anonymous tool-use events to understand which tools are most useful and to guide future development. No file data or personal information is collected, only which tool was used and a random browser-generated session ID. All aggregated statistics are publicly visible on the <a href="/en/stats">Statistics page</a>.</p>
+
+    <h2>Technology</h2>
+    <p>imgpact is built with <strong>Rust</strong> compiled to WebAssembly for image processing, and <strong>Axum</strong> for serving the pages. The image engine uses the <code>image</code> crate for format conversion and the <code>gif</code> crate for GIF manipulation. Video processing uses <strong>FFmpeg.wasm</strong>. Anonymous usage events are stored in a lightweight <strong>SQLite</strong> database on the server.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About imgpact",
+  "url": "https://imgpact.com/about",
+  "description": "imgpact is a free collection of browser-based image, GIF, and video tools powered by WebAssembly. No uploads, no signup, 100% private.",
+  "mainEntity": {
+    "@type": "WebApplication",
+    "name": "imgpact",
+    "url": "https://imgpact.com",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+}
+</script>
+{% endblock %}

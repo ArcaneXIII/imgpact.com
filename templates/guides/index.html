@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}{{ t.guides_title | default(value="Image Guides & Tutorials") }} | imgpact{% endblock %}
+{% block meta_description %}{{ t.guides_subtitle | default(value="Free image guides updated for 2026.") }}{% endblock %}
+{% block content %}
+<div class="guides-index">
+
+  <div class="guides-index-header">
+    <h1>{{ t.guides_title | default(value="Image guides & tutorials") }}</h1>
+    <p>{{ t.guides_subtitle | default(value="Master image formats, web optimization and best practices for every platform.") }}</p>
+  </div>
+
+  <div class="guides-filter-bar">
+    <div class="guides-search-wrap">
+      <i data-lucide="search" class="guides-search-icon"></i>
+      <input type="search" id="guides-search" class="guides-search-input"
+             placeholder="{{ t.guides_search_ph | default(value="Search a guide…") }}"
+             autocomplete="off" />
+    </div>
+    <div class="guides-filter-pills" id="guides-filter-pills">
+      <button class="guides-pill active" data-pillar="all">
+        <i data-lucide="layout-grid"></i>
+        {{ t.guides_filter_all | default(value="All") }}
+      </button>
+      {% for pillar in pillar_groups %}
+      <button class="guides-pill" data-pillar="{{ pillar.key }}">
+        <i data-lucide="{{ pillar.icon }}"></i>
+        {{ pillar.name }}
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="guides-no-results" id="guides-no-results" style="display:none">
+    <i data-lucide="search-x"></i>
+    <p>{{ t.guides_no_results | default(value="No guides found for") }} "<span id="guides-no-results-query"></span>"</p>
+  </div>
+
+  {% for pillar in pillar_groups %}
+  <section class="guides-pillar" data-pillar="{{ pillar.key }}">
+    <h2 class="guides-pillar-title">
+      <i data-lucide="{{ pillar.icon }}"></i>
+      {{ pillar.name }}
+    </h2>
+    <div class="guides-grid">
+      {% for guide in pillar.guides %}
+      <a href="/{{ lang }}/{{ guides_section }}/{{ guide.url_slug }}" class="guides-card"
+         data-pillar="{{ guide.pillar_key }}"
+         data-keywords="{{ guide.title | lower }} {{ guide.description | lower }}">
+        <div class="guides-card-pillar">
+          <i data-lucide="{{ pillar.icon }}"></i>
+          {{ guide.pillar }}
+        </div>
+        <div class="guides-card-title">{{ guide.title }}</div>
+        <div class="guides-card-desc">{{ guide.description }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+</div>
+
+<script>
+(function () {
+  lucide.createIcons();
+  const searchInput = document.getElementById('guides-search');
+  const pills       = document.querySelectorAll('.guides-pill');
+  const sections    = document.querySelectorAll('.guides-pillar');
+  const noResults   = document.getElementById('guides-no-results');
+  const noResultsQ  = document.getElementById('guides-no-results-query');
+  let activePillar  = 'all';
+
+  function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+    sections.forEach(section => {
+      let sectionVisible = false;
+      section.querySelectorAll('.guides-card').forEach(card => {
+        const visible = (activePillar === 'all' || card.dataset.pillar === activePillar)
+                     && (!query || card.dataset.keywords.includes(query));
+        card.style.display = visible ? '' : 'none';
+        if (visible) { sectionVisible = true; visibleCount++; }
+      });
+      section.style.display = sectionVisible ? '' : 'none';
+    });
+    noResults.style.display = visibleCount === 0 ? 'flex' : 'none';
+    if (visibleCount === 0) noResultsQ.textContent = searchInput.value.trim();
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activePillar = pill.dataset.pillar;
+      applyFilters();
+    });
+  });
+})();
+</script>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Image Guides, imgpact",
+  "url": "https://imgpact.com/guides",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

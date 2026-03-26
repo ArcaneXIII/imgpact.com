@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}Images et Core Web Vitals : LCP, CLS et FID | imgpact{% endblock %}
+{% block meta_description %}Comment les images affectent vos Core Web Vitals Google : optimiser le LCP (image hero), corriger le CLS (width/height), mesurer avec PageSpeed Insights. Checklist complète.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimiser-images-site-web">Optimisation web</a>
+    <span>›</span>
+    Images et Core Web Vitals
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimisation web</div>
+    <h1>Images et Core Web Vitals : LCP, CLS et FID</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Depuis mai 2021, Google intègre les <strong>Core Web Vitals</strong> dans son algorithme de classement. Ces métriques mesurent l'expérience utilisateur réelle sur votre site, et les images en sont souvent la première cause de mauvais scores. Comprendre ce lien est aujourd'hui indispensable pour tout site cherchant à bien se positionner dans les résultats de recherche.</p>
+
+    <h2>Les Core Web Vitals : les trois métriques</h2>
+    <p>Google mesure trois métriques principales, calculées sur les données réelles de terrain (CrUX. Chrome User Experience Report) :</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Métrique</th>
+          <th>Ce qu'elle mesure</th>
+          <th>Seuil "bon"</th>
+          <th>Seuil "à améliorer"</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LCP</strong>. Largest Contentful Paint</td>
+          <td>Temps de chargement du plus grand élément visible</td>
+          <td>≤ 2,5 s</td>
+          <td>2,5 – 4 s</td>
+        </tr>
+        <tr>
+          <td><strong>CLS</strong>. Cumulative Layout Shift</td>
+          <td>Stabilité visuelle (décalages de mise en page)</td>
+          <td>≤ 0,1</td>
+          <td>0,1 – 0,25</td>
+        </tr>
+        <tr>
+          <td><strong>INP</strong>. Interaction to Next Paint</td>
+          <td>Réactivité aux interactions utilisateur</td>
+          <td>≤ 200 ms</td>
+          <td>200 – 500 ms</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Évolution :</strong> En mars 2024, Google a remplacé le FID (First Input Delay) par l'INP (Interaction to Next Paint) comme troisième métrique officielle. L'INP est moins directement lié aux images, mais LCP et CLS restent les deux métriques les plus impactées par votre gestion des images.
+    </div>
+
+    <h2>LCP : l'image hero est souvent l'élément critique</h2>
+    <p>Le LCP identifie <strong>l'élément visible le plus grand dans le viewport</strong> au moment du chargement de la page. Dans la grande majorité des pages web, cet élément est :</p>
+    <ul>
+      <li>Une image hero (bannière, visuel principal en haut de page)</li>
+      <li>Une image de fond CSS appliquée à un bloc hero</li>
+      <li>Plus rarement, un grand bloc de texte (heading principal)</li>
+    </ul>
+    <p>Un LCP supérieur à 2,5 secondes signifie que votre visiteur attend plus de 2,5 secondes avant de voir l'élément principal de votre page. C'est trop long, et Google le sait via les données CrUX de Chrome.</p>
+
+    <h3>1. Preload de l'image LCP</h3>
+    <p>Informez le navigateur qu'il doit charger cette image en priorité absolue, avant même d'analyser le reste du HTML :</p>
+    <pre><code>&lt;!-- Dans le &lt;head&gt; de la page --&gt;
+&lt;link rel="preload" as="image" href="/images/hero.webp"
+      fetchpriority="high" type="image/webp"&gt;</code></pre>
+
+    <h3>2. fetchpriority="high" sur la balise img</h3>
+    <p>L'attribut <code>fetchpriority="high"</code> (standardisé en 2023) indique au navigateur de hisser cette ressource en tête de la file de téléchargement :</p>
+    <pre><code>&lt;img
+  src="hero.webp"
+  alt="Visuel principal"
+  width="1920"
+  height="1080"
+  fetchpriority="high"&gt;</code></pre>
+
+    <h3>3. Ne jamais lazy-loader l'image LCP</h3>
+    <p>L'attribut <code>loading="lazy"</code> retarde délibérément le chargement de l'image jusqu'à ce qu'elle approche du viewport. Sur l'image LCP, qui est <em>déjà</em> dans le viewport, c'est catastrophique pour le score. Réservez le lazy loading aux images below-the-fold.</p>
+
+    <h3>4. Optimiser le poids de l'image hero</h3>
+    <p>Une image hero en WebP bien compressée charge 2 à 4 fois plus vite qu'un JPEG non optimisé de même dimension. Cibles recommandées :</p>
+    <ul>
+      <li>Image hero 1920 px large : <strong>moins de 150 Ko en WebP</strong>, moins de 100 Ko en AVIF</li>
+      <li>Vignette produit 600 px : moins de 40 Ko en WebP</li>
+      <li>Thumbnail 300 px : moins de 20 Ko</li>
+    </ul>
+
+    <h3>5. Servir l'image hero depuis un CDN</h3>
+    <p>La latence réseau compte autant que le poids du fichier. Un CDN place votre image sur des serveurs géographiquement proches de vos visiteurs, réduisant le Time To First Byte (TTFB) de l'image de 100 à 400 ms selon la localisation.</p>
+
+    <div class="tip-box">
+      <strong>Diagnostic rapide :</strong> Ouvrez <a href="https://pagespeed.web.dev" rel="noopener">PageSpeed Insights</a> sur votre page d'accueil. La section "Opportunités" indique directement l'élément LCP identifié et les raisons de son délai (ressource non préchargée, format non optimisé, chaîne de redirections, etc.).
+    </div>
+
+    <h2>CLS : toujours spécifier width et height</h2>
+    <p>Le CLS mesure les décalages visuels inattendus pendant le chargement de la page. Imaginez lire un article et, au moment de cliquer sur un lien, une image se charge et pousse tout le contenu vers le bas, votre clic arrive sur le mauvais élément. C'est un <em>layout shift</em>.</p>
+
+    <h3>Pourquoi les images causent-elles du CLS ?</h3>
+    <p>Sans dimensions explicites, le navigateur ne connaît pas la taille d'une image avant de l'avoir téléchargée. Il alloue 0 pixel d'espace, puis redimensionne brutalement la mise en page à l'arrivée de l'image. Résultat : tout le contenu en dessous se déplace brusquement.</p>
+
+    <h3>La solution : toujours spécifier width et height</h3>
+    <pre><code>&lt;!-- Mauvais : pas de dimensions, CLS garanti --&gt;
+&lt;img src="photo.webp" alt="Photo de produit"&gt;
+
+&lt;!-- Bon : dimensions explicites, espace réservé dès le départ --&gt;
+&lt;img src="photo.webp" alt="Photo de produit" width="800" height="600"&gt;</code></pre>
+    <p>Avec <code>width</code> et <code>height</code> définis, le navigateur calcule le ratio d'aspect avant de charger l'image et réserve l'espace exact. Grâce à la propriété CSS <code>aspect-ratio: auto</code> appliquée automatiquement depuis Chrome 79+, ce comportement est préservé même sur les images responsives (<code>max-width: 100%</code>) :</p>
+    <pre><code>&lt;!-- Image responsive sans CLS : spécifiez les dimensions intrinsèques --&gt;
+&lt;img
+  src="photo.webp"
+  alt="Photo de produit"
+  width="800"
+  height="600"
+  style="width: 100%; height: auto;"&gt;</code></pre>
+
+    <div class="warning-box">
+      <strong>Images injectées par JavaScript :</strong> Les images insérées via JS après le rendu initial (carrousels, widgets tiers, publicités) peuvent aussi causer du CLS si elles ne réservent pas d'espace en amont. Utilisez un conteneur à ratio fixe avec <code>padding-bottom</code> ou la propriété CSS <code>aspect-ratio</code> avant l'injection.
+    </div>
+
+    <h2>INP et images : l'impact indirect</h2>
+    <p>L'INP (Interaction to Next Paint) mesure la réactivité de la page aux interactions utilisateur (clic, saisie, tap). Les images n'impactent pas directement l'INP, mais elles peuvent y contribuer indirectement :</p>
+    <ul>
+      <li><strong>Images non optimisées et décodage coûteux</strong> : le décodage de très grandes images JPEG peut saturer le thread principal et retarder les interactions</li>
+      <li><strong>Trop d'images dans le DOM</strong> : des centaines de balises <code>&lt;img&gt;</code> sans lazy loading chargent et décodent en parallèle, consommant CPU et mémoire</li>
+      <li><strong>Images de fond en CSS complexes</strong> : les images CSS appliquées avec <code>filter</code> ou des effets GPU peuvent provoquer des repaints coûteux</li>
+    </ul>
+
+    <h2>Checklist complète : images et Core Web Vitals</h2>
+
+    <h3>Pour un LCP vert (≤ 2,5 s)</h3>
+    <ul>
+      <li>Identifier l'élément LCP avec PageSpeed Insights ou Chrome DevTools</li>
+      <li>Ajouter <code>&lt;link rel="preload"&gt;</code> dans le <code>&lt;head&gt;</code> pour l'image LCP</li>
+      <li>Utiliser <code>fetchpriority="high"</code> sur la balise <code>&lt;img&gt;</code> de l'image LCP</li>
+      <li>Ne jamais utiliser <code>loading="lazy"</code> sur l'image LCP</li>
+      <li>Convertir en WebP ou AVIF, viser moins de 150 Ko pour une image hero</li>
+      <li>Servir depuis un CDN avec mise en cache longue durée</li>
+      <li>Éviter les redirections sur l'URL de l'image</li>
+    </ul>
+
+    <h3>Pour un CLS vert (≤ 0,1)</h3>
+    <ul>
+      <li>Toujours spécifier <code>width</code> et <code>height</code> sur chaque balise <code>&lt;img&gt;</code></li>
+      <li>Appliquer <code>height: auto</code> en CSS pour les images responsives, mais garder les dimensions HTML</li>
+      <li>Utiliser des conteneurs à ratio fixe pour les images chargées dynamiquement</li>
+      <li>Éviter d'insérer des images au-dessus du contenu déjà affiché via JavaScript</li>
+      <li>Précharger les images de fond critiques utilisées en CSS</li>
+    </ul>
+
+    <h2>Outils pour mesurer les Core Web Vitals</h2>
+
+    <h3>PageSpeed Insights</h3>
+    <p>L'outil officiel Google (<a href="https://pagespeed.web.dev" rel="noopener">pagespeed.web.dev</a>) fournit à la fois les données de terrain réelles (CrUX) et les données de laboratoire (Lighthouse). C'est l'outil de référence : il identifie directement l'élément LCP, quantifie le CLS par élément et propose des recommandations concrètes.</p>
+
+    <h3>Chrome DevTools, onglet Performance</h3>
+    <p>L'enregistrement de performance dans Chrome DevTools permet de visualiser précisément le moment où l'élément LCP est peint, identifier les images qui causent des repaints et mesurer le temps de décodage de chaque image. L'onglet Lighthouse (F12) offre un score synthétique de 0 à 100.</p>
+
+    <h3>Google Search Console</h3>
+    <p>Le rapport "Expérience de page" dans Search Console agrège les données CrUX par groupe d'URL et signale les pages sous les seuils. C'est ici que vous mesurez l'impact réel sur votre positionnement SEO, car Google utilise ces données de terrain, pas les données de laboratoire, pour le classement.</p>
+
+    <h3>Web Vitals Chrome Extension</h3>
+    <p>Cette extension Google affiche en temps réel les valeurs LCP, CLS et INP pendant que vous naviguez sur n'importe quelle page. Pratique pour un diagnostic rapide sans quitter le navigateur, notamment sur les pages de staging non encore indexées.</p>
+
+    <div class="info-box">
+      <strong>Rappel important :</strong> Les Core Web Vitals sont évalués par Google sur les <em>données terrain</em> (vraies visites agrégées sur 28 jours) pour le classement. Les outils de laboratoire (Lighthouse, DevTools) donnent des indications orientantes mais ne sont pas les valeurs qui impactent directement votre SEO. Visez un "bon" score dans PageSpeed Insights sur les données de terrain.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Compressez vos images hero en WebP, redimensionnez-les aux bonnes dimensions et améliorez votre score LCP dès aujourd'hui, directement dans votre navigateur, sans inscription.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimiser mes images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/optimiser-images-site-web" class="guide-related-card">
+        <strong>Comment optimiser les images pour votre site web</strong>
+        <span>Toutes les techniques d'optimisation des images web en un seul guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy loading des images : le guide complet 2026</strong>
+        <span>Différer le chargement des images hors-viewport pour des pages plus rapides.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Images responsives avec srcset et sizes</strong>
+        <span>Servir la bonne image à chaque écran avec srcset, sizes et &lt;picture&gt;.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Images et Core Web Vitals : LCP, CLS et FID",
+  "description": "Comment les images affectent vos Core Web Vitals Google : optimiser le LCP (image hero), corriger le CLS (width/height), mesurer avec PageSpeed Insights. Checklist complète.",
+  "url": "https://imgpact.com/guides/images-core-web-vitals",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

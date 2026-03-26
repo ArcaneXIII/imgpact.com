@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Imágenes Responsivas: srcset y sizes Explicados | imgpact{% endblock %}
+{% block meta_description %}Los atributos srcset y sizes permiten al navegador elegir la resolución óptima para cada dispositivo. Aprende la sintaxis, los patrones más comunes y los errores a evitar.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web">Optimización Web</a>
+    <span>›</span>
+    Imágenes Responsivas
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimización Web</div>
+    <h1>Imágenes Responsivas: srcset y sizes Explicados</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Una foto que se muestra a 400 px en móvil no necesita tener 1600 px de ancho. Sin embargo, sin el marcado de imágenes responsivas, todos los usuarios descargan el mismo archivo grande. Los atributos <code>srcset</code> y <code>sizes</code> resuelven esto: informan al navegador qué candidatos de imagen existen y qué tan grande se mostrará cada uno, permitiéndole elegir el archivo óptimo para descargar.</p>
+
+    <h2>El problema: una sola imagen para todas las pantallas</h2>
+    <p>Sin imágenes responsivas, debes elegir: servir un archivo grande (rápido en escritorio, lento en móvil) o un archivo pequeño (rápido en móvil, borroso en escritorio Retina). Ninguna opción es óptima. El marcado de imágenes responsivas te permite servir ambos y dejar que el navegador elija.</p>
+
+    <h2>srcset con descriptores de ancho (w)</h2>
+    <p>El patrón más común. Proporciona múltiples anchos de imagen y el navegador elige según el ancho de pantalla y la densidad de píxeles:</p>
+    <pre><code>&lt;img
+  srcset="photo-400.webp 400w,
+          photo-800.webp 800w,
+          photo-1200.webp 1200w,
+          photo-1600.webp 1600w"
+  src="photo-800.webp"
+  alt="Descripción"
+  width="800" height="600"
+&gt;</code></pre>
+    <p>El descriptor <code>w</code> es el ancho real en píxeles de ese archivo de imagen, no un breakpoint CSS. El navegador lo usa junto con el ancho de pantalla y la proporción de píxeles del dispositivo para elegir la opción más eficiente.</p>
+
+    <h2>El atributo sizes</h2>
+    <p>Sin <code>sizes</code>, el navegador asume que la imagen ocupa el 100 % del ancho de la ventana gráfica. Para una imagen en barra lateral que se muestra a 300 px en escritorio, esto hace que el navegador descargue un archivo mucho más grande del necesario. <code>sizes</code> indica al navegador qué tan ancha se mostrará la imagen en cada breakpoint:</p>
+    <pre><code>&lt;img
+  srcset="photo-300.webp 300w,
+          photo-600.webp 600w,
+          photo-900.webp 900w"
+  sizes="(max-width: 768px) 100vw,
+         (max-width: 1200px) 50vw,
+         300px"
+  src="photo-600.webp"
+  alt="Descripción"
+  width="600" height="400"
+&gt;</code></pre>
+    <p>Lee <code>sizes</code> de arriba a abajo: en pantallas más estrechas de 768 px, la imagen ocupa el 100 % de la ventana gráfica. En pantallas de hasta 1200 px, ocupa el 50 %. En todas las demás pantallas (más grandes), mide exactamente 300 px de ancho.</p>
+
+    <h2>srcset con descriptores de densidad de píxeles (x)</h2>
+    <p>Para imágenes de tamaño fijo (logotipos, avatares, iconos), usa descriptores de densidad de píxeles en su lugar:</p>
+    <pre><code>&lt;img
+  srcset="logo.webp 1x, logo@2x.webp 2x, logo@3x.webp 3x"
+  src="logo.webp"
+  alt="Logotipo de la empresa"
+  width="200" height="60"
+&gt;</code></pre>
+    <p>El navegador descarga la versión 2x en pantallas Retina, 3x en pantallas de muy alta densidad y 1x en el resto.</p>
+
+    <h2>Combinando con &lt;picture&gt; para negociación de formato</h2>
+    <p>Combina <code>&lt;picture&gt;</code> para cambiar de formato con <code>srcset</code> para el dimensionado responsivo:</p>
+    <pre><code>&lt;picture&gt;
+  &lt;source
+    type="image/avif"
+    srcset="photo-400.avif 400w, photo-800.avif 800w, photo-1200.avif 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;source
+    type="image/webp"
+    srcset="photo-400.webp 400w, photo-800.webp 800w, photo-1200.webp 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;img
+    src="photo-800.jpg"
+    srcset="photo-400.jpg 400w, photo-800.jpg 800w, photo-1200.jpg 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+    alt="Descripción"
+    width="800" height="600"
+    loading="lazy"
+  &gt;
+&lt;/picture&gt;</code></pre>
+
+    <h2>¿Qué tamaños de imagen generar?</h2>
+    <p>Un conjunto inicial práctico para la mayoría de las imágenes de contenido:</p>
+    <ul>
+      <li><strong>400 px</strong>: móvil (pantallas pequeñas, 1x)</li>
+      <li><strong>800 px</strong>: móvil Retina (2x), tablet pequeña</li>
+      <li><strong>1200 px</strong>: escritorio, tablet Retina</li>
+      <li><strong>1600 px</strong>: escritorio grande, imágenes anchas</li>
+    </ul>
+    <p>Para imágenes hero o de ancho completo, añade una variante de 2400 px para pantallas Retina grandes.</p>
+
+    <div class="tip-box">
+      <strong>Automatización:</strong> Generar todas estas variantes manualmente no es práctico. Usa un CDN de imágenes (Cloudinary, Imgix, Cloudflare Images) para generar tamaños bajo demanda mediante parámetros de URL, o un plugin de herramienta de compilación (next/image, gatsby-image, astro:assets) que lo gestione automáticamente.
+    </div>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Usa <code>srcset</code> con descriptores <code>w</code> para imágenes de contenido y añade un atributo <code>sizes</code> que coincida con tu diseño CSS. Este único cambio puede reducir a la mitad los bytes de imagen descargados por los usuarios móviles. Combínalo con <code>&lt;picture&gt;</code> para la negociación de formato y entregar AVIF a los navegadores modernos con JPEG como alternativa.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Redimensionar Imágenes</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy Loading de Imágenes</strong>
+        <span>Aplaza las imágenes por debajo del fold para acelerar la carga inicial.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/images-core-web-vitals" class="guide-related-card">
+        <strong>Imágenes y Core Web Vitals</strong>
+        <span>Cómo LCP, CLS e INP se relacionan con tus imágenes.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo Optimizar Imágenes para la Web</strong>
+        <span>La guía completa de optimización de imágenes para 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Imágenes Responsivas: srcset y sizes Explicados",
+  "description": "Los atributos srcset y sizes permiten al navegador elegir la resolución óptima para cada dispositivo. Aprende la sintaxis, los patrones más comunes y los errores a evitar.",
+  "url": "https://imgpact.com/guides/responsive-images-srcset-sizes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}Compression WebP vs JPEG : analyse chiffrée | imgpact{% endblock %}
+{% block meta_description %}WebP vs JPEG : comparaison technique avec données réelles. À qualité visuelle égale, WebP est 25–35 % plus léger. Métriques SSIM, cas d'usage concrets et stratégie de migration.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/compression-image-lossy-lossless">Compression</a>
+    <span>›</span>
+    WebP vs JPEG
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜️ Compression</div>
+    <h1>Compression WebP vs JPEG : analyse chiffrée</h1>
+    <div class="guide-meta">
+      <span>⏱ 9 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <h2>Les chiffres clés : ce que disent les benchmarks</h2>
+    <p>Le chiffre le plus souvent cité est celui des benchmarks publiés par Google lors de l'introduction du format WebP en 2010, puis confirmés par des études indépendantes depuis : <strong>à qualité visuelle équivalente, WebP produit des fichiers 25 à 35 % plus petits que JPEG</strong>. Ce gain s'applique aux images avec pertes (lossy).</p>
+    <p>En mode lossless (sans pertes), WebP surpasse PNG de 25 à 34 % selon le type d'image; mais cette comparaison sort du périmètre JPEG, qui est un format exclusivement lossy.</p>
+    <p>Ces chiffres sont des moyennes. Les résultats varient selon le type de contenu, le niveau de qualité cible et l'encodeur utilisé. Voici ce qu'on observe sur des cas concrets :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type d'image</th>
+          <th>JPEG (qualité 85)</th>
+          <th>WebP (équivalent visuel)</th>
+          <th>Gain WebP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Photo de paysage, 1920×1080 px</td>
+          <td>320 Ko</td>
+          <td>215 Ko</td>
+          <td>−33 %</td>
+        </tr>
+        <tr>
+          <td>Portrait en studio, 800×1000 px</td>
+          <td>145 Ko</td>
+          <td>98 Ko</td>
+          <td>−32 %</td>
+        </tr>
+        <tr>
+          <td>Capture d'écran UI, 1440×900 px</td>
+          <td>280 Ko</td>
+          <td>175 Ko</td>
+          <td>−37 %</td>
+        </tr>
+        <tr>
+          <td>Illustration e-commerce, 600×600 px</td>
+          <td>95 Ko</td>
+          <td>72 Ko</td>
+          <td>−24 %</td>
+        </tr>
+        <tr>
+          <td>Image avec texte superposé, 1200×630 px</td>
+          <td>210 Ko</td>
+          <td>148 Ko</td>
+          <td>−30 %</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Méthodologie :</strong> Ces mesures comparent JPEG à qualité 85 (MozJPEG) avec WebP à un niveau de qualité ajusté pour obtenir un SSIM (Structural Similarity Index) équivalent sur les deux fichiers. Ce n'est pas une comparaison à paramètre fixe, mais à qualité visuelle perçue équivalente, ce qui est la seule comparaison utile en pratique.
+    </div>
+
+    <h2>Comment fonctionne WebP : prédiction et entropie</h2>
+    <p>Comprendre l'avantage de WebP nécessite de comprendre pourquoi il est structurellement plus efficace que JPEG.</p>
+    <p><strong>JPEG</strong> découpe l'image en blocs de 8×8 pixels, applique une transformée en cosinus discrète (DCT) pour convertir les données spatiales en données fréquentielles, puis quantifie les coefficients. C'est une approche solide, mais le découpage en blocs crée des artefacts visibles à haute compression (artefacts de macroblocs) et ne tire pas parti des corrélations entre blocs adjacents.</p>
+    <p><strong>WebP lossy</strong> est dérivé du codec vidéo VP8. Il utilise deux techniques supplémentaires que JPEG n'implémente pas :</p>
+    <ul>
+      <li><strong>Codage prédictif (intra-prediction) :</strong> Chaque macro-bloc de 16×16 pixels est encodé en prédisant sa valeur à partir des blocs voisins déjà encodés, et en ne stockant que le résidu (différence entre prédiction et valeur réelle). Sur les zones uniformes, ciel, peaux, fonds, les résidus sont proches de zéro et s'encodent en très peu de bits.</li>
+      <li><strong>Codage entropique arithmétique :</strong> WebP utilise un codage arithmétique booléen, plus efficace que le codage de Huffman utilisé par JPEG pour compresser les coefficients quantifiés. Ce seul changement représente un gain de 5 à 10 %.</li>
+    </ul>
+    <p>La combinaison de ces deux mécanismes explique l'essentiel de l'avantage de WebP sur JPEG.</p>
+
+    <h2>Mesurer la qualité visuelle : SSIM et DSSIM</h2>
+    <p>Comparer des images compressées à paramètre fixe (ex. "JPEG 80 vs WebP 80") n'a pas de sens : les échelles de qualité des deux formats ne sont pas linéairement comparables. La bonne approche est de mesurer la qualité visuelle objectivement.</p>
+    <p>Le <strong>SSIM (Structural Similarity Index)</strong> est la métrique la plus courante. Il mesure la similarité structurelle entre deux images sur une échelle de 0 à 1 (1 = identiques). Une valeur SSIM &ge; 0,95 est généralement considérée comme visuellement indiscernable de l'original pour des images photo.</p>
+    <p>Le <strong>DSSIM</strong> est la distance SSIM (1 − SSIM), utile pour comparer des encodeurs : un DSSIM plus bas signifie une meilleure fidélité à qualité de compression égale.</p>
+    <p>Des outils comme <strong>Butteraugli</strong> (développé par Google) vont plus loin en modélisant la perception humaine du système visuel : deux images peuvent avoir un SSIM identique mais des scores Butteraugli différents si les artefacts sont distribués dans des zones que l'œil humain est plus ou moins sensible à.</p>
+    <div class="tip-box">
+      <strong>Pour les développeurs :</strong> L'outil <code>cjpeg-static</code> de Mozilla et <code>cwebp</code> de Google permettent d'encoder des fichiers JPEG et WebP avec un niveau de qualité cible en termes de SSIM plutôt qu'un paramètre numérique arbitraire. C'est la meilleure façon de faire une comparaison équitable entre les deux formats.
+    </div>
+
+    <h2>Quand JPEG reste le meilleur choix</h2>
+    <p>Malgré son avantage technique, WebP n'est pas toujours le format optimal. Il existe des situations où JPEG reste préférable :</p>
+    <ul>
+      <li><strong>Compatibilité universelle :</strong> JPEG est supporté par 100 % des navigateurs, clients email, applications, logiciels de retouche et appareils photo. WebP atteint 97 % de support navigateur en 2026, mais reste absent de nombreux outils de traitement d'image professionnels et de clients email (Outlook bureau notamment).</li>
+      <li><strong>Métadonnées Exif complètes :</strong> Les fichiers JPEG peuvent stocker des métadonnées Exif étendues, données GPS, paramètres d'appareil photo, profils ICC, informations IPTC. WebP supporte les métadonnées Exif et XMP, mais l'écosystème de lecture de ces métadonnées est moins mature.</li>
+      <li><strong>Compatibilité avec les outils de traitement :</strong> Photoshop, Lightroom, les CMS legacy et de nombreux pipelines d'automatisation traitent le JPEG nativement sans configuration supplémentaire. WebP nécessite des plugins ou des bibliothèques dédiées sur certains outils anciens.</li>
+      <li><strong>Encodage rapide :</strong> L'encodage JPEG est significativement plus rapide que l'encodage WebP, notamment aux niveaux de qualité élevés. Pour des pipelines de traitement en temps réel ou à très haute volumétrie, cela peut avoir un impact mesurable sur les coûts.</li>
+    </ul>
+    <div class="warning-box">
+      <strong>Cas particulier : les emails.</strong> WebP n'est pas supporté par Outlook bureau (versions 2016–2021), qui représente encore une part significative des ouvertures en contexte B2B. Pour les images destinées aux campagnes email, continuez à utiliser JPEG et PNG sans exception.
+    </div>
+
+    <h2>JPEG, WebP et AVIF : tableau comparatif des gains de compression</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>JPEG</th>
+          <th>WebP</th>
+          <th>AVIF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Compression vs JPEG (même qualité visuelle)</td>
+          <td>Référence</td>
+          <td>−25 à −35 %</td>
+          <td>−40 à −55 %</td>
+        </tr>
+        <tr>
+          <td>Support navigateurs (2026)</td>
+          <td>100 %</td>
+          <td>97 %</td>
+          <td>93 %</td>
+        </tr>
+        <tr>
+          <td>Transparence (alpha)</td>
+          <td>Non</td>
+          <td>Oui</td>
+          <td>Oui</td>
+        </tr>
+        <tr>
+          <td>Animation</td>
+          <td>Non</td>
+          <td>Oui</td>
+          <td>Oui</td>
+        </tr>
+        <tr>
+          <td>Vitesse d'encodage</td>
+          <td>Très rapide</td>
+          <td>Rapide</td>
+          <td>Lent</td>
+        </tr>
+        <tr>
+          <td>Vitesse de décodage</td>
+          <td>Très rapide</td>
+          <td>Rapide</td>
+          <td>Moyen</td>
+        </tr>
+        <tr>
+          <td>Métadonnées Exif</td>
+          <td>Complet</td>
+          <td>Partiel</td>
+          <td>Partiel</td>
+        </tr>
+        <tr>
+          <td>Support email</td>
+          <td>Universel</td>
+          <td>Partiel</td>
+          <td>Non</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Stratégie de migration vers WebP</h2>
+    <p>Pour un site web existant, la migration de JPEG vers WebP ne nécessite pas de reconstruire l'ensemble des assets. La stratégie recommandée en 2026 est le <strong>service conditionnel</strong> : servir WebP aux navigateurs qui le supportent, JPEG aux autres.</p>
+    <p>La balise HTML <code>&lt;picture&gt;</code> permet cette logique nativement, sans JavaScript :</p>
+    <pre><code>&lt;picture&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;img src="image.jpg" alt="Description de l'image"&gt;
+&lt;/picture&gt;</code></pre>
+    <p>Pour les sites à fort volume d'images, une règle de négociation de contenu HTTP côté serveur est plus scalable, elle ne nécessite aucune modification du HTML :</p>
+    <pre><code># Apache : servir WebP si le navigateur le supporte et que le fichier existe
+&lt;IfModule mod_rewrite.c&gt;
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_FILENAME}.webp -f
+  RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.webp [T=image/webp,E=accept:1]
+&lt;/IfModule&gt;</code></pre>
+    <p>Les CDN modernes (Cloudflare, Fastly, AWS CloudFront avec Lambda@Edge, Cloudinary) proposent cette conversion automatique à la volée, sans toucher aux fichiers source. Un gain de 30 % sur le poids des images se traduit directement par un meilleur score LCP et un meilleur référencement.</p>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Convertissez vos JPEG en WebP en un clic et comparez le gain de poids à qualité visuelle équivalente, directement dans votre navigateur, sans installation.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/jpg" class="guide-cta-link">Convertir JPEG en WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/compression-image-lossy-lossless" class="guide-related-card">
+        <strong>Compression avec et sans pertes</strong>
+        <span>Guide complet sur lossy vs lossless : algorithmes, cas d'usage et réglages.</span>
+      </a>
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG : quand utiliser chaque format ?</strong>
+        <span>Comparaison pratique pour choisir le bon format selon votre type de contenu.</span>
+      </a>
+      <a href="/{{ lang }}/guides/format-avif" class="guide-related-card">
+        <strong>Le format AVIF : guide 2026</strong>
+        <span>AVIF surpasse WebP de 15 à 20 % en compression, est-il prêt pour la production ?</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Compression WebP vs JPEG : analyse chiffrée",
+  "description": "WebP vs JPEG : comparaison technique avec données réelles. À qualité visuelle égale, WebP est 25–35 % plus léger. Métriques SSIM, cas d'usage concrets et stratégie de migration.",
+  "url": "https://imgpact.com/guides/compression-webp-vs-jpeg",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

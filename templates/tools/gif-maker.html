@@ -1,0 +1,147 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page" style="max-width:960px">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="{{ url_gif_maker }}">{{ t.breadcrumb_gif_tools }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.nav_gif_maker }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="clapperboard"></i> {{ t.nav_gif_maker }}</h1>
+    <p>{{ t.tool_gif_maker_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_images }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, multiple files supported</div>
+    <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" multiple style="display:none">
+  </div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <!-- Frame timeline -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem">
+        <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary)">
+          {{ t.label_frames }} (<span id="frame-count">0</span>)
+        </span>
+        <button id="btn-add-more"
+          style="font-size:0.8rem;padding:0.3rem 0.75rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer">
+          {{ t.btn_add_more_frames }}
+        </button>
+        <input type="file" id="add-more-input" accept="image/png,image/jpeg,image/webp" multiple style="display:none">
+      </div>
+      <div class="frame-timeline" id="frame-timeline"></div>
+
+      <!-- Controls -->
+      <div class="control-row" style="margin-top:1rem">
+        <div class="control-group">
+          <label>{{ t.label_frame_delay }}</label>
+          <input type="number" id="global-delay" value="100" min="20" max="10000" style="width:100px">
+        </div>
+        <div class="control-group" style="justify-content:flex-end">
+          <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">
+            <input type="checkbox" id="per-frame-toggle"> {{ t.label_per_frame_delays }}
+          </label>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_loop }}</label>
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.875rem">
+              <input type="radio" name="loop" value="0" checked> {{ t.label_infinite }}
+            </label>
+            <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.875rem">
+              <input type="radio" name="loop" value="custom"> {{ t.label_custom }}:
+              <input type="number" id="loop-count" value="3" min="1" style="width:60px" disabled>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_output_size }}</label>
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.875rem">
+              <input type="radio" name="size" value="original" checked> {{ t.label_original }}
+            </label>
+            <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.875rem">
+              <input type="radio" name="size" value="custom"> {{ t.label_custom }}:
+              <input type="number" id="out-width" value="480" min="1" style="width:70px" disabled> ×
+              <input type="number" id="out-height" value="270" min="1" style="width:70px" disabled>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-process" id="btn-create"><i data-lucide="clapperboard"></i> {{ t.btn_create_gif }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.5rem">{{ t.label_preview }}</div>
+    <div style="position:relative;display:inline-block" id="gif-preview-wrap">
+      <img id="gif-preview" style="max-width:100%;max-height:420px;border-radius:var(--radius);border:1px solid var(--border);display:block">
+    </div>
+    <div class="stats-bar" id="stats-bar" style="margin-top:0.75rem"></div>
+    <button class="btn-download" id="btn-download" style="margin-top:0.5rem"><i data-lucide="download"></i> {{ t.btn_download_gif }}</button>
+  </div>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/gif-maker/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/gif-maker/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/gif-maker/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/gif-maker/en.html" ignore missing -%}
+{%- endif -%}
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/gif-maker.js"></script>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF Maker",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/gif-maker",
+    "description": "Create animated GIFs from images or video frames. Drag-and-drop frames, set delays, preview instantly. Free, no upload.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",     "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "GIF Maker","item": "https://imgpact.com/tools/gif-maker" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Create an Animated GIF",
+    "description": "Step-by-step guide to creating an animated GIF from images using imgpact.",
+    "tool": { "@type": "HowToTool", "name": "imgpact GIF Maker" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Upload images", "text": "Upload your PNG, JPG, or WebP images." },
+      { "@type": "HowToStep", "position": 2, "name": "Arrange frames", "text": "Reorder frames by dragging them in the timeline." },
+      { "@type": "HowToStep", "position": 3, "name": "Set frame delay", "text": "Set the frame delay in milliseconds (100 ms = 10 fps)." },
+      { "@type": "HowToStep", "position": 4, "name": "Set loop count", "text": "Choose infinite loop or enter a custom repeat count." },
+      { "@type": "HowToStep", "position": 5, "name": "Create and download", "text": "Click Create GIF and download your animation." }
+    ]
+  }
+]
+</script>
+{% endblock %}

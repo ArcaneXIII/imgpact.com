@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Responsive Images: srcset and sizes Explained | imgpact{% endblock %}
+{% block meta_description %}The srcset and sizes attributes let the browser choose the optimal image resolution for each device. Learn the syntax, common patterns, and mistakes to avoid.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Web Optimization</a>
+    <span>›</span>
+    Responsive Images
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Web Optimization</div>
+    <h1>Responsive Images: srcset and sizes Explained</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>A photo displayed at 400 px on mobile does not need to be 1600 px wide. Yet without responsive image markup, every user downloads the same large file. The <code>srcset</code> and <code>sizes</code> attributes solve this: they tell the browser what image candidates exist and how large each will display, letting it choose the optimal file to download.</p>
+
+    <h2>The problem: one image for all screens</h2>
+    <p>Without responsive images, you face a choice: serve a large file (fast on desktop, slow on mobile) or a small file (fast on mobile, blurry on Retina desktop). Neither is optimal. Responsive image markup lets you serve both, and let the browser pick.</p>
+
+    <h2>srcset with width descriptors (w)</h2>
+    <p>The most common pattern. Provide multiple image widths and the browser picks based on screen width and pixel density:</p>
+    <pre><code>&lt;img
+  srcset="photo-400.webp 400w,
+          photo-800.webp 800w,
+          photo-1200.webp 1200w,
+          photo-1600.webp 1600w"
+  src="photo-800.webp"
+  alt="Description"
+  width="800" height="600"
+&gt;</code></pre>
+    <p>The <code>w</code> descriptor is the actual pixel width of that image file, not a CSS breakpoint. The browser uses this along with screen width and device pixel ratio to pick the most efficient option.</p>
+
+    <h2>The sizes attribute</h2>
+    <p>Without <code>sizes</code>, the browser assumes the image is 100% of the viewport width. For a sidebar image displayed at 300 px on desktop, this causes the browser to download a much larger file than needed. <code>sizes</code> tells the browser how wide the image will be displayed at each breakpoint:</p>
+    <pre><code>&lt;img
+  srcset="photo-300.webp 300w,
+          photo-600.webp 600w,
+          photo-900.webp 900w"
+  sizes="(max-width: 768px) 100vw,
+         (max-width: 1200px) 50vw,
+         300px"
+  src="photo-600.webp"
+  alt="Description"
+  width="600" height="400"
+&gt;</code></pre>
+    <p>Read <code>sizes</code> top to bottom: on screens narrower than 768 px, the image is 100% of the viewport. On screens up to 1200 px, it is 50% of the viewport. On all other (larger) screens, it is exactly 300 px wide.</p>
+
+    <h2>srcset with pixel density descriptors (x)</h2>
+    <p>For fixed-size images (logos, avatars, icons), use pixel density descriptors instead:</p>
+    <pre><code>&lt;img
+  srcset="logo.webp 1x, logo@2x.webp 2x, logo@3x.webp 3x"
+  src="logo.webp"
+  alt="Company logo"
+  width="200" height="60"
+&gt;</code></pre>
+    <p>The browser downloads the 2x version on Retina displays, 3x on very high-DPI screens, and 1x everywhere else.</p>
+
+    <h2>Combining with &lt;picture&gt; for format negotiation</h2>
+    <p>Combine <code>&lt;picture&gt;</code> for format switching with <code>srcset</code> for responsive sizing:</p>
+    <pre><code>&lt;picture&gt;
+  &lt;source
+    type="image/avif"
+    srcset="photo-400.avif 400w, photo-800.avif 800w, photo-1200.avif 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;source
+    type="image/webp"
+    srcset="photo-400.webp 400w, photo-800.webp 800w, photo-1200.webp 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;img
+    src="photo-800.jpg"
+    srcset="photo-400.jpg 400w, photo-800.jpg 800w, photo-1200.jpg 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+    alt="Description"
+    width="800" height="600"
+    loading="lazy"
+  &gt;
+&lt;/picture&gt;</code></pre>
+
+    <h2>Which image sizes to generate?</h2>
+    <p>A practical starting set for most content images:</p>
+    <ul>
+      <li><strong>400 px</strong>: mobile (small screens, 1x)</li>
+      <li><strong>800 px</strong>: mobile Retina (2x), small tablet</li>
+      <li><strong>1200 px</strong>: desktop, tablet Retina</li>
+      <li><strong>1600 px</strong>: large desktop, wide images</li>
+    </ul>
+    <p>For hero/full-width images, add a 2400 px variant for large Retina displays.</p>
+
+    <div class="tip-box">
+      <strong>Automation:</strong> Generating all these variants manually is impractical. Use an image CDN (Cloudinary, Imgix, Cloudflare Images) to generate sizes on demand via URL parameters, or a build tool plugin (next/image, gatsby-image, astro:assets) that handles it automatically.
+    </div>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Use <code>srcset</code> with <code>w</code> descriptors for content images, and add a <code>sizes</code> attribute that matches your CSS layout. This single change can halve the image bytes downloaded by mobile users. Combine with <code>&lt;picture&gt;</code> for format negotiation to deliver AVIF to modern browsers and JPEG as a fallback.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy Loading Images</strong>
+        <span>Defer below-fold images to speed up initial load.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images and Core Web Vitals</strong>
+        <span>How LCP, CLS and INP relate to your images.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>How to Optimize Images for the Web</strong>
+        <span>The complete 2026 image optimization guide.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Responsive Images: srcset and sizes Explained",
+  "description": "The srcset and sizes attributes let the browser choose the optimal image resolution for each device. Learn the syntax, common patterns, and mistakes to avoid.",
+  "url": "https://imgpact.com/guides/responsive-images-srcset-sizes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Help & FAQ, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Help & FAQ</h1>
+    <p class="info-lead">Answers to the most common questions about imgpact.</p>
+  </div>
+  <div class="info-body">
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Are there any file size or quantity limits?</summary>
+        <p>No. imgpact processes files entirely in your browser, there are no server-side limits. The only practical limit is your device's available RAM. A modern computer handles files of several hundred megabytes without issues.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do my images get uploaded to a server?</summary>
+        <p>Never. All processing happens locally in your browser using WebAssembly. Your files never leave your device.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which image formats are supported?</summary>
+        <p>imgpact supports PNG, JPG/JPEG, WebP, GIF, BMP, ICO, AVIF, TIFF, and SVG. Format availability varies by tool.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why is the first operation slower?</summary>
+        <p>The WebAssembly engine (~2 MB) is loaded on first use and then cached by your browser. Subsequent operations are instant.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I convert multiple images at once?</summary>
+        <p>On the converter pages, simply drop or select multiple files. They will all be processed and available for individual download or as a ZIP archive.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is imgpact free?</summary>
+        <p>Yes, all tools are free. The site is supported by unobtrusive advertisements.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which browsers are supported?</summary>
+        <p>Any modern browser with WebAssembly support: Chrome 88+, Firefox 89+, Safari 15.2+, and Edge 88+. Internet Explorer is not supported.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use imgpact offline?</summary>
+        <p>After the WASM engine has been cached by your browser, most tools work without an internet connection. A PWA offline mode is on the roadmap.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why can't I convert images to HEIC format?</summary>
+        <p>HEIC uses the HEVC (H.265) codec, which is patent-encumbered. There is no open-source WebAssembly encoder available, and browsers do not support HEIC as a Canvas output format. imgpact is a fully browser-based tool that cannot rely on server-side licensed codecs. You can convert FROM HEIC to any open format (JPG, PNG, WebP...). To produce HEIC files, use the Photos app on iPhone or Mac, which encodes natively.</p>
+      </details>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are there any file size or quantity limits?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. imgpact processes files entirely in your browser, there are no server-side limits. The only practical limit is your device's available RAM. A modern computer handles files of several hundred megabytes without issues." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do my images get uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. All processing happens locally in your browser using WebAssembly. Your files never leave your device." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "imgpact supports PNG, JPG/JPEG, WebP, GIF, BMP, ICO, AVIF, TIFF, and SVG. Format availability varies by tool." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is the first operation slower?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The WebAssembly engine (~2 MB) is loaded on first use and then cached by your browser. Subsequent operations are instant." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert multiple images at once?",
+      "acceptedAnswer": { "@type": "Answer", "text": "On the converter pages, simply drop or select multiple files. They will all be processed and available for individual download or as a ZIP archive." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is imgpact free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, all tools are free. The site is supported by unobtrusive advertisements." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which browsers are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Any modern browser with WebAssembly support: Chrome 88+, Firefox 89+, Safari 15.2+, and Edge 88+. Internet Explorer is not supported." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use imgpact offline?",
+      "acceptedAnswer": { "@type": "Answer", "text": "After the WASM engine has been cached by your browser, most tools work without an internet connection. A PWA offline mode is on the roadmap." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can't I convert images to HEIC format?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HEIC uses the HEVC (H.265) codec, which is patent-encumbered. There is no open-source WebAssembly encoder available, and browsers do not support HEIC as a Canvas output format. You can convert FROM HEIC to any open format (JPG, PNG, WebP...). To produce HEIC files, use the Photos app on iPhone or Mac." }
+    }
+  ]
+}
+</script>
+{% endblock %}

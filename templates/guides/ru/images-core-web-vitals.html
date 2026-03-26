@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Изображения и Core Web Vitals: LCP, CLS, INP | imgpact{% endblock %}
+{% block meta_description %}Изображения. главная причина плохих показателей Core Web Vitals. Узнайте, как LCP, CLS и INP зависят от изображений, и что исправить для улучшения позиций в Google.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Веб-оптимизация</a>
+    <span>›</span>
+    Изображения &amp; Core Web Vitals
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Веб-оптимизация</div>
+    <h1>Изображения и Core Web Vitals: LCP, CLS, INP</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>С 2021 года Google использует Core Web Vitals как сигнал ранжирования в результатах поиска. Изображения оказывают прямое и существенное влияние на все три метрики. Понимание этой взаимосвязи необходимо для любой работы по SEO и производительности веб-страниц.</p>
+
+    <h2>Что такое Core Web Vitals?</h2>
+    <p>Core Web Vitals. это три метрики пользовательского опыта, измеряемые Google:</p>
+    <ul>
+      <li><strong>LCP (Largest Contentful Paint)</strong>: время до отрисовки самого крупного видимого элемента. Как правило, это изображение.</li>
+      <li><strong>CLS (Cumulative Layout Shift)</strong>: насколько неожиданно смещается макет страницы. Изображения без указанных размеров. основная причина.</li>
+      <li><strong>INP (Interaction to Next Paint)</strong>: отзывчивость на взаимодействие с пользователем. Тяжёлые изображения могут косвенно влиять на этот показатель.</li>
+    </ul>
+
+    <h2>LCP: метрика, больше всего зависящая от изображений</h2>
+    <p>На 70–80% страниц элемент LCP. это изображение: обычно баннер-герой, главное фото или изображение товара. Google ожидает LCP менее <strong>2,5 секунды</strong>. Типичные проблемы с изображениями, влияющие на LCP:</p>
+
+    <h3>1. Изображение LCP загружается лениво</h3>
+    <p>Самая вредная ошибка. Добавление <code>loading="lazy"</code> к изображению-герою откладывает его обнаружение и загрузку.</p>
+    <pre><code>&lt;!-- Wrong: delays LCP --&gt;
+&lt;img src="hero.jpg" loading="lazy"&gt;
+
+&lt;!-- Correct: load immediately --&gt;
+&lt;img src="hero.jpg" loading="eager"&gt;</code></pre>
+
+    <h3>2. Изображение LCP не предзагружено</h3>
+    <p>Браузер обнаруживает изображение LCP только при разборе HTML. Подсказка предзагрузки позволяет браузеру получить его раньше:</p>
+    <pre><code>&lt;link rel="preload" as="image" href="hero.avif" type="image/avif"&gt;</code></pre>
+
+    <h3>3. Изображение LCP слишком тяжёлое</h3>
+    <p>Изображение-герой весом 1 МБ всегда даст плохой LCP на мобильных соединениях. Цель: менее 200 КБ для полноширинного баннера 1200 пикселей, используя AVIF или WebP.</p>
+
+    <h3>4. Изображение LCP обслуживается без CDN</h3>
+    <p>Обслуживание изображений с одного исходного сервера увеличивает задержку для удалённых пользователей. CDN сокращает TTFB (время до первого байта), напрямую улучшая LCP.</p>
+
+    <h2>CLS: изображения без указания размеров</h2>
+    <p>Если браузер не знает размеры изображения до его загрузки, он не может зарезервировать место в макете. Изображение загружается и сдвигает содержимое вниз. это и есть сдвиг макета. Исправление простое:</p>
+    <pre><code>&lt;!-- Wrong: no dimensions, causes CLS --&gt;
+&lt;img src="photo.jpg" alt="..."&gt;
+
+&lt;!-- Correct: dimensions prevent layout shift --&gt;
+&lt;img src="photo.jpg" alt="..." width="800" height="600"&gt;</code></pre>
+    <p>Также можно использовать CSS <code>aspect-ratio</code> для достижения того же эффекта, когда нельзя жёстко задать размеры:</p>
+    <pre><code>img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
+}</code></pre>
+
+    <h2>Измерение влияния изображений на Core Web Vitals</h2>
+    <p>Используйте эти инструменты, чтобы определить, какие изображения ухудшают ваши показатели:</p>
+    <ul>
+      <li><strong>Google Search Console</strong>: отчёт Core Web Vitals показывает страницы с плохими оценками на основе реальных данных пользователей</li>
+      <li><strong>PageSpeed Insights</strong>: определяет элемент LCP, показывает возможности «Правильно размещайте изображения» и «Используйте изображения в новых форматах»</li>
+      <li><strong>Chrome DevTools → вкладка Performance</strong>: водопадная диаграмма показывает, когда каждое изображение загружается и отрисовывается</li>
+      <li><strong>Lighthouse</strong>: встроен в Chrome DevTools, указывает на конкретные возможности оптимизации изображений</li>
+    </ul>
+
+    <h2>Контрольный список изображений для Core Web Vitals</h2>
+    <table>
+      <thead>
+        <tr><th>Проблема</th><th>Метрика</th><th>Исправление</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Изображение-герой с ленивой загрузкой</td><td>LCP</td><td>Удалить loading="lazy" с изображения LCP</td></tr>
+        <tr><td>Изображение LCP не предзагружено</td><td>LCP</td><td>Добавить &lt;link rel="preload"&gt;</td></tr>
+        <tr><td>Изображение LCP слишком большое</td><td>LCP</td><td>Сжать до &lt;200 КБ, использовать AVIF/WebP</td></tr>
+        <tr><td>Нет атрибутов width/height у изображений</td><td>CLS</td><td>Всегда указывать width и height</td></tr>
+        <tr><td>Изображения без CDN</td><td>LCP</td><td>Использовать CDN для статических ресурсов</td></tr>
+        <tr><td>Нет согласования форматов</td><td>LCP</td><td>Отдавать AVIF/WebP поддерживаемым браузерам</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Главный вывод:</strong> Изображения. основной рычаг для улучшения Core Web Vitals. Сначала исправьте изображение LCP: уберите ленивую загрузку, добавьте подсказку предзагрузки, сожмите до менее 200 КБ с AVIF или WebP и подавайте через CDN. Затем исправьте CLS, добавив атрибуты width и height каждому изображению.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Оптимизировать изображения</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Конвертировать в WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Ленивая загрузка изображений</strong>
+        <span>Когда и как использовать loading="lazy", не ухудшая LCP.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Адаптивные изображения: srcset и sizes</strong>
+        <span>Отдавайте правильное разрешение для каждого экрана.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>Как оптимизировать изображения для веба</strong>
+        <span>Полное руководство по оптимизации изображений 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Изображения и Core Web Vitals: LCP, CLS, INP",
+  "description": "Изображения. главная причина плохих показателей Core Web Vitals. Узнайте, как LCP, CLS и INP зависят от изображений, и что исправить для улучшения позиций в Google.",
+  "url": "https://imgpact.com/guides/images-core-web-vitals",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

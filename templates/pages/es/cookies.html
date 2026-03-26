@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Política de cookies, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Política de cookies</h1>
+    <p class="info-lead">Última actualización: marzo de 2026</p>
+  </div>
+  <div class="info-body">
+
+    <h2>¿Qué son las cookies?</h2>
+    <p>Las cookies son pequeños archivos de texto almacenados en su navegador. También utilizamos <code>localStorage</code>, un mecanismo similar que funciona sin cookies pero sirve para recordar sus preferencias.</p>
+
+    <h2>Cookies y almacenamiento utilizados</h2>
+    <table class="info-table">
+      <thead>
+        <tr><th>Nombre</th><th>Tipo</th><th>Finalidad</th><th>Duración</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>imgpact-theme</code></td>
+          <td>localStorage</td>
+          <td>Recuerda su preferencia de tema claro/oscuro</td>
+          <td>Hasta borrado manual</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-lang</code></td>
+          <td>Cookie</td>
+          <td>Recuerda su idioma preferido (ES, EN, FR, RU)</td>
+          <td>365 días</td>
+        </tr>
+        <tr>
+          <td><code>imgpact_consent</code></td>
+          <td>localStorage</td>
+          <td>Guarda sus elecciones de consentimiento de cookies</td>
+          <td>365 días</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-sid</code></td>
+          <td>localStorage</td>
+          <td>ID de sesión aleatorio y anónimo usado para contar usuarios únicos de herramientas. Se envía a los servidores de imgpact (solo junto con el nombre de la herramienta) al usar una herramienta. Sin datos personales, sin dirección IP.</td>
+          <td>Hasta borrado manual</td>
+        </tr>
+        <tr>
+          <td>Google Analytics (GA4)</td>
+          <td>Cookie / localStorage</td>
+          <td>Mide las visitas y el uso de herramientas para saber cuáles son más populares. Datos agregados y anónimos. Solo se carga con su consentimiento.</td>
+          <td>Hasta 2 años</td>
+        </tr>
+        <tr>
+          <td>Microsoft Clarity</td>
+          <td>Cookie / localStorage</td>
+          <td>Registra reproducciones de sesión y mapas de calor anonimizados para mejorar la interfaz. Solo se carga con su consentimiento.</td>
+          <td>Hasta 1 año</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Analytics, ¿qué datos se recopilan?</h2>
+    <p>Con su consentimiento, recopilamos datos <strong>anónimos y agregados</strong> como:</p>
+    <ul>
+      <li>Páginas visitadas y herramientas utilizadas</li>
+      <li>Tiempo empleado en cada herramienta</li>
+      <li>País (no ciudad ni dirección IP)</li>
+      <li>Tipo de navegador y dispositivo</li>
+    </ul>
+    <p><strong>Nunca</strong> recopilamos sus imágenes, nombres de archivos ni contenidos, todo el procesamiento de imágenes ocurre localmente en su navegador, nada se envía jamás a nuestros servidores.</p>
+
+    <h2>Sus opciones</h2>
+    <p>Puede gestionar sus preferencias en cualquier momento mediante el botón <strong>Cookies</strong> en la esquina inferior izquierda de cada página. Puede aceptar todo, rechazar todo, o elegir individualmente entre Google Analytics y Microsoft Clarity.</p>
+    <p>Si rechaza el analytics, Google Analytics se carga igualmente en <strong>modo anónimo</strong> (sin cookies, IP anonimizada, sin seguimiento entre sitios). Microsoft Clarity no se carga en absoluto.</p>
+
+    <h2>Eliminar cookies</h2>
+    <p>Puede borrar todas las cookies y el localStorage de imgpact en cualquier momento desde las herramientas de desarrollo de su navegador: <strong>DevTools → Aplicación → Almacenamiento → Borrar datos del sitio</strong>.</p>
+
+    <h2>Políticas de privacidad de terceros</h2>
+    <ul>
+      <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de privacidad de Google</a></li>
+      <li><a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Declaración de privacidad de Microsoft</a></li>
+    </ul>
+
+  </div>
+</div>
+{% endblock %}

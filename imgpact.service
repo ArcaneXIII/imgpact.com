@@ -1,0 +1,22 @@
+[Unit]
+Description=imgpact — Free Online Image Tools
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/imgpact
+ExecStart=/opt/imgpact/server
+Restart=always
+RestartSec=5
+Environment=RUST_LOG=info
+Environment=PORT=3000
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/imgpact
+
+[Install]
+WantedBy=multi-user.target

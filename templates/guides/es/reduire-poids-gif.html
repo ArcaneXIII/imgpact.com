@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Cómo reducir el tamaño de un GIF: 6 métodos probados | imgpact{% endblock %}
+{% block meta_description %}Los archivos GIF son grandes por naturaleza. Aprende 6 métodos para reducir el tamaño de un GIF: menos colores, menor tasa de fotogramas, recortar, redimensionar, optimizar con gifsicle o convertir a WebP/vídeo.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/compresion-con-perdida-sin-perdida">Compresión</a>
+    <span>›</span>
+    Reducir el tamaño de un GIF
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜 Compresión</div>
+    <h1>Cómo reducir el tamaño de un GIF: 6 métodos probados</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>GIF es el formato de imagen animada con peor compresión de los que se usan ampliamente. Una animación de 5 segundos a 30 fps y 800×600 píxeles puede superar fácilmente los 15–25 MB. Sin embargo, los GIF siguen siendo omnipresentes para animaciones cortas, reacciones y demos. Aquí tienes seis estrategias efectivas para reducir drásticamente el tamaño de los GIF.</p>
+
+    <h2>Por qué los GIF son tan grandes</h2>
+    <p>GIF fue diseñado en 1987. Su compresión (LZW) es sin pérdida pero está limitada a 256 colores por fotograma. Para contenido fotográfico, 256 colores es completamente insuficiente: el códec genera grandes patrones de tramado que se comprimen mal. Para GIF derivados de vídeo, cada fotograma se almacena casi de forma independiente, a diferencia de los códecs de vídeo modernos que solo almacenan las diferencias entre fotogramas.</p>
+
+    <h2>Método 1: Reducir la paleta de colores</h2>
+    <p>GIF admite hasta 256 colores por fotograma. La mayoría de las animaciones se ven aceptables con 64–128 colores, y los gráficos simples pueden funcionar con tan solo 16–32:</p>
+    <ul>
+      <li>256 colores → 128 colores: normalmente un 20–30% más pequeño</li>
+      <li>256 colores → 64 colores: normalmente un 35–50% más pequeño</li>
+      <li>256 colores → 32 colores: un 50–65% más pequeño (puede aparecer posterización)</li>
+    </ul>
+    <p>Reduce los colores en Photoshop (Guardar para web), GIMP (modo indexado) o gifsicle (<code>--colors 64</code>).</p>
+
+    <h2>Método 2: Reducir la tasa de fotogramas</h2>
+    <p>Las animaciones GIF rara vez necesitan 30 fps. La mayoría de los GIF se ven fluidos a 10–15 fps, y las animaciones simples funcionan bien a 5–8 fps:</p>
+    <ul>
+      <li>30 fps → 15 fps: un 50% menos de fotogramas, ~40–45% de reducción del archivo</li>
+      <li>30 fps → 10 fps: un 67% menos de fotogramas, ~55–60% de reducción del archivo</li>
+    </ul>
+    <p>Establece el retardo de fotograma a 100 ms (10 fps) o 67 ms (15 fps) para los objetivos más comunes.</p>
+
+    <h2>Método 3: Recortar y redimensionar</h2>
+    <p>Cada píxel cuenta. Recorta el GIF para mostrar solo el contenido esencial y redimensiona a las dimensiones de visualización reales. Un GIF de 400×300 es aproximadamente ×4 más pequeño que la misma animación a 800×600 (la relación de píxeles es cuadrática).</p>
+
+    <div class="tip-box">
+      <strong>Regla general:</strong> Nunca hagas un GIF más grande que su tamaño de visualización real en la página. Si se muestra a 500 px de ancho, expórtalo a 500 px, no a 1000 px.
+    </div>
+
+    <h2>Método 4: Optimizar diferencias entre fotogramas con gifsicle</h2>
+    <p>El flag <code>--optimize</code> de gifsicle hace que cada fotograma almacene solo los píxeles que cambiaron respecto al fotograma anterior, en lugar del fotograma completo:</p>
+    <pre><code>gifsicle --optimize=3 --lossy=80 input.gif -o output.gif</code></pre>
+    <p><code>--optimize=3</code> es el nivel de optimización más agresivo. <code>--lossy=80</code> añade una leve compresión con pérdida que apenas es visible pero puede reducir el tamaño del archivo un 30–40% adicional.</p>
+
+    <h2>Método 5: Convertir a WebP animado</h2>
+    <p>El WebP animado usa compresión de vídeo VP8, que es mucho más eficiente que el LZW de GIF. La misma animación en WebP animado es típicamente <strong>un 50–70% más pequeña</strong> que en GIF, con mayor fidelidad de color. Compatibilidad: Chrome, Firefox, Edge (más del 96% de usuarios en 2026). Safari añadió soporte en Safari 14+.</p>
+    <pre><code># Usando ffmpeg
+ffmpeg -i animation.gif -vf "fps=15,scale=400:-1" \
+  -c:v libwebp -quality 75 -loop 0 animation.webp</code></pre>
+
+    <h2>Método 6: Convertir a vídeo (mejor relación calidad/tamaño)</h2>
+    <p>Para animaciones largas (más de 3–5 segundos), reemplazar el GIF con un elemento <code>&lt;video&gt;</code> en bucle y sin sonido da resultados dramáticamente mejores. Un GIF de 10 MB a menudo puede reemplazarse por un MP4 de 200–500 KB:</p>
+    <pre><code>&lt;video autoplay loop muted playsinline&gt;
+  &lt;source src="animation.webm" type="video/webm"&gt;
+  &lt;source src="animation.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+    <p>Los atributos <code>autoplay muted playsinline</code> garantizan que se comporte como un GIF (se reproduce automáticamente en móvil sin interacción del usuario).</p>
+
+    <h2>Comparativa: métodos de optimización de GIF</h2>
+    <table>
+      <thead>
+        <tr><th>Método</th><th>Reducción de tamaño</th><th>Impacto en la calidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Reducir a 128 colores</td><td>20–30%</td><td>Mínimo</td></tr>
+        <tr><td>Reducir a 64 colores</td><td>35–50%</td><td>Algo de posterización</td></tr>
+        <tr><td>Reducir tasa de fotogramas a la mitad (30→15)</td><td>40–45%</td><td>Ligeramente menos fluido</td></tr>
+        <tr><td>gifsicle optimize=3</td><td>20–40%</td><td>Ninguno</td></tr>
+        <tr><td>gifsicle lossy=80</td><td>30–40%</td><td>Mínimo</td></tr>
+        <tr><td>Convertir a WebP animado</td><td>50–70%</td><td>Mejor que GIF</td></tr>
+        <tr><td>Convertir a vídeo MP4</td><td>80–95%</td><td>Mucho mejor que GIF</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Las ganancias más rápidas son reducir la paleta de colores (–50% de tamaño) y reducir la tasa de fotogramas a la mitad (–45%). Para el mejor resultado, combina todos los métodos: reduce los colores, baja la tasa de fotogramas, recorta y pasa por gifsicle. Si la animación dura más de 3 segundos, reemplaza el GIF completamente con un WebP animado o un vídeo en bucle sin sonido.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/gif-editor" class="guide-cta-link">Editar GIF</a>
+      <a href="/tools/video-to-gif" class="guide-cta-link secondary">Vídeo a GIF</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/compresion-con-perdida-sin-perdida" class="guide-related-card">
+        <strong>Compresión con pérdida vs sin pérdida</strong>
+        <span>Los fundamentos de la compresión de imágenes explicados.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/comprimir-sin-perder-calidad" class="guide-related-card">
+        <strong>Comprimir sin perder calidad</strong>
+        <span>Técnicas prácticas de compresión para todos los tipos de imagen.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo optimizar imágenes para la web</strong>
+        <span>La guía completa de optimización de imágenes para 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cómo reducir el tamaño de un GIF: 6 métodos probados",
+  "description": "Los archivos GIF son grandes por naturaleza. Aprende 6 métodos para reducir el tamaño: menos colores, menor tasa de fotogramas, recortar, redimensionar, optimizar con gifsicle o convertir a WebP/vídeo.",
+  "url": "https://imgpact.com/guides/reducir-tamano-gif",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

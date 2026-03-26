@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Interactive Product Zoom: Implementation Guide 2026 | imgpact{% endblock %}
+{% block meta_description %}Product zoom increases conversion by letting customers inspect detail. Learn image size requirements, CSS/JS zoom implementations, and best practices for e-commerce.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/ecommerce-product-images">E-commerce</a>
+    <span>›</span>
+    Interactive Product Zoom
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Interactive Product Zoom: Implementation Guide 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Product zoom allows customers to examine fine details, fabric texture, engraving quality, material finish, without leaving the product page. Studies show that product zoom users convert at significantly higher rates than non-users. This guide covers the image requirements for zoom and how to implement it effectively.</p>
+
+    <h2>Why product zoom matters</h2>
+    <p>In a physical store, customers pick up products and examine them closely. Online, zoom is the closest equivalent. Customers who use the zoom feature:</p>
+    <ul>
+      <li>Are actively engaged and closer to purchasing</li>
+      <li>Have higher average order values</li>
+      <li>Are less likely to return (fewer "not what I expected" returns)</li>
+    </ul>
+    <p>Amazon attributes part of its conversion success to high-resolution images (minimum 1000 px) that enable their hover-zoom feature. The same principle applies to any e-commerce site.</p>
+
+    <h2>Image requirements for zoom</h2>
+    <p>Zoom quality is entirely determined by source image resolution. Calculate what you need based on your zoom factor:</p>
+    <table>
+      <thead><tr><th>Display size</th><th>Zoom factor</th><th>Required source size</th></tr></thead>
+      <tbody>
+        <tr><td>500 × 500 px</td><td>2×</td><td>1000 × 1000 px</td></tr>
+        <tr><td>500 × 500 px</td><td>4×</td><td>2000 × 2000 px</td></tr>
+        <tr><td>600 × 600 px</td><td>4×</td><td>2400 × 2400 px</td></tr>
+        <tr><td>800 × 800 px</td><td>4×</td><td>3200 × 3200 px</td></tr>
+      </tbody>
+    </table>
+    <p>For most e-commerce use cases, a 4× zoom from a 2000×2000 source image (displayed at 500×500) provides excellent detail visibility. This is why <strong>2000×2000 px is the industry standard</strong> for product images.</p>
+
+    <h2>Zoom implementation types</h2>
+
+    <h3>1. CSS-only zoom (simplest)</h3>
+    <p>The easiest implementation, no JavaScript required. On hover, the image scales up within its container:</p>
+    <pre><code>.product-image-wrapper {
+  overflow: hidden;
+  width: 500px;
+  height: 500px;
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-image-wrapper:hover img {
+  transform: scale(2);
+  cursor: zoom-in;
+}</code></pre>
+    <p>Limitation: the user cannot control zoom position, the image scales from its centre. Suitable for quick zoom but less precise than cursor-tracking zoom.</p>
+
+    <h3>2. JavaScript cursor-tracking zoom</h3>
+    <p>The image magnifies at the cursor position, giving users precise control. This is the standard on most major e-commerce sites (Amazon, ASOS, etc.):</p>
+    <pre><code>const wrapper = document.querySelector('.product-zoom');
+const img = wrapper.querySelector('img');
+
+wrapper.addEventListener('mousemove', (e) => {
+  const rect = wrapper.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+  img.style.transformOrigin = `${x}% ${y}%`;
+  img.style.transform = 'scale(3)';
+});
+
+wrapper.addEventListener('mouseleave', () => {
+  img.style.transform = 'scale(1)';
+  img.style.transformOrigin = 'center';
+});</code></pre>
+
+    <h3>3. Lightbox/modal zoom</h3>
+    <p>Click the product image to open a full-screen modal with a larger view. Works well on mobile (where hover doesn't exist). Libraries like Fancybox, GLightbox, or Photoswipe provide this with minimal setup.</p>
+
+    <h3>4. Lens-style zoom (separate magnifier panel)</h3>
+    <p>A small lens rectangle follows the cursor on the product image, and a separate panel shows the magnified area. Common on Amazon product pages. More complex to implement but very clear UX. Libraries: EasyZoom, Drift (by Imgix).</p>
+
+    <h2>Mobile considerations</h2>
+    <p>Touch devices do not have hover events. For mobile:</p>
+    <ul>
+      <li>Use pinch-to-zoom (native browser behaviour, ensure you are not disabling it with <code>user-scalable=no</code> in the viewport meta)</li>
+      <li>Add tap-to-zoom or a "zoom" button that opens a fullscreen lightbox</li>
+      <li>Swipeable carousels for multiple product images work better than zoom on small screens</li>
+    </ul>
+
+    <h2>Performance considerations for zoom</h2>
+    <p>Zoom requires high-resolution images, which are large. Handle this carefully:</p>
+    <ul>
+      <li><strong>Lazy load the zoom-resolution images</strong>: serve a 600×600 thumbnail initially, load the 2000×2000 version only when the user hovers or taps the zoom area</li>
+      <li><strong>Use progressive loading</strong>: display the thumbnail at scale immediately, swap to high-res when loaded</li>
+      <li><strong>Preload the zoom image on mouseenter</strong> with a 200ms delay to anticipate intent without unnecessary fetching</li>
+    </ul>
+    <pre><code>wrapper.addEventListener('mouseenter', () => {
+  const zoomImg = new Image();
+  zoomImg.src = img.dataset.zoomSrc; // preload high-res
+});</code></pre>
+
+    <div class="tip-box">
+      <strong>Best practice:</strong> Store two image URLs per product: a display-size image (600–800 px) served by default, and a zoom-size image (2000+ px) loaded on demand. This keeps initial page load fast while enabling full-quality zoom.
+    </div>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Product zoom needs source images at least 2× the display size, 2000×2000 px source for a 4× zoom at 500 px display is ideal. For most stores, a simple CSS or JavaScript cursor-tracking zoom covers 90% of needs. On mobile, pinch-to-zoom or a lightbox is more appropriate than hover-based zoom.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize for Zoom</a>
+      <a href="/tools/optimize" class="guide-cta-link secondary">Optimize Images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/ecommerce-product-images" class="guide-related-card">
+        <strong>E-commerce Product Images</strong>
+        <span>Complete guide to product photography for online stores.</span>
+      </a>
+      <a href="/{{ lang }}/guides/amazon-product-images" class="guide-related-card">
+        <strong>Amazon Product Images</strong>
+        <span>Amazon's specific requirements for product images.</span>
+      </a>
+      <a href="/{{ lang }}/guides/product-photos-white-background" class="guide-related-card">
+        <strong>White Background Product Photos</strong>
+        <span>How to achieve clean white backgrounds for marketplace images.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Interactive Product Zoom: Implementation Guide 2026",
+  "description": "Product zoom increases conversion by letting customers inspect detail. Learn image size requirements, CSS/JS zoom implementations, and best practices for e-commerce.",
+  "url": "https://imgpact.com/guides/interactive-product-zoom",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

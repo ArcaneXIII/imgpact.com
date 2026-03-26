@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}YouTube Banner Size 2026: Channel Art Dimensions | imgpact{% endblock %}
+{% block meta_description %}The exact YouTube banner dimensions for 2026: 2560×1440 px total, with a 1546×423 px safe zone. Learn how to create channel art that works on all devices.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/social-media-image-sizes-2026">Social Media</a>
+    <span>›</span>
+    YouTube Banner Size
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📱 Social Media</div>
+    <h1>YouTube Banner Size 2026: Channel Art Dimensions</h1>
+    <div class="guide-meta">
+      <span>⏱ 4 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>The YouTube channel banner (channel art) is one of the trickiest images to size correctly because it is displayed at different dimensions on every device. TV, desktop, tablet, and mobile all show different amounts of the image. Using the correct total canvas size and respecting the safe zone ensures your banner looks great everywhere.</p>
+
+    <h2>YouTube banner dimensions</h2>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Total canvas size</td><td>2560 × 1440 px</td></tr>
+        <tr><td>File size limit</td><td>6 MB maximum</td></tr>
+        <tr><td>Format</strong></td><td>JPEG, PNG, GIF (no animated GIF), BMP</td></tr>
+        <tr><td>Safe zone (all devices)</td><td>1546 × 423 px (centred)</td></tr>
+        <tr><td>Tablet display</td><td>1855 × 423 px</td></tr>
+        <tr><td>Desktop display</td><td>2560 × 423 px</td></tr>
+        <tr><td>TV display</td><td>2560 × 1440 px (full image)</td></tr>
+        <tr><td>Mobile display</td><td>1546 × 423 px</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The safe zone explained</h2>
+    <p>YouTube scales your 2560×1440 image differently on each device:</p>
+    <ul>
+      <li><strong>TV</strong>: shows the entire 2560×1440 canvas</li>
+      <li><strong>Desktop</strong>: shows the full width (2560 px) but only 423 px of height from the centre</li>
+      <li><strong>Tablet</strong>: shows 1855 px wide × 423 px tall from the centre</li>
+      <li><strong>Mobile</strong>: shows 1546 px wide × 423 px tall from the centre</li>
+    </ul>
+    <p>The <strong>safe zone (1546×423 px, centred)</strong> is the only portion guaranteed to be visible on every device. Keep all essential content, channel name, tagline, logo, within this zone. Decorative background elements can extend to the full 2560×1440 canvas.</p>
+
+    <h2>How to set up the safe zone in your design tool</h2>
+    <ol>
+      <li>Create a canvas at <strong>2560 × 1440 px</strong></li>
+      <li>Find the centre of the canvas: 1280 px horizontally, 720 px vertically</li>
+      <li>Draw a guide rectangle <strong>1546 px wide × 423 px tall</strong>, centred on the canvas:
+        <ul>
+          <li>Left edge: 1280 − 773 = <strong>507 px</strong></li>
+          <li>Right edge: 1280 + 773 = <strong>2053 px</strong></li>
+          <li>Top edge: 720 − 211.5 ≈ <strong>508 px</strong></li>
+          <li>Bottom edge: 720 + 211.5 ≈ <strong>932 px</strong></li>
+        </ul>
+      </li>
+      <li>Place all critical text and logos inside this rectangle</li>
+      <li>Fill the rest of the canvas with your background design</li>
+    </ol>
+
+    <h2>Channel profile picture</h2>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Recommended upload size</td><td>800 × 800 px</td></tr>
+        <tr><td>Minimum size</td><td>98 × 98 px</td></tr>
+        <tr><td>Display size</td><td>Varies by placement (up to 98 px)</td></tr>
+        <tr><td>Format</td><td>JPEG, PNG, GIF, BMP</td></tr>
+      </tbody>
+    </table>
+    <p>YouTube displays the profile picture as a circle. Upload at 800×800 px with your logo centred and some margin to allow for the circular crop.</p>
+
+    <h2>Video thumbnail</h2>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Recommended size</td><td>1280 × 720 px (16:9)</td></tr>
+        <tr><td>Maximum size</td><td>2 MB</td></tr>
+        <tr><td>Minimum width</td><td>640 px</td></tr>
+        <tr><td>Best format</td><td>JPEG for photos, PNG for graphics with text</td></tr>
+      </tbody>
+    </table>
+    <p>Thumbnails are one of the most important factors for YouTube click-through rate. Keep text large and legible at small sizes (thumbnails appear at ~168×94 px in search results) and ensure the image is compelling at a glance.</p>
+
+    <div class="tip-box">
+      <strong>Design tip:</strong> Test your banner at 1546×423 px first, design it to look complete at that size. Then expand the canvas to 2560×1440 and add background elements that extend to the edges for TV display. This workflow ensures the safe zone is never neglected.
+    </div>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Create your YouTube banner at 2560×1440 px but keep all essential text and logos within the 1546×423 px safe zone in the centre. Upload as JPEG or PNG under 6 MB. Upload your profile picture at 800×800 px, centred for circular display.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize Images</a>
+      <a href="/tools/crop" class="guide-cta-link secondary">Crop Images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/social-media-image-sizes-2026" class="guide-related-card">
+        <strong>Social Media Image Sizes 2026</strong>
+        <span>Complete reference for all platforms in one guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/instagram-image-dimensions" class="guide-related-card">
+        <strong>Instagram Image Dimensions</strong>
+        <span>All Instagram formats: feed, Reels, Stories, carousels.</span>
+      </a>
+      <a href="/{{ lang }}/guides/linkedin-image-sizes" class="guide-related-card">
+        <strong>Optimal LinkedIn Images</strong>
+        <span>Dimensions and best practices for LinkedIn posts and profiles.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "YouTube Banner Size 2026: Channel Art Dimensions",
+  "description": "The exact YouTube banner dimensions for 2026: 2560×1440 px total, with a 1546×423 px safe zone. Learn how to create channel art that works on all devices.",
+  "url": "https://imgpact.com/guides/youtube-banner-size",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

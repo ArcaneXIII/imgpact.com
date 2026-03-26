@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Politique de cookies, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Politique de cookies</h1>
+    <p class="info-lead">Dernière mise à jour : mars 2026</p>
+  </div>
+  <div class="info-body">
+
+    <h2>Que sont les cookies ?</h2>
+    <p>Les cookies sont de petits fichiers texte stockés dans votre navigateur. Nous utilisons également <code>localStorage</code>, un mécanisme similaire qui fonctionne sans cookie mais sert à mémoriser vos préférences.</p>
+
+    <h2>Cookies et stockage utilisés</h2>
+    <table class="info-table">
+      <thead>
+        <tr><th>Nom</th><th>Type</th><th>Finalité</th><th>Durée</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>imgpact-theme</code></td>
+          <td>localStorage</td>
+          <td>Mémorise votre préférence de thème clair/sombre</td>
+          <td>Jusqu'à effacement manuel</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-lang</code></td>
+          <td>Cookie</td>
+          <td>Mémorise votre langue préférée (FR, EN, ES, RU)</td>
+          <td>365 jours</td>
+        </tr>
+        <tr>
+          <td><code>imgpact_consent</code></td>
+          <td>localStorage</td>
+          <td>Enregistre vos choix de consentement aux cookies</td>
+          <td>365 jours</td>
+        </tr>
+        <tr>
+          <td><code>imgpact-sid</code></td>
+          <td>localStorage</td>
+          <td>Identifiant de session aléatoire et anonyme utilisé pour compter les utilisateurs uniques des outils. Envoyé aux serveurs imgpact (avec le nom de l'outil uniquement) lors de l'utilisation d'un outil. Aucune donnée personnelle, aucune adresse IP.</td>
+          <td>Jusqu'à effacement manuel</td>
+        </tr>
+        <tr>
+          <td>Google Analytics (GA4)</td>
+          <td>Cookie / localStorage</td>
+          <td>Mesure les visites et l'utilisation des outils pour comprendre quelles fonctionnalités sont les plus populaires. Données agrégées et anonymes. Chargé uniquement avec votre consentement.</td>
+          <td>Jusqu'à 2 ans</td>
+        </tr>
+        <tr>
+          <td>Microsoft Clarity</td>
+          <td>Cookie / localStorage</td>
+          <td>Enregistre des replays de session et cartes de chaleur anonymisés pour comprendre comment les outils sont utilisés et améliorer l'interface. Chargé uniquement avec votre consentement.</td>
+          <td>Jusqu'à 1 an</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Analytics, quelles données sont collectées ?</h2>
+    <p>Si vous consentez, nous collectons des données <strong>anonymes et agrégées</strong> telles que :</p>
+    <ul>
+      <li>Pages visitées et outils utilisés</li>
+      <li>Temps passé sur chaque outil</li>
+      <li>Pays (pas la ville ni l'adresse IP)</li>
+      <li>Type de navigateur et d'appareil</li>
+    </ul>
+    <p>Nous ne collectons <strong>jamais</strong> vos images, noms de fichiers ou contenus, tout le traitement d'image s'effectue localement dans votre navigateur, rien n'est jamais envoyé à nos serveurs.</p>
+
+    <h2>Vos choix</h2>
+    <p>Vous pouvez gérer vos préférences à tout moment via le bouton <strong>Cookies</strong> en bas à gauche de chaque page. Vous pouvez tout accepter, tout refuser, ou choisir individuellement entre Google Analytics et Microsoft Clarity.</p>
+    <p>Si vous refusez l'analytics, Google Analytics se charge quand même en <strong>mode anonyme</strong> (sans cookies, IP anonymisée, sans suivi inter-sites). Microsoft Clarity n'est pas chargé du tout.</p>
+
+    <h2>Supprimer les cookies</h2>
+    <p>Vous pouvez effacer tous les cookies et le localStorage d'imgpact à tout moment via les outils de développement de votre navigateur : <strong>DevTools → Application → Stockage → Effacer les données du site</strong>.</p>
+
+    <h2>Politiques de confidentialité des tiers</h2>
+    <ul>
+      <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de confidentialité Google</a></li>
+      <li><a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Déclaration de confidentialité Microsoft</a></li>
+    </ul>
+
+  </div>
+</div>
+{% endblock %}

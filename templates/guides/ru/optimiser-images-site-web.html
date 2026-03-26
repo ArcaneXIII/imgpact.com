@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}Как оптимизировать изображения для веба в 2026 году | imgpact{% endblock %}
+{% block meta_description %}Полное руководство по оптимизации веб-изображений: выберите правильный формат, сжимайте без потерь качества, реализуйте ленивую загрузку, адаптивные изображения и доставку через CDN.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Веб-оптимизация</a>
+    <span>›</span>
+    Оптимизация изображений
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Веб-оптимизация</div>
+    <h1>Как оптимизировать изображения для веба в 2026 году</h1>
+    <div class="guide-meta">
+      <span>⏱ 8 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Изображения составляют 50–70% среднего веса веб-страницы. Плохо оптимизированные изображения. главная причина медленных сайтов, высокого показателя отказов и плохих оценок Core Web Vitals. В этом руководстве рассматриваются все техники для доставки быстрых, лёгких и SEO-дружественных изображений.</p>
+
+    <h2>Шаг 1: Выберите правильный формат</h2>
+    <p>Выбор формата оказывает наибольшее влияние на размер файла ещё до применения какого-либо сжатия:</p>
+    <ul>
+      <li><strong>AVIF</strong>: лучшее сжатие для фотографий (стандарт 2026 года для современных браузеров)</li>
+      <li><strong>WebP</strong>: отличное сжатие, поддержка 97% браузеров. используйте как запасной вариант для AVIF</li>
+      <li><strong>JPEG</strong>: универсальный запасной вариант для фотографий</li>
+      <li><strong>PNG</strong>: когда требуется прозрачность и WebP не является опцией</li>
+      <li><strong>SVG</strong>: логотипы, иконки, любой векторный контент. бесконечно масштабируемый</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Быстрое правило:</strong> Фотографии → AVIF (с запасным WebP/JPEG). Графика с прозрачностью → WebP (с запасным PNG). Логотипы и иконки → SVG.
+    </div>
+
+    <h2>Шаг 2: Изменяйте размер до отображаемых размеров</h2>
+    <p>Никогда не загружайте фото размером 4000×3000 пикселей для отображения в 800×600. Браузер загружает полное разрешение, а затем масштабирует его. впустую расходуя пропускную способность без видимой пользы. Всегда изменяйте размер изображений до максимальных отображаемых размеров перед загрузкой.</p>
+    <p>Для адаптивных изображений, отображаемых в разных размерах на мобильных и десктопных устройствах, используйте атрибуты <code>srcset</code> и <code>sizes</code>, чтобы предоставить несколько разрешений и позволить браузеру выбрать подходящее.</p>
+
+    <h2>Шаг 3: Агрессивно сжимайте</h2>
+    <p>Большинство изображений могут выдержать значительно большее сжатие, чем принято думать. Практические целевые показатели:</p>
+    <table>
+      <thead>
+        <tr><th>Тип изображения</th><th>Рекомендуемое качество</th><th>Ожидаемый размер файла</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Главное / баннерное фото</td><td>AVIF q60–70 / JPEG q75–85</td><td>50–150 КБ</td></tr>
+        <tr><td>Фото товара (e-commerce)</td><td>AVIF q70 / JPEG q80–85</td><td>30–100 КБ</td></tr>
+        <tr><td>Миниатюра</td><td>AVIF q60 / JPEG q75</td><td>5–20 КБ</td></tr>
+        <tr><td>PNG-графика (прозрачность)</td><td>WebP q80 / PNG 8-бит</td><td>10–50 КБ</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Шаг 4: Реализуйте ленивую загрузку</h2>
+    <p>Изображения ниже линии видимости не следует загружать, пока пользователь не прокрутит страницу к ним. Нативный HTML-атрибут делает это тривиальным:</p>
+    <pre><code>&lt;img src="photo.jpg" alt="Описание" loading="lazy"&gt;</code></pre>
+    <p>Всегда добавляйте <code>loading="eager"</code> (или опускайте атрибут) для изображений выше линии видимости. особенно для вашего LCP-изображения (Largest Contentful Paint). Ленивая загрузка главного изображения негативно скажется на вашем LCP-показателе.</p>
+
+    <h2>Шаг 5: Добавляйте атрибуты width и height</h2>
+    <p>Всегда указывайте <code>width</code> и <code>height</code> для каждого тега <code>&lt;img&gt;</code>. Это позволяет браузеру зарезервировать правильное пространство до загрузки изображения, устраняя Cumulative Layout Shift (CLS). метрику Core Web Vitals:</p>
+    <pre><code>&lt;img src="photo.jpg" alt="Описание" width="800" height="600" loading="lazy"&gt;</code></pre>
+
+    <h2>Шаг 6: Используйте CDN</h2>
+    <p>Сеть доставки контента (CDN) обслуживает изображения с серверов, географически близких к вашим пользователям, снижая задержку. Современные image CDN (Cloudflare Images, Fastly, Imgix, Cloudinary) также автоматизируют:</p>
+    <ul>
+      <li>Конвертацию форматов (AVIF для поддерживающих браузеров, иначе WebP, в крайнем случае JPEG)</li>
+      <li>Адаптивное изменение размера по запросу</li>
+      <li>Агрессивное кеширование с правильными заголовками</li>
+    </ul>
+
+    <h2>Шаг 7: Предзагружайте LCP-изображение</h2>
+    <p>Изображение Largest Contentful Paint (обычно главное изображение) оказывает наибольшее влияние на пользовательский опыт. Сообщите браузеру о необходимости загрузить его как можно раньше:</p>
+    <pre><code>&lt;link rel="preload" as="image" href="hero.avif" type="image/avif"
+      imagesrcset="hero-400.avif 400w, hero-800.avif 800w, hero-1200.avif 1200w"
+      imagesizes="100vw"&gt;</code></pre>
+
+    <h2>Чеклист оптимизации изображений</h2>
+    <ul>
+      <li>✅ Правильный формат для каждого типа изображения</li>
+      <li>✅ Размер изменён до максимальных отображаемых размеров</li>
+      <li>✅ Сжатие до целевого качества (не 100%)</li>
+      <li>✅ <code>loading="lazy"</code> для всех изображений ниже линии видимости</li>
+      <li>✅ Атрибуты <code>width</code> и <code>height</code> для каждого &lt;img&gt;</li>
+      <li>✅ Описательный атрибут <code>alt</code> для каждого изображения</li>
+      <li>✅ Доставка по HTTPS через CDN</li>
+      <li>✅ LCP-изображение предзагружено</li>
+      <li>✅ Элемент <code>&lt;picture&gt;</code> с источниками AVIF + WebP + JPEG</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Главный вывод:</strong> Оптимизация изображений. не единичное действие, а пайплайн. Выберите правильный формат, измените размер до отображаемых размеров, агрессивно сжимайте, ленивo загружайте изображения ниже линии видимости и используйте CDN. Вместе эти шаги обычно снижают общий вес изображений страницы на 60–80%.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Оптимизировать изображения</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Конвертировать в WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Изображения и Core Web Vitals</strong>
+        <span>LCP, CLS, FID: как изображения влияют на ваш рейтинг в Google.</span>
+      </a>
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Ленивая загрузка изображений</strong>
+        <span>Всё о нативной ленивой загрузке и лучших практиках.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Адаптивные изображения: srcset и sizes</strong>
+        <span>Автоматически доставляйте правильное изображение для каждого размера экрана.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Optimize Images for the Web in 2026",
+  "description": "A complete guide to web image optimization: choose the right format, compress without quality loss, implement lazy loading, responsive images, and CDN delivery.",
+  "url": "https://imgpact.com/guides/optimize-website-images",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}AVIF Format: The Next-Generation Image Format Explained | imgpact{% endblock %}
+{% block meta_description %}AVIF compresses images 50% better than JPEG with no visible quality loss. Learn what AVIF is, browser support in 2026, and when to use it on your website.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/image-formats">Image Formats</a>
+    <span>›</span>
+    AVIF
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Image Formats</div>
+    <h1>AVIF: The Next-Generation Image Format</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>AVIF (AV1 Image File Format) is the most advanced image format available in 2026. Derived from the AV1 video codec developed by the Alliance for Open Media, it achieves compression ratios that were unthinkable a few years ago: up to 50% smaller than JPEG for equivalent visual quality, and even better than WebP.</p>
+
+    <h2>What is AVIF?</h2>
+    <p>AVIF is a still image format based on AV1 video compression. It was designed to replace JPEG and WebP for photographic content on the web. Key properties include:</p>
+    <ul>
+      <li><strong>Lossy and lossless compression</strong>: like WebP, AVIF supports both modes</li>
+      <li><strong>HDR and wide colour gamut</strong>: supports 10-bit and 12-bit colour depth vs JPEG's 8-bit</li>
+      <li><strong>Transparency</strong>: full alpha channel support</li>
+      <li><strong>No patent royalties</strong>: open, royalty-free standard</li>
+      <li><strong>Animated AVIF</strong>: can replace GIF and WebP animations</li>
+    </ul>
+
+    <h2>AVIF vs WebP vs JPEG: file size comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Typical file size</th>
+          <th>Transparency</th>
+          <th>HDR</th>
+          <th>Browser support (2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>JPEG</td>
+          <td>Baseline (100%)</td>
+          <td>No</td>
+          <td>No</td>
+          <td>100%</td>
+        </tr>
+        <tr>
+          <td>WebP</td>
+          <td>~65–75% of JPEG</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>97%</td>
+        </tr>
+        <tr>
+          <td>AVIF</td>
+          <td>~45–60% of JPEG</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>93%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Browser support in 2026</h2>
+    <p>AVIF support has matured considerably. As of early 2026, AVIF is supported by:</p>
+    <ul>
+      <li><strong>Chrome 85+</strong> (since August 2020)</li>
+      <li><strong>Firefox 93+</strong> (since October 2021)</li>
+      <li><strong>Safari 16.1+</strong> (since October 2022)</li>
+      <li><strong>Edge 121+</strong></li>
+      <li><strong>Samsung Internet 14+</strong></li>
+    </ul>
+    <p>The main gap is older iOS Safari versions. For maximum compatibility, use AVIF with a JPEG or WebP fallback via the HTML <code>&lt;picture&gt;</code> element.</p>
+
+    <div class="tip-box">
+      <strong>Recommended approach:</strong> Serve AVIF to browsers that support it, WebP as a secondary fallback, and JPEG for all others. Use the <code>&lt;picture&gt;</code> element or let your CDN handle format negotiation automatically.
+    </div>
+
+    <h2>Using AVIF with the &lt;picture&gt; element</h2>
+    <pre><code>&lt;picture&gt;
+  &lt;source srcset="image.avif" type="image/avif"&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;img src="image.jpg" alt="Description"&gt;
+&lt;/picture&gt;</code></pre>
+    <p>Browsers read the <code>&lt;source&gt;</code> elements in order and use the first format they support. Browsers without AVIF or WebP support fall back to JPEG seamlessly.</p>
+
+    <h2>When to use AVIF</h2>
+    <p>AVIF is the best choice when:</p>
+    <ul>
+      <li>You want the smallest possible file sizes for photographs</li>
+      <li>You display HDR imagery or wide-gamut photography</li>
+      <li>Your target audience uses modern browsers (2022+)</li>
+      <li>You have a CDN or image pipeline that can automate conversion</li>
+    </ul>
+
+    <h2>When AVIF may not be ideal</h2>
+    <ul>
+      <li><strong>Encoding is slow</strong>: AVIF encoding is significantly slower than JPEG/WebP. Always pre-encode images, real-time on-the-fly generation is impractical without hardware acceleration</li>
+      <li><strong>Very small images</strong>: for tiny thumbnails or simple icons, the file size advantage shrinks and SVG or PNG may be more appropriate</li>
+      <li><strong>Legacy audience</strong>: if your analytics show significant Safari 15 or older browser traffic, always provide a fallback</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> AVIF is the best image format for web photography in 2026, offering up to 50% size savings over JPEG. Use it with a WebP/JPEG fallback via <code>&lt;picture&gt;</code> for full compatibility. For sites using modern CDNs (Cloudflare, Fastly, etc.), AVIF conversion is often available automatically.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/webp" class="guide-cta-link">Convert to WebP</a>
+      <a href="/tools/convert/jpg" class="guide-cta-link secondary">Convert to JPEG</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/image-formats" class="guide-related-card">
+        <strong>Complete Guide to Web Image Formats</strong>
+        <span>JPEG, PNG, WebP, AVIF, SVG: understand all formats in one article.</span>
+      </a>
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG</strong>
+        <span>Which classic format should you choose, and when does WebP beat both?</span>
+      </a>
+      <a href="/{{ lang }}/guides/webp-vs-jpeg-compression" class="guide-related-card">
+        <strong>WebP vs JPEG Compression</strong>
+        <span>Detailed comparison of modern vs classic compression methods.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AVIF: The Next-Generation Image Format",
+  "description": "AVIF compresses images 50% better than JPEG with no visible quality loss. Learn what AVIF is, browser support in 2026, and when to use it on your website.",
+  "url": "https://imgpact.com/guides/avif-format",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

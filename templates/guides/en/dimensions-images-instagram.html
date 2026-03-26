@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Instagram Image Dimensions 2026: Every Format | imgpact{% endblock %}
+{% block meta_description %}The exact Instagram image sizes for 2026: square and portrait posts, Stories, Reels, carousel, profile picture. Avoid pixelation and unwanted cropping.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/social-media-image-sizes-2026">Social Media</a>
+    <span>›</span>
+    Instagram Dimensions
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📱 Social Media</div>
+    <h1>Instagram Image Dimensions 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Instagram is one of the most visually demanding platforms, images are its core product. Uploading at incorrect dimensions means the platform crops your image automatically, often cutting out important content. This guide covers every Instagram format with exact 2026 dimensions.</p>
+
+    <h2>Instagram feed post sizes</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Dimensions</th><th>Aspect ratio</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Square</td><td>1080 × 1080 px</td><td>1:1</td><td>Classic Instagram format, safest choice</td></tr>
+        <tr><td>Portrait (recommended)</td><td>1080 × 1350 px</td><td>4:5</td><td>Takes most screen space in the feed</td></tr>
+        <tr><td>Landscape</td><td>1080 × 566 px</td><td>1.91:1</td><td>Least screen real estate</td></tr>
+      </tbody>
+    </table>
+    <p>Instagram displays images at 1080 px wide in the feed. Always export at exactly 1080 px width to avoid double scaling. Portrait (4:5) posts take up the most vertical space in the feed, giving higher visibility per post.</p>
+
+    <h2>Instagram Stories and Reels</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Dimensions</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Stories</td><td>1080 × 1920 px</td><td>9:16 full screen vertical</td></tr>
+        <tr><td>Reels</td><td>1080 × 1920 px</td><td>Keep key content between 1080×1420 (safe zone)</td></tr>
+        <tr><td>Stories thumbnail (feed)</td><td>161 × 161 px</td><td>Auto-generated circle crop from centre</td></tr>
+      </tbody>
+    </table>
+    <p>For Reels, the bottom ~250 px is covered by the caption and action buttons. Keep important visual content in the <strong>safe area</strong>: roughly 1080×1420, centred vertically, leaving about 250 px clear at top and bottom.</p>
+
+    <h2>Instagram carousel posts</h2>
+    <p>Carousel albums can mix different aspect ratios but it is best to keep all slides in the same format. Instagram crops all slides to match the first slide's aspect ratio when viewed in the feed (though users can scroll to see the full image of each slide). Recommendation: use 1:1 or 4:5 for carousels.</p>
+
+    <h2>Profile picture</h2>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Upload size</td><td>320 × 320 px minimum</td></tr>
+        <tr><td>Display size (mobile)</td><td>110 × 110 px</td></tr>
+        <tr><td>Display size (desktop)</td><td>150 × 150 px</td></tr>
+        <tr><td>Shape</td><td>Cropped to circle by Instagram</td></tr>
+      </tbody>
+    </table>
+    <p>Upload at 320×320 px minimum. The profile picture is always displayed as a circle, so ensure your logo or face is centred and there is margin around the key content to account for the circular crop.</p>
+
+    <h2>Instagram compression tips</h2>
+    <p>Instagram re-compresses every image you upload. To get the best quality after Instagram's compression:</p>
+    <ul>
+      <li>Upload JPEG at quality <strong>85–90</strong> (not 100, Instagram will compress again regardless)</li>
+      <li>Export at exactly <strong>1080 px</strong> width for feed posts (not 2160 px, bigger does not help)</li>
+      <li>Use <strong>sRGB colour profile</strong>, Instagram ignores embedded ICC profiles and converts to sRGB, causing colour shifts if you use AdobeRGB</li>
+      <li>Avoid uploading PNG for photos, Instagram converts them to JPEG with extra compression</li>
+    </ul>
+
+    <h2>Checking your dimensions before posting</h2>
+    <p>Quick way to verify: right-click your image in Windows → Properties → Details tab, or in macOS → Get Info. Check "Dimensions" matches your target before uploading.</p>
+
+    <div class="tip-box">
+      <strong>Best practice workflow:</strong> Export from Photoshop/Lightroom at 1080 px width, JPEG quality 85, sRGB colour space. Crop to 4:5 (1080×1350) for maximum feed visibility. For Stories/Reels, use 1080×1920 and keep key content in the central 1080×1420 zone.
+    </div>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Use 1080×1350 (4:5) for feed posts, it occupies the most feed space. Use 1080×1920 for Stories and Reels, keeping important content in the central safe zone. Export JPEG at quality 85–90 in sRGB for the best result after Instagram's re-compression.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize to Instagram Size</a>
+      <a href="/tools/crop" class="guide-cta-link secondary">Crop to 4:5</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/social-media-image-sizes-2026" class="guide-related-card">
+        <strong>Social Media Image Sizes 2026</strong>
+        <span>Complete reference for all platforms: Instagram, Facebook, YouTube, LinkedIn.</span>
+      </a>
+      <a href="/{{ lang }}/guides/facebook-image-dimensions" class="guide-related-card">
+        <strong>Facebook Image Dimensions</strong>
+        <span>Cover, feed, story and event image sizes for Facebook.</span>
+      </a>
+      <a href="/{{ lang }}/guides/linkedin-image-sizes" class="guide-related-card">
+        <strong>Optimal LinkedIn Images</strong>
+        <span>Dimensions and best practices for LinkedIn posts and profiles.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Instagram Image Dimensions 2026",
+  "description": "The exact Instagram image sizes for 2026: square and portrait posts, Stories, Reels, carousel, profile picture. Avoid pixelation and unwanted cropping.",
+  "url": "https://imgpact.com/guides/instagram-image-dimensions",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

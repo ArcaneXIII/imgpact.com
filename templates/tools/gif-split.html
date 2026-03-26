@@ -1,0 +1,73 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="{{ url_gif_maker }}">{{ t.breadcrumb_gif_tools }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_gif_split_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="scissors"></i> {{ t.tool_gif_split_title }}</h1>
+    <p>{{ t.tool_gif_split_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="film"></i></div>
+    <div class="upload-text">{{ t.upload_drop_gif }}</div>
+    <div class="upload-hint">Animated GIF</div>
+    <input type="file" id="file-input" accept="image/gif" style="display:none">
+  </div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel" style="padding:1rem">
+      <div id="gif-summary" class="gif-info-card"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:0.75rem">
+        <button class="btn-download" id="btn-zip"><i data-lucide="archive"></i> {{ t.btn_download_zip }}</button>
+      </div>
+    </div>
+    <div class="frame-grid" id="frame-grid"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/gif-split.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/gif-split/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/gif-split/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/gif-split/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/gif-split/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF Split",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/gif-split",
+    "description": "Extract individual frames from animated GIFs as PNG images. Download all as ZIP. Free browser tool.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",      "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "GIF Tools", "item": "https://imgpact.com/tools/gif-maker" },
+      { "@type": "ListItem", "position": 3, "name": "GIF Split", "item": "https://imgpact.com/tools/gif-split" }
+    ]
+  }
+]
+</script>
+{% endblock %}

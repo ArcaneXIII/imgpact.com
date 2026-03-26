@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title | default(value="imgpact - Free, Unlimited Image & GIF Tools") }}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "imgpact",
+    "url": "https://imgpact.com",
+    "description": "Free browser-based image, GIF, and video tools. No upload limits, no signup. Everything runs in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "PNG Converter", "JPG Converter", "WebP Converter", "GIF Converter", "SVG Converter",
+      "Image Crop", "Image Resize", "Image Optimize", "Image Effects", "Add Text to Image",
+      "Image Transform", "GIF Maker", "GIF Editor", "GIF Split", "GIF Analyzer",
+      "Video to GIF", "GIF to MP4", "GIF to WebM", "GIF to MOV"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "imgpact",
+    "url": "https://imgpact.com",
+    "description": "Free browser-based image, GIF, and video tools."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "imgpact. All Free Online Image Tools",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1,  "name": "PNG Converter",   "url": "https://imgpact.com/tools/convert/png" },
+      { "@type": "ListItem", "position": 2,  "name": "JPG Converter",   "url": "https://imgpact.com/tools/convert/jpg" },
+      { "@type": "ListItem", "position": 3,  "name": "WebP Converter",  "url": "https://imgpact.com/tools/convert/webp" },
+      { "@type": "ListItem", "position": 4,  "name": "GIF Converter",   "url": "https://imgpact.com/tools/convert/gif" },
+      { "@type": "ListItem", "position": 5,  "name": "SVG Converter",   "url": "https://imgpact.com/tools/convert/svg" },
+      { "@type": "ListItem", "position": 6,  "name": "Crop Image",      "url": "https://imgpact.com/tools/crop" },
+      { "@type": "ListItem", "position": 7,  "name": "Resize Image",    "url": "https://imgpact.com/tools/resize" },
+      { "@type": "ListItem", "position": 8,  "name": "Optimize Images", "url": "https://imgpact.com/tools/optimize" },
+      { "@type": "ListItem", "position": 9,  "name": "Image Effects",   "url": "https://imgpact.com/tools/effects" },
+      { "@type": "ListItem", "position": 10, "name": "Add Text",        "url": "https://imgpact.com/tools/add-text" },
+      { "@type": "ListItem", "position": 11, "name": "Transform Image", "url": "https://imgpact.com/tools/transform" },
+      { "@type": "ListItem", "position": 12, "name": "GIF Maker",       "url": "https://imgpact.com/tools/gif-maker" },
+      { "@type": "ListItem", "position": 13, "name": "GIF Editor",      "url": "https://imgpact.com/tools/gif-editor" },
+      { "@type": "ListItem", "position": 14, "name": "GIF Split",       "url": "https://imgpact.com/tools/gif-split" },
+      { "@type": "ListItem", "position": 15, "name": "GIF Analyzer",    "url": "https://imgpact.com/tools/gif-analyzer" },
+      { "@type": "ListItem", "position": 16, "name": "Video to GIF",    "url": "https://imgpact.com/tools/video-to-gif" },
+      { "@type": "ListItem", "position": 17, "name": "GIF to MP4",      "url": "https://imgpact.com/tools/gif-to-mp4" },
+      { "@type": "ListItem", "position": 18, "name": "GIF to WebM",     "url": "https://imgpact.com/tools/gif-to-webm" },
+      { "@type": "ListItem", "position": 19, "name": "GIF to MOV",      "url": "https://imgpact.com/tools/gif-to-mov" }
+    ]
+  }
+]
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 class="hero-title">img<span class="hero-title-accent">pact</span></h1>
+  <p class="hero-subtitle">{{ t.hero_subtitle | replace(from="\n", to="<br>") }}</p>
+  <div class="hero-badges">
+    <span class="hero-badge"><i data-lucide="infinity"></i> {{ t.hero_badge_unlimited }}</span>
+    <span class="hero-badge"><i data-lucide="hard-drive"></i> {{ t.hero_badge_no_size }}</span>
+    <span class="hero-badge"><i data-lucide="lock"></i> {{ t.hero_badge_private }}</span>
+    <span class="hero-badge"><i data-lucide="zap"></i> {{ t.hero_badge_instant }}</span>
+  </div>
+</section>
+
+<section class="tool-grid-section">
+
+  <div class="tool-category tool-category--convert">
+    <h2 class="category-title"><i data-lucide="arrow-right-left"></i> {{ t.section_converters }}</h2>
+    <div class="tool-grid">
+      <a href="{{ url_convert_png }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">PNG {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_png }}</p>
+      </a>
+      <a href="{{ url_convert_jpg }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">JPG {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_jpg }}</p>
+      </a>
+      <a href="{{ url_convert_webp }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">WebP {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_webp }}</p>
+      </a>
+      <a href="{{ url_convert_gif }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">GIF {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_conv }}</p>
+      </a>
+      <a href="{{ url_convert_svg }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="pen-tool"></i></span>
+        <h3 class="tool-name">SVG {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_svg }}</p>
+      </a>
+      <a href="{{ url_convert_avif }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">AVIF {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_avif }}</p>
+      </a>
+      <a href="{{ url_convert_heic }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">HEIC {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_heic }}</p>
+      </a>
+      <a href="{{ url_convert_tiff }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">TIFF {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_tiff }}</p>
+      </a>
+      <a href="{{ url_convert_bmp }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="arrow-right-left"></i></span>
+        <h3 class="tool-name">BMP {{ t.label_converter }}</h3>
+        <p class="tool-desc">{{ t.card_desc_bmp }}</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="tool-category tool-category--image">
+    <h2 class="category-title"><i data-lucide="image"></i> {{ t.section_image_tools }}</h2>
+    <div class="tool-grid">
+      <a href="{{ url_crop }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="crop"></i></span>
+        <h3 class="tool-name">{{ t.nav_crop }}</h3>
+        <p class="tool-desc">{{ t.card_desc_crop }}</p>
+      </a>
+      <a href="{{ url_resize }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="scaling"></i></span>
+        <h3 class="tool-name">{{ t.nav_resize }}</h3>
+        <p class="tool-desc">{{ t.card_desc_resize }}</p>
+      </a>
+      <a href="{{ url_optimize }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="gauge"></i></span>
+        <h3 class="tool-name">{{ t.nav_optimize }}</h3>
+        <p class="tool-desc">{{ t.card_desc_optimize }}</p>
+      </a>
+      <a href="{{ url_effects }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="wand-sparkles"></i></span>
+        <h3 class="tool-name">{{ t.nav_effects }}</h3>
+        <p class="tool-desc">{{ t.card_desc_effects }}</p>
+      </a>
+      <a href="{{ url_add_text }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="type"></i></span>
+        <h3 class="tool-name">{{ t.nav_add_text }}</h3>
+        <p class="tool-desc">{{ t.card_desc_add_text }}</p>
+      </a>
+      <a href="{{ url_transform }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="rotate-cw"></i></span>
+        <h3 class="tool-name">{{ t.tool_transform_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_transform }}</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="tool-category tool-category--gif">
+    <h2 class="category-title"><i data-lucide="film"></i> {{ t.section_gif_tools }}</h2>
+    <div class="tool-grid">
+      <a href="{{ url_gif_maker }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="clapperboard"></i></span>
+        <h3 class="tool-name">{{ t.nav_gif_maker }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_maker }}</p>
+      </a>
+      <a href="{{ url_video_to_gif }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="video"></i></span>
+        <h3 class="tool-name">{{ t.nav_video_to_gif }}</h3>
+        <p class="tool-desc">{{ t.card_desc_video_gif }}</p>
+      </a>
+      <a href="{{ url_gif_to_mp4 }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="file-video"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_to_mp4_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_mp4 }}</p>
+      </a>
+      <a href="{{ url_gif_to_webm }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="monitor-play"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_to_webm_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_webm }}</p>
+      </a>
+      <a href="{{ url_gif_to_mov }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="film"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_to_mov_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_mov }}</p>
+      </a>
+      <a href="{{ url_gif_analyzer }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="bar-chart-2"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_analyzer_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_analyzer }}</p>
+      </a>
+      <a href="{{ url_gif_editor }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="pencil-ruler"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_editor_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_editor }}</p>
+      </a>
+      <a href="{{ url_gif_split }}" class="tool-card">
+        <span class="tool-icon"><i data-lucide="scissors"></i></span>
+        <h3 class="tool-name">{{ t.tool_gif_split_title }}</h3>
+        <p class="tool-desc">{{ t.card_desc_gif_split }}</p>
+      </a>
+    </div>
+  </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% block title %}Optimizing Images for Email: Complete Guide | imgpact{% endblock %}
+{% block meta_description %}Everything you need to optimize images for email campaigns: file size targets, format choices, animated GIFs, Outlook workarounds, and a pre-send checklist for every major email client.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/lossy-vs-lossless-compression">Compression</a>
+    <span>›</span>
+    Optimizing Images for Email
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜️ Compression</div>
+    <h1>Optimizing Images for Email: Complete Guide</h1>
+    <div class="guide-meta">
+      <span>⏱ 8 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <h2>Why Image Optimization Matters in Email</h2>
+    <p>Email is one of the most unforgiving environments for images. Unlike a browser, where a large image might only slow down a page, in email a heavy or unsupported image can break layouts, trigger spam filters, or simply never display, leaving your subscribers staring at a grid of broken image icons.</p>
+    <p>The core constraints are threefold: <strong>file size</strong> (affecting load speed on mobile and load time before engagement drops), <strong>format support</strong> (which varies wildly across clients), and <strong>rendering behavior</strong> (CSS, backgrounds, and animations work very differently from client to client).</p>
+    <p>Marketers who optimize their email images consistently see higher click-through rates, lower bounce rates in ISP deliverability scoring, and faster rendering times on slow mobile connections, all of which compound over thousands of sends.</p>
+
+    <h2>Email Client Compatibility: What Each Client Supports</h2>
+    <p>Before choosing a format or technique, you need to know which email clients your audience uses. The table below covers the four dominant clients, which together represent roughly 85% of email opens worldwide.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Email Client</th>
+          <th>WebP Support</th>
+          <th>Animated GIF</th>
+          <th>CSS Background Images</th>
+          <th>Images Blocked by Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Apple Mail (iOS &amp; macOS)</td>
+          <td>✅ Yes (iOS 14+, macOS 11+)</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Gmail (Web &amp; App)</td>
+          <td>✅ Yes (Chrome-based)</td>
+          <td>✅ Yes</td>
+          <td>⚠️ Partial</td>
+          <td>No (images proxied via Google)</td>
+        </tr>
+        <tr>
+          <td>Outlook (2016–2021, 365 Win)</td>
+          <td>❌ No</td>
+          <td>❌ Shows first frame only</td>
+          <td>❌ No (use VML)</td>
+          <td>Yes (by default in corporate)</td>
+        </tr>
+        <tr>
+          <td>Yahoo Mail</td>
+          <td>❌ No</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Because Outlook on Windows still holds 4–10% of enterprise opens and does not support WebP, always send JPEG or PNG as your baseline format unless you are certain your list contains no Outlook users.
+    </div>
+
+    <h2>File Size Targets and the 600 px Maximum Width</h2>
+    <p>The universally accepted maximum width for email templates is <strong>600 px</strong>. This width renders cleanly across desktop clients and scales down gracefully on mobile without triggering horizontal scroll. Any image wider than 600 px risks breaking layouts in Outlook, which does not apply <code>max-width: 100%</code> automatically.</p>
+    <p>Beyond layout, file size is your primary performance lever. Below are the recommended maximum sizes per image type:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Image Element</th>
+          <th>Recommended Max Size</th>
+          <th>Typical Dimensions</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero / Banner image</td>
+          <td>100 KB</td>
+          <td>600 × 200 to 600 × 400 px</td>
+          <td>JPEG (quality 75–80)</td>
+        </tr>
+        <tr>
+          <td>Product image</td>
+          <td>80 KB</td>
+          <td>300 × 300 px</td>
+          <td>JPEG or PNG</td>
+        </tr>
+        <tr>
+          <td>Logo / header</td>
+          <td>30 KB</td>
+          <td>200 × 60 px</td>
+          <td>PNG (transparency needed)</td>
+        </tr>
+        <tr>
+          <td>Animated GIF</td>
+          <td>200 KB</td>
+          <td>600 × 200 px max</td>
+          <td>GIF</td>
+        </tr>
+        <tr>
+          <td>Icon / badge</td>
+          <td>10 KB</td>
+          <td>48 × 48 to 80 × 80 px</td>
+          <td>PNG</td>
+        </tr>
+        <tr>
+          <td>Total email weight</td>
+          <td>600 KB max</td>
+          <td>-</td>
+          <td>Mixed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <strong>Tip:</strong> Gmail clips emails that exceed 102 KB of HTML source. Keep your HTML lean and host all images externally so the message body stays small.
+    </div>
+
+    <h2>JPEG vs PNG for Email</h2>
+    <p><strong>JPEG</strong> is the right choice for photographic content, hero banners, product photos, lifestyle images, and any image with gradients or complex color transitions. At quality 75–80 in most encoders, JPEG produces files small enough to meet the 100 KB target while maintaining excellent visual fidelity at 600 px screen width.</p>
+    <p><strong>PNG</strong> should be reserved for images that require a transparent background (logos, overlaid text treatments, icons with soft edges) or images that are predominantly flat color with hard edges (screenshots, UI mockups, charts). PNG is lossless, which means files are predictably larger, a 300 × 300 product photo in PNG can easily exceed 150 KB.</p>
+    <p>A common mistake is using PNG for photographs "because it's higher quality." At the sizes used in email, JPEG quality 80 is visually indistinguishable from PNG for photos, and the file size difference can be 5× to 10×.</p>
+    <p>Do not use WebP as your primary email image format. While Apple Mail and Gmail support it, Outlook and Yahoo do not, and there is no reliable way to serve a fallback WebP vs JPEG per email client the way you can with the HTML <code>&lt;picture&gt;</code> element in a browser.</p>
+
+    <h2>Animated GIFs and the First-Frame Fallback Rule</h2>
+    <p>Animated GIFs remain the only broadly supported animation format in email. CSS animations and video (even MP4) are not reliably supported across clients. However, Outlook 2007–2021 on Windows does not animate GIFs, it displays only the <strong>first frame</strong>.</p>
+    <p>This is known as the first-frame fallback rule, and it has a direct design implication: <strong>your first frame must be self-sufficient</strong>. If your animated GIF reveals a discount code on frame 3, Outlook users will never see it. Design your first frame to contain all the key information, the headline, the offer, the call to action, and treat subsequent frames as an enhancement for clients that support animation.</p>
+    <p>To keep animated GIFs under 200 KB: limit to 3–5 frames, reduce colors to 64 or 128 (from the 256 maximum), constrain dimensions to 600 × 200 px or smaller, and use a dithering setting of 50% or less. Tools like ezgif.com and imgpact's optimizer can strip metadata and optimize frame palettes automatically.</p>
+
+    <div class="warning-box">
+      <strong>Warning:</strong> Animated GIFs above 1 MB are frequently flagged by corporate spam filters and may cause your email to be delivered to the junk folder. Always test with your ESP's preview tool before sending.
+    </div>
+
+    <h2>Outlook VML Workaround for Background Images</h2>
+    <p>Outlook (Windows desktop versions) ignores CSS <code>background-image</code> properties entirely. If your template design depends on a background image behind text, a common pattern for hero sections, Outlook users will see only the fallback background color, stripping out the visual impact of the design.</p>
+    <p>The standard solution is Microsoft's Vector Markup Language (VML), a legacy XML-based syntax that Outlook's rendering engine (which uses Word's layout engine, not a browser engine) does understand. The pattern wraps a VML <code>v:rect</code> element with a <code>fill</code> attribute around your content, inside Outlook conditional comments:</p>
+    <pre><code>&lt;!--[if gte mso 9]&gt;
+&lt;v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false"
+  style="width:600px;height:200px;"&gt;
+  &lt;v:fill type="frame" src="https://example.com/hero.jpg" color="#1a1a2e"/&gt;
+  &lt;v:textbox inset="0,0,0,0"&gt;
+&lt;![endif]--&gt;
+  &lt;!-- Your content visible to all other clients --&gt;
+&lt;!--[if gte mso 9]&gt;&lt;/v:textbox&gt;&lt;/v:rect&gt;&lt;![endif]--&gt;</code></pre>
+    <p>The <code>color</code> attribute on <code>v:fill</code> acts as the fallback if the image fails to load. Always set it to a color that keeps your text readable.</p>
+
+    <h2>Alt Text and the Pre-Send Checklist</h2>
+    <p>Alt text is not optional in email. Corporate email environments often block images by default, meaning a significant percentage of your B2B audience may read your email seeing only alt text labels. Write descriptive, action-oriented alt text for every image, especially CTAs: <code>alt="Shop Summer Sale, 40% off"</code> is far more useful than <code>alt="image1.jpg"</code>.</p>
+
+    <p>Use this checklist before every send:</p>
+    <ul>
+      <li>All images hosted on a reliable CDN (not email attachments)</li>
+      <li>No image wider than 600 px</li>
+      <li>Hero images ≤ 100 KB, total email image weight ≤ 600 KB</li>
+      <li>JPEG used for photos, PNG only for logos/icons with transparency</li>
+      <li>No WebP images (use JPEG/PNG for broadest compatibility)</li>
+      <li>Animated GIF first frame contains all critical content</li>
+      <li>Alt text filled in for every <code>&lt;img&gt;</code> tag</li>
+      <li>Outlook VML fallback in place for any background images</li>
+      <li>Tested in Apple Mail, Gmail (web), Outlook 2019, and Gmail app on Android</li>
+      <li>Total HTML source size under 100 KB (to avoid Gmail clipping)</li>
+    </ul>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimize your email images</a>
+      <a href="/tools/resize" class="guide-cta-link">Resize to 600 px width</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/en/compression-webp-vs-jpeg" class="guide-related-card">
+        <strong>WebP vs JPEG: Data-Driven Comparison</strong>
+        <span>Which format wins on compression and compatibility?</span>
+      </a>
+      <a href="/{{ lang }}/guides/en/images-produits-ecommerce" class="guide-related-card">
+        <strong>E-commerce Product Images</strong>
+        <span>Optimize product photos to increase conversions</span>
+      </a>
+      <a href="/{{ lang }}/guides/en/photos-produit-fond-blanc" class="guide-related-card">
+        <strong>White Background Product Photos</strong>
+        <span>DIY techniques and AI tools for clean product shots</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Optimizing Images for Email: Complete Guide",
+  "description": "Everything you need to optimize images for email campaigns: file size targets, format choices, animated GIFs, Outlook workarounds, and a pre-send checklist for every major email client.",
+  "url": "https://imgpact.com/guides/en/optimiser-images-email",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

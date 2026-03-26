@@ -1,0 +1,118 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_effects_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="wand-sparkles"></i> {{ t.tool_effects_title }}</h1>
+    <p>{{ t.tool_effects_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_image }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, BMP</div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <div class="effect-grid" id="effect-grid">
+        <div class="effect-card" data-effect="grayscale" data-no-intensity="true"><i data-lucide="circle-off"></i><br>{{ t.effect_grayscale }}</div>
+        <div class="effect-card" data-effect="sepia"><i data-lucide="palette"></i><br>{{ t.effect_sepia }}</div>
+        <div class="effect-card" data-effect="blur"><i data-lucide="droplets"></i><br>{{ t.effect_blur }}</div>
+        <div class="effect-card" data-effect="sharpen"><i data-lucide="zoom-in"></i><br>{{ t.effect_sharpen }}</div>
+        <div class="effect-card" data-effect="brighten"><i data-lucide="sun"></i><br>{{ t.effect_brightness }}</div>
+        <div class="effect-card" data-effect="contrast"><i data-lucide="sliders-horizontal"></i><br>{{ t.effect_contrast }}</div>
+        <div class="effect-card" data-effect="invert" data-no-intensity="true"><i data-lucide="sun-moon"></i><br>{{ t.effect_invert }}</div>
+        <div class="effect-card" data-effect="pixelate"><i data-lucide="grid-3x3"></i><br>{{ t.effect_pixelate }}</div>
+      </div>
+
+      <div id="effects-stack" style="display:none;margin-bottom:0.5rem">
+        <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.4rem">{{ t.label_effects_applied }}</div>
+        <div id="effects-stack-badges" style="display:flex;flex-wrap:wrap;gap:0.4rem"></div>
+      </div>
+
+      <div id="intensity-row" style="display:none" class="control-row">
+        <div class="control-group" style="flex:1;min-width:200px">
+          <label>{{ t.label_intensity }}: <span id="intensity-label">50%</span></label>
+          <input type="range" id="intensity" min="0" max="100" value="50" style="width:100%">
+        </div>
+      </div>
+
+      <div id="preview-container" style="margin-top:0.75rem;display:none">
+        <div class="ba-label" style="margin-bottom:0.4rem">{{ t.label_preview }}</div>
+        <div style="position:relative" id="preview-wrap">
+          <img id="preview-img" class="ba-img" style="max-height:420px;object-fit:contain">
+        </div>
+      </div>
+
+      <div class="control-row" style="margin-top:0.75rem">
+        <div class="control-group">
+          <label>{{ t.label_output_format }}</label>
+          <select id="out-format">
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0.75rem">
+        <button class="btn-process" id="btn-apply" style="flex:1" disabled><i data-lucide="check"></i> {{ t.btn_apply_effect }}</button>
+        <button id="btn-reset"
+          style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.8rem 1.25rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-secondary);cursor:pointer;font-size:0.9rem;font-weight:600;white-space:nowrap"
+          disabled><i data-lucide="rotate-ccw"></i> {{ t.btn_reset }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="before-after" id="before-after"></div>
+    <button class="btn-download" id="btn-download"><i data-lucide="download"></i> {{ t.btn_download }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/effects.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/effects/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/effects/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/effects/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/effects/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Effects",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/effects",
+    "description": "Apply grayscale, sepia, blur, sharpen, brightness and more. Stack multiple effects. Free browser tool.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Image Effects", "item": "https://imgpact.com/tools/effects" }
+    ]
+  }
+]
+</script>
+{% endblock %}

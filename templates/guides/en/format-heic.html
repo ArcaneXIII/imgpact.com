@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}HEIC Format: What It Is and How to Convert It | imgpact{% endblock %}
+{% block meta_description %}HEIC is Apple's photo format, smaller than JPEG but not web-compatible. Learn what HEIC is, why it exists, and how to convert HEIC to JPEG or PNG.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/image-formats">Image Formats</a>
+    <span>›</span>
+    HEIC Format
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Image Formats</div>
+    <h1>HEIC Format: What It Is and How to Convert It</h1>
+    <div class="guide-meta">
+      <span>⏱ 4 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Since iOS 11 (2017), Apple has stored iPhone photos in HEIC format by default. If you have ever transferred photos from your iPhone to a Windows PC and found files with a <code>.heic</code> extension that nothing could open, you have encountered this format. Here is everything you need to know.</p>
+
+    <h2>What is HEIC?</h2>
+    <p>HEIC stands for <strong>High Efficiency Image Container</strong>. It is a container format based on the HEIF (High Efficiency Image File Format) standard, and it uses the HEVC (H.265) video codec for image compression. Apple adopted it for two reasons:</p>
+    <ul>
+      <li><strong>Smaller files</strong>: HEIC photos are roughly half the file size of equivalent JPEG photos at the same visual quality</li>
+      <li><strong>Better quality at small sizes</strong>: HEIC preserves finer detail, especially in shadows and highlights</li>
+    </ul>
+    <p>Technically, HEIC also supports live photos, image sequences, HDR, and 16-bit colour depth, capabilities that JPEG cannot match.</p>
+
+    <h2>Why is HEIC a problem?</h2>
+    <p>The format's main weakness is <strong>compatibility</strong>. HEIC is not a web standard and is not natively supported on Windows (without a codec), Android, or most Linux systems. Browsers do not support it. Web servers cannot serve it. Uploading a <code>.heic</code> file to a website will likely fail or display incorrectly.</p>
+
+    <table>
+      <thead>
+        <tr><th>Platform</th><th>HEIC support</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>iPhone / iOS</td><td>Native (created and viewed)</td></tr>
+        <tr><td>macOS 10.13+</td><td>Native preview and conversion</td></tr>
+        <tr><td>Windows 11</td><td>Requires Microsoft HEIF extensions (free)</td></tr>
+        <tr><td>Android</td><td>Partial (varies by device)</td></tr>
+        <tr><td>Web browsers</td><td>Not supported</td></tr>
+        <tr><td>Most web services</td><td>Not accepted</td></tr>
+      </tbody>
+    </table>
+
+    <h2>How to avoid HEIC on iPhone</h2>
+    <p>If you want your iPhone to capture in JPEG (for broader compatibility), change the camera setting:</p>
+    <ol>
+      <li>Open <strong>Settings</strong></li>
+      <li>Tap <strong>Camera</strong></li>
+      <li>Tap <strong>Formats</strong></li>
+      <li>Select <strong>Most Compatible</strong> (JPEG) instead of "High Efficiency"</li>
+    </ol>
+    <p>Note: this reduces photo quality slightly and increases file sizes, the tradeoff for universal compatibility.</p>
+
+    <h2>How to convert HEIC to JPEG or PNG</h2>
+
+    <h3>On Mac</h3>
+    <p>Open the HEIC file in Preview, then choose <strong>File → Export</strong> and select JPEG or PNG from the Format dropdown. macOS handles the conversion natively.</p>
+
+    <h3>On Windows</h3>
+    <p>Install the free <strong>HEIF Image Extensions</strong> from the Microsoft Store. Once installed, Windows Photos can open HEIC files, and you can export to JPEG via right-click.</p>
+
+    <h3>Online conversion</h3>
+    <p>Upload your HEIC file to an online converter and download the JPEG or PNG result. No software installation required, ideal for one-off conversions.</p>
+
+    <h3>Bulk conversion on Mac (command line)</h3>
+    <pre><code># Convert all HEIC files in a folder to JPEG
+for f in *.heic; do
+  sips -s format jpeg "$f" --out "${f%.heic}.jpg"
+done</code></pre>
+
+    <div class="tip-box">
+      <strong>Best practice for web:</strong> Always convert HEIC to JPEG or WebP before uploading images to a website, CMS, or social media platform. HEIC is excellent for device storage but is not a web-compatible format.
+    </div>
+
+    <h2>HEIC vs JPEG vs WebP: quick comparison</h2>
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Compression</th><th>Web use</th><th>Transparency</th><th>HDR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>HEIC</td><td>Best (×2 JPEG)</td><td>Not supported</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>JPEG</td><td>Good</td><td>Universal</td><td>No</td><td>No</td></tr>
+        <tr><td>WebP</td><td>Better than JPEG</td><td>97% browsers</td><td>Yes</td><td>No</td></tr>
+        <tr><td>AVIF</td><td>Best for web</td><td>93% browsers</td><td>Yes</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> HEIC is a great format for iPhone storage, half the size of JPEG at the same quality. But it is not web-compatible. Always convert to JPEG, PNG, or WebP before sharing online or uploading to any web service.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/jpg" class="guide-cta-link">Convert to JPEG</a>
+      <a href="/tools/convert/png" class="guide-cta-link secondary">Convert to PNG</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG</strong>
+        <span>Which format to choose for web images and why.</span>
+      </a>
+      <a href="/{{ lang }}/guides/avif-format" class="guide-related-card">
+        <strong>AVIF Format</strong>
+        <span>The next-generation web format that rivals HEIC's compression.</span>
+      </a>
+      <a href="/{{ lang }}/guides/image-formats" class="guide-related-card">
+        <strong>Complete Guide to Web Image Formats</strong>
+        <span>All formats compared: JPEG, PNG, WebP, AVIF, SVG, HEIC.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "HEIC Format: What It Is and How to Convert It",
+  "description": "HEIC is Apple's photo format, smaller than JPEG but not web-compatible. Learn what HEIC is, why it exists, and how to convert HEIC to JPEG or PNG.",
+  "url": "https://imgpact.com/guides/heic-format",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

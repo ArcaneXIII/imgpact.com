@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Lossy vs Lossless Image Compression: Full Comparison | imgpact{% endblock %}
+{% block meta_description %}Lossy compression reduces file size by discarding data. Lossless keeps every pixel. Learn which compression type to choose for photos, graphics, logos, and web images.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/lossy-vs-lossless-compression">Compression</a>
+    <span>›</span>
+    Lossy vs Lossless
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜 Compression</div>
+    <h1>Lossy vs Lossless Image Compression</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Every image on the web has been compressed; but not all compression is the same. Understanding the difference between lossy and lossless compression is the foundation of all image optimization work. It determines which format to choose, how much quality you can sacrifice, and when to stop compressing.</p>
+
+    <h2>What is lossy compression?</h2>
+    <p>Lossy compression <strong>permanently removes data</strong> from the image. The algorithm analyses the image and discards information that human eyes are least likely to notice, fine texture in smooth areas, subtle colour gradients, high-frequency detail. The result is a smaller file at the cost of some image fidelity.</p>
+    <p>The key characteristic: <strong>quality loss is irreversible</strong>. Once you save a JPEG, the discarded data is gone. Re-saving that JPEG again causes another round of quality loss, this is called "generation loss."</p>
+    <p><strong>Formats that use lossy compression:</strong> JPEG, WebP (lossy mode), AVIF (lossy mode), HEIC (lossy mode)</p>
+
+    <h2>What is lossless compression?</h2>
+    <p>Lossless compression <strong>preserves every pixel</strong> of the original image. The algorithm finds redundant patterns in the data and encodes them more efficiently, like ZIP compression for files; but the decompressed image is bit-for-bit identical to the original. No visual information is ever discarded.</p>
+    <p><strong>Formats that use lossless compression:</strong> PNG, GIF, WebP (lossless mode), AVIF (lossless mode), BMP (uncompressed)</p>
+
+    <h2>Side-by-side comparison</h2>
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Lossy</th><th>Lossless</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Data preservation</td><td>Partial (irreversible)</td><td>Complete (perfect)</td></tr>
+        <tr><td>File size</td><td>Smallest</td><td>Larger</td></tr>
+        <tr><td>Quality on re-save</td><td>Degrades</td><td>Unchanged</td></tr>
+        <tr><td>Best for</td><td>Photographs, complex images</td><td>Graphics, logos, text, screenshots</td></tr>
+        <tr><td>Common formats</td><td>JPEG, WebP lossy, AVIF</td><td>PNG, WebP lossless, GIF</td></tr>
+      </tbody>
+    </table>
+
+    <h2>When to use lossy compression</h2>
+    <p>Lossy compression is the right choice when:</p>
+    <ul>
+      <li><strong>You are compressing photographs</strong>: photos have complex, irregular pixel patterns where some data loss is imperceptible</li>
+      <li><strong>File size is critical</strong>: hero images, product photos, page backgrounds</li>
+      <li><strong>The image will be viewed at a fixed size</strong> and you control the final output quality</li>
+      <li><strong>You will not edit the image again</strong>: lossy should be the last step before publishing</li>
+    </ul>
+
+    <h2>When to use lossless compression</h2>
+    <p>Lossless compression is necessary when:</p>
+    <ul>
+      <li><strong>The image contains sharp edges or text</strong>: lossy compression creates visible artifacts (ringing, blurring) around high-contrast edges</li>
+      <li><strong>Transparency is required</strong>: PNG with an alpha channel</li>
+      <li><strong>The image is a source file that will be edited</strong>: always work in lossless formats; apply lossy compression only at export</li>
+      <li><strong>Pixel-perfect accuracy matters</strong>: screenshots, UI mockups, technical diagrams</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Working rule:</strong> Use lossy for photographs and visual backgrounds. Use lossless for anything with text, transparency, or sharp geometric shapes. When in doubt, compare both at your target file size and judge visually.
+    </div>
+
+    <h2>Quality settings in lossy compression</h2>
+    <p>Lossy formats (JPEG, WebP, AVIF) have a quality parameter, typically on a scale of 0–100. This is not a linear scale, the relationship between quality value and file size is not proportional:</p>
+    <ul>
+      <li><strong>JPEG 90–100</strong>: very high quality, large file. Rarely justified for web use</li>
+      <li><strong>JPEG 75–85</strong>: excellent for photos, imperceptible quality loss, typical web target</li>
+      <li><strong>JPEG 60–75</strong>: visible artifacts on close inspection, but acceptable for thumbnails</li>
+      <li><strong>JPEG below 60</strong>: visible degradation, only suitable for very small images</li>
+    </ul>
+    <p>WebP and AVIF produce better results at the same quality setting, AVIF q60 typically looks better than JPEG q80 at a smaller file size.</p>
+
+    <h2>Lossless PNG optimization</h2>
+    <p>Even lossless PNG files can be significantly reduced in size without any quality loss by:</p>
+    <ul>
+      <li>Reducing colour depth: PNG-8 (256 colours) vs PNG-24 (16 million colours), use PNG-8 for simple graphics</li>
+      <li>Applying more aggressive DEFLATE compression (pngcrush, oxipng)</li>
+      <li>Removing metadata (ICC profiles, text chunks, creation timestamps)</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Lossy compression is ideal for photographs (smallest files, imperceptible loss at quality 75–85). Lossless is required for graphics with text, sharp edges, or transparency. For editing workflows, always keep lossless source files and apply lossy compression only as the final export step.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimize Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/compress-without-quality-loss" class="guide-related-card">
+        <strong>How to Compress Without Losing Quality</strong>
+        <span>Practical techniques to maximize compression while preserving visual fidelity.</span>
+      </a>
+      <a href="/{{ lang }}/guides/webp-vs-jpeg-compression" class="guide-related-card">
+        <strong>WebP vs JPEG Compression</strong>
+        <span>Which format gives better results for web images?</span>
+      </a>
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG</strong>
+        <span>The two most common formats for lossy and lossless web images.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lossy vs Lossless Image Compression",
+  "description": "Lossy compression reduces file size by discarding data. Lossless keeps every pixel. Learn which compression type to choose for photos, graphics, logos, and web images.",
+  "url": "https://imgpact.com/guides/lossy-vs-lossless-compression",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

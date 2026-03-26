@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}How to Compress Images Without Losing Quality | imgpact{% endblock %}
+{% block meta_description %}Compress images 50–80% without visible quality loss. Practical techniques: choose the right format, target the right quality setting, and use perceptual compression.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/lossy-vs-lossless-compression">Compression</a>
+    <span>›</span>
+    Compress Without Losing Quality
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜 Compression</div>
+    <h1>How to Compress Images Without Losing Quality</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>"Compress without losing quality" sounds like a contradiction, and for lossy formats, it technically is. But in practice, the visual threshold at which compression becomes perceptible is far lower than most people assume. With the right format and settings, you can reduce image file sizes by 60–80% with no visible difference to the human eye.</p>
+
+    <h2>Understand the quality sweet spot</h2>
+    <p>Every lossy format has a quality range where compression is aggressive but the result looks identical to the original. For photos:</p>
+    <ul>
+      <li><strong>JPEG quality 75–85</strong>: imperceptible loss for most photos at web display sizes</li>
+      <li><strong>WebP quality 75–85</strong>: same visual quality as JPEG q85 at 25–35% smaller file</li>
+      <li><strong>AVIF quality 60–75</strong>: same visual quality as JPEG q85 at 40–50% smaller file</li>
+    </ul>
+    <p>The savings between quality 100 and quality 80 in JPEG are enormous, often a factor of 3–5, with no perceptible difference. Quality values above 85 produce diminishing returns.</p>
+
+    <div class="tip-box">
+      <strong>Test at actual display size:</strong> Always judge compressed images at the size they will appear on screen. Zoom in or download the file and zoom in a photo editor. Artifacts that are invisible at 100% web display are often obvious at 400%; but your users never zoom in to 400%.
+    </div>
+
+    <h2>Choose a modern format</h2>
+    <p>Switching from JPEG to a modern format is the single biggest source of "free" compression gains:</p>
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Same quality, what size vs JPEG?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>JPEG (baseline)</td><td>100%</td></tr>
+        <tr><td>WebP</td><td>65–75%</td></tr>
+        <tr><td>AVIF</td><td>45–60%</td></tr>
+      </tbody>
+    </table>
+    <p>Converting a 300 KB JPEG to AVIF at equivalent quality typically produces a 130–180 KB file. No quality change, 40–55% size reduction.</p>
+
+    <h2>Resize before compressing</h2>
+    <p>Compressing a 4000 px wide image that will display at 800 px is wasteful. Resize first to the display dimensions, then compress. An 800×600 image at JPEG q80 will be dramatically smaller than a 4000×3000 image at JPEG q95, and look identical at web display sizes.</p>
+
+    <h2>Strip metadata</h2>
+    <p>JPEG and PNG files often contain embedded metadata: GPS coordinates, camera model, colour profiles, editing history, copyright strings. This data can add 20–150 KB to a file. For web use, strip all metadata:</p>
+    <ul>
+      <li><strong>JPEG</strong>: strip EXIF, IPTC, XMP, saves 5–50 KB typically</li>
+      <li><strong>PNG</strong>: remove tEXt, iTXt, zTXt, gAMA, cHRM chunks, saves 1–20 KB</li>
+    </ul>
+    <p>Most compression tools and image CDNs strip metadata automatically. Verify with a tool like exiftool or browser DevTools (file size before/after) that metadata has been removed.</p>
+
+    <h2>Use progressive JPEG for large images</h2>
+    <p>Progressive JPEG encodes the image in multiple passes, delivering a blurry full-size preview quickly that sharpens as more data arrives. For images over 10 KB, progressive JPEG is typically 2–10% smaller than baseline JPEG at the same quality. It also provides a better perceived loading experience on slow connections.</p>
+
+    <h2>Lossless PNG compression without quality loss</h2>
+    <p>For PNG files (screenshots, graphics with transparency), apply lossless optimization:</p>
+    <ul>
+      <li><strong>Reduce colour depth</strong>: if the image uses fewer than 256 colours, convert to PNG-8 (indexed colour). This can reduce file size by 60–70% with no visual change</li>
+      <li><strong>Run pngcrush or oxipng</strong>: these tools find the optimal DEFLATE compression parameters without changing any pixel values</li>
+      <li><strong>Consider WebP lossless</strong>: WebP lossless is typically 26% smaller than PNG with identical pixel data</li>
+    </ul>
+
+    <h2>Compression workflow for web images</h2>
+    <ol>
+      <li>Resize to display dimensions</li>
+      <li>Choose format: AVIF → WebP → JPEG/PNG based on browser support needs</li>
+      <li>For photos: start at quality 80, reduce to 70 if file still too large, stop at 65</li>
+      <li>Strip metadata</li>
+      <li>Visual check at actual display size</li>
+      <li>Compare file sizes before and after</li>
+    </ol>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> You can compress images 50–80% with no visible quality difference by: (1) using AVIF or WebP instead of JPEG, (2) targeting quality 75–85 instead of 90–100, (3) resizing to actual display dimensions, and (4) stripping metadata. The "quality loss" people fear usually only appears above 400% zoom, your users never see it.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimize Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lossy-vs-lossless-compression" class="guide-related-card">
+        <strong>Lossy vs Lossless Compression</strong>
+        <span>Understand the fundamental types of image compression.</span>
+      </a>
+      <a href="/{{ lang }}/guides/webp-vs-jpeg-compression" class="guide-related-card">
+        <strong>WebP vs JPEG Compression</strong>
+        <span>Detailed comparison of the two most common web formats.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>How to Optimize Images for the Web</strong>
+        <span>The complete 2026 image optimization checklist.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Compress Images Without Losing Quality",
+  "description": "Compress images 50–80% without visible quality loss. Practical techniques: choose the right format, target the right quality setting, and use perceptual compression.",
+  "url": "https://imgpact.com/guides/compress-without-quality-loss",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  imgpact:
+    build: .
+    container_name: imgpact
+    restart: unless-stopped
+    environment:
+      - RUST_LOG=info
+    networks:
+      - web
+    # Not exposed directly — nginx proxies to it
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:alpine
+    container_name: imgpact-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/imgpact.conf:ro
+      - ./nginx/certbot/conf:/etc/letsencrypt:ro
+      - ./nginx/certbot/www:/var/www/certbot:ro
+    depends_on:
+      - imgpact
+    networks:
+      - web
+
+  certbot:
+    image: certbot/certbot
+    container_name: imgpact-certbot
+    volumes:
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done"
+
+networks:
+  web:
+    driver: bridge

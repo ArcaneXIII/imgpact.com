@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}, imgpact{% endblock %}
+{% block meta_description %}{{ description }} Free, runs in your browser.{% endblock %}
+
+{% block content %}
+<div class="tool-page"
+  data-from-format="{{ from_format }}"
+  data-to-format="{{ to_format }}"
+  data-tool-slug="{{ tool_slug }}"
+  id="converter-root">
+
+  <div class="tool-header">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">Drop a <strong>{{ from_format | upper }}</strong> file here or click to browse</div>
+    <div class="upload-hint">{{ accept_types }}</div>
+    <input type="file" id="file-input" accept="{{ accept_types }}" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+
+      {% if to_format == "jpg" or to_format == "jpeg" or to_format == "webp" or to_format == "avif" %}
+      <div class="control-row">
+        <div class="control-group" style="flex:1;min-width:200px">
+          <label>Quality: <span id="quality-label">85</span></label>
+          <input type="range" id="quality" min="1" max="100" value="85" style="width:100%">
+        </div>
+      </div>
+      {% endif %}
+
+      <div id="jxl-notice" style="display:none;padding:0.6rem 0.85rem;background:#fef9c3;border:1px solid #fde047;border-radius:var(--radius);font-size:0.85rem;color:#78350f">
+        <i data-lucide="alert-triangle"></i> JPEG XL support is experimental. Conversion may not work for all files.
+      </div>
+
+      <div id="svg-out-notice" style="display:none;padding:0.6rem 0.85rem;background:#f0fdf4;border:1px solid #86efac;border-radius:var(--radius);font-size:0.85rem;color:#14532d">
+        <i data-lucide="info"></i> GIF → SVG embeds each frame as a PNG data URI inside an SVG wrapper.
+      </div>
+
+      <button class="btn-process" id="btn-convert"><i data-lucide="refresh-cw"></i> Convert to {{ to_format | upper }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="before-after" id="before-after"></div>
+    <div class="stats-bar" id="stats-bar"></div>
+    <button class="btn-download" id="btn-download"><i data-lucide="download"></i> Download {{ to_format | upper }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/converters.js" type="module"></script>
+{% endblock %}

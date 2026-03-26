@@ -1,0 +1,7 @@
+target/
+pkg/
+node_modules/
+static/wasm/*.js
+static/wasm/*.wasm
+static/wasm/*.ts
+!static/wasm/.gitkeep

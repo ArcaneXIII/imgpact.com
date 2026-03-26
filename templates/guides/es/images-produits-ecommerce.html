@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}Imágenes de Productos para E-commerce: Guía Completa 2026 | imgpact{% endblock %}
+{% block meta_description %}Las imágenes de producto impulsan la conversión. Aprende las dimensiones, formatos, fondos y técnicas de optimización correctas para fotos de e-commerce que venden.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/imagenes-productos-ecommerce">E-commerce</a>
+    <span>›</span>
+    Imágenes de Productos
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Imágenes de Productos para E-commerce: Guía Completa 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>En el e-commerce, las imágenes de producto son tu sala de ventas. Los clientes no pueden tocar ni probar el producto, tus imágenes deben compensarlo. Los estudios muestran consistentemente que las imágenes de producto de alta calidad aumentan las tasas de conversión entre un 20 y un 40 %. Esta guía cubre todo, desde los requisitos técnicos hasta las mejores prácticas para imágenes que convierten.</p>
+
+    <h2>Dimensiones recomendadas para imágenes de producto</h2>
+    <table>
+      <thead><tr><th>Plataforma / caso de uso</th><th>Tamaño recomendado</th><th>Proporción</th></tr></thead>
+      <tbody>
+        <tr><td>Shopify (general)</td><td>2048 × 2048 px</td><td>1:1</td></tr>
+        <tr><td>WooCommerce</td><td>800 × 800 px mínimo, 1200×1200 recomendado</td><td>1:1</td></tr>
+        <tr><td>Amazon imagen principal</td><td>2000 × 2000 px (mínimo 1000×1000)</td><td>1:1</td></tr>
+        <tr><td>E-commerce general</td><td>1200 × 1200 px a 2000 × 2000 px</td><td>1:1</td></tr>
+        <tr><td>Vista zoom (escritorio)</td><td>2000 × 2000 px mínimo</td><td>1:1</td></tr>
+      </tbody>
+    </table>
+    <p>Las imágenes cuadradas (1:1) son el estándar de la industria para fotos de producto porque se muestran de forma consistente en todos los diseños de cuadrícula, aplicaciones móviles y publicaciones en redes sociales sin recortes inesperados.</p>
+
+    <h2>Por qué la resolución importa para el zoom</h2>
+    <p>La mayoría de los sitios de e-commerce modernos ofrecen una función de zoom. Para que funcione bien, tus imágenes deben ser más grandes que el tamaño de visualización. Si tu imagen de producto se muestra a 500×500 y hace zoom a 1000×1000, necesitas imágenes fuente de al menos 1000×1000. Para un zoom suave de 4x, usa 2000×2000 px como mínimo.</p>
+
+    <h2>Formato de archivo para imágenes de producto</h2>
+    <ul>
+      <li><strong>Fotos con fondo blanco</strong>: JPEG a calidad 80–85, los fondos blancos se comprimen muy bien en JPEG</li>
+      <li><strong>Imágenes que requieren transparencia</strong> (p. ej., superposición en fondos de color): WebP o PNG</li>
+      <li><strong>Fotos de estilo de vida / contextuales</strong>: JPEG a calidad 80–85</li>
+    </ul>
+    <p>JPEG es el estándar para la gran mayoría de fotos de producto. A calidad 80, una imagen de producto de 2000×2000 pesa típicamente entre 300 y 600 KB, rápida de cargar y nítida para el zoom. WebP reduce esto entre un 25 y un 35 % adicional.</p>
+
+    <h2>Fondo: blanco vs. estilo de vida</h2>
+
+    <h3>Fondo blanco (requerido por la mayoría de los marketplaces)</h3>
+    <p>Amazon, eBay y la mayoría de los grandes marketplaces requieren que la imagen principal del producto tenga un fondo blanco puro (RGB 255,255,255). Los fondos blancos:</p>
+    <ul>
+      <li>Se ven limpios y profesionales en cualquier diseño de cuadrícula</li>
+      <li>Son obligatorios para los listados en marketplaces</li>
+      <li>Se comprimen mucho mejor en JPEG que los fondos complejos</li>
+      <li>Permiten a los clientes centrarse completamente en el producto</li>
+    </ul>
+
+    <h3>Imágenes de estilo de vida (contextuales)</h3>
+    <p>Las imágenes secundarias que muestran el producto en uso aumentan drásticamente la conversión y el tiempo en la página. Un buen listado de producto incluye: 1 imagen principal con fondo blanco + 3–6 imágenes de estilo de vida / contextuales + 1–2 primeros planos de detalle / textura.</p>
+
+    <h2>Número de imágenes por producto</h2>
+    <p>Las investigaciones muestran consistentemente que los listados con 5–8 imágenes superan significativamente a los que tienen 1–2. Proporciona:</p>
+    <ul>
+      <li>Vista frontal (imagen principal, fondo blanco)</li>
+      <li>Vista trasera</li>
+      <li>Vistas laterales (izquierda y derecha para productos en 3D)</li>
+      <li>Tomas de detalle (textura, materiales, características clave)</li>
+      <li>Referencia de escala (en uso, con una persona u objeto cotidiano para el tamaño)</li>
+      <li>Foto de estilo de vida (producto en su contexto natural)</li>
+    </ul>
+
+    <h2>Optimización de imágenes para el rendimiento del e-commerce</h2>
+    <p>Los sitios de e-commerce son típicamente muy pesados en imágenes. La optimización del rendimiento es fundamental para el SEO y la conversión:</p>
+    <ul>
+      <li><strong>Carga diferida (lazy load)</strong> de todas las imágenes de producto excepto la imagen principal visible sin desplazamiento</li>
+      <li><strong>Sirve WebP</strong> con fallback JPEG para todas las fotos de producto</li>
+      <li><strong>Usa <code>srcset</code></strong> para miniaturas de producto responsivas</li>
+      <li><strong>Establece ancho y alto explícitos</strong> para prevenir el CLS</li>
+      <li><strong>Comprime de forma agresiva</strong>: un JPEG de producto con fondo blanco a calidad 80 es indistinguible de calidad 95 a los tamaños de visualización</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Objetivos de tamaño de archivo:</strong> Apunta a menos de 300 KB por imagen de producto a un tamaño de visualización de 1000×1000 px. Para cuadrículas de miniaturas, menos de 50 KB por miniatura. Esto mantiene el peso de la página manejable incluso en páginas de categorías con 20–50 productos visibles.
+    </div>
+
+    <h2>Texto alternativo para imágenes de producto</h2>
+    <p>Cada imagen de producto necesita texto alternativo descriptivo para el SEO y la accesibilidad. Incluye: nombre del producto, color, atributo clave. Ejemplo: <code>alt="Cartera de cuero azul, bifold, 6 ranuras para tarjetas"</code>. Evita el texto alternativo genérico como "imagen de producto 1".</p>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Usa 2000×2000 px cuadrado JPEG (calidad 80) en fondos blancos para compatibilidad con marketplaces y calidad de zoom. Proporciona 5–8 imágenes por producto incluyendo vistas frontal, trasera, de detalle y de estilo de vida. Optimiza para web con carga diferida y WebP para una página de producto rápida y con alta conversión.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Redimensionar Imágenes de Producto</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/fotos-producto-fondo-blanco" class="guide-related-card">
+        <strong>Fotos de Producto con Fondo Blanco</strong>
+        <span>Cómo conseguir fondos blancos limpios para imágenes en marketplaces.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/tamanos-imagenes-shopify" class="guide-related-card">
+        <strong>Optimización de Imágenes en Shopify</strong>
+        <span>Tamaños y configuraciones específicos para tiendas Shopify.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/imagenes-productos-amazon" class="guide-related-card">
+        <strong>Imágenes de Producto en Amazon</strong>
+        <span>Los requisitos de imágenes de Amazon y cómo cumplirlos.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Imágenes de Productos para E-commerce: Guía Completa 2026",
+  "description": "Las imágenes de producto impulsan la conversión. Aprende las dimensiones, formatos, fondos y técnicas de optimización correctas para fotos de e-commerce que venden.",
+  "url": "https://imgpact.com/guides/imagenes-productos-ecommerce",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

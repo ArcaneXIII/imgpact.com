@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block title %}JPEG vs PNG: ¿Qué formato deberías elegir? | imgpact{% endblock %}
+{% block meta_description %}¿JPEG o PNG? Compara las diferencias técnicas, los casos de uso y el equilibrio en el tamaño de archivo. Elige el formato correcto en cada ocasión, y descubre cuándo WebP supera a ambos.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/formatos-imagen">Formatos de imagen</a>
+    <span>›</span>
+    JPEG vs PNG
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Formatos de imagen</div>
+    <h1>JPEG vs PNG: ¿Qué formato deberías elegir?</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>JPEG y PNG son los dos formatos de imagen más utilizados en la web, con una historia combinada de más de 25 años. Sin embargo, muchos desarrolladores y creadores de contenido los usan indistintamente, sin darse cuenta de que esta elección puede duplicar o triplicar el peso de sus páginas. Aquí tienes todo lo que necesitas saber para elegir correctamente.</p>
+
+    <h2>La diferencia técnica fundamental</h2>
+    <p>La diferencia más importante entre JPEG y PNG radica en cómo comprimen los datos:</p>
+    <ul>
+      <li><strong>JPEG usa compresión con pérdida</strong>: al guardar un JPEG, los datos se descartan permanentemente. El algoritmo aprovecha los límites de la percepción visual humana para eliminar los detalles menos visibles. Cada vez que vuelves a guardar un JPEG, la calidad se degrada ligeramente.</li>
+      <li><strong>PNG usa compresión sin pérdida</strong>: cada píxel de la imagen original se conserva con perfecta fidelidad. Puedes abrir, editar y volver a guardar un archivo PNG indefinidamente sin ninguna pérdida de calidad.</li>
+    </ul>
+    <p>Esta diferencia fundamental es la razón por la que los dos formatos tienen dominios de aplicación distintos.</p>
+
+    <h2>JPEG vs PNG: tabla comparativa (8 criterios)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>JPEG</th>
+          <th>PNG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tipo de compresión</td>
+          <td>Con pérdida</td>
+          <td>Sin pérdida</td>
+        </tr>
+        <tr>
+          <td>Transparencia</td>
+          <td>No</td>
+          <td>Sí (canal alfa)</td>
+        </tr>
+        <tr>
+          <td>Animación</td>
+          <td>No</td>
+          <td>No (solo extensión APNG)</td>
+        </tr>
+        <tr>
+          <td>Profundidad de color</td>
+          <td>24 bits (16,7 M de colores)</td>
+          <td>8, 24 o 32 bits</td>
+        </tr>
+        <tr>
+          <td>Tamaño de archivo para fotos</td>
+          <td>Muy pequeño</td>
+          <td>Muy grande</td>
+        </tr>
+        <tr>
+          <td>Tamaño de archivo para gráficos</td>
+          <td>Mediano (con artefactos)</td>
+          <td>Pequeño a mediano</td>
+        </tr>
+        <tr>
+          <td>Pérdida de calidad al guardar</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Compatibilidad con navegadores</td>
+          <td>100%</td>
+          <td>100%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Cuándo usar JPEG</h2>
+    <p>JPEG es el formato preferido para todo lo <strong>fotográfico</strong>. Sus puntos fuertes brillan en estos contextos:</p>
+    <ul>
+      <li><strong>Fotos de productos</strong> en un sitio de comercio electrónico</li>
+      <li><strong>Retratos y fotografía de personas</strong></li>
+      <li><strong>Imágenes con muchos degradados</strong>: paisajes, cielos, texturas naturales</li>
+      <li><strong>Imágenes de hero/banner</strong> donde el tamaño del archivo es crítico</li>
+      <li><strong>Imágenes compartidas en redes sociales</strong> que aplican su propia compresión de todos modos</li>
+    </ul>
+    <p>Una foto de 3 MB guardada como PNG puede reducirse a 200–400 KB como JPEG de buena calidad (80/100), <strong>un factor de 7 a 15</strong> sin degradación perceptible.</p>
+
+    <div class="tip-box">
+      <strong>Recomendación:</strong> Para fotos web, exporta como JPEG con un valor de calidad entre 75 y 85. Por encima de 90, la mejora de calidad es casi invisible pero el tamaño del archivo crece considerablemente.
+    </div>
+
+    <h2>Cuándo usar PNG</h2>
+    <p>PNG es irremplazable en cuanto se aplica alguna de estas condiciones:</p>
+    <ul>
+      <li><strong>Se requiere transparencia</strong>: un logotipo sobre un fondo de color, un icono con esquinas redondeadas o un elemento superpuesto sobre una imagen</li>
+      <li><strong>La imagen contiene texto o bordes nítidos</strong>: la compresión con pérdida de JPEG difumina los contornos y puede hacer el texto ilegible</li>
+      <li><strong>Capturas de pantalla</strong>: los elementos de interfaz (botones, menús) se conservan mejor en PNG</li>
+      <li><strong>Gráficos generados por ordenador</strong> con áreas de color plano (diagramas, infografías)</li>
+      <li><strong>Imágenes que se editarán posteriormente</strong>: trabaja siempre en PNG y exporta a JPEG solo al final</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Error común:</strong> Guardar una fotografía como PNG para "mejor calidad". En la práctica, un PNG de una foto puede pesar entre 10 y 20 veces más que un JPEG equivalente sin ninguna diferencia visible en pantalla. Reserva PNG para los casos en que la transparencia o la precisión píxel a píxel sean realmente necesarias.
+    </div>
+
+    <h2>Consejos prácticos por caso de uso</h2>
+
+    <h3>Sitio web de comercio electrónico</h3>
+    <p>Usa <strong>JPEG para las fotos de productos</strong> y <strong>PNG para los logotipos y pictogramas</strong> que aparecen sobre fondos blancos o de color. Si tu CMS lo admite, activa la conversión automática a WebP para obtener lo mejor de ambos mundos.</p>
+
+    <h3>Portfolio o sitio de presentación</h3>
+    <p>Imágenes de fondo y galerías de fotos → JPEG o WebP. Logotipo, iconos de navegación, elementos gráficos → PNG o SVG.</p>
+
+    <h3>Redes sociales</h3>
+    <p>La mayoría de las plataformas recomprimen las imágenes de todos modos. Comparte fotos como JPEG de alta calidad (90+) para limitar la doble compresión. Para contenidos visuales que contienen texto (citas, infografías), prefiere PNG para mantener el texto nítido.</p>
+
+    <h2>WebP: la alternativa moderna que supera a ambos</h2>
+    <p>Si tienes libertad para elegir tu formato en 2026, <strong>WebP es el reemplazo superior tanto para JPEG como para PNG en la gran mayoría de los casos</strong>: ofrece archivos un 25–35 % más pequeños que JPEG, admite transparencia como PNG y es compatible con el 97 % de los navegadores. El debate JPEG vs PNG se vuelve secundario una vez que adoptas WebP en tu flujo de trabajo.</p>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> JPEG para fotos (pequeño, sin transparencia), PNG para gráficos y logotipos (transparente, sin pérdida). En 2026, prefiere WebP o AVIF para mayor rendimiento, con JPEG/PNG como fallback solo cuando sea necesario.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/jpg" class="guide-cta-link">Convertir a JPEG</a>
+      <a href="/tools/convert/png" class="guide-cta-link secondary">Convertir a PNG</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/formatos-imagen" class="guide-related-card">
+        <strong>Guía completa de formatos de imagen web</strong>
+        <span>JPEG, PNG, WebP, AVIF, SVG: entiende todos los formatos en un solo artículo.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/formato-avif" class="guide-related-card">
+        <strong>¿Qué es AVIF?</strong>
+        <span>El formato de nueva generación que comprime incluso mejor que WebP.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo optimizar imágenes para la web</strong>
+        <span>La guía completa 2026 para imágenes rápidas, ligeras y SEO-friendly.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "JPEG vs PNG: ¿Qué formato deberías elegir?",
+  "description": "¿JPEG o PNG? Compara las diferencias técnicas, los casos de uso y el equilibrio en el tamaño de archivo. Elige el formato correcto en cada ocasión, y descubre cuándo WebP supera a ambos.",
+  "url": "https://imgpact.com/guides/jpeg-vs-png",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

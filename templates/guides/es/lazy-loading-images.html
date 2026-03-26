@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}Lazy Loading de imágenes: Guía completa 2026 | imgpact{% endblock %}
+{% block meta_description %}El lazy loading nativo con loading="lazy" aplaza las imágenes fuera de pantalla y reduce el tiempo de carga de la página. Aprende a implementarlo correctamente y evita los errores comunes.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web">Optimización web</a>
+    <span>›</span>
+    Lazy Loading
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimización web</div>
+    <h1>Lazy Loading de imágenes: Guía completa 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>El lazy loading es una de las optimizaciones de rendimiento más sencillas y efectivas que puedes aplicar a un sitio web. Al aplazar la carga de imágenes que no son visibles en el viewport, reduces el peso inicial de la página, aceleras el primer renderizado y ahorras ancho de banda a los usuarios que nunca llegan al final de la página.</p>
+
+    <h2>Lazy loading nativo: un solo atributo</h2>
+    <p>Desde 2019, todos los navegadores principales admiten el atributo <code>loading</code> en elementos <code>&lt;img&gt;</code> e <code>&lt;iframe&gt;</code>. No se necesita ninguna librería JavaScript:</p>
+    <pre><code>&lt;img src="photo.jpg" alt="Descripción" loading="lazy"&gt;</code></pre>
+    <p>El navegador solo descarga la imagen cuando el usuario se desplaza a una cierta distancia de ella. El umbral varía según el navegador y la velocidad de conexión, típicamente entre 1.250 y 2.500 px por delante del viewport.</p>
+
+    <h2>Los tres valores de loading=</h2>
+    <table>
+      <thead>
+        <tr><th>Valor</th><th>Comportamiento</th><th>Cuándo usarlo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>lazy</code></td>
+          <td>Aplazado hasta estar cerca del viewport</td>
+          <td>Todas las imágenes por debajo del pliegue</td>
+        </tr>
+        <tr>
+          <td><code>eager</code></td>
+          <td>Cargado inmediatamente (comportamiento por defecto)</td>
+          <td>Imágenes por encima del pliegue, especialmente la imagen LCP</td>
+        </tr>
+        <tr>
+          <td><code>auto</code></td>
+          <td>El navegador decide (principalmente igual que eager)</td>
+          <td>No recomendado, prefiere valores explícitos</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Regla crítica: nunca apliques lazy loading a imágenes por encima del pliegue</h2>
+    <p>El error de lazy loading más común es aplicarlo a todas las imágenes de la página, incluida la imagen hero. Esto retrasa el <strong>Largest Contentful Paint (LCP)</strong>, la métrica de Google que mide cuándo el contenido principal es visible. Una imagen LCP con lazy loading puede reducir drásticamente tu puntuación LCP.</p>
+
+    <div class="warning-box">
+      <strong>Importante:</strong> La primera imagen visible al cargar la página, típicamente un banner hero o imagen destacada. NO debe tener <code>loading="lazy"</code>. Usa <code>loading="eager"</code> o simplemente omite el atributo. Lo ideal es precargarla con una etiqueta <code>&lt;link rel="preload"&gt;</code>.
+    </div>
+
+    <h2>Añade siempre width y height</h2>
+    <p>El lazy loading funciona mejor cuando el navegador conoce las dimensiones de las imágenes antes de cargarlas. Sin <code>width</code> y <code>height</code>, el navegador no puede reservar espacio, provocando saltos de maquetación (CLS) cuando las imágenes se cargan:</p>
+    <pre><code>&lt;!-- Correcto: dimensiones especificadas --&gt;
+&lt;img src="photo.jpg" alt="..." width="800" height="600" loading="lazy"&gt;
+
+&lt;!-- Incorrecto: sin dimensiones, causará salto de maquetación --&gt;
+&lt;img src="photo.jpg" alt="..." loading="lazy"&gt;</code></pre>
+
+    <h2>Lazy loading con srcset</h2>
+    <p>El lazy loading es totalmente compatible con las imágenes responsive:</p>
+    <pre><code>&lt;img
+  srcset="photo-400.webp 400w, photo-800.webp 800w, photo-1200.webp 1200w"
+  sizes="(max-width: 600px) 100vw, 800px"
+  src="photo-800.webp"
+  alt="Descripción"
+  width="800" height="600"
+  loading="lazy"
+&gt;</code></pre>
+
+    <h2>Lazy loading con el elemento &lt;picture&gt;</h2>
+    <pre><code>&lt;picture&gt;
+  &lt;source srcset="photo.avif" type="image/avif"&gt;
+  &lt;source srcset="photo.webp" type="image/webp"&gt;
+  &lt;img src="photo.jpg" alt="Descripción" width="800" height="600" loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+    <p>El atributo <code>loading</code> va en el elemento <code>&lt;img&gt;</code>, no en los elementos <code>&lt;picture&gt;</code> o <code>&lt;source&gt;</code>.</p>
+
+    <h2>Compatibilidad con navegadores</h2>
+    <p>El lazy loading nativo es compatible con todos los navegadores modernos a partir de 2026: Chrome 76+, Firefox 75+, Safari 15.4+, Edge 79+. Para navegadores más antiguos, omitir el atributo simplemente carga todas las imágenes inmediatamente, una degradación elegante y segura. No se necesita polyfill.</p>
+
+    <h2>Cuándo usar un lazy loader JavaScript</h2>
+    <p>El atributo nativo cubre la gran mayoría de los casos de uso. Una librería JavaScript (como lazysizes) puede ser útil si:</p>
+    <ul>
+      <li>Necesitas dar soporte a navegadores muy antiguos (Safari 14 e inferiores)</li>
+      <li>Estás aplicando lazy loading a imágenes de fondo CSS</li>
+      <li>Necesitas umbrales de carga personalizados o callbacks</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Añade <code>loading="lazy"</code> a todas las imágenes por debajo del pliegue. Nunca lo apliques a tu imagen LCP. Especifica siempre <code>width</code> y <code>height</code> para evitar saltos de maquetación. Este cambio de una línea suele reducir el peso inicial de descarga de la página entre un 30 y un 50 % en páginas con muchas imágenes.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimizar imágenes</a>
+      <a href="/tools/resize" class="guide-cta-link secondary">Redimensionar imágenes</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/images-core-web-vitals" class="guide-related-card">
+        <strong>Imágenes y Core Web Vitals</strong>
+        <span>Cómo LCP, CLS e INP se relacionan con tus imágenes.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Imágenes responsive: srcset y sizes</strong>
+        <span>Sirve la imagen correcta a cada tamaño de pantalla.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo optimizar imágenes para la web</strong>
+        <span>La guía completa de optimización de imágenes 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lazy Loading Images: Complete Guide 2026",
+  "description": "Native lazy loading with loading='lazy' defers off-screen images and reduces page load time. Learn how to implement it correctly and avoid common mistakes.",
+  "url": "https://imgpact.com/guides/lazy-loading-images",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

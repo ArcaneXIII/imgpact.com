@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Imágenes y Core Web Vitals: LCP, CLS, INP Explicados | imgpact{% endblock %}
+{% block meta_description %}Las imágenes son la principal causa de malos Core Web Vitals. Aprende cómo LCP, CLS e INP se ven afectados por las imágenes y qué corregir para mejorar tu posicionamiento en Google.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web">Optimización Web</a>
+    <span>›</span>
+    Imágenes &amp; Core Web Vitals
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimización Web</div>
+    <h1>Imágenes y Core Web Vitals: LCP, CLS, INP</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Desde 2021, Google utiliza los Core Web Vitals como señal de posicionamiento en los resultados de búsqueda. Las imágenes tienen un impacto directo y significativo en las tres métricas. Comprender esta relación es esencial para cualquier trabajo de SEO u optimización web.</p>
+
+    <h2>¿Qué son los Core Web Vitals?</h2>
+    <p>Los Core Web Vitals son tres métricas de experiencia de usuario medidas por Google:</p>
+    <ul>
+      <li><strong>LCP (Largest Contentful Paint)</strong>: cuánto tarda en renderizarse el elemento visible más grande. Generalmente es una imagen.</li>
+      <li><strong>CLS (Cumulative Layout Shift)</strong>: cuánto se desplaza inesperadamente el diseño de la página. Las imágenes sin dimensiones son una causa principal.</li>
+      <li><strong>INP (Interaction to Next Paint)</strong>: capacidad de respuesta a las interacciones del usuario. Las imágenes pesadas pueden afectarlo indirectamente.</li>
+    </ul>
+
+    <h2>LCP: la métrica más afectada por las imágenes</h2>
+    <p>En el 70–80 % de las páginas, el elemento LCP es una imagen, normalmente un banner hero, una foto destacada o una imagen de producto. Google espera que el LCP sea inferior a <strong>2,5 segundos</strong>. Problemas habituales de LCP relacionados con imágenes:</p>
+
+    <h3>1. La imagen LCP tiene carga diferida</h3>
+    <p>El error más perjudicial. Añadir <code>loading="lazy"</code> a tu imagen hero retrasa su descubrimiento y descarga.</p>
+    <pre><code>&lt;!-- Incorrecto: retrasa el LCP --&gt;
+&lt;img src="hero.jpg" loading="lazy"&gt;
+
+&lt;!-- Correcto: cargar de inmediato --&gt;
+&lt;img src="hero.jpg" loading="eager"&gt;</code></pre>
+
+    <h3>2. La imagen LCP no está precargada</h3>
+    <p>El navegador descubre la imagen LCP solo al analizar el HTML. Una pista de precarga hace que el navegador la obtenga antes:</p>
+    <pre><code>&lt;link rel="preload" as="image" href="hero.avif" type="image/avif"&gt;</code></pre>
+
+    <h3>3. La imagen LCP es demasiado pesada</h3>
+    <p>Una imagen hero de 1 MB siempre producirá un LCP deficiente en conexiones móviles. Objetivo: menos de 200 KB para un hero de ancho completo a 1200 px, usando AVIF o WebP.</p>
+
+    <h3>4. La imagen LCP se sirve sin CDN</h3>
+    <p>Servir imágenes desde un único servidor de origen añade latencia para los usuarios distantes. Un CDN reduce el Time to First Byte (TTFB) de las imágenes, mejorando directamente el LCP.</p>
+
+    <h2>CLS: imágenes sin dimensiones</h2>
+    <p>Cuando un navegador no conoce las dimensiones de una imagen antes de cargarla, no puede reservar espacio en el diseño. La imagen se carga y empuja el contenido hacia abajo, eso es un desplazamiento de diseño. La solución es sencilla:</p>
+    <pre><code>&lt;!-- Incorrecto: sin dimensiones, causa CLS --&gt;
+&lt;img src="foto.jpg" alt="..."&gt;
+
+&lt;!-- Correcto: las dimensiones evitan el desplazamiento de diseño --&gt;
+&lt;img src="foto.jpg" alt="..." width="800" height="600"&gt;</code></pre>
+    <p>También puedes usar CSS <code>aspect-ratio</code> para lograr el mismo efecto cuando no puedes fijar las dimensiones en el código:</p>
+    <pre><code>img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
+}</code></pre>
+
+    <h2>Medir el impacto de las imágenes en los Core Web Vitals</h2>
+    <p>Usa estas herramientas para identificar qué imágenes están perjudicando tus puntuaciones:</p>
+    <ul>
+      <li><strong>Google Search Console</strong>: el informe de Core Web Vitals muestra páginas con puntuaciones deficientes a partir de datos de usuarios reales</li>
+      <li><strong>PageSpeed Insights</strong>: identifica el elemento LCP, muestra oportunidades de "Dimensionar imágenes correctamente" y "Servir imágenes en formatos de próxima generación"</li>
+      <li><strong>Chrome DevTools → pestaña Performance</strong>: la vista de cascada muestra cuándo se obtiene y pinta cada imagen</li>
+      <li><strong>Lighthouse</strong>: integrado en Chrome DevTools, señala oportunidades específicas de optimización de imágenes</li>
+    </ul>
+
+    <h2>Lista de verificación de imágenes para Core Web Vitals</h2>
+    <table>
+      <thead>
+        <tr><th>Problema</th><th>Métrica</th><th>Solución</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Imagen hero con carga diferida</td><td>LCP</td><td>Eliminar loading="lazy" de la imagen LCP</td></tr>
+        <tr><td>Imagen LCP no precargada</td><td>LCP</td><td>Añadir &lt;link rel="preload"&gt;</td></tr>
+        <tr><td>Imagen LCP demasiado grande</td><td>LCP</td><td>Comprimir a &lt;200 KB, usar AVIF/WebP</td></tr>
+        <tr><td>Sin width/height en las imágenes</td><td>CLS</td><td>Añadir siempre los atributos width y height</td></tr>
+        <tr><td>Imágenes servidas sin CDN</td><td>LCP</td><td>Usar un CDN para activos estáticos</td></tr>
+        <tr><td>Sin negociación de formato</td><td>LCP</td><td>Servir AVIF/WebP a los navegadores compatibles</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Las imágenes son la palanca principal para mejorar los Core Web Vitals. Corrige primero tu imagen LCP: elimina la carga diferida, añade una pista de precarga, comprime a menos de 200 KB con AVIF o WebP y sírvela desde un CDN. Luego corrige el CLS añadiendo los atributos width y height a cada imagen.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimizar Imágenes</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy Loading de Imágenes</strong>
+        <span>Cuándo y cómo usar loading="lazy" sin perjudicar el LCP.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Imágenes Responsivas: srcset y sizes</strong>
+        <span>Sirve la resolución adecuada a cada pantalla.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo Optimizar Imágenes para la Web</strong>
+        <span>La guía completa de optimización de imágenes para 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Imágenes y Core Web Vitals: LCP, CLS, INP",
+  "description": "Las imágenes son la principal causa de malos Core Web Vitals. Aprende cómo LCP, CLS e INP se ven afectados por las imágenes y qué corregir para mejorar tu posicionamiento en Google.",
+  "url": "https://imgpact.com/guides/images-core-web-vitals",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

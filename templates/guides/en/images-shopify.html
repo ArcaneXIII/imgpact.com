@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Shopify Image Optimization: Sizes, Formats, and Speed | imgpact{% endblock %}
+{% block meta_description %}Shopify image sizes, formats, and optimization tips for 2026. Correct product image dimensions, how Shopify handles WebP, and how to speed up your store.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/ecommerce-product-images">E-commerce</a>
+    <span>›</span>
+    Shopify Images
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Shopify Image Optimization 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Shopify is the world's most popular e-commerce platform. Its image handling is largely automatic; but uploading images at the wrong dimensions or format results in blurry product photos, slow load times, and lower conversion rates. This guide covers everything you need to know about Shopify images in 2026.</p>
+
+    <h2>Shopify product image specifications</h2>
+    <table>
+      <thead><tr><th>Image type</th><th>Recommended size</th><th>Max file size</th></tr></thead>
+      <tbody>
+        <tr><td>Product image</td><td>2048 × 2048 px</td><td>20 MB</td></tr>
+        <tr><td>Collection image</td><td>1800 × 1000 px</td><td>20 MB</td></tr>
+        <tr><td>Blog post image</td><td>1800 × 1000 px</td><td>20 MB</td></tr>
+        <tr><td>Homepage slideshow / hero</td><td>1800 × 1000 px (or 2560 × 1440 px for retina)</td><td>20 MB</td></tr>
+        <tr><td>Logo</td><td>400 × 200 px (or SVG)</td><td>20 MB</td></tr>
+        <tr><td>Favicon</td><td>32 × 32 px</td><td>20 MB</td></tr>
+      </tbody>
+    </table>
+
+    <h2>How Shopify handles images</h2>
+    <p>Shopify automatically converts uploaded images to WebP for browsers that support it (since 2020). It also generates multiple responsive image variants. This means:</p>
+    <ul>
+      <li>You should upload at the <strong>highest quality JPEG or PNG</strong> you have. Shopify's conversion will produce the best result from a high-quality source</li>
+      <li>You <strong>do not need to manually create WebP files</strong> for Shopify, it does this automatically</li>
+      <li>Shopify generates variants at widths: 180, 360, 540, 720, 900, 1080, 1296, 1512, 2048, 4472 px</li>
+    </ul>
+
+    <h2>Recommended upload format</h2>
+    <p>Despite Shopify's automatic WebP conversion, the format you upload matters:</p>
+    <ul>
+      <li><strong>JPEG</strong>: best for product photos on white or plain backgrounds. Upload at quality 85–90</li>
+      <li><strong>PNG</strong>: required if your product has transparency (e.g., stickers, apparel on transparent background). Shopify will convert to WebP with transparency preserved</li>
+      <li><strong>SVG</strong>: for your store logo. Shopify supports SVG and it will scale perfectly on all screens</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Avoid uploading over-compressed images:</strong> If you upload a JPEG at quality 60, Shopify converts that to WebP from the already-degraded source. Start with a high-quality source (q85+) so Shopify's auto-conversion has good material to work with.
+    </div>
+
+    <h2>Aspect ratio consistency</h2>
+    <p>Shopify themes display product images in a grid. If your product images have inconsistent aspect ratios, the grid will look uneven. Best practice: use <strong>1:1 (square)</strong> for all product images, it is the universal standard and works with every Shopify theme.</p>
+    <p>If your products cannot be photographed square, set a consistent ratio (e.g., 4:3) across your entire catalogue rather than mixing portrait and landscape images.</p>
+
+    <h2>Hero and collection images</h2>
+    <p>For full-width banner/hero images on the homepage and collection pages:</p>
+    <ul>
+      <li>Use <strong>1800 × 1000 px</strong> minimum (or 2560 × 1440 for retina-heavy traffic)</li>
+      <li>Keep important content in the centre third of the image, many themes crop the sides on mobile</li>
+      <li>File size target: under <strong>300 KB</strong> for hero images (critical for LCP)</li>
+    </ul>
+
+    <h2>Speed optimization for Shopify stores</h2>
+    <p>Shopify's built-in optimization helps, but there are additional steps you can take:</p>
+    <ul>
+      <li><strong>Name your image files descriptively</strong> before uploading: <code>blue-leather-wallet-front.jpg</code> not <code>IMG_3847.jpg</code>. Shopify uses the filename as part of the image URL and alt text default</li>
+      <li><strong>Add alt text to every product image</strong> in the Shopify admin (Media section). This is important for both SEO and accessibility</li>
+      <li><strong>Avoid lazy loading your first product image</strong>, this is typically the LCP element. Shopify themes handle this correctly in modern versions, but check with PageSpeed Insights</li>
+      <li><strong>Compress images before uploading</strong>: even though Shopify converts to WebP, your original JPEG is stored and served as a fallback</li>
+    </ul>
+
+    <h2>Checking your store's image performance</h2>
+    <ol>
+      <li>Run your store URL through <strong>PageSpeed Insights</strong></li>
+      <li>Look for "Properly size images" and "Serve images in next-gen formats" recommendations</li>
+      <li>Check your LCP image, it should be under 2.5 seconds on mobile</li>
+      <li>Verify no images are missing alt text</li>
+    </ol>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Upload all Shopify product images at 2048×2048 px square, JPEG quality 85–90 (or PNG if transparency is needed). Shopify auto-converts to WebP, give it the best source material. Use SVG for your logo. Aim for hero images under 300 KB and add descriptive alt text to every image for SEO.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize to 2048×2048</a>
+      <a href="/tools/optimize" class="guide-cta-link secondary">Optimize Images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/ecommerce-product-images" class="guide-related-card">
+        <strong>E-commerce Product Images</strong>
+        <span>The complete guide to product photography for online stores.</span>
+      </a>
+      <a href="/{{ lang }}/guides/amazon-product-images" class="guide-related-card">
+        <strong>Amazon Product Images</strong>
+        <span>Amazon's specific requirements and how to meet them.</span>
+      </a>
+      <a href="/{{ lang }}/guides/product-photos-white-background" class="guide-related-card">
+        <strong>White Background Product Photos</strong>
+        <span>How to achieve clean white backgrounds for marketplace images.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Shopify Image Optimization 2026",
+  "description": "Shopify image sizes, formats, and optimization tips for 2026. Correct product image dimensions, how Shopify handles WebP, and how to speed up your store.",
+  "url": "https://imgpact.com/guides/shopify-image-sizes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

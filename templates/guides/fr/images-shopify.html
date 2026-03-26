@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block title %}Images Shopify : formats, tailles et optimisation | imgpact{% endblock %}
+{% block meta_description %}Guide complet des images Shopify 2026 : dimensions recommandées, formats acceptés, compression automatique, CDN Fastly, conversion WebP et alt text pour le SEO.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a> <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a> <span>›</span>
+    <a href="/{{ lang }}/guides/images-produits-ecommerce">E-commerce</a> <span>›</span>
+    Images Shopify
+  </nav>
+
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Images Shopify : formats, tailles et optimisation</h1>
+    <div class="guide-meta">
+      <span>⏱ 8 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Shopify est la plateforme e-commerce la plus utilisée au monde avec plus de 4 millions de boutiques actives. Ses fonctionnalités natives de gestion des images sont puissantes, mais elles cachent des subtilités importantes : compression automatique parfois agressive, comportement du CDN, limites d'upload et conversion WebP automatique. Ce guide vous donne toutes les clés pour tirer le meilleur de Shopify en matière d'images produits.</p>
+
+    <h2>Limites d'upload et dimensions sur Shopify</h2>
+    <p>Shopify impose une limite technique d'upload à <strong>20 Mo et 4472 × 4472 pixels</strong>. En pratique, il n'est ni utile ni recommandé d'uploader des images aussi grandes. Les recommandations officielles Shopify pour 2026 sont les suivantes :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type d'image</th>
+          <th>Dimensions recommandées</th>
+          <th>Ratio</th>
+          <th>Remarque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Image produit principale</td>
+          <td>2048 × 2048 px</td>
+          <td>1:1 (carré)</td>
+          <td>Optimal pour le zoom et les écrans Retina</td>
+        </tr>
+        <tr>
+          <td>Minimum recommandé (avec zoom)</td>
+          <td>800 × 800 px</td>
+          <td>1:1</td>
+          <td>En dessous, le zoom sera flou</td>
+        </tr>
+        <tr>
+          <td>Image de collection</td>
+          <td>1800 × 1000 px</td>
+          <td>16:9 ou 18:10</td>
+          <td>Format paysage pour les têtes de page catégorie</td>
+        </tr>
+        <tr>
+          <td>Bannière hero (page d'accueil)</td>
+          <td>1920 × 1080 px</td>
+          <td>16:9</td>
+          <td>Texte centré pour le recadrage mobile</td>
+        </tr>
+        <tr>
+          <td>Logo</td>
+          <td>400 × 200 px</td>
+          <td>2:1</td>
+          <td>PNG avec transparence recommandé</td>
+        </tr>
+        <tr>
+          <td>Favicon</td>
+          <td>32 × 32 px</td>
+          <td>1:1</td>
+          <td>ICO ou PNG</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <strong>Format carré pour les produits :</strong> Le ratio 1:1 est fortement conseillé pour toutes les images produits Shopify. Dans les grilles de produits, les images sont affichées dans des conteneurs uniformes. Des ratios différents entre produits provoquent des décalages visuels ou des barres blanches qui nuisent au professionnalisme de votre catalogue.
+    </div>
+
+    <h2>Formats d'images acceptés par Shopify</h2>
+    <p>Shopify accepte les formats suivants à l'upload : JPEG, PNG, GIF (dont les GIFs animés), WebP et HEIC (photos iPhone). Voici comment choisir le bon format selon votre cas d'usage :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Usage recommandé</th>
+          <th>Avantages</th>
+          <th>Inconvénients</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>JPEG</td>
+          <td>Photos produits, images lifestyle</td>
+          <td>Compression efficace, universel</td>
+          <td>Pas de transparence</td>
+        </tr>
+        <tr>
+          <td>PNG</td>
+          <td>Logos, images avec fond transparent</td>
+          <td>Transparence, qualité maximale</td>
+          <td>Fichiers lourds</td>
+        </tr>
+        <tr>
+          <td>WebP</td>
+          <td>Optimisation avancée (upload direct)</td>
+          <td>30-50 % plus léger que JPEG</td>
+          <td>Shopify le sert déjà en WebP auto</td>
+        </tr>
+        <tr>
+          <td>HEIC</td>
+          <td>Photos iPhone directement</td>
+          <td>Pratique sans conversion</td>
+          <td>Converti automatiquement en JPEG par Shopify</td>
+        </tr>
+        <tr>
+          <td>GIF animé</td>
+          <td>Animations légères uniquement</td>
+          <td>Supporte l'animation</td>
+          <td>Très lourd, préférez une vidéo MP4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>La compression automatique Shopify : attention à la qualité</h2>
+    <p>Shopify compresse automatiquement vos images à l'upload via son CDN Fastly. C'est une fonctionnalité utile qui réduit le poids des fichiers sans intervention manuelle. Mais elle peut dégrader la qualité si vous uploadez des images déjà fortement compressées.</p>
+
+    <div class="warning-box">
+      <strong>Piège courant :</strong> Si vous uploadez un JPEG compressé à 60 % de qualité, Shopify le re-compresse une deuxième fois. Le résultat est une image doublement dégradée, avec des artefacts visibles autour des contours. Uploadez toujours vos images avec une qualité JPEG de 85 à 95 % et laissez Shopify gérer la compression finale.
+    </div>
+
+    <p>Depuis 2021, Shopify sert automatiquement vos images en <strong>WebP</strong> aux navigateurs compatibles (tous les navigateurs modernes), même si vous avez uploadé un JPEG. Cette conversion à la volée réduit le poids des images de 25 à 35 % sans aucune intervention de votre part. C'est un avantage concurrentiel natif de Shopify qui contribue directement à votre score Google PageSpeed.</p>
+
+    <h2>Le CDN Fastly : performance mondiale incluse</h2>
+    <p>Toutes les images Shopify sont automatiquement distribuées via le <strong>CDN Fastly</strong>, l'un des CDN les plus rapides au monde. Vos images sont servies depuis le point de présence (PoP) le plus proche géographiquement de chaque visiteur, réduisant la latence et le temps de chargement.</p>
+
+    <p>Vous n'avez rien à configurer. Les URLs de vos images ressemblent à :</p>
+
+    <pre><code>https://cdn.shopify.com/s/files/1/XXXX/XXXX/products/
+nom-produit_800x800.jpg?v=1234567890</code></pre>
+
+    <p>Shopify génère automatiquement plusieurs tailles depuis votre image originale : <code>_100x</code>, <code>_200x</code>, <code>_400x</code>, <code>_800x</code>, <code>_1024x</code>, <code>_2048x</code>. Dans les templates Liquid de votre thème, utilisez le filtre <code>| image_url: width: 800</code> pour charger la taille appropriée au contexte d'affichage, ne chargez jamais une image 2048 px dans un thumbnail de 100 px.</p>
+
+    <h2>Configurer l'alt text pour le SEO Shopify</h2>
+    <p>Shopify laisse le champ alt text vide par défaut si vous ne le remplissez pas. C'est une erreur SEO courante et facile à corriger. L'alt text bien rédigé génère du trafic depuis Google Image et améliore l'indexation dans Google Shopping.</p>
+
+    <p>Pour modifier l'alt text dans l'interface Shopify :</p>
+    <ol>
+      <li>Allez dans <strong>Produits</strong> puis sélectionnez votre produit</li>
+      <li>Dans la galerie d'images, cliquez sur l'image concernée</li>
+      <li>Cliquez sur l'icône crayon <strong>"Modifier l'alt"</strong></li>
+      <li>Saisissez une description précise incluant le mot-clé principal (ex. : <em>"Sneakers femme blanc cassé semelle gomme vue latérale"</em>)</li>
+    </ol>
+
+    <div class="info-box">
+      <strong>Alt text en masse :</strong> Pour les catalogues importants, vous pouvez gérer les alt text via l'API Shopify Admin REST ou l'API GraphQL, ou utiliser des applications comme Alt Text AI qui génèrent des alt text automatiquement par IA pour tous vos produits.
+    </div>
+
+    <h2>Images de collection et bannières hero</h2>
+    <p>Les images de collection s'affichent en tête de page catégorie. Elles doivent être suffisamment larges (1800 × 1000 px minimum) pour un rendu net sur grand écran, tout en restant raisonnablement légères (inférieur à 500 Ko après compression).</p>
+
+    <p>Pour les bannières hero de la page d'accueil, Shopify recadre automatiquement les images selon le viewport du visiteur. Adoptez une approche "central-safe zone" : placez les éléments importants (produit vedette, accroche texte, bouton CTA) dans les 60 % centraux du cadre. Les bords seront coupés sur mobile sans préavis.</p>
+
+    <div class="tip-box">
+      <strong>Bannière responsive :</strong> Certains thèmes Shopify récents (comme Dawn) permettent de définir une image différente pour mobile (portrait) et desktop (paysage). Profitez-en pour optimiser l'expérience sur chaque appareil plutôt que de faire un compromis avec une seule image pour tous les formats.
+    </div>
+
+    <h2>Impact des images sur les performances Shopify</h2>
+    <p>Le score Google PageSpeed de votre boutique Shopify est directement lié à la qualité de vos images. Les images représentent souvent 70 % ou plus du poids total d'une page produit. Points de contrôle essentiels :</p>
+
+    <ul>
+      <li><strong>Lazy loading :</strong> la plupart des thèmes Shopify récents (Dawn, Craft, Sense) activent le lazy loading nativement via <code>loading="lazy"</code>. Vérifiez dans votre thème que l'image principale du produit utilise bien <code>loading="eager"</code> et <code>fetchpriority="high"</code>.</li>
+      <li><strong>Poids des images :</strong> chaque image produit ne devrait pas dépasser 200-300 Ko après compression. Les bannières hero peuvent monter à 500 Ko maximum.</li>
+      <li><strong>Google PageSpeed Insights :</strong> auditez régulièrement votre boutique et filtrez les recommandations "Éviter les images de taille non adaptée" et "Utiliser des formats d'images modernes".</li>
+      <li><strong>Applications de compression :</strong> si vous avez déjà uploadé de nombreuses images lourdes, des applications comme Crush.pics ou TinyIMG peuvent re-compresser votre bibliothèque existante en masse, directement depuis votre admin Shopify.</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Évitez les bordures blanches sur les images produit :</strong> Certains vendeurs ajoutent une marge blanche autour de leur produit pour qu'il paraisse plus petit dans le cadre. C'est une erreur : le produit semble miniaturisé dans les résultats de recherche Shopify et Amazon. Le produit doit occuper 85 à 90 % du cadre.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Préparez vos images avant de les uploader sur Shopify : compression optimale, dimensions exactes, format carré en 2048 × 2048 px. Gagnez du temps et améliorez vos performances PageSpeed.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimiser mes images</a>
+      <a href="/tools/resize" class="guide-cta-link secondary">Redimensionner en 2048 × 2048</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/images-produits-ecommerce" class="guide-related-card">
+        <strong>Images produits e-commerce : le guide complet</strong>
+        <span>Toutes les règles d'or pour optimiser vos visuels produits et convertir plus.</span>
+      </a>
+      <a href="/{{ lang }}/guides/amazon-product-images" class="guide-related-card">
+        <strong>Images Amazon : exigences et bonnes pratiques</strong>
+        <span>Exigences officielles et conseils pour vendre plus sur Amazon Marketplace.</span>
+      </a>
+      <a href="/{{ lang }}/guides/photos-produit-fond-blanc" class="guide-related-card">
+        <strong>Photos produit sur fond blanc</strong>
+        <span>Techniques de prise de vue et retouche pour un fond blanc parfait.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Images Shopify : formats, tailles et optimisation",
+  "description": "Guide complet des images Shopify 2026 : dimensions recommandées, formats acceptés, compression automatique, CDN Fastly, conversion WebP et alt text pour le SEO.",
+  "url": "https://imgpact.com/guides/images-shopify",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

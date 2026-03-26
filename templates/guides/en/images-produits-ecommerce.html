@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}E-commerce Product Images: Complete Guide 2026 | imgpact{% endblock %}
+{% block meta_description %}Product images drive conversion. Learn the right dimensions, formats, backgrounds, and optimization techniques for e-commerce photos that sell.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/ecommerce-product-images">E-commerce</a>
+    <span>›</span>
+    Product Images
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>E-commerce Product Images: Complete Guide 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>In e-commerce, product images are your sales floor. Customers cannot touch or try the product, your images must compensate. Studies consistently show that high-quality product images increase conversion rates by 20–40%. This guide covers everything from technical requirements to best practices for images that convert.</p>
+
+    <h2>Recommended product image dimensions</h2>
+    <table>
+      <thead><tr><th>Platform / use case</th><th>Recommended size</th><th>Ratio</th></tr></thead>
+      <tbody>
+        <tr><td>Shopify (general)</td><td>2048 × 2048 px</td><td>1:1</td></tr>
+        <tr><td>WooCommerce</td><td>800 × 800 px minimum, 1200×1200 recommended</td><td>1:1</td></tr>
+        <tr><td>Amazon main image</td><td>2000 × 2000 px (minimum 1000×1000)</td><td>1:1</td></tr>
+        <tr><td>General e-commerce</td><td>1200 × 1200 px to 2000 × 2000 px</td><td>1:1</td></tr>
+        <tr><td>Zoom view (desktop)</td><td>2000 × 2000 px minimum</td><td>1:1</td></tr>
+      </tbody>
+    </table>
+    <p>Square (1:1) images are the industry standard for product photos because they display consistently across all grid layouts, mobile apps, and social media shares without unexpected cropping.</p>
+
+    <h2>Why image resolution matters for zoom</h2>
+    <p>Most modern e-commerce sites offer a zoom feature. For this to work well, your images need to be larger than the display size. If your product image is displayed at 500×500 and zooms to 1000×1000, you need at least 1000×1000 source images. For a smooth 4x zoom, use 2000×2000 px minimum.</p>
+
+    <h2>File format for product images</h2>
+    <ul>
+      <li><strong>White background photos</strong>: JPEG at quality 80–85, white backgrounds compress extremely well in JPEG</li>
+      <li><strong>Images requiring transparency</strong> (e.g., overlay on coloured backgrounds): WebP or PNG</li>
+      <li><strong>Lifestyle/contextual photos</strong>: JPEG at quality 80–85</li>
+    </ul>
+    <p>JPEG is the standard for the vast majority of product photos. At quality 80, a 2000×2000 product image typically weighs 300–600 KB, fast to load and sharp for zoom. WebP reduces this further by 25–35%.</p>
+
+    <h2>Background: white vs lifestyle</h2>
+
+    <h3>White background (required by most marketplaces)</h3>
+    <p>Amazon, eBay, most major marketplaces require the main product image on a pure white background (RGB 255,255,255). White backgrounds:</p>
+    <ul>
+      <li>Look clean and professional in any grid layout</li>
+      <li>Are required for marketplace listings</li>
+      <li>Compress much better in JPEG than complex backgrounds</li>
+      <li>Allow customers to focus entirely on the product</li>
+    </ul>
+
+    <h3>Lifestyle images (contextual)</h3>
+    <p>Secondary images showing the product in use dramatically increase conversion and time on page. A good product listing has: 1 white background main image + 3–6 lifestyle/contextual images + 1–2 detail/texture close-ups.</p>
+
+    <h2>Number of images per product</h2>
+    <p>Research consistently shows that listings with 5–8 images significantly outperform those with 1–2. Provide:</p>
+    <ul>
+      <li>Front view (main image, white background)</li>
+      <li>Back view</li>
+      <li>Side views (left and right for 3D products)</li>
+      <li>Detail shots (texture, materials, key features)</li>
+      <li>Scale reference (in-use, with a person or common object for size)</li>
+      <li>Lifestyle photo (product in natural context)</li>
+    </ul>
+
+    <h2>Image optimization for e-commerce performance</h2>
+    <p>E-commerce sites are typically image-heavy. Performance optimization is critical for SEO and conversion:</p>
+    <ul>
+      <li><strong>Lazy load</strong> all product images except the main image above the fold</li>
+      <li><strong>Serve WebP</strong> with JPEG fallback for all product photos</li>
+      <li><strong>Use <code>srcset</code></strong> for responsive product thumbnails</li>
+      <li><strong>Set explicit width and height</strong> to prevent CLS</li>
+      <li><strong>Compress aggressively</strong>: a white-background product JPEG at quality 80 is indistinguishable from quality 95 at display sizes</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>File size targets:</strong> Aim for under 300 KB per product image at 1000×1000 px display size. For thumbnail grids, under 50 KB per thumbnail. This keeps page weight manageable even for category pages with 20–50 products visible.
+    </div>
+
+    <h2>Alt text for product images</h2>
+    <p>Every product image needs descriptive alt text for SEO and accessibility. Include: product name, colour, key attribute. Example: <code>alt="Blue leather wallet, bifold, 6 card slots"</code>. Avoid generic alt text like "product image 1."</p>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Use 2000×2000 px square JPEG (quality 80) on white backgrounds for marketplace compatibility and zoom quality. Provide 5–8 images per product including front, back, detail, and lifestyle views. Optimize for web with lazy loading and WebP for a fast, high-converting product page.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize Product Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/product-photos-white-background" class="guide-related-card">
+        <strong>White Background Product Photos</strong>
+        <span>How to achieve clean white backgrounds for marketplace images.</span>
+      </a>
+      <a href="/{{ lang }}/guides/shopify-image-sizes" class="guide-related-card">
+        <strong>Shopify Image Optimization</strong>
+        <span>Specific sizes and settings for Shopify stores.</span>
+      </a>
+      <a href="/{{ lang }}/guides/amazon-product-images" class="guide-related-card">
+        <strong>Amazon Product Images</strong>
+        <span>Amazon's image requirements and how to comply.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "E-commerce Product Images: Complete Guide 2026",
+  "description": "Product images drive conversion. Learn the right dimensions, formats, backgrounds, and optimization techniques for e-commerce photos that sell.",
+  "url": "https://imgpact.com/guides/ecommerce-product-images",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

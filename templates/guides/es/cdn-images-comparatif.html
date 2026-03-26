@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Comparativa de CDN de Imágenes 2026: Cloudflare, Cloudinary, Imgix, Fastly | imgpact{% endblock %}
+{% block meta_description %}Compara los principales CDN de imágenes para 2026: Cloudflare Images, Cloudinary, Imgix y Fastly. Precios, características, soporte de formatos y cuál elegir según tu caso de uso.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web">Optimización Web</a>
+    <span>›</span>
+    Comparativa de CDN de Imágenes
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimización Web</div>
+    <h1>Comparativa de CDN de Imágenes 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Un CDN de imágenes hace mucho más que distribuir archivos geográficamente: automatiza la conversión de formatos, el redimensionado bajo demanda y la compresión, sirviendo a cada usuario la imagen óptima para su dispositivo y navegador. En 2026, usar un CDN de imágenes es la forma más rápida de alcanzar buenas puntuaciones en Core Web Vitals sin cambiar tu flujo de trabajo.</p>
+
+    <h2>¿Qué hace un CDN de imágenes?</h2>
+    <ul>
+      <li><strong>Negociación de formato</strong>: sirve AVIF a Chrome/Firefox, WebP a Safari 14+ y JPEG al resto, automáticamente mediante la cabecera Accept</li>
+      <li><strong>Redimensionado bajo demanda</strong>: genera una miniatura de 300×200 a partir de un original de 4000×3000 mediante parámetros de URL, sin necesidad de generar variantes previamente</li>
+      <li><strong>Compresión inteligente</strong>: aplica compresión basada en calidad ajustada para cada formato</li>
+      <li><strong>Caché en el borde</strong>: almacena en caché las imágenes procesadas en servidores perimetrales cercanos a los usuarios, reduciendo la carga del origen y la latencia</li>
+      <li><strong>Transformación diferida</strong>: transforma las imágenes en el momento de la solicitud y almacena el resultado en caché indefinidamente</li>
+    </ul>
+
+    <h2>Cloudflare Images</h2>
+    <p><strong>Ideal para:</strong> equipos que ya usan Cloudflare para DNS/CDN y quieren la configuración más sencilla posible.</p>
+    <ul>
+      <li>Precio fijo: 5 $/mes por 100 000 imágenes almacenadas, 1 $ por cada 100 000 solicitudes de entrega</li>
+      <li>Servicio automático de AVIF y WebP</li>
+      <li>Redimensionado y recorte basados en URL</li>
+      <li>Integrado con Cloudflare Workers para procesamiento avanzado</li>
+      <li>Sin nivel gratuito generoso, los costes comienzan de inmediato</li>
+    </ul>
+
+    <h2>Cloudinary</h2>
+    <p><strong>Ideal para:</strong> gestión de imágenes completa con flujo de trabajo DAM (Digital Asset Management), API de transformación rica y nivel gratuito generoso.</p>
+    <ul>
+      <li>Nivel gratuito: 25 créditos mensuales (aproximadamente 25 000 transformaciones)</li>
+      <li>API de transformación más completa: recorte, detección de rostros, eliminación de fondo, superposiciones, efectos</li>
+      <li>Soporte de AVIF, WebP, JPEG, PNG, GIF y WebM</li>
+      <li>SDKs para todos los frameworks principales</li>
+      <li>Puede volverse costoso a gran escala, controla el uso de créditos</li>
+    </ul>
+
+    <h2>Imgix</h2>
+    <p><strong>Ideal para:</strong> equipos centrados en el desarrollo que necesitan procesamiento de imágenes basado en URL con gran nivel de detalle sin dependencia de un proveedor concreto.</p>
+    <ul>
+      <li>Precio desde 10 $/mes (1 000 imágenes maestras)</li>
+      <li>API de transformación por URL extremadamente potente (más de 100 parámetros)</li>
+      <li>Servicio automático de AVIF y WebP basado en cabeceras Accept</li>
+      <li>Se conecta directamente a S3, GCS, Azure Blob o cualquier URL de origen</li>
+      <li>Sin almacenamiento de imágenes, funciona como proxy</li>
+    </ul>
+
+    <h2>Fastly Image Optimizer</h2>
+    <p><strong>Ideal para:</strong> empresas que ya usan el CDN de Fastly y necesitan optimización de imágenes integrada a escala.</p>
+    <ul>
+      <li>Precios por uso, contratos empresariales</li>
+      <li>Integración profunda con Fastly VCL/Compute@Edge</li>
+      <li>Soporte de AVIF, WebP y JPEG 2000</li>
+      <li>Rendimiento perimetral de primer nivel para sitios de alto tráfico</li>
+      <li>No es práctico para proyectos pequeños, se aplica un gasto mínimo</li>
+    </ul>
+
+    <h2>Tabla comparativa</h2>
+    <table>
+      <thead>
+        <tr><th>CDN</th><th>Nivel gratuito</th><th>AVIF</th><th>Ideal para</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cloudflare Images</td><td>No</td><td>Sí</td><td>Usuarios de Cloudflare</td></tr>
+        <tr><td>Cloudinary</td><td>Sí (25 créditos)</td><td>Sí</td><td>Flujos de trabajo completos</td></tr>
+        <tr><td>Imgix</td><td>No</td><td>Sí</td><td>API para desarrolladores</td></tr>
+        <tr><td>Fastly IO</td><td>No</td><td>Sí</td><td>Empresas</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Alternativa autoalojada: nginx + libvips</h2>
+    <p>Para equipos con experiencia en infraestructura, una solución autoalojada con nginx como proxy y libvips (mediante thumbor o imaginary) para las transformaciones ofrece control total a bajo coste. El inconveniente es la complejidad operativa y la ausencia de una red perimetral global.</p>
+
+    <div class="tip-box">
+      <strong>Recomendación:</strong> Para la mayoría de los proyectos con menos de 50 000 visitantes mensuales, empieza con el nivel gratuito de Cloudinary. Para mayor tráfico o stacks centrados en Cloudflare, Cloudflare Images es la opción más sencilla. Imgix vale la pena para equipos de desarrollo que necesitan la máxima flexibilidad de transformación.
+    </div>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Un CDN de imágenes automatiza la conversión de formatos, el redimensionado responsivo y la compresión, eliminando la necesidad de generar variantes de imagen de antemano. Para la mayoría de los sitios web, cambiar a un CDN de imágenes ofrece la mayor mejora de LCP por hora de trabajo de ingeniería.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimizar Imágenes</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/images-core-web-vitals" class="guide-related-card">
+        <strong>Imágenes y Core Web Vitals</strong>
+        <span>LCP, CLS, INP: cómo las imágenes afectan tu posicionamiento.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Imágenes Responsivas: srcset y sizes</strong>
+        <span>Sirve la imagen correcta a cada tamaño de pantalla.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo Optimizar Imágenes para la Web</strong>
+        <span>La guía completa de optimización de imágenes para 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Comparativa de CDN de Imágenes 2026",
+  "description": "Compara los principales CDN de imágenes para 2026: Cloudflare Images, Cloudinary, Imgix y Fastly. Precios, características, soporte de formatos y cuál elegir según tu caso de uso.",
+  "url": "https://imgpact.com/guides/comparativa-cdn-imagenes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

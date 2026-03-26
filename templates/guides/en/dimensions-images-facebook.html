@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block title %}Facebook Image Dimensions 2026: Cover, Posts, Stories | imgpact{% endblock %}
+{% block meta_description %}Exact Facebook image sizes for 2026: cover photos, feed posts, Stories, profile pictures, event banners. Upload the right dimensions to avoid cropping and blurring.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/social-media-image-sizes-2026">Social Media</a>
+    <span>›</span>
+    Facebook Dimensions
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📱 Social Media</div>
+    <h1>Facebook Image Dimensions 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Facebook is accessed on devices ranging from small phones to large desktop monitors, and its image display dimensions vary accordingly. Using precise dimensions ensures your images look sharp, are not cropped unexpectedly, and survive Facebook's compression with acceptable quality.</p>
+
+    <h2>Facebook cover photo</h2>
+    <table>
+      <thead><tr><th>Surface</th><th>Dimensions</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Page cover photo</td><td>820 × 312 px (desktop) / 640 × 360 px (mobile)</td><td>Use 820×462 for both</td></tr>
+        <tr><td>Profile cover photo</td><td>820 × 312 px</td><td>Safe area differs on mobile</td></tr>
+        <tr><td>Group cover photo</td><td>1640 × 856 px</td><td>Displayed at 820×428 on desktop</td></tr>
+      </tbody>
+    </table>
+    <p>For page and profile cover photos, Facebook crops differently on desktop and mobile. A safe approach: upload at <strong>820 × 462 px</strong> and keep key content in the central 820×312 area. The top and bottom 75 px may be cut on desktop.</p>
+
+    <h2>Facebook feed post images</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Recommended dimensions</th><th>Aspect ratio</th></tr></thead>
+      <tbody>
+        <tr><td>Standard link post image</td><td>1200 × 630 px</td><td>1.91:1</td></tr>
+        <tr><td>Square post</td><td>1080 × 1080 px</td><td>1:1</td></tr>
+        <tr><td>Portrait post</td><td>1080 × 1350 px</td><td>4:5</td></tr>
+        <tr><td>Landscape photo</td><td>1200 × 628 px</td><td>≈1.91:1</td></tr>
+      </tbody>
+    </table>
+    <p>For link posts (when you share a URL), Facebook pulls the Open Graph image. Set your OG image to exactly 1200×630 px for consistent display. The minimum for link previews is 600×315 px, but 1200×630 is displayed at 2x on Retina screens.</p>
+
+    <h2>Profile picture</h2>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Upload dimensions</td><td>170 × 170 px minimum</td></tr>
+        <tr><td>Recommended upload</td><td>400 × 400 px</td></tr>
+        <tr><td>Display on desktop</td><td>170 × 170 px</td></tr>
+        <tr><td>Display in feed</td><td>40 × 40 px</td></tr>
+        <tr><td>Shape</td><td>Circular crop</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Facebook Stories</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Dimensions</th></tr></thead>
+      <tbody>
+        <tr><td>Story image</td><td>1080 × 1920 px (9:16)</td></tr>
+        <tr><td>Story safe zone</td><td>1080 × 1420 px (centre)</td></tr>
+      </tbody>
+    </table>
+    <p>Facebook Stories are displayed full-screen at 9:16. The top and bottom approximately 250 px are overlaid by the profile bar and action buttons, keep important content in the safe zone.</p>
+
+    <h2>Facebook event cover photo</h2>
+    <table>
+      <thead><tr><th>Format</th><th>Dimensions</th></tr></thead>
+      <tbody>
+        <tr><td>Event cover (recommended)</td><td>1920 × 1005 px</td></tr>
+        <tr><td>Event cover (minimum)</td><td>400 × 150 px</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Facebook Ads image sizes</h2>
+    <table>
+      <thead><tr><th>Ad placement</th><th>Recommended size</th></tr></thead>
+      <tbody>
+        <tr><td>Feed single image</td><td>1080 × 1080 px or 1200 × 628 px</td></tr>
+        <tr><td>Stories ad</td><td>1080 × 1920 px</td></tr>
+        <tr><td>Carousel card</td><td>1080 × 1080 px (1:1)</td></tr>
+        <tr><td>Right column</td><td>1200 × 628 px</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Facebook compression tips</h2>
+    <ul>
+      <li>Upload JPEG at quality <strong>80–90</strong> before posting, Facebook re-compresses regardless</li>
+      <li>Use <strong>PNG for graphics with text</strong>, Facebook's JPEG compression blurs text in graphics</li>
+      <li>Use <strong>sRGB colour space</strong> to avoid colour shifts</li>
+      <li>Avoid uploading images larger than the recommended dimensions, Facebook will scale down and apply additional compression</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> The most important Facebook image size to get right is the cover photo (820×462 with a safe area of 820×312) and link post OG image (1200×630). For feed posts, 1080×1080 (square) or 1200×630 (landscape) are the safest choices. Always upload JPEG at 85+ quality in sRGB.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize to Facebook Size</a>
+      <a href="/tools/crop" class="guide-cta-link secondary">Crop to 1200×630</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/social-media-image-sizes-2026" class="guide-related-card">
+        <strong>Social Media Image Sizes 2026</strong>
+        <span>Complete reference for all platforms in one guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/instagram-image-dimensions" class="guide-related-card">
+        <strong>Instagram Image Dimensions</strong>
+        <span>All Instagram formats: feed, Reels, Stories, carousels.</span>
+      </a>
+      <a href="/{{ lang }}/guides/youtube-banner-size" class="guide-related-card">
+        <strong>YouTube Banner Size</strong>
+        <span>Channel art dimensions and the critical safe zone.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Facebook Image Dimensions 2026",
+  "description": "Exact Facebook image sizes for 2026: cover photos, feed posts, Stories, profile pictures, event banners.",
+  "url": "https://imgpact.com/guides/facebook-image-dimensions",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

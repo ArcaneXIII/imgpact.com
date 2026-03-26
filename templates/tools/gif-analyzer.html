@@ -1,0 +1,94 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="{{ url_gif_maker }}">{{ t.breadcrumb_gif_tools }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_gif_analyzer_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="bar-chart-2"></i> {{ t.tool_gif_analyzer_title }}</h1>
+    <p>{{ t.tool_gif_analyzer_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="film"></i></div>
+    <div class="upload-text">{{ t.upload_drop_gif }}</div>
+    <div class="upload-hint">Animated GIF</div>
+    <input type="file" id="file-input" accept="image/gif" style="display:none">
+  </div>
+
+  <div id="tool-controls" class="hidden">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.25rem" id="analysis-layout">
+
+      <!-- Left: info + preview -->
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div class="controls-panel gif-info-card" id="info-panel"></div>
+
+        <div class="controls-panel" style="padding:1rem">
+          <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.5rem">{{ t.label_live_preview }}</div>
+          <img id="gif-preview" style="max-width:100%;border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap">
+            <button class="btn-transform" id="btn-prev" style="min-width:unset;padding:0.4rem 0.65rem"><i data-lucide="skip-back"></i></button>
+            <button class="btn-transform" id="btn-play" style="min-width:unset;padding:0.4rem 0.75rem"><i data-lucide="pause"></i></button>
+            <button class="btn-transform" id="btn-next" style="min-width:unset;padding:0.4rem 0.65rem"><i data-lucide="skip-forward"></i></button>
+            <span id="frame-indicator" style="font-size:0.85rem;font-family:var(--font-mono);color:var(--text-secondary)">Frame 1 / 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: frame table -->
+      <div class="controls-panel" style="padding:1rem;overflow:auto;max-height:680px">
+        <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem">{{ t.label_frame_details }}</div>
+        <table class="frame-table" id="frame-table">
+          <thead>
+            <tr><th>#</th><th>{{ t.label_preview }}</th><th>{{ t.label_delay }}</th></tr>
+          </thead>
+          <tbody id="frame-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/gif-analyzer.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/gif-analyzer/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/gif-analyzer/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/gif-analyzer/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/gif-analyzer/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF Analyzer",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/gif-analyzer",
+    "description": "Analyze GIF frame timing, dimensions, loop count and metadata. Free, no upload required.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",         "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "GIF Tools",    "item": "https://imgpact.com/tools/gif-maker" },
+      { "@type": "ListItem", "position": 3, "name": "GIF Analyzer", "item": "https://imgpact.com/tools/gif-analyzer" }
+    ]
+  }
+]
+</script>
+{% endblock %}

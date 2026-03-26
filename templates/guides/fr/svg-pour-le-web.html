@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}SVG pour le web : guide complet | imgpact{% endblock %}
+{% block meta_description %}Tout savoir sur SVG pour le web : vecteur vs raster, mise à l'échelle infinie, accessibilité, animations CSS, inline vs balise img, optimisation avec SVGO. Guide complet 2026.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/formats-image">Formats d'image</a>
+    <span>›</span>
+    SVG pour le web
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Formats d'image</div>
+    <h1>SVG pour le web : guide complet</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>SVG est le seul format d'image nativement vectoriel du web. Contrairement à JPEG, PNG ou WebP, un fichier SVG ne stocke pas des pixels mais des <strong>instructions géométriques</strong>, tracés, courbes, formes, interprétées par le navigateur à l'affichage. Le résultat est une image nette à n'importe quelle taille, du favicon 16×16 px à l'écran 8K, pour un poids de fichier souvent dérisoire. Son support navigateur est de <strong>100 %</strong> depuis Internet Explorer 9. Voici tout ce qu'il faut savoir pour l'utiliser intelligemment.</p>
+
+    <h2>Vecteur vs raster : la différence fondamentale</h2>
+    <p>Les formats <strong>raster</strong> (JPEG, PNG, WebP, AVIF) stockent l'image sous forme d'une grille de pixels. Agrandir une image raster au-delà de sa résolution native provoque le flou caractéristique de la pixellisation. Chaque doublement de dimensions quadruple le nombre de pixels, et donc le poids mémoire.</p>
+    <p>Le format <strong>SVG (Scalable Vector Graphics)</strong> stocke des descriptions mathématiques : "un cercle de rayon 50 px, rempli de rouge, centré en (100, 100)". Afficher ce cercle en 10 px ou en 1 000 px revient à recalculer la même équation, la qualité est parfaite dans les deux cas, et le fichier ne grossit pas d'un octet.</p>
+    <p>SVG est un format <strong>XML</strong> standardisé par le W3C. Un fichier .svg est du texte lisible, modifiable, versionnable et compressible comme n'importe quel document HTML ou CSS.</p>
+
+    <div class="info-box">
+      <strong>En chiffres :</strong> Un logo vectoriel en SVG peut peser 2 à 5 Ko et s'afficher parfaitement sur un écran Retina 4K. Le même logo exporté en PNG 2× pour les écrans haute densité peut peser 80 à 150 Ko, et il faudrait plusieurs variantes (1×, 2×, 3×) pour couvrir tous les appareils.
+    </div>
+
+    <h2>SVG vs PNG vs JPEG : quand choisir quoi ?</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type de contenu</th>
+          <th>Format recommandé</th>
+          <th>Raison principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logo de marque</td>
+          <td>SVG</td>
+          <td>Netteté à toutes tailles, léger, stylisable</td>
+        </tr>
+        <tr>
+          <td>Icônes d'interface</td>
+          <td>SVG</td>
+          <td>Colorisable via CSS, adaptatif, sprite possible</td>
+        </tr>
+        <tr>
+          <td>Illustrations géométriques</td>
+          <td>SVG</td>
+          <td>Légèreté, animations CSS possibles</td>
+        </tr>
+        <tr>
+          <td>Graphiques et diagrammes</td>
+          <td>SVG</td>
+          <td>Texte indexable, interactif via JavaScript</td>
+        </tr>
+        <tr>
+          <td>Photographies</td>
+          <td>WebP / AVIF / JPEG</td>
+          <td>SVG ne compresse pas les photos efficacement</td>
+        </tr>
+        <tr>
+          <td>Captures d'écran</td>
+          <td>PNG / WebP lossless</td>
+          <td>Trop complexe pour un SVG, texte lisible en PNG</td>
+        </tr>
+        <tr>
+          <td>Illustrations très détaillées</td>
+          <td>PNG / WebP</td>
+          <td>SVG devient lourd au-delà d'une certaine complexité</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Accessibilité : title, desc et aria</h2>
+    <p>Un SVG bien structuré est accessible aux technologies d'assistance (lecteurs d'écran) sans effort supplémentaire. Les deux balises essentielles sont <code>&lt;title&gt;</code> et <code>&lt;desc&gt;</code> :</p>
+    <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+     role="img" aria-labelledby="logoTitle logoDesc"&gt;
+  &lt;title id="logoTitle"&gt;Logo imgpact&lt;/title&gt;
+  &lt;desc id="logoDesc"&gt;Un éclair stylisé symbolisant la rapidité d'optimisation&lt;/desc&gt;
+  &lt;!-- chemins SVG --&gt;
+&lt;/svg&gt;</code></pre>
+    <p>Pour les SVG purement décoratifs (icônes qui accompagnent un libellé textuel), masquez-les aux lecteurs d'écran pour éviter la redondance :</p>
+    <pre><code>&lt;svg aria-hidden="true" focusable="false"&gt;
+  &lt;!-- icône décorative --&gt;
+&lt;/svg&gt;
+&lt;span&gt;Télécharger&lt;/span&gt;</code></pre>
+
+    <div class="tip-box">
+      <strong>Règle des deux cas :</strong> Tout SVG significatif (logo, illustration principale) doit avoir un <code>&lt;title&gt;</code> référencé par <code>aria-labelledby</code>. Tout SVG purement décoratif doit avoir <code>aria-hidden="true"</code>. Ces deux règles couvrent 95 % des situations.
+    </div>
+
+    <h2>Animations SVG : CSS et SMIL</h2>
+    <p>SVG supporte nativement deux types d'animations :</p>
+    <p><strong>Animations CSS</strong> (recommandée) : les éléments SVG répondent aux propriétés CSS <code>transform</code>, <code>opacity</code>, <code>fill</code>, <code>stroke</code>. Vous animez un SVG exactement comme un élément HTML :</p>
+    <pre><code>&lt;style&gt;
+  .spinner {
+    animation: rotate 1s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+&lt;/style&gt;
+&lt;svg viewBox="0 0 24 24"&gt;
+  &lt;circle class="spinner" cx="12" cy="12" r="10"
+          fill="none" stroke="#0066cc" stroke-width="2" /&gt;
+&lt;/svg&gt;</code></pre>
+    <p><strong>SMIL</strong> : animations déclarées directement dans le SVG avec des balises comme <code>&lt;animate&gt;</code>. Utiles pour des SVG autonomes intégrés via une balise <code>&lt;img&gt;</code> (le CSS externe n'y a pas accès), mais moins flexibles que CSS.</p>
+    <p>Les SVG animés remplacent avantageusement les GIFs animés, qui sont souvent 10 à 50 fois plus lourds, pour les loaders, indicateurs de progression et microinteractions.</p>
+
+    <h2>Inline SVG vs balise &lt;img&gt; : quand choisir quoi ?</h2>
+    <p>Il existe deux façons principales d'intégrer un SVG en HTML, avec des cas d'usage distincts :</p>
+
+    <h3>Balise &lt;img src="logo.svg"&gt;</h3>
+    <ul>
+      <li>Simple à implémenter, mis en cache par le navigateur comme n'importe quelle image</li>
+      <li>N'alourdit pas le DOM HTML, n'expose pas le code SVG</li>
+      <li>Impossible de styliser les éléments internes via CSS externe</li>
+      <li>Impossible d'animer les chemins internes via JavaScript</li>
+      <li><strong>Idéal pour :</strong> logos en footer, illustrations d'articles, images SVG statiques</li>
+    </ul>
+
+    <h3>SVG inline (code copié directement dans le HTML)</h3>
+    <ul>
+      <li>Accès complet au DOM SVG : chaque élément est ciblable par CSS ou JS</li>
+      <li>Permet de changer la couleur du logo selon le thème (dark/light mode) avec une variable CSS</li>
+      <li>Permet les animations complexes et interactions pilotées par JavaScript</li>
+      <li>Alourdit le HTML, non cachable séparément, code plus verbeux</li>
+      <li><strong>Idéal pour :</strong> icônes d'interface, logos colorisables selon le contexte, illustrations interactives</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Technique des sprites SVG :</strong> Définissez tous vos icônes une fois dans un bloc <code>&lt;svg style="display:none"&gt;</code> en début de page via des balises <code>&lt;symbol&gt;</code>, puis référencez-les avec <code>&lt;use href="#icon-name"&gt;</code>. Cette approche combine la maintenabilité de l'inline SVG avec la performance d'un seul chargement HTTP.
+    </div>
+
+    <h2>Performance : optimiser les SVG avec SVGO</h2>
+    <p>Les SVG exportés par Illustrator, Figma ou Inkscape contiennent souvent un volume important de métadonnées inutiles : commentaires d'éditeur, IDs auto-générés, attributs redondants, groupes vides, balises <code>&lt;defs&gt;</code> vides. <strong>SVGO</strong> (SVG Optimizer) est l'outil de référence pour nettoyer ces fichiers :</p>
+    <pre><code>npm install -g svgo
+svgo logo.svg --output logo.min.svg</code></pre>
+    <p>Les gains sont souvent spectaculaires : <strong>30 à 60 % de réduction de taille</strong> sans aucune modification visuelle. Quelques règles supplémentaires pour les performances :</p>
+    <ul>
+      <li><strong>Évitez les chemins trop complexes</strong> : une illustration avec 50 000 points de contrôle génère un SVG lourd et un DOM coûteux à rendre. Au-delà d'un certain niveau de détail, un WebP optimisé sera plus léger.</li>
+      <li><strong>Utilisez toujours viewBox, pas width/height fixes</strong> : l'attribut <code>viewBox</code> rend votre SVG naturellement responsive sans CSS supplémentaire.</li>
+      <li><strong>Activez la compression gzip/Brotli</strong> : comme SVG est du texte XML, la compression HTTP réduit encore sa taille de 60 à 80 %. Assurez-vous que votre serveur sert les SVG avec <code>Content-Encoding: gzip</code>.</li>
+      <li><strong>Fusionnez les groupes inutiles</strong> : des couches Figma non fusionnées génèrent des dizaines de balises <code>&lt;g&gt;</code> vides qui alourdissent inutilement le DOM.</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Sécurité importante :</strong> SVG est du XML exécutable, il peut contenir du JavaScript, des références à des ressources externes et des vecteurs d'attaque XSS. N'affichez <em>jamais</em> en inline un SVG uploadé par un utilisateur sans l'avoir assaini au préalable. Utilisez une bibliothèque comme <strong>DOMPurify</strong> avant tout rendu inline de SVG externe.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Besoin de convertir une illustration SVG en PNG ou WebP pour une utilisation spécifique (email, réseau social, plateforme qui n'accepte pas SVG) ? imgpact gère la conversion en quelques secondes, directement dans le navigateur.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/png" class="guide-cta-link">Convertir SVG en PNG</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/formats-image" class="guide-related-card">
+        <strong>Guide complet des formats d'image</strong>
+        <span>JPEG, PNG, WebP, AVIF, SVG : tout comprendre en un seul article.</span>
+      </a>
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG : lequel choisir ?</strong>
+        <span>Comparatif des deux formats raster les plus répandus du web.</span>
+      </a>
+      <a href="/{{ lang }}/guides/format-avif" class="guide-related-card">
+        <strong>Qu'est-ce que le format AVIF ?</strong>
+        <span>Le format nouvelle génération qui compresse 50 % mieux que JPEG.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SVG pour le web : guide complet",
+  "description": "Tout savoir sur SVG pour le web : vecteur vs raster, mise à l'échelle infinie, accessibilité, animations CSS, inline vs balise img, optimisation avec SVGO. Guide complet 2026.",
+  "url": "https://imgpact.com/guides/svg-pour-le-web",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

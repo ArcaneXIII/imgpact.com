@@ -1,0 +1,175 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page" style="max-width:980px">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="{{ url_gif_maker }}">{{ t.breadcrumb_gif_tools }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_gif_editor_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="pencil-ruler"></i> {{ t.tool_gif_editor_title }}</h1>
+    <p>{{ t.tool_gif_editor_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="film"></i></div>
+    <div class="upload-text">{{ t.upload_drop_gif }}</div>
+    <div class="upload-hint">Animated GIF</div>
+    <input type="file" id="file-input" accept="image/gif" style="display:none">
+  </div>
+
+  <div id="tool-controls" class="hidden">
+
+    <!-- GIF info bar -->
+    <div id="gif-info-bar" class="file-info-bar" style="margin-top:0.75rem"></div>
+
+    <!-- Editing toolbar -->
+    <div class="controls-panel" style="padding:1rem;margin-top:0.75rem">
+
+      <!-- Frame ops -->
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;padding-bottom:0.75rem;border-bottom:1px solid var(--border)">
+        <span class="toolbar-label">{{ t.label_frames }}</span>
+        <button class="toolbar-btn" id="btn-select-all">{{ t.btn_select_all }}</button>
+        <button class="toolbar-btn" id="btn-deselect">{{ t.btn_deselect }}</button>
+        <button class="toolbar-btn danger" id="btn-delete-sel"><i data-lucide="trash-2"></i> {{ t.btn_delete_sel }}</button>
+        <button class="toolbar-btn" id="btn-dup-sel">⧉ {{ t.btn_duplicate_sel }}</button>
+        <span style="border-left:1px solid var(--border);height:1.5rem;margin:0 0.25rem"></span>
+        <span class="toolbar-label">{{ t.label_delay }}</span>
+        <input type="number" id="delay-input" value="100" min="20" max="10000"
+          style="width:80px;padding:0.3rem 0.5rem;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem">
+        <span style="font-size:0.8rem;color:var(--text-secondary)">ms</span>
+        <button class="toolbar-btn" id="btn-set-delay">{{ t.btn_set_delay_sel }}</button>
+        <button class="toolbar-btn" id="btn-set-all-delay">{{ t.btn_set_delay_all }}</button>
+      </div>
+
+      <!-- Playback ops -->
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border)">
+        <span class="toolbar-label">{{ t.label_speed }}</span>
+        <button class="toolbar-btn speed-btn" data-speed="0.5">0.5×</button>
+        <button class="toolbar-btn speed-btn active" data-speed="1">1×</button>
+        <button class="toolbar-btn speed-btn" data-speed="1.5">1.5×</button>
+        <button class="toolbar-btn speed-btn" data-speed="2">2×</button>
+        <span style="border-left:1px solid var(--border);height:1.5rem;margin:0 0.25rem"></span>
+        <button class="toolbar-btn" id="btn-reverse">{{ t.btn_reverse_anim }}</button>
+      </div>
+
+      <!-- Transform ops -->
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;padding-top:0.75rem">
+        <span class="toolbar-label">{{ t.label_transform_all }}</span>
+        <button class="toolbar-btn" id="btn-crop-all"><i data-lucide="scissors"></i> {{ t.btn_crop }}</button>
+        <button class="toolbar-btn" id="btn-rot90"><i data-lucide="rotate-cw"></i> 90° CW</button>
+        <button class="toolbar-btn" id="btn-rot270"><i data-lucide="rotate-ccw"></i> 90° CCW</button>
+        <button class="toolbar-btn" id="btn-rot180"><i data-lucide="refresh-cw"></i> 180°</button>
+        <button class="toolbar-btn" id="btn-fliph"><i data-lucide="flip-horizontal"></i> Flip H</button>
+        <button class="toolbar-btn" id="btn-flipv"><i data-lucide="flip-vertical"></i> Flip V</button>
+      </div>
+    </div>
+
+    <!-- Frame timeline -->
+    <div style="margin-top:0.75rem">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.4rem">
+        {{ t.label_frames }} (<span id="frame-count">0</span>), {{ t.label_gif_editor_hint }}
+      </div>
+      <div class="frame-timeline" id="frame-timeline" style="min-height:140px;border:1px solid var(--border);border-radius:var(--radius);padding:0.5rem;background:var(--bg-secondary)"></div>
+    </div>
+
+    <!-- Crop overlay (hidden until triggered) -->
+    <div id="crop-overlay-panel" class="hidden controls-panel" style="margin-top:0.75rem;padding:1rem">
+      <div style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem"><i data-lucide="scissors"></i> {{ t.label_gif_editor_crop_hint }}</div>
+      <div class="canvas-wrap" id="crop-canvas-wrap"><canvas id="crop-canvas"></canvas></div>
+      <div class="control-row" style="margin-top:0.5rem">
+        <div class="control-group"><label>X</label><input type="number" id="ce-x" value="0" min="0" style="width:80px"></div>
+        <div class="control-group"><label>Y</label><input type="number" id="ce-y" value="0" min="0" style="width:80px"></div>
+        <div class="control-group"><label>{{ t.label_width }}</label><input type="number" id="ce-w" value="100" min="1" style="width:80px"></div>
+        <div class="control-group"><label>{{ t.label_height }}</label><input type="number" id="ce-h" value="100" min="1" style="width:80px"></div>
+        <div style="display:flex;gap:0.5rem;align-items:flex-end">
+          <button class="btn-process" id="btn-apply-crop" style="width:auto;padding:0.45rem 1rem;margin:0">{{ t.btn_apply_crop }}</button>
+          <button id="btn-cancel-crop" style="padding:0.45rem 0.75rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-secondary);cursor:pointer">{{ t.btn_cancel }}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview + Export -->
+    <div class="controls-panel" style="margin-top:0.75rem;padding:1rem">
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start">
+
+        <!-- Animated preview -->
+        <div style="flex:0 0 auto">
+          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.4rem">{{ t.label_preview }}</div>
+          <div style="position:relative" id="preview-wrap">
+            <img id="preview-img" style="max-width:320px;max-height:280px;border-radius:var(--radius);border:1px solid var(--border);background:repeating-conic-gradient(#e2e8f0 0% 25%,#fff 0% 50%) 0 0/12px 12px;display:block">
+          </div>
+          <div style="display:flex;align-items:center;gap:0.4rem;margin-top:0.5rem">
+            <button class="toolbar-btn" id="btn-prev-frame"><i data-lucide="skip-back"></i></button>
+            <button class="toolbar-btn" id="btn-play-pause"><i data-lucide="pause"></i></button>
+            <button class="toolbar-btn" id="btn-next-frame"><i data-lucide="skip-forward"></i></button>
+            <span id="frame-indicator" style="font-size:0.82rem;font-family:var(--font-mono);color:var(--text-secondary)">0 / 0</span>
+          </div>
+        </div>
+
+        <!-- Export -->
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem">{{ t.btn_download }}</div>
+          <div class="control-row">
+            <div class="control-group">
+              <label>{{ t.label_loop }}</label>
+              <select id="export-loop">
+                <option value="0">{{ t.label_infinite }}</option>
+                <option value="1">{{ t.label_loop_1x }}</option>
+                <option value="2">{{ t.label_loop_2x }}</option>
+                <option value="3">{{ t.label_loop_3x }}</option>
+                <option value="5">{{ t.label_loop_5x }}</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-process" id="btn-save" style="margin-top:1rem"><i data-lucide="save"></i> {{ t.btn_save_gif }}</button>
+          <div id="export-stats" style="margin-top:0.75rem;font-size:0.82rem;font-family:var(--font-mono);color:var(--text-secondary)"></div>
+          <button class="btn-download hidden" id="btn-download" style="margin-top:0.5rem"><i data-lucide="download"></i> {{ t.btn_download }}</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- #tool-controls -->
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/gif-editor.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/gif-editor/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/gif-editor/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/gif-editor/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/gif-editor/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF Editor",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/gif-editor",
+    "description": "Edit animated GIFs: reorder frames, adjust timing, crop, rotate, flip, reverse, change speed. Free, in-browser.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "GIF Tools",  "item": "https://imgpact.com/tools/gif-maker" },
+      { "@type": "ListItem", "position": 3, "name": "GIF Editor", "item": "https://imgpact.com/tools/gif-editor" }
+    ]
+  }
+]
+</script>
+{% endblock %}

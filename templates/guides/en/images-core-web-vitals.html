@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Images and Core Web Vitals: LCP, CLS, FID Explained | imgpact{% endblock %}
+{% block meta_description %}Images are the top cause of poor Core Web Vitals. Learn how LCP, CLS, and INP are affected by images, and what to fix to improve your Google ranking.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Web Optimization</a>
+    <span>›</span>
+    Images &amp; Core Web Vitals
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Web Optimization</div>
+    <h1>Images and Core Web Vitals: LCP, CLS, INP</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Since 2021, Google has used Core Web Vitals as a ranking signal in search results. Images have a direct and significant impact on all three metrics. Understanding this relationship is essential for any SEO or web performance work.</p>
+
+    <h2>What are Core Web Vitals?</h2>
+    <p>Core Web Vitals are three user experience metrics measured by Google:</p>
+    <ul>
+      <li><strong>LCP (Largest Contentful Paint)</strong>: how long it takes for the largest visible element to render. Usually an image.</li>
+      <li><strong>CLS (Cumulative Layout Shift)</strong>: how much the page layout shifts unexpectedly. Images without dimensions are a major cause.</li>
+      <li><strong>INP (Interaction to Next Paint)</strong>: responsiveness to user interactions. Heavy images can indirectly affect this.</li>
+    </ul>
+
+    <h2>LCP: the most image-affected metric</h2>
+    <p>In 70–80% of pages, the LCP element is an image, typically a hero banner, featured photo, or product image. Google expects LCP to be under <strong>2.5 seconds</strong>. Common image-related LCP problems:</p>
+
+    <h3>1. LCP image is lazy-loaded</h3>
+    <p>The most damaging mistake. Adding <code>loading="lazy"</code> to your hero image delays its discovery and download.</p>
+    <pre><code>&lt;!-- Wrong: delays LCP --&gt;
+&lt;img src="hero.jpg" loading="lazy"&gt;
+
+&lt;!-- Correct: load immediately --&gt;
+&lt;img src="hero.jpg" loading="eager"&gt;</code></pre>
+
+    <h3>2. LCP image is not preloaded</h3>
+    <p>The browser discovers the LCP image only when parsing the HTML. A preload hint makes the browser fetch it earlier:</p>
+    <pre><code>&lt;link rel="preload" as="image" href="hero.avif" type="image/avif"&gt;</code></pre>
+
+    <h3>3. LCP image is too heavy</h3>
+    <p>A hero image weighing 1 MB will always produce a poor LCP on mobile connections. Target: under 200 KB for a full-width hero at 1200px wide, using AVIF or WebP.</p>
+
+    <h3>4. LCP image served without a CDN</h3>
+    <p>Serving images from a single origin server adds latency for distant users. A CDN reduces Time to First Byte (TTFB) for images, directly improving LCP.</p>
+
+    <h2>CLS: images without dimensions</h2>
+    <p>When a browser does not know an image's dimensions before it loads, it cannot reserve space in the layout. The image loads in and pushes content down, that is a layout shift. The fix is simple:</p>
+    <pre><code>&lt;!-- Wrong: no dimensions, causes CLS --&gt;
+&lt;img src="photo.jpg" alt="..."&gt;
+
+&lt;!-- Correct: dimensions prevent layout shift --&gt;
+&lt;img src="photo.jpg" alt="..." width="800" height="600"&gt;</code></pre>
+    <p>You can also use CSS <code>aspect-ratio</code> to achieve the same effect when you cannot hardcode dimensions:</p>
+    <pre><code>img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
+}</code></pre>
+
+    <h2>Measuring image impact on Core Web Vitals</h2>
+    <p>Use these tools to identify which images are hurting your scores:</p>
+    <ul>
+      <li><strong>Google Search Console</strong>: Core Web Vitals report shows pages with poor scores from real user data</li>
+      <li><strong>PageSpeed Insights</strong>: identifies the LCP element, shows "Properly size images" and "Serve images in next-gen formats" opportunities</li>
+      <li><strong>Chrome DevTools → Performance tab</strong>: waterfall view shows when each image is fetched and painted</li>
+      <li><strong>Lighthouse</strong>: built into Chrome DevTools, flags specific image optimization opportunities</li>
+    </ul>
+
+    <h2>Core Web Vitals image checklist</h2>
+    <table>
+      <thead>
+        <tr><th>Issue</th><th>Metric</th><th>Fix</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hero image lazy-loaded</td><td>LCP</td><td>Remove loading="lazy" from LCP image</td></tr>
+        <tr><td>LCP image not preloaded</td><td>LCP</td><td>Add &lt;link rel="preload"&gt;</td></tr>
+        <tr><td>LCP image too large</td><td>LCP</td><td>Compress to &lt;200 KB, use AVIF/WebP</td></tr>
+        <tr><td>No width/height on images</td><td>CLS</td><td>Always add width and height attributes</td></tr>
+        <tr><td>Images served without CDN</td><td>LCP</td><td>Use a CDN for static assets</td></tr>
+        <tr><td>No format negotiation</td><td>LCP</td><td>Serve AVIF/WebP to supported browsers</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Images are the primary lever for improving Core Web Vitals. Fix your LCP image first: remove lazy loading, add a preload hint, compress to under 200 KB with AVIF or WebP, and serve from a CDN. Then fix CLS by adding width and height attributes to every image.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimize Images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convert to WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy Loading Images</strong>
+        <span>When and how to use loading="lazy" without hurting LCP.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Responsive Images: srcset and sizes</strong>
+        <span>Serve the right resolution to every screen.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>How to Optimize Images for the Web</strong>
+        <span>The complete 2026 image optimization guide.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Images and Core Web Vitals: LCP, CLS, INP",
+  "description": "Images are the top cause of poor Core Web Vitals. Learn how LCP, CLS, and INP are affected by images, and what to fix to improve your Google ranking.",
+  "url": "https://imgpact.com/guides/images-core-web-vitals",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

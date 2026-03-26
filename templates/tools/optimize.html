@@ -1,0 +1,95 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_optimize_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="gauge"></i> {{ t.tool_optimize_title }}</h1>
+    <p>{{ t.tool_optimize_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_images }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, unlimited files</div>
+    <input type="file" id="file-input" accept="image/*" multiple style="display:none">
+  </div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <div class="control-row">
+        <div class="control-group" style="flex:1;min-width:200px">
+          <label>{{ t.label_quality }}: <span id="quality-label">80</span></label>
+          <input type="range" id="quality" min="1" max="100" value="80" style="width:100%">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_output_format }}</label>
+          <select id="out-format">
+            <option value="same">{{ t.option_same_as_input }}</option>
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-row">
+        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.875rem">
+          <input type="checkbox" id="strip-meta" checked>
+          {{ t.label_strip_metadata }}
+        </label>
+      </div>
+      <div id="file-queue"></div>
+      <button class="btn-process" id="btn-optimize"><i data-lucide="gauge"></i> {{ t.btn_optimize_all }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div id="summary-stats" class="stats-bar" style="font-size:1rem;margin-bottom:1.25rem"></div>
+    <div id="batch-results" class="batch-results"></div>
+    <button class="btn-download" id="btn-zip" style="margin-top:1.25rem"><i data-lucide="archive"></i> {{ t.btn_download_zip }}</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/optimize.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/optimize/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/optimize/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/optimize/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/optimize/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Optimizer",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/optimize",
+    "description": "Compress PNG, JPG, WebP images without visible quality loss. Unlimited batch processing. Free, runs in your browser.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",            "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Optimize Images", "item": "https://imgpact.com/tools/optimize" }
+    ]
+  }
+]
+</script>
+{% endblock %}

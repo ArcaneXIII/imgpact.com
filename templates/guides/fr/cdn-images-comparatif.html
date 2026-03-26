@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% block title %}CDN images : quel service choisir en 2026 ? | imgpact{% endblock %}
+{% block meta_description %}Comparatif des CDN d'images en 2026 : Cloudflare Images, Cloudinary, ImageKit, imgix, Bunny.net. Tableau des fonctionnalités, prix, cas d'usage et quand vous n'en avez pas besoin.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimiser-images-site-web">Optimisation web</a>
+    <span>›</span>
+    CDN images comparatif
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimisation web</div>
+    <h1>CDN images : quel service choisir en 2026 ?</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Un CDN d'images spécialisé va bien au-delà d'un simple réseau de distribution. Il transforme vos images à la volée, redimensionnement, conversion WebP/AVIF, compression adaptative, selon le navigateur et l'écran de chaque visiteur, depuis des serveurs géographiquement proches. En 2026, l'offre s'est considérablement densifiée. Voici comment choisir le bon service selon votre situation.</p>
+
+    <h2>Qu'est-ce qu'un CDN d'images et pourquoi en avoir un ?</h2>
+    <p>Un CDN (Content Delivery Network) généraliste met en cache vos ressources statiques sur des Points of Presence (PoP) répartis dans le monde, réduisant la latence réseau. Un <strong>CDN d'images spécialisé</strong> ajoute une couche de traitement :</p>
+    <ul>
+      <li><strong>Conversion de format automatique</strong> : détecte le navigateur et sert WebP ou AVIF si supporté, JPEG sinon, sans toucher au code HTML</li>
+      <li><strong>Redimensionnement à la volée</strong> : génère une version 400 px depuis l'original 3000 px via un paramètre d'URL</li>
+      <li><strong>Compression adaptative</strong> : ajuste la qualité selon le contenu détecté (photo vs graphique)</li>
+      <li><strong>Recadrage intelligent</strong> : crop centré sur le sujet principal grâce à la détection de visages ou de points d'intérêt (IA)</li>
+    </ul>
+    <p>Le principe : vous stockez une seule image source haute résolution. Le CDN génère et met en cache les variantes à la demande. Chaque variante n'est calculée qu'une seule fois.</p>
+
+    <div class="info-box">
+      <strong>Impact mesurable :</strong> Des études de cas publiées par Cloudinary et Imgix montrent des gains de 40 à 70 % sur le poids total des images après migration vers un CDN d'images avec conversion automatique WebP/AVIF, et des améliorations LCP de 0,5 à 1,5 secondes sur mobile.
+    </div>
+
+    <h2>Comparatif des 5 principaux services</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Conversion WebP/AVIF auto</th>
+          <th>Resize à la volée</th>
+          <th>Offre gratuite</th>
+          <th>Prix d'entrée</th>
+          <th>Idéal pour</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cloudflare Images</strong></td>
+          <td>Oui</td>
+          <td>Oui (variantes prédéfinies)</td>
+          <td>Non (essai)</td>
+          <td>~5 $/mois</td>
+          <td>Sites déjà sur Cloudflare</td>
+        </tr>
+        <tr>
+          <td><strong>Cloudinary</strong></td>
+          <td>Oui (f_auto)</td>
+          <td>Oui (paramètres URL)</td>
+          <td>Oui (25 GB)</td>
+          <td>89 $/mois</td>
+          <td>Grandes équipes, DAM</td>
+        </tr>
+        <tr>
+          <td><strong>ImageKit</strong></td>
+          <td>Oui</td>
+          <td>Oui</td>
+          <td>Oui (20 GB/mois)</td>
+          <td>49 $/mois</td>
+          <td>Startups, e-commerce</td>
+        </tr>
+        <tr>
+          <td><strong>imgix</strong></td>
+          <td>Oui (fm=webp)</td>
+          <td>Oui (200+ paramètres)</td>
+          <td>Non</td>
+          <td>~100 $/mois</td>
+          <td>Agences, médias</td>
+        </tr>
+        <tr>
+          <td><strong>Bunny.net</strong></td>
+          <td>Oui (via Bunny Optimizer)</td>
+          <td>Oui</td>
+          <td>Non (essai 14j)</td>
+          <td>~10 $/mois</td>
+          <td>Budget limité, faible latence EU</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Présentation détaillée de chaque service</h2>
+
+    <h3>Cloudflare Images</h3>
+    <p>Cloudflare Images est l'option la plus naturelle si votre site est déjà derrière Cloudflare (ce qui est le cas pour des millions de sites). L'intégration est native et la latence bénéficie des plus de 300 PoP du réseau Cloudflare.</p>
+    <ul>
+      <li><strong>Points forts :</strong> intégration sans friction pour les sites Cloudflare, support AVIF et WebP automatique, Workers pour des transformations serverless avancées</li>
+      <li><strong>Limites :</strong> fonctionnalités de transformation moins étendues que Cloudinary ou imgix (pas de détection IA, recadrage limité), gestion des variantes moins flexible</li>
+      <li><strong>Tarif :</strong> 5 $/mois pour 100 000 images stockées + 500 000 livraisons. Au-delà : 1 $ pour 200 000 images stockées supplémentaires.</li>
+    </ul>
+
+    <h3>Cloudinary</h3>
+    <p>Cloudinary est la solution la plus complète du marché : elle combine CDN d'images, DAM (Digital Asset Management) et transformations avancées par IA en une seule plateforme.</p>
+    <ul>
+      <li><strong>Points forts :</strong> intelligence artificielle (recadrage automatique sur le sujet, suppression d'arrière-plan, upscaling), SDK officiels pour tous les langages (PHP, Python, Ruby, Node.js, iOS, Android), intégrations e-commerce nombreuses</li>
+      <li><strong>Limites :</strong> complexité de la plateforme, coûts qui montent rapidement avec le volume, courbe d'apprentissage</li>
+      <li><strong>Tarif :</strong> offre gratuite généreuse (25 GB stockage + 25 GB bande passante/mois), puis à partir de 89 $/mois</li>
+    </ul>
+
+    <h3>ImageKit</h3>
+    <p>ImageKit se positionne comme une alternative plus accessible et plus simple à Cloudinary, avec une offre gratuite substantielle et des prix compétitifs pour les startups et les PME.</p>
+    <ul>
+      <li><strong>Points forts :</strong> offre gratuite réelle (20 GB de bande passante/mois), interface simple, intégrations Next.js, WordPress, Shopify, bon support des formats modernes</li>
+      <li><strong>Limites :</strong> réseau de PoP moins dense que Cloudflare ou Fastly, fonctionnalités IA moins avancées</li>
+      <li><strong>Tarif :</strong> offre gratuite, puis 49 $/mois pour 500 GB/mois</li>
+    </ul>
+
+    <h3>imgix</h3>
+    <p>imgix est le CDN d'images pionnier, fondé en 2012, reconnu pour la richesse de son API de transformation (plus de 200 paramètres documentés) et la qualité de ses algorithmes de rendu.</p>
+    <ul>
+      <li><strong>Points forts :</strong> API de transformation la plus complète du marché, documentation exemplaire, intégration native avec Next.js (<code>next/image</code>), Sanity, Contentful, Prismic</li>
+      <li><strong>Limites :</strong> tarification élevée, peut être surdimensionné pour les petits sites, pas de vraie offre gratuite</li>
+      <li><strong>Tarif :</strong> à partir de ~100 $/mois (bande passante incluse)</li>
+    </ul>
+
+    <h3>Bunny.net</h3>
+    <p>Bunny.net est un CDN généraliste européen qui propose depuis 2022 un optimiseur d'images (<em>Bunny Optimizer</em>) avec conversion WebP/AVIF et redimensionnement. Son positionnement prix est très compétitif, et sa performance en Europe est souvent supérieure aux acteurs américains.</p>
+    <ul>
+      <li><strong>Points forts :</strong> prix très bas (0,005 $ par Go de bande passante), excellente latence en Europe, conformité RGPD avec serveurs EU</li>
+      <li><strong>Limites :</strong> fonctionnalités de transformation plus limitées, pas d'IA, moins d'intégrations</li>
+      <li><strong>Tarif :</strong> CDN à partir de 1 $/mois + Bunny Optimizer à 9,5 $/mois</li>
+    </ul>
+
+    <h2>Quand avez-vous réellement besoin d'un CDN d'images ?</h2>
+    <p>Un CDN d'images devient pertinent dans ces situations :</p>
+    <ul>
+      <li><strong>Audience internationale</strong> : vos visiteurs sont répartis sur plusieurs continents et la latence réseau impacte vos Core Web Vitals</li>
+      <li><strong>Volume important</strong> : au-delà de 10 000 visiteurs/jour, le coût est généralement amorti par les gains de conversion et de SEO</li>
+      <li><strong>Images générées dynamiquement</strong> : e-commerce avec variantes de produits (couleurs, angles), plateformes UGC où les utilisateurs uploadent leurs photos</li>
+      <li><strong>Stack moderne avec images responsives</strong> : Next.js, Nuxt, Astro s'intègrent nativement avec Cloudinary, ImageKit et imgix via leurs plugins officiels</li>
+      <li><strong>Équipe sans compétences images</strong> : la conversion automatique WebP/AVIF supprime tout le travail manuel d'optimisation</li>
+    </ul>
+
+    <h2>Quand vous n'en avez PAS besoin</h2>
+    <p>Pour un site personnel, un blog ou un petit site vitrine avec une audience locale et moins de 1 000 visiteurs/jour, un CDN d'images représente une complexité et un coût injustifiés. La stratégie optimale est alors :</p>
+    <ul>
+      <li>Optimiser les images en amont avec un outil comme imgpact (compression WebP, dimensions correctes)</li>
+      <li>Les servir depuis un hébergeur avec CDN généraliste intégré (Vercel, Netlify, Render)</li>
+      <li>Configurer des en-têtes de cache longs (<code>Cache-Control: max-age=31536000</code>) pour les assets statiques</li>
+    </ul>
+    <p>Cette approche est suffisante pour atteindre des scores LCP corrects sans dépenser 50 à 100 $/mois pour un CDN d'images.</p>
+
+    <div class="warning-box">
+      <strong>Ne sautez pas l'optimisation initiale :</strong> Un CDN distribue vos images rapidement, mais si les fichiers sources pèsent 3 Mo chacun, vous distribuez rapidement de gros fichiers. Optimisez d'abord les images en amont, puis distribuez. Les deux étapes ne se substituent pas.
+    </div>
+
+    <div class="tip-box">
+      <strong>Test de latence :</strong> Avant de choisir un CDN, mesurez la latence réelle avec <a href="https://www.webpagetest.org" rel="noopener">WebPageTest</a> en simulant une connexion depuis les localisations de vos principaux marchés (Paris, New York, São Paulo, Singapour). Les différences entre CDN peuvent être significatives selon la région.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Avant de pousser vos images sur un CDN, optimisez-les en amont : compression WebP, dimensions correctes, suppression des métadonnées. Des images légères coûtent moins cher à stocker et à distribuer sur n'importe quel CDN.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimiser mes images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/optimiser-images-site-web" class="guide-related-card">
+        <strong>Comment optimiser les images pour votre site web</strong>
+        <span>Toutes les techniques d'optimisation des images web en un seul guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy loading des images : le guide complet 2026</strong>
+        <span>Différer le chargement des images hors-viewport pour des pages plus rapides.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images et Core Web Vitals : LCP, CLS et FID</strong>
+        <span>Comment les images impactent vos métriques Google et comment les améliorer.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "CDN images : quel service choisir en 2026 ?",
+  "description": "Comparatif des CDN d'images en 2026 : Cloudflare Images, Cloudinary, ImageKit, imgix, Bunny.net. Tableau des fonctionnalités, prix, cas d'usage et quand vous n'en avez pas besoin.",
+  "url": "https://imgpact.com/guides/cdn-images-comparatif",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

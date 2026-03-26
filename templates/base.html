@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang | default(value="en") }}" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ page_title | default(value="imgpact - Free, Unlimited Image & GIF Tools") }}{% endblock %}</title>
+  <script>(function(){var t=localStorage.getItem('imgpact-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+  <meta name="description" content="{% block meta_description %}{{ meta_description | default(value="Free image, GIF & video tools that run in your browser. No upload, no signup, no limits.") }}{% endblock %}" />
+  <link rel="canonical" href="{{ canonical_url | default(value="https://imgpact.com/") }}" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="{{ canonical_url | default(value="https://imgpact.com/") }}" />
+  <meta property="og:title"       content="{{ og_title | default(value="imgpact. Image & GIF Tools, Free & In Your Browser") }}" />
+  <meta property="og:description" content="{{ og_description | default(value="Compress, convert, resize, crop and edit images & GIFs directly in your browser. No upload, no signup, no limits, 100% free.") }}" />
+  <meta property="og:image"       content="{{ og_image | default(value="https://imgpact.com/static/img/og-image.png") }}" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name"   content="imgpact" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="{{ og_title | default(value='imgpact. Image & GIF Tools, Free & In Your Browser') }}" />
+  <meta name="twitter:description" content="{{ og_description | default(value='Compress, convert, resize, crop and edit images & GIFs directly in your browser. No upload, no signup, no limits, 100% free.') }}" />
+  <meta name="twitter:image"       content="{{ og_image | default(value='https://imgpact.com/static/img/og-image.png') }}" />
+  <meta name="robots"              content="index, follow" />
+  <meta name="theme-color"         content="#111111" />
+  <link rel="icon" type="image/svg+xml" href="/static/img/favicon.svg" />
+  <link rel="alternate" hreflang="en" href="{{ canonical_url | default(value="https://imgpact.com/") }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ canonical_url | default(value="https://imgpact.com/") }}" />
+  <style>:root{color-scheme:dark;--bg-main:#111111;--bg-secondary:#1a1a1a;--bg-card:#1e1e1e;--text-primary:#ececec;--text-secondary:#888888;--text-muted:#555555;--accent:#4d9eff;--accent-hover:#74b4ff;--accent-subtle:rgba(77,158,255,0.09);--accent-ring:rgba(77,158,255,0.25);--border:#2a2a2a;--border-strong:#3a3a3a;--header-bg:rgba(17,17,17,0.9);--shadow-sm:0 1px 3px rgba(0,0,0,0.4);--shadow-md:0 4px 20px rgba(0,0,0,0.5),0 1px 4px rgba(0,0,0,0.3);--success:#3fb950;--error:#f85149;--checker:repeating-conic-gradient(#1e1e1e 0% 25%,#252525 0% 50%) 0 0 / 14px 14px;--radius:8px;--radius-sm:5px;--header-height:58px;--sidebar-width:220px;--font-mono:"JetBrains Mono","Fira Mono","Consolas",monospace}[data-theme="light"]{color-scheme:light;--bg-main:#f9f9f9;--bg-secondary:#f2f2f2;--bg-card:#ffffff;--text-primary:#111111;--text-secondary:#666666;--text-muted:#aaaaaa;--accent:#0070f3;--accent-hover:#005ed0;--accent-subtle:rgba(0,112,243,0.07);--accent-ring:rgba(0,112,243,0.22);--border:#e5e5e5;--border-strong:#d0d0d0;--header-bg:rgba(249,249,249,0.92);--shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 16px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.05);--success:#16a34a;--error:#dc2626;--checker:repeating-conic-gradient(#ebebeb 0% 25%,#fff 0% 50%) 0 0 / 14px 14px}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;color:var(--text-primary);background:var(--bg-main);min-height:100vh;display:flex;flex-direction:column;transition:background 0.2s,color 0.2s}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%;display:block}.site-header{position:sticky;top:0;z-index:100;height:var(--header-height);background:var(--header-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}.header-inner{max-width:1400px;margin:0 auto;padding:0 1.25rem;height:100%;display:flex;align-items:center;gap:2rem}.logo{font-size:1.25rem;font-weight:700;color:var(--text-primary);letter-spacing:-0.03em;text-decoration:none;flex-shrink:0}.logo .logo-accent{color:var(--accent)}.logo:hover{text-decoration:none;opacity:0.75}.main-nav{display:flex;align-items:center;gap:0.25rem;margin-left:auto}.main-nav a{color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.35rem 0.7rem;border-radius:var(--radius-sm);transition:color 0.15s,background 0.15s;text-decoration:none}.main-nav a:hover{color:var(--text-primary);background:var(--accent-subtle);text-decoration:none}.theme-toggle{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-secondary);cursor:pointer;font-size:1rem;flex-shrink:0;transition:background 0.15s,border-color 0.15s;margin-left:0.5rem}.theme-toggle:hover{background:var(--accent-subtle);border-color:var(--accent)}.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:0.4rem;margin-left:auto}.hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:transform 0.2s,opacity 0.2s}.page-shell{display:flex;flex:1;max-width:1400px;width:100%;margin:0 auto;padding:0 1.25rem;gap:1.5rem;align-items:flex-start}.sidebar{width:var(--sidebar-width);flex-shrink:0;display:flex;flex-direction:column;gap:0;padding:1rem 0}.sidebar-nav{display:flex;flex-direction:column;gap:0}.nav-group{margin-bottom:1.25rem}.nav-group-title{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-muted);padding:0 0.75rem 0.4rem;display:flex;align-items:center;gap:0.4rem}.nav-group-title i{width:12px;height:12px;flex-shrink:0;color:var(--accent)}.nav-link{display:block;padding:0.35rem 0.75rem;font-size:0.875rem;color:var(--text-secondary);border-radius:var(--radius);text-decoration:none;transition:color 0.15s,background 0.15s;line-height:1.5}.nav-link:hover{color:var(--text-primary);background:var(--bg-secondary);text-decoration:none}.nav-link.active{color:var(--accent);background:var(--accent-subtle);border-left:2px solid var(--accent);padding-left:calc(0.75rem - 2px);font-weight:500}.main-content{flex:1;min-width:0;padding:1.5rem 0}.hero{text-align:center;padding:3rem 1rem 2.5rem}.hero-title{font-size:clamp(2.5rem,6vw,3.8rem);font-weight:800;color:var(--text-primary);letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem}.hero-title-accent{color:var(--accent)}.hero-subtitle{font-size:clamp(1rem,2vw,1.15rem);color:var(--text-secondary);max-width:580px;margin:0 auto;line-height:1.65}.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;margin-top:1.5rem}.hero-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.75rem;border-radius:999px;font-size:0.8rem;font-weight:500;background:var(--accent-subtle);color:var(--accent);border:1px solid var(--accent-ring);white-space:nowrap}.hero-badge i{width:13px;height:13px;flex-shrink:0}.hero-stats{display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)}.hero-stats span{display:inline-flex;align-items:center;gap:0.35rem}.hero-stats i{width:14px;height:14px;flex-shrink:0}.hero-stats strong{color:var(--text);font-weight:600}.hero-stats-sep{color:var(--text-muted);opacity:0.5}.stats-section{max-width:800px;margin:0 auto 3rem;padding:0 1rem}.stats-totals{display:flex;gap:1.5rem;justify-content:center;margin-bottom:2.5rem}.stats-total-card{display:flex;flex-direction:column;align-items:center;gap:0.4rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2.5rem;min-width:160px}.stats-total-card i{color:var(--accent);width:28px;height:28px}.stats-total-number{font-size:2rem;font-weight:700;color:var(--text)}.stats-total-label{font-size:0.85rem;color:var(--text-muted);text-align:center}.stats-table-wrapper{overflow-x:auto}.stats-table{width:100%;border-collapse:collapse;font-size:0.9rem}.stats-table th,.stats-table td{padding:0.65rem 1rem;border-bottom:1px solid var(--border);text-align:left}.stats-table th{color:var(--text-muted);font-weight:600;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}.stats-table tbody tr:hover{background:var(--surface)}.stats-col-num{text-align:right !important;font-variant-numeric:tabular-nums}.stats-empty{text-align:center;color:var(--text-muted);padding:2rem}.page-hero{text-align:center;padding:2.5rem 1rem 1.5rem}.page-hero h1{font-size:2rem;font-weight:700;margin-bottom:0.5rem}.page-hero-subtitle{color:var(--text-muted);font-size:1rem}.stats-group-header td{padding:0.9rem 1rem 0.5rem;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;border-bottom:none;display:flex;align-items:center;gap:0.45rem}.stats-group-header i{width:14px;height:14px;flex-shrink:0}.stats-tool-name{display:flex;align-items:center;gap:0.6rem}.stats-tool-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;flex-shrink:0}.stats-tool-icon i{width:14px;height:14px}.stats-row--convert:hover{background:var(--cat-convert-bg)}.stats-row--image:hover{background:var(--cat-image-bg)}.stats-row--gif:hover{background:var(--cat-gif-bg)}.tool-grid-section{display:flex;flex-direction:column;gap:2.5rem;padding-bottom:3rem}.tool-category{}.category-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem}.category-title i{width:14px;height:14px;flex-shrink:0;color:var(--accent)}.tool-category--convert .category-title{color:#4d9eff;border-bottom-color:#4d9eff33}.tool-category--convert .category-title i{color:#4d9eff}.tool-category--image .category-title{color:#38bdf8;border-bottom-color:#38bdf833}.tool-category--image .category-title i{color:#38bdf8}.tool-category--gif .category-title{color:#818cf8;border-bottom-color:#818cf833}.tool-category--gif .category-title i{color:#818cf8}.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.tool-card{display:flex;flex-direction:column;gap:0.35rem;padding:1rem 1rem 0.9rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-left:2px solid transparent;border-radius:var(--radius);box-shadow:var(--shadow-sm);text-decoration:none;transition:border-color 0.15s,background 0.15s;color:inherit}.tool-card:hover{border-left-color:var(--accent);border-color:var(--border-strong);background:var(--bg-secondary);text-decoration:none;box-shadow:0 0 0 1px var(--accent-ring)}.tool-icon{display:flex;align-items:center;color:color-mix(in srgb,var(--accent) 45%,var(--text-muted));margin-bottom:0.35rem;transition:color 0.15s}.tool-icon i{width:16px;height:16px;flex-shrink:0}.tool-card:hover .tool-icon{color:var(--accent)}.tool-name{font-size:0.9rem;font-weight:600;color:var(--text-primary)}.tool-desc{font-size:0.82rem;color:var(--text-secondary);line-height:1.45}.tool-coming-soon{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;gap:1rem}.coming-soon-icon{font-size:3.5rem;line-height:1}.tool-page-title{font-size:2rem;font-weight:700;color:var(--text-primary)}.coming-soon-text{font-size:1.05rem;color:var(--text-secondary)}.btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.25rem;border-radius:var(--radius);font-size:0.9rem;font-weight:500;cursor:pointer;text-decoration:none;transition:background 0.15s,transform 0.1s;border:none}.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover);text-decoration:none;color:#fff;transform:translateY(-1px)}.site-footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:1.25rem 1.25rem}.footer-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-size:0.85rem;color:var(--text-secondary);flex-wrap:wrap}.footer-nav{display:flex;gap:1.25rem}.footer-nav a{color:var(--text-secondary);font-size:0.85rem}.footer-nav a:hover{color:var(--accent)}.mono{font-family:var(--font-mono);font-size:0.875em}@media (max-width:1023px){.sidebar{position:fixed;top:var(--header-height);left:-100%;width:280px;height:calc(100vh - var(--header-height));background:var(--bg-main);border-right:1px solid var(--border);z-index:90;overflow-y:auto;padding:1rem;transition:left 0.25s ease;box-shadow:none;backdrop-filter:blur(16px)}.sidebar.open{left:0;box-shadow:4px 0 20px rgba(0,0,0,0.1)}.page-shell{display:block;padding:0 1rem}.main-content{padding:1.25rem 0}.hamburger{display:flex}.main-nav{display:none}.theme-toggle{margin-left:auto}.tool-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:600px){.tool-grid{grid-template-columns:1fr}.hero{padding:2rem 0.5rem 1.5rem}.footer-inner{flex-direction:column;text-align:center}.footer-nav{justify-content:center;flex-wrap:wrap;gap:0.75rem}}.sidebar-overlay{display:none;position:fixed;inset:0;top:var(--header-height);background:rgba(0,0,0,0.35);z-index:80}.sidebar-overlay.active{display:block}.tool-page{max-width:900px;margin:0 auto}.tool-header{margin-bottom:1.5rem}.tool-header h1{font-size:1.75rem;font-weight:700;margin-bottom:0.25rem}.tool-header p{color:var(--text-secondary)}.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:var(--bg-secondary);user-select:none}.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-subtle)}.upload-icon{}.upload-text{font-size:1rem;color:var(--text-secondary)}.upload-hint{font-size:0.8rem;color:var(--text-secondary);margin-top:0.25rem;opacity:0.7}.file-info-bar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem 1rem;margin-top:0.75rem;font-size:0.85rem}.file-info-bar .fi-name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}.file-info-bar .fi-meta{color:var(--text-secondary);font-family:var(--font-mono);font-size:0.8rem}</style>
+  <link rel="preload" href="/static/css/style-extra.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/static/css/style.css" /></noscript>
+  <link rel="preload" href="/static/css/consent.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/static/css/consent.css" /></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/{{ lang | default(value="en") }}/" class="logo">img<span class="logo-accent">pact</span></a>
+
+      <!-- Search -->
+      <div class="nav-search" id="nav-search">
+        <i data-lucide="search" class="nav-search-icon"></i>
+        <input type="search" id="nav-search-input" class="nav-search-input" placeholder="{{ t.nav_search_ph | default(value="Search tools…") }}" autocomplete="off" spellcheck="false" />
+        <kbd class="nav-search-kbd">⌘K</kbd>
+        <div class="nav-search-dropdown" id="nav-search-dropdown" hidden></div>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="main-nav">
+        <a href="{{ url_convert_webp }}">{{ t.nav_convert | default(value="Convert") }}</a>
+        <a href="{{ url_crop }}">{{ t.nav_crop | default(value="Crop") }}</a>
+        <a href="{{ url_resize }}">{{ t.nav_resize | default(value="Resize") }}</a>
+        <a href="{{ url_optimize }}">{{ t.nav_optimize | default(value="Optimize") }}</a>
+        <a href="{{ url_effects }}">{{ t.nav_effects | default(value="Effects") }}</a>
+        <a href="{{ url_add_text }}">{{ t.nav_add_text | default(value="Add Text") }}</a>
+        <a href="{{ url_gif_maker }}">{{ t.nav_gif_maker | default(value="GIF Maker") }}</a>
+        <a href="{{ url_video_to_gif }}">{{ t.nav_video_to_gif | default(value="Video to GIF") }}</a>
+        <a href="{{ url_guides }}">{{ t.nav_guides | default(value="Guides") }}</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+        <span class="theme-icon"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+
+        <div class="nav-group nav-group--convert">
+          <h3 class="nav-group-title"><i data-lucide="arrow-right-left"></i> {{ t.sidebar_convert | default(value="Convert") }}</h3>
+          <a href="{{ url_convert_png }}"  class="nav-link {% if active_tool == 'convert-png' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> PNG {{ t.label_converter }}</a>
+          <a href="{{ url_convert_jpg }}"  class="nav-link {% if active_tool == 'convert-jpg' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> JPG {{ t.label_converter }}</a>
+          <a href="{{ url_convert_webp }}" class="nav-link {% if active_tool == 'convert-webp' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> WebP {{ t.label_converter }}</a>
+          <a href="{{ url_convert_gif }}"  class="nav-link {% if active_tool == 'convert-gif' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> GIF {{ t.label_converter }}</a>
+          <a href="{{ url_convert_svg }}"  class="nav-link {% if active_tool == 'convert-svg' %}active{% endif %}"><i data-lucide="pen-tool"></i> SVG {{ t.label_converter }}</a>
+          <a href="{{ url_convert_avif }}" class="nav-link {% if active_tool == 'convert-avif' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> AVIF {{ t.label_converter }}</a>
+          <a href="{{ url_convert_heic }}" class="nav-link {% if active_tool == 'convert-heic' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> HEIC {{ t.label_converter }}</a>
+          <a href="{{ url_convert_tiff }}" class="nav-link {% if active_tool == 'convert-tiff' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> TIFF {{ t.label_converter }}</a>
+          <a href="{{ url_convert_bmp }}"  class="nav-link {% if active_tool == 'convert-bmp' %}active{% endif %}"><i data-lucide="arrow-right-left"></i> BMP {{ t.label_converter }}</a>
+        </div>
+
+        <div class="nav-group nav-group--image">
+          <h3 class="nav-group-title"><i data-lucide="image"></i> {{ t.sidebar_image | default(value="Image Tools") }}</h3>
+          <a href="{{ url_crop }}"      class="nav-link {% if active_tool == 'crop' %}active{% endif %}"><i data-lucide="crop"></i> {{ t.nav_crop | default(value="Crop") }}</a>
+          <a href="{{ url_resize }}"    class="nav-link {% if active_tool == 'resize' %}active{% endif %}"><i data-lucide="scaling"></i> {{ t.nav_resize | default(value="Resize") }}</a>
+          <a href="{{ url_optimize }}"  class="nav-link {% if active_tool == 'optimize' %}active{% endif %}"><i data-lucide="gauge"></i> {{ t.nav_optimize | default(value="Optimize") }}</a>
+          <a href="{{ url_effects }}"   class="nav-link {% if active_tool == 'effects' %}active{% endif %}"><i data-lucide="wand-sparkles"></i> {{ t.nav_effects | default(value="Effects") }}</a>
+          <a href="{{ url_add_text }}"  class="nav-link {% if active_tool == 'add-text' %}active{% endif %}"><i data-lucide="type"></i> {{ t.nav_add_text | default(value="Add Text") }}</a>
+          <a href="{{ url_transform }}" class="nav-link {% if active_tool == 'transform' %}active{% endif %}"><i data-lucide="rotate-cw"></i> {{ t.tool_transform_title }}</a>
+        </div>
+
+        <div class="nav-group nav-group--gif">
+          <h3 class="nav-group-title"><i data-lucide="film"></i> {{ t.sidebar_gif | default(value="GIF Tools") }}</h3>
+          <a href="{{ url_gif_maker }}"    class="nav-link {% if active_tool == 'gif-maker' %}active{% endif %}"><i data-lucide="clapperboard"></i> {{ t.nav_gif_maker | default(value="GIF Maker") }}</a>
+          <a href="{{ url_gif_editor }}"   class="nav-link {% if active_tool == 'gif-editor' %}active{% endif %}"><i data-lucide="sliders-horizontal"></i> {{ t.tool_gif_editor_title }}</a>
+          <a href="{{ url_gif_split }}"    class="nav-link {% if active_tool == 'gif-split' %}active{% endif %}"><i data-lucide="scissors"></i> {{ t.tool_gif_split_title }}</a>
+          <a href="{{ url_gif_analyzer }}" class="nav-link {% if active_tool == 'gif-analyzer' %}active{% endif %}"><i data-lucide="bar-chart-2"></i> {{ t.tool_gif_analyzer_title }}</a>
+          <a href="{{ url_video_to_gif }}" class="nav-link {% if active_tool == 'video-to-gif' %}active{% endif %}"><i data-lucide="video"></i> {{ t.nav_video_to_gif | default(value="Video to GIF") }}</a>
+          <a href="{{ url_gif_to_mp4 }}"   class="nav-link {% if active_tool == 'gif-to-mp4' %}active{% endif %}"><i data-lucide="file-video"></i> {{ t.tool_gif_to_mp4_title }}</a>
+          <a href="{{ url_gif_to_webm }}"  class="nav-link {% if active_tool == 'gif-to-webm' %}active{% endif %}"><i data-lucide="monitor-play"></i> {{ t.tool_gif_to_webm_title }}</a>
+          <a href="{{ url_gif_to_mov }}"   class="nav-link {% if active_tool == 'gif-to-mov' %}active{% endif %}"><i data-lucide="film"></i> {{ t.tool_gif_to_mov_title }}</a>
+        </div>
+
+      </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-col footer-brand">
+        <a href="/" class="footer-logo">img<span class="logo-accent">pact</span></a>
+        <p class="footer-tagline">{{ t.footer_tagline | default(value="Free browser-based image tools.\nNo upload. No signup. No limits.") }}</p>
+        <div class="footer-badges">
+          <span class="footer-badge"><i data-lucide="shield-check"></i> {{ t.footer_private | default(value="100% private") }}</span>
+          <span class="footer-badge"><i data-lucide="zap"></i> {{ t.footer_browser | default(value="Runs in browser") }}</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ t.footer_popular_tools | default(value="Popular Tools") }}</h4>
+        <nav class="footer-links">
+          <a href="{{ url_convert_webp }}">WebP {{ t.label_converter }}</a>
+          <a href="{{ url_convert_png }}">PNG {{ t.label_converter }}</a>
+          <a href="{{ url_crop }}">{{ t.nav_crop | default(value="Crop") }}</a>
+          <a href="{{ url_resize }}">{{ t.nav_resize | default(value="Resize") }}</a>
+          <a href="{{ url_optimize }}">{{ t.nav_optimize | default(value="Optimize") }}</a>
+          <a href="{{ url_effects }}">{{ t.nav_effects | default(value="Effects") }}</a>
+          <a href="{{ url_gif_maker }}">{{ t.nav_gif_maker | default(value="GIF Maker") }}</a>
+          <a href="{{ url_video_to_gif }}">{{ t.nav_video_to_gif | default(value="Video to GIF") }}</a>
+        </nav>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ t.footer_more_tools | default(value="More Tools") }}</h4>
+        <nav class="footer-links">
+          <a href="{{ url_convert_jpg }}">JPG {{ t.label_converter }}</a>
+          <a href="{{ url_convert_gif }}">GIF {{ t.label_converter }}</a>
+          <a href="{{ url_convert_svg }}">SVG {{ t.label_converter }}</a>
+          <a href="{{ url_add_text }}">{{ t.nav_add_text | default(value="Add Text") }}</a>
+          <a href="{{ url_transform }}">{{ t.tool_transform_title }}</a>
+          <a href="{{ url_gif_editor }}">{{ t.tool_gif_editor_title }}</a>
+          <a href="{{ url_gif_split }}">{{ t.tool_gif_split_title }}</a>
+          <a href="{{ url_gif_analyzer }}">{{ t.tool_gif_analyzer_title }}</a>
+        </nav>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ t.footer_help | default(value="Help") }}</h4>
+        <nav class="footer-links">
+          <a href="/{{ lang }}/help">{{ t.footer_faq }}</a>
+          <a href="/{{ lang }}/about">{{ t.footer_about }}</a>
+          <a href="/{{ lang }}/privacy">{{ t.footer_privacy_policy }}</a>
+          <a href="/{{ lang }}/cookies">{{ t.footer_cookie_policy }}</a>
+          <a href="/{{ lang }}/terms">{{ t.footer_terms_service }}</a>
+          <a href="{{ url_guides }}">{{ t.nav_guides | default(value="Guides") }}</a>
+          <a href="/{{ lang }}/stats">{{ t.footer_stats | default(value="Statistics") }}</a>
+        </nav>
+
+        <div class="footer-search">
+          <i data-lucide="search"></i>
+          <input type="search" id="footer-search-input" placeholder="{{ t.nav_search_ph | default(value="Search tools…") }}" autocomplete="off" />
+        </div>
+        <div class="footer-search-results" id="footer-search-results"></div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>{{ t.footer_copyright | default(value="© 2026 imgpact. All image processing runs locally in your browser.") }}</span>
+
+      <div class="footer-lang">
+        <i data-lucide="globe" class="footer-lang-icon"></i>
+        <button class="footer-lang-btn{% if t.lang_code == "en" %} active{% endif %}" data-lang="en">🇬🇧 EN</button>
+        <button class="footer-lang-btn{% if t.lang_code == "fr" %} active{% endif %}" data-lang="fr">🇫🇷 FR</button>
+        <button class="footer-lang-btn{% if t.lang_code == "es" %} active{% endif %}" data-lang="es">🇪🇸 ES</button>
+        <button class="footer-lang-btn{% if t.lang_code == "ru" %} active{% endif %}" data-lang="ru">🇷🇺 RU</button>
+      </div>
+
+      <nav class="footer-bottom-nav">
+        <a href="/{{ lang }}/privacy">{{ t.footer_privacy_short }}</a>
+        <a href="/{{ lang }}/cookies">{{ t.footer_cookies_short }}</a>
+        <a href="/{{ lang }}/terms">{{ t.footer_terms_short }}</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>window.IMGPACT_LANG = "{{ lang }}";</script>
+  {% if tool_urls_json %}<script>window.IMGPACT_TOOL_URLS = {{ tool_urls_json | safe }};</script>{% endif %}
+  <script src="/static/js/app.js" defer></script>
+  <script src="/static/js/consent.js" defer></script>
+  <script src="/static/js/stats.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script>document.addEventListener('DOMContentLoaded',function(){if(window.lucide)lucide.createIcons();});</script>
+
+  <!-- Language switcher logic -->
+  <script>
+  document.querySelectorAll('.footer-lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var newLang = btn.dataset.lang;
+      document.cookie = 'imgpact-lang=' + newLang + ';path=/;max-age=31536000;SameSite=Lax';
+      // If we know the correct URL for this tool in the target language, use it
+      if (window.IMGPACT_TOOL_URLS && window.IMGPACT_TOOL_URLS[newLang]) {
+        window.location.href = window.IMGPACT_TOOL_URLS[newLang];
+      } else {
+        // Non-tool page: swap lang prefix if present, else go to /{newLang}/
+        var m = window.location.pathname.match(/^\/(en|fr|es|ru)(\/.*)?$/);
+        window.location.href = '/' + newLang + (m ? (m[2] || '/') : '/');
+      }
+    });
+  });
+  </script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"imgpact","url":"https://imgpact.com","description":"Free browser-based image, GIF, and video tools. No upload limits, no signup. Everything runs in your browser.","logo":{"@type":"ImageObject","url":"https://imgpact.com/static/img/og-image.png"}}
+  </script>
+  {% block structured_data %}{% endblock %}
+</body>
+</html>

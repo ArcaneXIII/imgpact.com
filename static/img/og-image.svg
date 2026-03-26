@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#111111"/>
+
+  <!-- Subtle grid texture -->
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1e1e1e" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Blue glow behind logo -->
+  <ellipse cx="600" cy="280" rx="340" ry="120" fill="#4d9eff" opacity="0.07"/>
+
+  <!-- Logo: imgpact -->
+  <text x="600" y="310"
+        font-family="Inter,system-ui,-apple-system,sans-serif"
+        font-size="120" font-weight="800" letter-spacing="-4"
+        text-anchor="middle" dominant-baseline="central"
+        fill="#ffffff">img<tspan fill="#4d9eff">pact</tspan></text>
+
+  <!-- Tagline -->
+  <text x="600" y="410"
+        font-family="Inter,system-ui,-apple-system,sans-serif"
+        font-size="28" font-weight="400" letter-spacing="0.5"
+        text-anchor="middle" dominant-baseline="central"
+        fill="#888888">Free browser-based image &amp; GIF tools — no upload, no signup</text>
+
+  <!-- Bottom accent line -->
+  <rect x="540" y="490" width="120" height="3" rx="2" fill="#4d9eff" opacity="0.6"/>
+</svg>

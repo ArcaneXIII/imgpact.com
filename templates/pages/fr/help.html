@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Aide & questions fréquentes, imgpact{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>Aide & questions fréquentes</h1>
+    <p class="info-lead">Réponses aux questions les plus courantes sur imgpact.</p>
+  </div>
+  <div class="info-body">
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Y a-t-il des limites de taille ou de quantité de fichiers ?</summary>
+        <p>Non. imgpact traite les fichiers entièrement dans votre navigateur, il n'y a aucune limite côté serveur. La seule limite pratique est la RAM disponible sur votre appareil. Un ordinateur moderne gère sans problème des fichiers de plusieurs centaines de mégaoctets.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Mes images sont-elles envoyées sur un serveur ?</summary>
+        <p>Jamais. Tout le traitement s'effectue localement dans votre navigateur via WebAssembly. Vos fichiers ne quittent jamais votre appareil.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Quels formats d'image sont pris en charge ?</summary>
+        <p>imgpact prend en charge PNG, JPG/JPEG, WebP, GIF, BMP, ICO, AVIF, TIFF et SVG. La disponibilité des formats varie selon l'outil.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Pourquoi la première opération est-elle plus lente ?</summary>
+        <p>Le moteur WebAssembly (~2 Mo) est chargé lors de la première utilisation, puis mis en cache par votre navigateur. Les opérations suivantes sont instantanées.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Comment convertir plusieurs images à la fois ?</summary>
+        <p>Sur les pages de conversion, déposez ou sélectionnez simplement plusieurs fichiers. Ils seront tous traités et disponibles en téléchargement individuel ou sous forme d'archive ZIP.</p>
+      </details>
+      <details class="faq-item">
+        <summary>imgpact est-il gratuit ?</summary>
+        <p>Oui, tous les outils sont gratuits. Le site est financé par des publicités discrètes.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Quels navigateurs sont pris en charge ?</summary>
+        <p>Tout navigateur moderne prenant en charge WebAssembly : Chrome 88+, Firefox 89+, Safari 15.2+ et Edge 88+. Internet Explorer n'est pas pris en charge.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Puis-je utiliser imgpact hors ligne ?</summary>
+        <p>Une fois le moteur WASM mis en cache par votre navigateur, la plupart des outils fonctionnent sans connexion internet. Un mode hors ligne PWA est prévu dans la feuille de route.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Pourquoi la conversion vers HEIC n'est-elle pas disponible ?</summary>
+        <p>HEIC utilise le codec HEVC (H.265), soumis à des brevets. Il n'existe pas d'encodeur WebAssembly open-source pour ce format, et les navigateurs ne supportent pas HEIC en sortie Canvas. imgpact étant un outil 100% navigateur, il ne peut pas s'appuyer sur des codecs sous licence installés côté serveur. Vous pouvez convertir VOS fichiers HEIC vers des formats ouverts (JPG, PNG, WebP...). Pour produire des fichiers HEIC, utilisez l'app Photos sur iPhone ou Mac, qui encode nativement en HEIC.</p>
+      </details>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Y a-t-il des limites de taille ou de quantité de fichiers ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non. imgpact traite les fichiers entièrement dans votre navigateur, il n'y a aucune limite côté serveur. La seule limite pratique est la RAM disponible sur votre appareil. Un ordinateur moderne gère sans problème des fichiers de plusieurs centaines de mégaoctets." }
+    },
+    {
+      "@type": "Question",
+      "name": "Mes images sont-elles envoyées sur un serveur ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Jamais. Tout le traitement s'effectue localement dans votre navigateur via WebAssembly. Vos fichiers ne quittent jamais votre appareil." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels formats d'image sont pris en charge ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "imgpact prend en charge PNG, JPG/JPEG, WebP, GIF, BMP, ICO, AVIF, TIFF et SVG. La disponibilité des formats varie selon l'outil." }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi la première opération est-elle plus lente ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le moteur WebAssembly (~2 Mo) est chargé lors de la première utilisation, puis mis en cache par votre navigateur. Les opérations suivantes sont instantanées." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment convertir plusieurs images à la fois ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sur les pages de conversion, déposez ou sélectionnez simplement plusieurs fichiers. Ils seront tous traités et disponibles en téléchargement individuel ou sous forme d'archive ZIP." }
+    },
+    {
+      "@type": "Question",
+      "name": "imgpact est-il gratuit ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui, tous les outils sont gratuits. Le site est financé par des publicités discrètes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels navigateurs sont pris en charge ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tout navigateur moderne prenant en charge WebAssembly : Chrome 88+, Firefox 89+, Safari 15.2+ et Edge 88+. Internet Explorer n'est pas pris en charge." }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je utiliser imgpact hors ligne ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Une fois le moteur WASM mis en cache par votre navigateur, la plupart des outils fonctionnent sans connexion internet. Un mode hors ligne PWA est prévu dans la feuille de route." }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi la conversion vers HEIC n'est-elle pas disponible ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HEIC utilise le codec HEVC (H.265), soumis à des brevets. Il n'existe pas d'encodeur WebAssembly open-source pour ce format. Vous pouvez convertir VOS fichiers HEIC vers des formats ouverts (JPG, PNG, WebP...). Pour produire des fichiers HEIC, utilisez l'app Photos sur iPhone ou Mac." }
+    }
+  ]
+}
+</script>
+{% endblock %}

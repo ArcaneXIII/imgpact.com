@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}SVG для веба: полное руководство 2026 | imgpact{% endblock %}
+{% block meta_description %}SVG-изображения бесконечно масштабируются, остаются чёткими на любом экране и, как правило, меньше растровых аналогов. Узнайте, как правильно использовать SVG на вашем сайте.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/image-formats">Форматы изображений</a>
+    <span>›</span>
+    SVG для веба
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Форматы изображений</div>
+    <h1>SVG для веба: полное руководство 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>SVG (Scalable Vector Graphics). единственный формат изображений в вебе, который одновременно обладает бесконечным разрешением и является текстовым. Один SVG-логотип выглядит идеально на экране мобильного телефона, 4K-мониторе и печатном билборде. без какой-либо потери качества. Понимание того, когда и как использовать SVG, необходимо для создания быстрых, чётких и современных сайтов.</p>
+
+    <h2>Чем SVG отличается от JPEG, PNG или WebP?</h2>
+    <p>Все другие распространённые форматы веб-изображений являются <strong>растровыми</strong>: они хранят данные пикселей с фиксированным разрешением. Увеличьте их сверх исходного размера. и они станут размытыми. SVG принципиально иной. это <strong>векторный</strong> формат, который хранит математические описания фигур, кривых и текста. Браузер отрисовывает изображение в любом необходимом размере, всегда с идеальной чёткостью.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Свойство</th>
+          <th>SVG</th>
+          <th>PNG / WebP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Бесконечное масштабирование</td><td>Да</td><td>Нет</td></tr>
+        <tr><td>Текстовый (редактируемый)</td><td>Да</td><td>Нет</td></tr>
+        <tr><td>Поддержка анимации</td><td>CSS / SMIL</td><td>Нет (PNG) / Да (WebP)</td></tr>
+        <tr><td>Идеален для фотографий</td><td>Нет</td><td>Да</td></tr>
+        <tr><td>Идеален для логотипов / иконок</td><td>Да</td><td>Приемлемо</td></tr>
+        <tr><td>Управление через DOM</td><td>Да (встроенный)</td><td>Нет</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Когда использовать SVG</h2>
+    <ul>
+      <li><strong>Логотипы и фирменные знаки</strong>: важнейший сценарий. один SVG-файл работает во всех размерах</li>
+      <li><strong>Иконки и элементы интерфейса</strong>: наборы иконок, навигационные иконки, иконки кнопок, SVG легче и чётче, чем PNG-спрайты</li>
+      <li><strong>Диаграммы, графики, инфографика</strong>: всё, что содержит линии, фигуры и текст, значительно выигрывает от векторного формата</li>
+      <li><strong>Иллюстрации с плоскими или градиентными цветами</strong>: иллюстрации в нарисованном от руки стиле чисто экспортируются в SVG</li>
+      <li><strong>Анимированная графика</strong>: анимированные CSS SVG. лёгкие альтернативы GIF или видео для простой анимации</li>
+    </ul>
+
+    <h2>Когда НЕ использовать SVG</h2>
+    <ul>
+      <li><strong>Фотографии</strong>: SVG не имеет эффективного способа представления фотографического контента. Фотография, встроенная в SVG, является просто растровым изображением в формате base64. используйте JPEG/WebP/AVIF вместо этого</li>
+      <li><strong>Очень сложные иллюстрации</strong>: высокодетализированный SVG с тысячами путей может быть больше и медленнее в рендеринге, чем эквивалентный WebP. Оцените перед выбором</li>
+    </ul>
+
+    <h2>Три способа встраивания SVG в HTML</h2>
+
+    <h3>1. Как тег &lt;img&gt; (внешний файл)</h3>
+    <pre><code>&lt;img src="logo.svg" alt="Логотип компании" width="200" height="60"&gt;</code></pre>
+    <p>Просто и кешируемо. SVG не может быть стилизован с помощью CSS родительской страницы. Хорошо подходит для логотипов и декоративных изображений.</p>
+
+    <h3>2. Встроенный SVG (непосредственно в HTML)</h3>
+    <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"&gt;
+  &lt;path d="M12 2L2 22h20L12 2z" fill="currentColor"/&gt;
+&lt;/svg&gt;</code></pre>
+    <p>Разметка SVG находится в HTML. Вы можете обращаться к его элементам с помощью CSS и JavaScript. отлично подходит для интерактивных иконок или иллюстраций с поддержкой тем, которые должны менять цвет в тёмном режиме.</p>
+
+    <h3>3. Как CSS-фон</h3>
+    <pre><code>background-image: url('icon.svg');</code></pre>
+    <p>Полезно для декоративных фонов или при использовании SVG в качестве CSS-маски. Не может быть динамически стилизован.</p>
+
+    <h2>Оптимизация SVG-файлов</h2>
+    <p>SVG, экспортированные из дизайн-инструментов (Illustrator, Figma, Inkscape), часто содержат ненужные метаданные, комментарии и избыточные атрибуты. Всегда прогоняйте SVG через оптимизатор перед развёртыванием:</p>
+    <ul>
+      <li><strong>SVGO</strong>: стандартный SVG-оптимизатор командной строки. Может уменьшить размер файла на 40–70%</li>
+      <li><strong>Настройки экспорта Figma / Sketch</strong>: используйте настройки экспорта «Оптимизированный» в вашем дизайн-инструменте</li>
+      <li><strong>Онлайн-инструменты</strong>: svgomg.net предоставляет визуальный интерфейс для SVGO</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Быстрый выигрыш:</strong> Удалите атрибут <code>xmlns:xlink</code>, очистите метаданные редактора и объедините ненужные группы. Типичный экспорт Figma может уменьшиться с 12 КБ до 4 КБ только с помощью этих шагов.
+    </div>
+
+    <h2>Доступность SVG</h2>
+    <p>SVG, используемые в качестве изображений, требуют правильной разметки для обеспечения доступности:</p>
+    <pre><code>&lt;!-- Для декоративных SVG --&gt;
+&lt;img src="decoration.svg" alt="" role="presentation"&gt;
+
+&lt;!-- Для информационных SVG --&gt;
+&lt;img src="chart.svg" alt="Столбчатая диаграмма, показывающая рост продаж на 40% в 4 квартале"&gt;
+
+&lt;!-- Для встроенных SVG --&gt;
+&lt;svg role="img" aria-labelledby="title"&gt;
+  &lt;title id="title"&gt;Логотип компании&lt;/title&gt;
+  ...
+&lt;/svg&gt;</code></pre>
+
+    <div class="info-box">
+      <strong>Главный вывод:</strong> Используйте SVG для каждого логотипа, иконки и векторной иллюстрации на вашем сайте. Это навсегда решает проблему дисплеев Retina, уменьшает количество HTTP-запросов при встраивании и обеспечивает CSS-тематизацию. Оптимизируйте с помощью SVGO перед развёртыванием и добавьте правильный alt-текст для программ чтения с экрана.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/svg" class="guide-cta-link">Конвертировать в SVG</a>
+      <a href="/tools/convert/png" class="guide-cta-link secondary">Конвертировать в PNG</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/image-formats" class="guide-related-card">
+        <strong>Полное руководство по форматам веб-изображений</strong>
+        <span>JPEG, PNG, WebP, AVIF, SVG: разберитесь во всех форматах в одной статье.</span>
+      </a>
+      <a href="/{{ lang }}/guides/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG против PNG</strong>
+        <span>Два наиболее распространённых растровых формата в детальном сравнении.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>Как оптимизировать изображения для веба</strong>
+        <span>Полное руководство 2026 года по быстрым, лёгким и SEO-дружественным изображениям.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SVG for the Web: Complete Guide 2026",
+  "description": "SVG images scale infinitely, stay sharp on any screen, and are typically smaller than raster alternatives. Learn how to use SVG correctly on your website.",
+  "url": "https://imgpact.com/guides/svg-for-the-web",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

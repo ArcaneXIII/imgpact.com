@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+{% block title %}Formatos de imagen web: JPEG, PNG, WebP, AVIF, SVG. Guía completa | imgpact{% endblock %}
+{% block meta_description %}Todo lo que necesitas saber sobre los formatos de imagen para la web: JPEG, PNG, WebP, AVIF, GIF, SVG. Comparativa completa, compatibilidad con navegadores, casos de uso y un árbol de decisión para elegir el formato adecuado.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/formatos-imagen">Formatos de imagen</a>
+    <span>›</span>
+    Formatos de imagen
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">📁 Formatos de imagen</div>
+    <h1>Formatos de imagen web: JPEG, PNG, WebP, AVIF, SVG. Guía completa</h1>
+    <div class="guide-meta">
+      <span>⏱ 12 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <section id="why-format-matters">
+      <h2>Por qué importa la elección del formato de imagen</h2>
+      <p>Las imágenes representan entre el <strong>50 y el 70 % del peso total de una página web media</strong>. Elegir el formato incorrecto puede inflar innecesariamente tu sitio, degradar la experiencia de usuario y perjudicar tu posicionamiento en los motores de búsqueda.</p>
+      <p>Desde 2021, Google incorpora los Core Web Vitals en su algoritmo de clasificación. Entre estas métricas, el <strong>Largest Contentful Paint (LCP)</strong> mide el tiempo que tarda en renderizarse el elemento visible más grande de la página, con frecuencia una imagen. Usar un formato inadecuado puede elevar tu LCP de 1,5 segundos a más de 4 segundos, lo cual es descalificador.</p>
+      <p>Pero el rendimiento no es la única consideración. Según tu caso de uso, puede que necesites:</p>
+      <ul>
+        <li><strong>Transparencia</strong> para un logotipo colocado sobre un fondo de color o fotográfico.</li>
+        <li>Una <strong>fotografía de alta calidad</strong> sin artefactos de compresión visibles.</li>
+        <li>Un <strong>gráfico escalable</strong> que se mantenga nítido a cualquier resolución de pantalla.</li>
+        <li><strong>Máxima compatibilidad con navegadores</strong> para audiencias en dispositivos más antiguos.</li>
+      </ul>
+      <p>Esta guía cubre los seis formatos de imagen web esenciales, JPEG, PNG, WebP, AVIF, GIF y SVG, para que puedas tomar la decisión correcta en todo momento.</p>
+    </section>
+
+    <section id="jpeg">
+      <h2>JPEG: el veterano de la fotografía</h2>
+      <p>El formato <strong>JPEG</strong> (Joint Photographic Experts Group) fue estandarizado en 1992. A pesar de su antigüedad, sigue siendo uno de los formatos más utilizados en la web, especialmente para fotografías.</p>
+
+      <h3>Cómo funciona la compresión JPEG</h3>
+      <p>JPEG utiliza <strong>compresión con pérdida</strong>. El algoritmo analiza la imagen, identifica regiones de color similar y descarta los detalles imperceptibles para el ojo humano. El grado de pérdida se controla mediante un parámetro de calidad (normalmente de 0 a 100).</p>
+      <p>A calidad 80, una fotografía JPEG suele ser visualmente indistinguible del original, pero pesa entre 5 y 10 veces menos. Por debajo de calidad 50, aparecen artefactos de bloque visibles, especialmente alrededor de los bordes nítidos.</p>
+
+      <h3>Casos de uso ideales para JPEG</h3>
+      <ul>
+        <li><strong>Fotografías</strong>: retratos, paisajes, fotos de productos</li>
+        <li><strong>Imágenes con degradados complejos</strong>: atardeceres, cielos nublados</li>
+        <li><strong>Imágenes que no requieren transparencia</strong></li>
+        <li><strong>Máxima compatibilidad</strong>: compatible con el 100 % de los navegadores, sistemas y dispositivos</li>
+      </ul>
+
+      <h3>Limitaciones de JPEG</h3>
+      <ul>
+        <li><strong>Sin transparencia</strong>: el fondo siempre es opaco</li>
+        <li><strong>Sin animación</strong></li>
+        <li><strong>Pérdida generacional</strong>: cada nuevo guardado amplifica los artefactos</li>
+        <li><strong>Inadecuado para texto y gráficos</strong>: los bordes nítidos se difuminan</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Consejo:</strong> Para fotos web, apunta a un valor de calidad entre 75 y 85. Por debajo de 70, los artefactos se vuelven visibles en la mayoría de imágenes; por encima de 90, la mejora de calidad es imperceptible mientras que el tamaño del archivo aumenta significativamente.
+      </div>
+    </section>
+
+    <section id="png">
+      <h2>PNG: compresión sin pérdida y transparencia</h2>
+      <p>El formato <strong>PNG</strong> (Portable Network Graphics) fue creado en 1996 como alternativa libre de patentes al GIF. Ofrece compresión sin pérdida y soporte completo de transparencia, lo que lo convierte en la opción preferida para gráficos web.</p>
+
+      <h3>PNG-8 vs PNG-24 vs PNG-32</h3>
+      <ul>
+        <li><strong>PNG-8</strong>: paleta de hasta 256 colores, archivos muy pequeños, ideal para iconos simples</li>
+        <li><strong>PNG-24</strong>: 16 millones de colores, sin canal alfa</li>
+        <li><strong>PNG-32</strong>: 16 millones de colores con transparencia alfa completa</li>
+      </ul>
+
+      <h3>Transparencia alfa: la característica estrella de PNG</h3>
+      <p>La transparencia alfa permite que cada píxel tenga un nivel de opacidad entre 0 (completamente transparente) y 255 (completamente opaco). Esto hace que PNG sea indispensable para:</p>
+      <ul>
+        <li><strong>Logotipos sobre fondos de color o fotográficos</strong></li>
+        <li><strong>Iconos con esquinas redondeadas o sombras</strong></li>
+        <li><strong>Elementos gráficos superpuestos</strong></li>
+        <li><strong>Capturas de pantalla con áreas transparentes</strong></li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Advertencia:</strong> Para fotografías, PNG produce archivos mucho más pesados que JPEG sin ninguna mejora de calidad perceptible. Usa PNG únicamente cuando la fidelidad sin pérdida o la transparencia sean realmente necesarias.
+      </div>
+    </section>
+
+    <section id="webp">
+      <h2>WebP: el formato moderno de Google</h2>
+      <p>Desarrollado por Google y lanzado en 2010, <strong>WebP</strong> fue diseñado para reemplazar tanto a JPEG como a PNG en la web. Ofrece una compresión superior tanto en modo con pérdida como sin pérdida, y también admite transparencia y animación.</p>
+
+      <h3>Ventajas de WebP frente a JPEG y PNG</h3>
+      <ul>
+        <li><strong>25–35 % más pequeño que JPEG</strong> con calidad visual equivalente</li>
+        <li><strong>26 % más pequeño que PNG</strong> en modo sin pérdida</li>
+        <li><strong>Transparencia alfa</strong> con un coste adicional insignificante</li>
+        <li><strong>Soporte de animación</strong>, mucho más eficiente que GIF</li>
+        <li><strong>Compresión con pérdida y sin pérdida</strong> en un único formato</li>
+      </ul>
+
+      <h3>Compatibilidad con navegadores en 2026</h3>
+      <p>WebP es ahora compatible con <strong>más del 97 % de los navegadores modernos</strong>, incluyendo Chrome, Firefox, Safari (desde iOS 14 / macOS Big Sur), Edge y Opera. En 2026, ya no es necesario un fallback JPEG para la mayoría de audiencias.</p>
+
+      <div class="info-box">
+        <strong>Útil saberlo:</strong> La mayoría de las plataformas CMS modernas (WordPress 5.8+, Shopify, Squarespace) convierten automáticamente las imágenes subidas a WebP. Si la tuya no lo hace, herramientas como imgpact gestionan la conversión en segundos.
+      </div>
+    </section>
+
+    <section id="avif">
+      <h2>AVIF: el formato de nueva generación</h2>
+      <p><strong>AVIF</strong> (AV1 Image File Format) es el formato de imagen web más reciente. Basado en el códec de vídeo AV1 desarrollado por la Alliance for Open Media, lleva la eficiencia de compresión incluso más allá que WebP.</p>
+
+      <h3>Rendimiento de compresión</h3>
+      <ul>
+        <li><strong>45–55 % más pequeño que JPEG</strong> con calidad visual equivalente</li>
+        <li><strong>20–30 % más pequeño que WebP</strong> en la mayoría de los casos</li>
+        <li>Soporte nativo para <strong>HDR y gama de colores amplia</strong> (Display P3, Rec. 2020)</li>
+        <li>Excelente representación de <strong>degradados y detalles finos</strong> sin artefactos de bloque JPEG</li>
+      </ul>
+
+      <h3>Compatibilidad con navegadores en 2026</h3>
+      <p>AVIF es compatible con Chrome (v85+), Firefox (v93+), Safari (v16.4+), Edge (v121+) y Samsung Internet, cubriendo aproximadamente el <strong>93 % de los navegadores activos</strong>. Se recomienda un fallback WebP o JPEG para el 5–7 % restante.</p>
+
+      <div class="tip-box">
+        <strong>Estrategia recomendada:</strong> Usa AVIF como formato principal con un fallback WebP mediante el elemento HTML <code>&lt;picture&gt;</code> para los navegadores que aún no lo admiten.
+      </div>
+    </section>
+
+    <section id="gif">
+      <h2>GIF: el legado de la animación</h2>
+      <p>El formato <strong>GIF</strong> (Graphics Interchange Format) data de 1987. Su paleta está limitada a 256 colores por fotograma y no tiene compresión entre fotogramas, lo que significa que cada fotograma se almacena casi de forma independiente. Una animación de 3 segundos a 24 fps almacena 72 fotogramas completos.</p>
+      <p>A pesar de ser técnicamente obsoleto, GIF persiste porque es el único formato animado universalmente compatible con clientes de correo electrónico (Outlook en particular no reproduce vídeo HTML5). En la web, los GIF animados deberían reemplazarse por WebP animado o un elemento HTML <code>&lt;video&gt;</code> con MP4/WebM, típicamente de 5 a 10 veces más pequeños para el mismo contenido visual.</p>
+
+      <div class="warning-box">
+        <strong>Evita GIF en la web</strong> a menos que tu plataforma lo requiera específicamente (correo electrónico, sistemas heredados). Un GIF animado de 2 MB puede reemplazarse por un vídeo WebM de 200 KB sin ninguna diferencia visible.
+      </div>
+    </section>
+
+    <section id="svg">
+      <h2>SVG: gráficos vectoriales para la web</h2>
+      <p><strong>SVG</strong> (Scalable Vector Graphics) es fundamentalmente diferente de los demás formatos. Mientras que JPEG, PNG, WebP y AVIF son formatos ráster (cuadrículas de píxeles), SVG describe formas geométricas en XML. El resultado: una imagen SVG es perfectamente nítida a cualquier tamaño, desde un favicon de 16×16 hasta una pantalla 4K.</p>
+
+      <h3>Ventajas de SVG</h3>
+      <ul>
+        <li><strong>Escalabilidad infinita</strong>: perfectamente nítido a cualquier resolución sin aumento del tamaño del archivo</li>
+        <li><strong>Extremadamente ligero</strong> para gráficos simples (logotipos, iconos): a menudo solo unos pocos cientos de bytes</li>
+        <li><strong>Estilizable con CSS</strong>: cambia los colores de los iconos sin tocar el archivo</li>
+        <li><strong>Animable</strong> con CSS o SMIL</li>
+        <li><strong>Accesible</strong>: el texto dentro de SVG es legible por los motores de búsqueda y los lectores de pantalla</li>
+      </ul>
+
+      <h3>Limitaciones de SVG</h3>
+      <ul>
+        <li><strong>Inadecuado para fotografías</strong>: las imágenes ráster complejas producen archivos SVG enormes</li>
+        <li><strong>Riesgo de seguridad XSS</strong> si el SVG proviene de una fuente no confiable (puede contener etiquetas de script), nunca incrustes SVG subido por usuarios sin desinfectarlo antes</li>
+      </ul>
+
+      <div class="info-box">
+        <strong>Regla de oro:</strong> SVG para todo lo vectorial (logotipos, iconos, ilustraciones, gráficos de datos); formatos ráster (JPEG, WebP, AVIF) para todo lo fotográfico.
+      </div>
+    </section>
+
+    <section id="comparison-table">
+      <h2>Tabla de comparación completa</h2>
+      <p>Esta tabla resume las características clave de cada formato para ayudarte a decidir rápidamente.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Formato</th>
+            <th>Tipo de compresión</th>
+            <th>Transparencia</th>
+            <th>Animación</th>
+            <th>Compatibilidad</th>
+            <th>Mejor caso de uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>JPEG</strong></td>
+            <td>Con pérdida, muy buena</td>
+            <td>No</td>
+            <td>No</td>
+            <td>100%</td>
+            <td>Fotos, degradados</td>
+          </tr>
+          <tr>
+            <td><strong>PNG</strong></td>
+            <td>Sin pérdida, buena</td>
+            <td>Sí (alfa)</td>
+            <td>No</td>
+            <td>100%</td>
+            <td>Logos, capturas, texto</td>
+          </tr>
+          <tr>
+            <td><strong>WebP</strong></td>
+            <td>Con/sin pérdida, excelente</td>
+            <td>Sí (alfa)</td>
+            <td>Sí</td>
+            <td>~97%</td>
+            <td>Uso web polivalente</td>
+          </tr>
+          <tr>
+            <td><strong>AVIF</strong></td>
+            <td>Con/sin pérdida, superior</td>
+            <td>Sí (alfa)</td>
+            <td>Sí</td>
+            <td>~93%</td>
+            <td>Fotos, máximo rendimiento</td>
+          </tr>
+          <tr>
+            <td><strong>GIF</strong></td>
+            <td>Sin pérdida, deficiente</td>
+            <td>Sí (1 bit)</td>
+            <td>Sí</td>
+            <td>100%</td>
+            <td>Animaciones simples (legado)</td>
+          </tr>
+          <tr>
+            <td><strong>SVG</strong></td>
+            <td>Vectorial, variable</td>
+            <td>Sí (nativa)</td>
+            <td>Sí (CSS/SMIL)</td>
+            <td>~98%</td>
+            <td>Logos, iconos, diagramas</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="decision-tree">
+      <h2>¿Qué formato debo usar? Un árbol de decisión</h2>
+
+      <h3>¿Tu imagen es vectorial (logotipo, icono, diagrama)?</h3>
+      <p>→ Usa <strong>SVG</strong>. Sin debate.</p>
+
+      <h3>¿Tu imagen es una fotografía o una imagen compleja con muchos colores?</h3>
+      <ul>
+        <li>Si el objetivo es el máximo rendimiento: <strong>AVIF</strong> (con fallback WebP mediante <code>&lt;picture&gt;</code>)</li>
+        <li>Si quieres simplicidad y amplia compatibilidad: <strong>WebP</strong></li>
+        <li>Si necesitas compatibilidad universal: <strong>JPEG</strong></li>
+      </ul>
+
+      <h3>¿Tu imagen requiere transparencia?</h3>
+      <ul>
+        <li>Prefiere <strong>WebP</strong> o <strong>AVIF</strong> para mayor rendimiento</li>
+        <li>Usa <strong>PNG</strong> si se requiere máxima compatibilidad</li>
+        <li>Nunca uses JPEG, no admite transparencia</li>
+      </ul>
+
+      <h3>¿Tu imagen es una captura de pantalla o contiene texto?</h3>
+      <p>→ Usa <strong>PNG</strong> o <strong>WebP sin pérdida</strong>. La compresión con pérdida difumina los bordes nítidos, dificultando la lectura del texto.</p>
+
+      <h3>¿Recibes fotos HEIC de un iPhone?</h3>
+      <p>→ Conviértelas a <strong>JPEG o WebP</strong> antes de publicarlas en la web. Ningún navegador muestra HEIC de forma nativa.</p>
+
+      <div class="tip-box">
+        <strong>Estrategia óptima para 2026:</strong> Usa AVIF como formato principal, WebP como fallback, y JPEG/PNG solo cuando se requiera compatibilidad absoluta. Implementa usando el elemento <code>&lt;picture&gt;</code>:
+        <pre><code>&lt;picture&gt;
+  &lt;source srcset="image.avif" type="image/avif"&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;img src="image.jpg" alt="Descripción de la imagen" width="800" height="600"&gt;
+&lt;/picture&gt;</code></pre>
+      </div>
+    </section>
+
+    <section id="conversion-tools">
+      <h2>Herramientas para convertir entre formatos</h2>
+
+      <h3>Herramientas en línea</h3>
+      <ul>
+        <li><strong>imgpact</strong>: conversión y optimización de imágenes rápida directamente en el navegador, sin necesidad de instalación. Compatible con JPEG, PNG, WebP, AVIF y SVG.</li>
+        <li><strong>Squoosh</strong> (Google): herramienta en línea de código abierto para comparar visualmente formatos y ajustes de compresión en paralelo.</li>
+        <li><strong>Cloudinary</strong>: solución en la nube para la gestión automatizada de imágenes y la conversión de formatos al vuelo en producción.</li>
+      </ul>
+
+      <h3>Herramientas de línea de comandos</h3>
+      <ul>
+        <li><strong>ImageMagick</strong>: la referencia de código abierto para la conversión y manipulación de imágenes por lotes.</li>
+        <li><strong>cwebp / dwebp</strong>: las herramientas oficiales de Google para codificar y decodificar archivos WebP.</li>
+        <li><strong>avifenc / avifdec</strong>: codificador y decodificador AVIF de línea de comandos.</li>
+        <li><strong>Sharp</strong> (Node.js): librería de alto rendimiento para la transformación de imágenes en pipelines de producción.</li>
+      </ul>
+
+      <h3>Integraciones con CMS</h3>
+      <ul>
+        <li><strong>WordPress</strong>: plugins como Imagify, ShortPixel o WebP Express para conversión automática</li>
+        <li><strong>Shopify</strong>: conversión automática a WebP para todas las imágenes de la tienda</li>
+        <li><strong>Next.js / Nuxt</strong>: componente <code>Image</code> integrado con optimización automática y conversión de formatos</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/convert/jpg" class="guide-cta-link">Convertir a JPEG</a>
+      <a href="/tools/convert/png" class="guide-cta-link secondary">Convertir a PNG</a>
+      <a href="/tools/optimize" class="guide-cta-link secondary">Optimizar imágenes</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG: ¿Cuál deberías elegir?</strong>
+        <span>Una comparativa detallada de los dos formatos web más extendidos.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/formato-avif" class="guide-related-card">
+        <strong>¿Qué es AVIF? El formato de nueva generación explicado</strong>
+        <span>El formato que comprime hasta un 55 % mejor que JPEG, y por qué es importante.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/svg-para-web" class="guide-related-card">
+        <strong>SVG para la web: Guía completa</strong>
+        <span>Todo lo que necesitas saber sobre el uso de imágenes vectoriales en tu sitio.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Formatos de imagen web: JPEG, PNG, WebP, AVIF, SVG. Guía completa",
+  "description": "Todo lo que necesitas saber sobre los formatos de imagen para la web: JPEG, PNG, WebP, AVIF, GIF, SVG. Comparativa completa, compatibilidad con navegadores, casos de uso y un árbol de decisión para elegir el formato adecuado.",
+  "url": "https://imgpact.com/guides/formatos-imagen",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

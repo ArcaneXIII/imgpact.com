@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Адаптивные изображения: srcset и sizes | imgpact{% endblock %}
+{% block meta_description %}Атрибуты srcset и sizes позволяют браузеру выбрать оптимальное разрешение для каждого устройства. Изучите синтаксис, типичные паттерны и ошибки, которых нужно избегать.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimize-website-images">Веб-оптимизация</a>
+    <span>›</span>
+    Адаптивные изображения
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Веб-оптимизация</div>
+    <h1>Адаптивные изображения: srcset и sizes</h1>
+    <div class="guide-meta">
+      <span>⏱ 7 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Фото, отображаемое шириной 400 пикселей на мобильном, не должно быть 1600 пикселей в ширину. Но без разметки адаптивных изображений каждый пользователь скачивает один и тот же большой файл. Атрибуты <code>srcset</code> и <code>sizes</code> решают эту проблему: они сообщают браузеру, какие варианты изображений доступны и насколько широко каждый из них будет отображаться, позволяя ему выбрать оптимальный файл для загрузки.</p>
+
+    <h2>Проблема: одно изображение для всех экранов</h2>
+    <p>Без адаптивных изображений вы стоите перед выбором: отдавать большой файл (быстро на десктопе, медленно на мобильных) или маленький файл (быстро на мобильных, размытый на Retina-десктопе). Ни то, ни другое не оптимально. Разметка адаптивных изображений позволяет отдавать оба варианта и предоставлять выбор браузеру.</p>
+
+    <h2>srcset с дескрипторами ширины (w)</h2>
+    <p>Самый распространённый паттерн. Укажите несколько ширин изображения, и браузер выберет на основе ширины экрана и плотности пикселей:</p>
+    <pre><code>&lt;img
+  srcset="photo-400.webp 400w,
+          photo-800.webp 800w,
+          photo-1200.webp 1200w,
+          photo-1600.webp 1600w"
+  src="photo-800.webp"
+  alt="Description"
+  width="800" height="600"
+&gt;</code></pre>
+    <p>Дескриптор <code>w</code>. это фактическая ширина в пикселях данного файла изображения, а не точка останова CSS. Браузер использует это значение вместе с шириной экрана и соотношением пикселей устройства для выбора наиболее эффективного варианта.</p>
+
+    <h2>Атрибут sizes</h2>
+    <p>Без <code>sizes</code> браузер считает, что изображение занимает 100% ширины окна просмотра. Для изображения в боковой панели шириной 300 пикселей на десктопе это заставляет браузер скачивать файл, намного больший, чем нужно. <code>sizes</code> сообщает браузеру, какой ширины будет изображение на каждой точке останова:</p>
+    <pre><code>&lt;img
+  srcset="photo-300.webp 300w,
+          photo-600.webp 600w,
+          photo-900.webp 900w"
+  sizes="(max-width: 768px) 100vw,
+         (max-width: 1200px) 50vw,
+         300px"
+  src="photo-600.webp"
+  alt="Description"
+  width="600" height="400"
+&gt;</code></pre>
+    <p>Читайте <code>sizes</code> сверху вниз: на экранах уже 768 пикселей изображение занимает 100% окна просмотра. На экранах до 1200 пикселей, 50% окна просмотра. На всех остальных (более широких) экранах. ровно 300 пикселей.</p>
+
+    <h2>srcset с дескрипторами плотности пикселей (x)</h2>
+    <p>Для изображений фиксированного размера (логотипы, аватары, иконки) используйте дескрипторы плотности пикселей:</p>
+    <pre><code>&lt;img
+  srcset="logo.webp 1x, logo@2x.webp 2x, logo@3x.webp 3x"
+  src="logo.webp"
+  alt="Company logo"
+  width="200" height="60"
+&gt;</code></pre>
+    <p>Браузер скачивает версию 2x на Retina-дисплеях, 3x на экранах с очень высокой плотностью пикселей и 1x везде остальном.</p>
+
+    <h2>Комбинирование с &lt;picture&gt; для согласования форматов</h2>
+    <p>Объедините <code>&lt;picture&gt;</code> для переключения форматов с <code>srcset</code> для адаптивного изменения размеров:</p>
+    <pre><code>&lt;picture&gt;
+  &lt;source
+    type="image/avif"
+    srcset="photo-400.avif 400w, photo-800.avif 800w, photo-1200.avif 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;source
+    type="image/webp"
+    srcset="photo-400.webp 400w, photo-800.webp 800w, photo-1200.webp 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+  &gt;
+  &lt;img
+    src="photo-800.jpg"
+    srcset="photo-400.jpg 400w, photo-800.jpg 800w, photo-1200.jpg 1200w"
+    sizes="(max-width: 768px) 100vw, 800px"
+    alt="Description"
+    width="800" height="600"
+    loading="lazy"
+  &gt;
+&lt;/picture&gt;</code></pre>
+
+    <h2>Какие размеры изображений генерировать?</h2>
+    <p>Практический стартовый набор для большинства контентных изображений:</p>
+    <ul>
+      <li><strong>400 пикселей</strong>: мобильные устройства (маленькие экраны, 1x)</li>
+      <li><strong>800 пикселей</strong>: мобильные Retina (2x), небольшие планшеты</li>
+      <li><strong>1200 пикселей</strong>: десктоп, планшеты Retina</li>
+      <li><strong>1600 пикселей</strong>: большой десктоп, широкие изображения</li>
+    </ul>
+    <p>Для баннеров и полноширинных изображений добавьте вариант 2400 пикселей для больших Retina-дисплеев.</p>
+
+    <div class="tip-box">
+      <strong>Автоматизация:</strong> Создавать все эти варианты вручную непрактично. Используйте CDN для изображений (Cloudinary, Imgix, Cloudflare Images) для генерации размеров по запросу через параметры URL или плагин для инструментов сборки (next/image, gatsby-image, astro:assets), который делает это автоматически.
+    </div>
+
+    <div class="info-box">
+      <strong>Главный вывод:</strong> Используйте <code>srcset</code> с дескрипторами <code>w</code> для контентных изображений и добавьте атрибут <code>sizes</code>, соответствующий вашему CSS-макету. Это одно изменение может вдвое сократить объём загружаемых изображений у мобильных пользователей. Комбинируйте с <code>&lt;picture&gt;</code> для согласования форматов, чтобы отдавать AVIF современным браузерам и JPEG в качестве запасного варианта.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Изменить размер изображений</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Конвертировать в WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Ленивая загрузка изображений</strong>
+        <span>Откладывайте загрузку изображений ниже сгиба для ускорения первоначальной загрузки.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Изображения и Core Web Vitals</strong>
+        <span>Как LCP, CLS и INP связаны с вашими изображениями.</span>
+      </a>
+      <a href="/{{ lang }}/guides/optimize-website-images" class="guide-related-card">
+        <strong>Как оптимизировать изображения для веба</strong>
+        <span>Полное руководство по оптимизации изображений 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Адаптивные изображения: srcset и sizes",
+  "description": "Атрибуты srcset и sizes позволяют браузеру выбрать оптимальное разрешение для каждого устройства. Изучите синтаксис, типичные паттерны и ошибки, которых нужно избегать.",
+  "url": "https://imgpact.com/guides/responsive-images-srcset-sizes",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

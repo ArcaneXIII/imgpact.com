@@ -1,0 +1,126 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_resize_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="scaling"></i> {{ t.tool_resize_title }}</h1>
+    <p>{{ t.tool_resize_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_image }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, GIF, BMP</div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <div id="current-dims" style="font-size:0.85rem;color:var(--text-secondary);font-family:var(--font-mono)"></div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_width }} (px)</label>
+          <input type="number" id="out-width" min="1" max="16000" value="800">
+        </div>
+        <div style="display:flex;align-items:flex-end;padding-bottom:2px">
+          <button id="lock-btn" title="{{ t.label_lock_aspect }}"
+            style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:0.45rem 0.65rem;cursor:pointer;line-height:1">
+            <i data-lucide="lock"></i>
+          </button>
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_height }} (px)</label>
+          <input type="number" id="out-height" min="1" max="16000" value="600">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_scale_pct }}</label>
+          <input type="number" id="scale-pct" min="1" max="500" value="100" style="width:80px">
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_resampling }}</label>
+          <select id="filter">
+            <option value="lanczos3">Lanczos3 (best quality)</option>
+            <option value="bicubic">Bicubic</option>
+            <option value="bilinear">Bilinear</option>
+            <option value="nearest">Nearest (fastest)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_output_format }}</label>
+          <select id="out-format">
+            <option value="same">{{ t.option_same_as_input }}</option>
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="live-preview-container" style="display:none;margin-top:0.75rem">
+        <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.4rem">
+          {{ t.label_live_preview }}, <span id="live-preview-label"></span>
+        </div>
+        <div style="position:relative" id="live-preview-wrap">
+          <img id="live-preview-img" style="max-width:100%;max-height:280px;border-radius:var(--radius);border:1px solid var(--border);object-fit:contain;display:block">
+        </div>
+      </div>
+
+      <button class="btn-process" id="btn-resize"><i data-lucide="scaling"></i> {{ t.tool_resize_title }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="before-after" id="before-after"></div>
+    <div class="stats-bar" id="stats-bar"></div>
+    <button class="btn-download" id="btn-download"><i data-lucide="download"></i> {{ t.btn_download }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/resize.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/resize/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/resize/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/resize/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/resize/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Resize Image",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/resize",
+    "description": "Resize images by pixels or percentage. Aspect ratio lock, multiple resampling filters. Free browser tool.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",         "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Resize Image", "item": "https://imgpact.com/tools/resize" }
+    ]
+  }
+]
+</script>
+{% endblock %}

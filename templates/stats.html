@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title | default(value="Statistics | imgpact") }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <h1>{{ t.stats_title }}</h1>
+  <p class="page-hero-subtitle">{{ t.stats_subtitle }}</p>
+</section>
+
+<section class="stats-section">
+  <div class="stats-totals">
+    <div class="stats-total-card">
+      <i data-lucide="bar-chart-2"></i>
+      <strong class="stats-total-number" id="stat-total-uses">…</strong>
+      <span class="stats-total-label">{{ t.stats_total_uses }}</span>
+    </div>
+    <div class="stats-total-card">
+      <i data-lucide="users"></i>
+      <strong class="stats-total-number" id="stat-total-users">…</strong>
+      <span class="stats-total-label">{{ t.stats_total_users }}</span>
+    </div>
+  </div>
+
+  <div class="stats-table-wrapper">
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>{{ t.stats_col_tool }}</th>
+          <th class="stats-col-num">{{ t.stats_col_uses }}</th>
+          <th class="stats-col-num">{{ t.stats_col_users }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for group in groups %}
+        <tr class="stats-group-header stats-group--{{ group.color }}">
+          <td colspan="3">
+            <i data-lucide="{{ group.icon }}"></i>
+            {{ group.name }}
+          </td>
+        </tr>
+        {% for row in group.tools %}
+        <tr class="stats-row stats-row--{{ group.color }}" data-tool="{{ row.slug }}">
+          <td class="stats-tool-name">
+            <span class="stats-tool-icon stats-tool-icon--{{ group.color }}">
+              <i data-lucide="{{ row.icon }}"></i>
+            </span>
+            {{ row.display_name }}
+          </td>
+          <td class="stats-col-num stats-cell-uses">…</td>
+          <td class="stats-col-num stats-cell-users">…</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+  fetch('/api/stats')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('stat-total-uses').textContent  = data.total_uses.toLocaleString();
+      document.getElementById('stat-total-users').textContent = data.total_unique_users.toLocaleString();
+      var byTool = {};
+      data.tools.forEach(function(t) { byTool[t.tool] = t; });
+      document.querySelectorAll('tr[data-tool]').forEach(function(row) {
+        var t = byTool[row.dataset.tool] || { uses: 0, unique_users: 0 };
+        row.querySelector('.stats-cell-uses').textContent  = t.uses.toLocaleString();
+        row.querySelector('.stats-cell-users').textContent = t.unique_users.toLocaleString();
+      });
+    })
+    .catch(function() {
+      document.getElementById('stat-total-uses').textContent  = '...';
+      document.getElementById('stat-total-users').textContent = '...';
+    });
+  </script>
+</section>
+{% endblock %}

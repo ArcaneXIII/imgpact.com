@@ -1,0 +1,16 @@
+[workspace]
+members = [
+    "server",
+    "wasm-engine",
+]
+resolver = "2"
+
+# Release profile (shared base).
+[profile.release]
+opt-level = "s"   # optimise for binary size (WASM default)
+lto = true        # link-time optimisation
+codegen-units = 1
+
+# Server binary: max speed instead of min size.
+[profile.release.package.server]
+opt-level = 3

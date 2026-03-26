@@ -1,0 +1,130 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_add_text_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="type"></i> {{ t.tool_add_text_title }}</h1>
+    <p>{{ t.tool_add_text_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_image }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, BMP</div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <div class="control-group">
+        <label>{{ t.label_text }}</label>
+        <input type="text" id="text-input" value="imgpact"
+          style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--bg-main);color:var(--text-primary)">
+      </div>
+
+      <div class="control-row">
+        <div class="control-group" style="flex:1;min-width:160px">
+          <label>{{ t.label_font_size }}: <span id="font-size-label">32px</span></label>
+          <input type="range" id="font-size" min="12" max="120" value="32" style="width:100%">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_color }}</label>
+          <input type="color" id="text-color" value="#ffffff">
+        </div>
+        <div class="control-group" style="justify-content:flex-end">
+          <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">
+            <input type="checkbox" id="bold-check"> {{ t.label_bold }}
+          </label>
+        </div>
+        <div class="control-group" style="justify-content:flex-end">
+          <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">
+            <input type="checkbox" id="outline-check" checked> {{ t.label_outline }}
+          </label>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_x_position }}</label>
+          <input type="number" id="text-x" value="20" min="0" style="width:90px">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_y_position }}</label>
+          <input type="number" id="text-y" value="40" min="0" style="width:90px">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_output_format }}</label>
+          <select id="out-format">
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="canvas-wrap" id="canvas-wrap" style="margin-top:0.5rem">
+        <canvas id="text-canvas" style="cursor:crosshair;max-width:100%"></canvas>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.3rem">
+        <i data-lucide="info"></i> {{ t.add_text_hint }}
+      </p>
+
+      <div style="display:flex;gap:0.75rem;margin-top:0.25rem">
+        <button class="btn-process" id="btn-bake" style="flex:1"><i data-lucide="type"></i> {{ t.btn_bake_text }}</button>
+        <button id="btn-reset"
+          style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.8rem 1.25rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-secondary);cursor:pointer;font-size:0.9rem;font-weight:600;white-space:nowrap"
+          disabled><i data-lucide="rotate-ccw"></i> {{ t.btn_reset }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="before-after" id="before-after"></div>
+    <button class="btn-download" id="btn-download"><i data-lucide="download"></i> {{ t.btn_download }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/add-text.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/add-text/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/add-text/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/add-text/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/add-text/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Add Text to Image",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/add-text",
+    "description": "Overlay custom text on images. Choose font size, color, position. Free, no signup required.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",              "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Add Text to Image", "item": "https://imgpact.com/tools/add-text" }
+    ]
+  }
+]
+</script>
+{% endblock %}

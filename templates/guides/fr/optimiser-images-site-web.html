@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+{% block title %}Comment optimiser les images pour votre site web : le guide complet | imgpact{% endblock %}
+{% block meta_description %}Découvrez toutes les techniques d'optimisation des images web : formats, compression, lazy loading, srcset, Core Web Vitals et CDN. Guide complet 2026.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimiser-images-site-web">Optimisation web</a>
+    <span>›</span>
+    Optimiser les images
+  </nav>
+
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimisation web</div>
+    <h1>Comment optimiser les images pour votre site web : le guide complet</h1>
+    <div class="guide-meta">
+      <span>⏱ 10 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <nav class="guide-toc">
+    <h2>Table des matières</h2>
+    <ol>
+      <li><a href="#pourquoi-optimisation">Pourquoi l'optimisation des images est essentielle</a></li>
+      <li><a href="#choisir-bon-format">Choisir le bon format d'image</a></li>
+      <li><a href="#dimensionner-images">Dimensionner correctement les images</a></li>
+      <li><a href="#compression-lossy-lossless">Compression lossy vs lossless</a></li>
+      <li><a href="#lazy-loading">Lazy loading : ne charger que ce qui est visible</a></li>
+      <li><a href="#images-responsives">Images responsives avec srcset et sizes</a></li>
+      <li><a href="#core-web-vitals-lcp">Core Web Vitals et LCP</a></li>
+      <li><a href="#cdn-images">CDN d'images : pourquoi et comment</a></li>
+      <li><a href="#checklist">Checklist complète d'optimisation des images</a></li>
+    </ol>
+  </nav>
+
+  <div class="guide-body">
+
+    <p>Les images représentent en moyenne <strong>50 à 75 % du poids d'une page web</strong>. Pourtant, la majorité des sites les servent sans aucune optimisation : mauvais format, dimensions surdimensionnées, absence de compression. Résultat : des pages lentes, un score Google PageSpeed en berne et des utilisateurs qui partent avant même d'avoir vu votre contenu.</p>
+
+    <p>Ce guide complet couvre toutes les techniques d'optimisation des images web en 2026, de la sélection du bon format jusqu'au déploiement sur CDN, en passant par le lazy loading et les Core Web Vitals.</p>
+
+    <h2 id="pourquoi-optimisation">1. Pourquoi l'optimisation des images est essentielle</h2>
+
+    <h3>Impact sur les performances</h3>
+    <p>Une image non optimisée peut peser plusieurs mégaoctets là où une version correctement compressée n'en ferait que quelques dizaines de kilooctets. Concrètement, une page qui met 5 secondes à charger perd en moyenne <strong>40 % de ses visiteurs</strong> par rapport à une page qui charge en 1 seconde (source : Google/Deloitte).</p>
+
+    <p>Les connexions mobiles, encore dominantes dans de nombreux marchés, amplifient l'effet : sur une connexion 4G à 10 Mbps, télécharger 3 Mo d'images prend environ 2,4 secondes, rien que pour les images. Sur 3G, comptez 8 secondes.</p>
+
+    <h3>Impact SEO</h3>
+    <p>Google intègre les Core Web Vitals dans son algorithme de classement depuis 2021. Parmi eux, le <strong>Largest Contentful Paint (LCP)</strong> mesure directement le temps de chargement de l'élément visuel le plus large de la page, très souvent une image hero. Un LCP supérieur à 2,5 secondes est pénalisant. Un LCP inférieur à 2,5 secondes est considéré comme bon.</p>
+
+    <p>L'optimisation des images améliore aussi le <strong>Cumulative Layout Shift (CLS)</strong> en réservant l'espace nécessaire avant le chargement, évitant les décalages visuels qui agacent les utilisateurs et dégradent le score.</p>
+
+    <h3>Impact sur l'expérience utilisateur</h3>
+    <p>Au-delà du SEO, des images rapides améliorent directement l'expérience : moins de frustration, meilleur taux de conversion, pages mobiles plus fluides. Une étude Akamai estime qu'un délai d'une seconde réduit les conversions de 7 %.</p>
+
+    <div class="info-box">
+      <strong>À retenir :</strong> L'optimisation des images n'est pas optionnelle. C'est une des actions à plus fort retour sur investissement pour améliorer performances, SEO et conversions.
+    </div>
+
+    <h2 id="choisir-bon-format">2. Choisir le bon format d'image</h2>
+
+    <p>Le choix du format est la première décision à prendre. En 2026, la priorité est claire : <strong>WebP par défaut</strong>, avec des fallbacks selon les cas.</p>
+
+    <h3>WebP : le format universel</h3>
+    <p>WebP offre une compression supérieure à JPEG et PNG tout en maintenant une qualité visuelle comparable. En moyenne :</p>
+    <ul>
+      <li>25 à 35 % plus léger que JPEG à qualité équivalente</li>
+      <li>26 % plus léger que PNG pour les images avec transparence</li>
+      <li>Support navigateur : 97 % en 2026 (tous les navigateurs modernes)</li>
+    </ul>
+
+    <h3>AVIF : le successeur de WebP</h3>
+    <p>AVIF (AV1 Image File Format) offre une compression encore meilleure que WebP (30 à 50 % plus léger que JPEG), mais l'encodage est plus lent et le support navigateur, bien qu'en progression, reste légèrement inférieur à WebP. À utiliser pour les sites à fort trafic avec un CDN capable de le servir conditionnellement.</p>
+
+    <h3>JPEG : pour les photographies</h3>
+    <p>JPEG reste pertinent pour les photographies complexes servies à des navigateurs ne supportant pas WebP, ou lorsque la compatibilité maximale est requise. Utilisez une qualité entre 75 et 85 % pour un bon équilibre poids/qualité.</p>
+
+    <h3>PNG : pour la transparence et les graphiques</h3>
+    <p>PNG est à privilégier uniquement lorsque vous avez besoin de transparence et que WebP n'est pas disponible, ou pour des graphiques avec aplats de couleurs et textes (logos, icônes). PNG est lossless par nature.</p>
+
+    <h3>SVG : pour les graphiques vectoriels</h3>
+    <p>Les logos, icônes et illustrations géométriques doivent toujours être servis en SVG lorsque c'est possible. SVG est résolution-indépendant, très léger, et facilement stylable via CSS.</p>
+
+    <h3>GIF : à éviter</h3>
+    <p>GIF est obsolète pour les animations. Utilisez des vidéos MP4/WebM (boucle autoplay muted) ou des animations CSS/SVG à la place. Une animation GIF de 2 Mo peut être remplacée par une vidéo WebM de 200 Ko.</p>
+
+    <div class="tip-box">
+      <strong>Bonne pratique :</strong> Utilisez l'élément <code>&lt;picture&gt;</code> pour servir AVIF aux navigateurs compatibles, WebP en fallback, et JPEG/PNG en dernier recours. imgpact gère cette conversion automatiquement.
+    </div>
+
+    <h2 id="dimensionner-images">3. Dimensionner correctement les images</h2>
+
+    <p>Servir une image de 3000×2000 pixels pour un thumbnail de 300×200 pixels est l'une des erreurs les plus courantes, et les plus coûteuses. Le navigateur télécharge tous les pixels, puis les réduit à l'affichage. C'est du gaspillage pur.</p>
+
+    <h3>Calculer les dimensions nécessaires</h3>
+    <p>La règle est simple : <strong>la largeur de l'image en pixels CSS × la densité de pixels de l'écran (device pixel ratio)</strong>. Pour un thumbnail de 300 px CSS sur un écran Retina (DPR 2), l'image source doit faire 600 px de large maximum.</p>
+
+    <p>Pour une image héroïque pleine largeur sur un écran Full HD, 1920 px suffit. Au-delà, vous servez des pixels que personne ne voit.</p>
+
+    <h3>Dimensions recommandées par usage</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Usage</th>
+          <th>Largeur recommandée</th>
+          <th>Remarque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Image hero pleine largeur</td>
+          <td>1920 px</td>
+          <td>Prévoir une version 960 px pour mobile</td>
+        </tr>
+        <tr>
+          <td>Image de contenu (article)</td>
+          <td>800–1200 px</td>
+          <td>Selon la largeur du contenu</td>
+        </tr>
+        <tr>
+          <td>Thumbnail / vignette</td>
+          <td>300–600 px</td>
+          <td>Dépend de la densité d'écran cible</td>
+        </tr>
+        <tr>
+          <td>Avatar / icône</td>
+          <td>64–128 px</td>
+          <td>SVG si vectoriel</td>
+        </tr>
+        <tr>
+          <td>Open Graph / réseaux sociaux</td>
+          <td>1200×630 px</td>
+          <td>Format paysage standardisé</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warning-box">
+      <strong>Attention :</strong> Ne redimensionnez pas les images avec CSS uniquement (<code>width: 100%; max-width: 300px</code>). Le navigateur télécharge quand même le fichier original. Redimensionnez les fichiers sources.
+    </div>
+
+    <h2 id="compression-lossy-lossless">4. Compression lossy vs lossless selon le contexte</h2>
+
+    <h3>Compression lossless (sans perte)</h3>
+    <p>La compression lossless réduit la taille du fichier sans aucune perte de qualité. Elle fonctionne en supprimant les métadonnées inutiles et en optimisant l'encodage interne. Elle est appropriée pour :</p>
+    <ul>
+      <li>Les logos et images de marque (qualité parfaite requise)</li>
+      <li>Les captures d'écran et images de produits avec textes</li>
+      <li>Les images qui seront éditées ultérieurement</li>
+      <li>Les PNG et SVG</li>
+    </ul>
+    <p>Gain typique : 10 à 25 % sur des PNG déjà non optimisés.</p>
+
+    <h3>Compression lossy (avec perte)</h3>
+    <p>La compression lossy sacrifie une partie de l'information visuelle pour réduire significativement le poids du fichier. Elle est appropriée pour :</p>
+    <ul>
+      <li>Les photographies</li>
+      <li>Les images de fond</li>
+      <li>Tout contenu où une légère dégradation est imperceptible</li>
+    </ul>
+    <p>Gain typique : 60 à 80 % sur une photo JPEG, avec une qualité visuelle indiscernable à qualité 80–85.</p>
+
+    <h3>Trouver le bon niveau de qualité</h3>
+    <p>Pour les JPEG et WebP, la qualité 80–85 est le sweet spot pour la plupart des usages web. En dessous de 70, des artefacts deviennent visibles. Au-dessus de 90, le gain de qualité est imperceptible mais le poids augmente fortement.</p>
+
+    <div class="tip-box">
+      <strong>Astuce :</strong> Utilisez la compression progressive pour les JPEG (option "progressive scan"). Cela permet d'afficher d'abord une version floue qui se précise progressivement, améliorant la perception de vitesse.
+    </div>
+
+    <h2 id="lazy-loading">5. Lazy loading : ne charger que ce qui est visible</h2>
+
+    <p>Le lazy loading consiste à différer le chargement des images situées hors du viewport visible, jusqu'à ce que l'utilisateur s'en approche en scrollant. C'est une optimisation critique pour les pages longues avec beaucoup d'images.</p>
+
+    <h3>L'attribut HTML natif loading="lazy"</h3>
+    <p>Depuis 2019, tous les navigateurs modernes supportent l'attribut natif <code>loading="lazy"</code>. Son utilisation est triviale :</p>
+
+    <pre><code>&lt;img src="image.webp" alt="Description" loading="lazy" width="800" height="600"&gt;</code></pre>
+
+    <p>C'est suffisant pour 95 % des cas d'usage. Pas besoin de JavaScript.</p>
+
+    <h3>Ce qu'il ne faut pas lazy-loader</h3>
+    <p>N'appliquez <strong>jamais</strong> <code>loading="lazy"</code> aux images above-the-fold (visibles sans scroll au chargement de la page). Cela retarderait leur chargement et dégraderait votre LCP. En règle générale, lazy-loadez tout sauf les 1 à 3 premières images de la page.</p>
+
+    <div class="warning-box">
+      <strong>Erreur fréquente :</strong> Appliquer <code>loading="lazy"</code> à l'image hero. C'est contre-productif : cela retarde l'affichage de l'élément le plus visible et fait chuter le score LCP.
+    </div>
+
+    <p>Pour en savoir plus, consultez notre guide dédié : <a href="/{{ lang }}/guides/lazy-loading-images">Lazy loading des images : le guide complet 2026</a>.</p>
+
+    <h2 id="images-responsives">6. Images responsives avec srcset et sizes</h2>
+
+    <p>Les attributs <code>srcset</code> et <code>sizes</code> permettent de servir différentes versions d'une même image selon la taille de l'écran et la densité de pixels du terminal.</p>
+
+    <pre><code>&lt;img
+  src="image-800.webp"
+  srcset="image-400.webp 400w,
+          image-800.webp 800w,
+          image-1600.webp 1600w"
+  sizes="(max-width: 600px) 100vw,
+         (max-width: 1200px) 50vw,
+         800px"
+  alt="Description de l'image"
+  width="800"
+  height="600"&gt;</code></pre>
+
+    <p>Le navigateur choisit automatiquement la version la plus adaptée selon le contexte. Un mobile en 375 px de large n'a pas besoin de télécharger une image de 1600 px.</p>
+
+    <p>Pour l'art direction (changer le cadrage selon l'écran), utilisez l'élément <code>&lt;picture&gt;</code>. Consultez notre guide complet : <a href="/{{ lang }}/guides/responsive-images-srcset-sizes">Images responsives avec srcset et sizes</a>.</p>
+
+    <h2 id="core-web-vitals-lcp">7. Core Web Vitals et LCP : l'image hero fait tout</h2>
+
+    <p>Le LCP (Largest Contentful Paint) est la métrique Core Web Vitals la plus impactée par les images. Dans la majorité des pages, l'élément LCP est l'image hero, le grande visuel en haut de page.</p>
+
+    <h3>Objectifs LCP</h3>
+    <ul>
+      <li><strong>Bon :</strong> LCP ≤ 2,5 secondes</li>
+      <li><strong>À améliorer :</strong> LCP entre 2,5 et 4 secondes</li>
+      <li><strong>Mauvais :</strong> LCP &gt; 4 secondes</li>
+    </ul>
+
+    <h3>Optimiser le LCP de l'image hero</h3>
+    <p>Plusieurs techniques combinées permettent d'atteindre un LCP inférieur à 2,5 s :</p>
+    <ul>
+      <li><strong>Preload :</strong> <code>&lt;link rel="preload" as="image" href="hero.webp"&gt;</code> dans le <code>&lt;head&gt;</code></li>
+      <li><strong>fetchpriority="high" :</strong> signale au navigateur que cette ressource est prioritaire</li>
+      <li><strong>Pas de lazy loading</strong> sur l'image hero (voir section précédente)</li>
+      <li><strong>Format WebP ou AVIF</strong> pour réduire le poids</li>
+      <li><strong>CDN avec cache</strong> pour réduire la latence réseau</li>
+    </ul>
+
+    <pre><code>&lt;img
+  src="hero.webp"
+  fetchpriority="high"
+  alt="Image principale de la page"
+  width="1920"
+  height="1080"&gt;</code></pre>
+
+    <p>Pour une analyse approfondie, consultez : <a href="/{{ lang }}/guides/images-core-web-vitals">Images et Core Web Vitals : optimiser LCP, CLS et FID</a>.</p>
+
+    <h2 id="cdn-images">8. CDN d'images : pourquoi et comment</h2>
+
+    <p>Un CDN (Content Delivery Network) d'images distribue vos images depuis des serveurs proches géographiquement de vos utilisateurs. Résultat : moins de latence, temps de chargement réduits, et pour certains CDN, transformation à la volée (redimensionnement, conversion de format, compression).</p>
+
+    <h3>Bénéfices d'un CDN d'images</h3>
+    <ul>
+      <li><strong>Latence réduite :</strong> un utilisateur en Europe reçoit l'image depuis un datacenter européen, pas depuis votre serveur en Amérique</li>
+      <li><strong>Transformation à la volée :</strong> services comme Cloudflare Images, Imgix ou Cloudinary génèrent le bon format et les bonnes dimensions automatiquement</li>
+      <li><strong>Décharge le serveur d'origine</strong> et réduit la bande passante</li>
+    </ul>
+
+    <h3>Quand en avez-vous besoin ?</h3>
+    <p>Un CDN d'images devient indispensable au-delà de quelques milliers de visiteurs par mois, ou si votre audience est internationale. En dessous, optimisez d'abord les images en amont (avec imgpact), puis hébergez-les sur un CDN généraliste.</p>
+
+    <p>Pour comparer les solutions du marché : <a href="/{{ lang }}/guides/cdn-images-comparatif">CDN d'images : comparatif et guide de choix 2026</a>.</p>
+
+    <h2 id="checklist">9. Checklist complète d'optimisation des images</h2>
+
+    <p>Utilisez cette checklist avant chaque mise en ligne :</p>
+
+    <h3>Format et compression</h3>
+    <ul>
+      <li>Utiliser WebP (ou AVIF) par défaut pour toutes les images raster</li>
+      <li>Utiliser SVG pour les logos, icônes et illustrations vectorielles</li>
+      <li>Compression lossy à qualité 80–85 pour les photographies</li>
+      <li>Compression lossless pour les logos et images de marque</li>
+      <li>Supprimer les métadonnées EXIF inutiles</li>
+    </ul>
+
+    <h3>Dimensions</h3>
+    <ul>
+      <li>Redimensionner aux dimensions réelles d'affichage (× DPR)</li>
+      <li>Créer plusieurs variantes pour srcset (400w, 800w, 1600w minimum)</li>
+      <li>Ne jamais servir une image 4K pour un thumbnail</li>
+    </ul>
+
+    <h3>HTML</h3>
+    <ul>
+      <li>Toujours spécifier <code>width</code> et <code>height</code> pour éviter le CLS</li>
+      <li>Rédiger un attribut <code>alt</code> descriptif sur toutes les images</li>
+      <li><code>loading="lazy"</code> sur toutes les images below-the-fold</li>
+      <li><code>fetchpriority="high"</code> sur l'image hero</li>
+      <li>Utiliser <code>&lt;picture&gt;</code> pour servir plusieurs formats</li>
+      <li>Implémenter <code>srcset</code> et <code>sizes</code></li>
+    </ul>
+
+    <h3>Infrastructure</h3>
+    <ul>
+      <li>Servir les images depuis un CDN</li>
+      <li>Activer la compression HTTP (gzip/brotli) sur le serveur</li>
+      <li>Configurer des en-têtes de cache longs pour les images statiques</li>
+      <li>Ajouter un <code>&lt;link rel="preload"&gt;</code> pour l'image LCP</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Résultat attendu :</strong> En appliquant l'ensemble de ces techniques, il est courant de réduire le poids total des images d'une page de 70 à 90 %, avec un LCP passant sous les 2,5 secondes sur la plupart des connexions.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Compressez, redimensionnez et convertissez vos images en WebP directement dans votre navigateur, gratuitement et sans inscription.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimiser mes images</a>
+      <a href="/tools/resize" class="guide-cta-link">Redimensionner mes images</a>
+      <a href="/tools/convert/webp" class="guide-cta-link">Convertir en WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/lazy-loading-images" class="guide-related-card">
+        <strong>Lazy loading des images : le guide complet 2026</strong>
+        <span>Différer le chargement des images hors-viewport pour des pages plus rapides.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images et Core Web Vitals : optimiser LCP, CLS et FID</strong>
+        <span>Comment les images impactent vos métriques Google et comment les améliorer.</span>
+      </a>
+      <a href="/{{ lang }}/guides/cdn-images-comparatif" class="guide-related-card">
+        <strong>CDN d'images : comparatif et guide de choix 2026</strong>
+        <span>Cloudflare Images, Imgix, Cloudinary : lequel choisir selon votre usage ?</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Images responsives avec srcset et sizes : guide pratique</strong>
+        <span>Servir la bonne image à chaque écran avec srcset, sizes et &lt;picture&gt;.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Comment optimiser les images pour votre site web : le guide complet",
+  "description": "Découvrez toutes les techniques d'optimisation des images web : formats, compression, lazy loading, srcset, Core Web Vitals et CDN. Guide complet 2026.",
+  "url": "https://imgpact.com/guides/optimiser-images-site-web",
+  "dateModified": "2026-03-22",
+  "publisher": {
+    "@type": "Organization",
+    "name": "imgpact",
+    "url": "https://imgpact.com"
+  }
+}
+</script>
+{% endblock %}

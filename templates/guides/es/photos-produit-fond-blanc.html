@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}Fotos de Producto con Fondo Blanco: Guía DIY 2026 | imgpact{% endblock %}
+{% block meta_description %}Consigue fotos de producto con fondo blanco profesional en casa o en postprocesado. Equipamiento, configuración de iluminación y técnicas de Photoshop para fondos RGB 255,255,255.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/imagenes-productos-ecommerce">E-commerce</a>
+    <span>›</span>
+    Fotos con Fondo Blanco
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Fotos de Producto con Fondo Blanco: Guía DIY 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Las fotos de producto con fondo blanco son obligatorias para Amazon, la mayoría de los marketplaces y las tiendas de e-commerce profesionales. Los fondos de blanco puro (RGB 255,255,255) se ven limpios, cumplen los requisitos de los marketplaces y permiten a los clientes centrarse completamente en el producto. Aquí te explicamos cómo conseguirlos, ya sea con una configuración fotográfica o en postprocesado.</p>
+
+    <h2>Método 1: Fondo blanco en cámara</h2>
+    <p>El enfoque más limpio. Consigue el fondo blanco correcto en el momento de la fotografía y el postprocesado se minimiza.</p>
+
+    <h3>Equipamiento necesario</h3>
+    <ul>
+      <li><strong>Papel continuo blanco</strong> o cartón pluma blanco (fondo)</li>
+      <li><strong>Dos softboxes</strong> o un ring light (o usa una ventana con luz natural difusa)</li>
+      <li><strong>Cámara</strong> o smartphone moderno con controles de exposición manual</li>
+      <li><strong>Opcional: caja de luz / tienda de luz</strong> para productos pequeños (~30€ en Amazon)</li>
+    </ul>
+
+    <h3>Configuración de iluminación</h3>
+    <p>La configuración clásica de dos luces:</p>
+    <ol>
+      <li>Coloca el fondo blanco detrás y debajo del producto (crea una "curva", sin esquina sharp entre el suelo y la pared)</li>
+      <li>Sitúa la luz principal a 45° a la izquierda o derecha del producto, ligeramente por encima</li>
+      <li>Sitúa una luz de relleno en el lado opuesto a menor potencia (relación 1:2 con la principal) para reducir las sombras duras</li>
+      <li>Añade una luz trasera apuntando al fondo (no al producto) para sobreexponer el fondo hasta blanco puro</li>
+    </ol>
+    <p>La clave es <strong>separar la iluminación del producto de la iluminación del fondo</strong>. El fondo necesita estar sobreexpuesto con respecto al producto.</p>
+
+    <h3>Configuración de la cámara</h3>
+    <ul>
+      <li>Ajusta el balance de blancos a "Personalizado" usando una tarjeta blanca en tu configuración</li>
+      <li>Fotografía en formato RAW si es posible para máxima flexibilidad en el postprocesado</li>
+      <li>Usa un trípode para imágenes nítidas, especialmente para productos pequeños</li>
+    </ul>
+
+    <h2>Método 2: Postprocesado (eliminación de fondo)</h2>
+    <p>Si no puedes montar un estudio adecuado, fotografía sobre el fondo más claro que encuentres (el gris o el beige claro funcionan) y elimina el fondo con software.</p>
+
+    <h3>Photoshop: Seleccionar sujeto + Eliminación de fondo</h3>
+    <ol>
+      <li>Abre tu foto de producto en Photoshop</li>
+      <li>Ve a <strong>Seleccionar → Sujeto</strong> (con IA, funciona bien para productos claros)</li>
+      <li>Revisa y perfecciona la selección con "Seleccionar y Máscara"</li>
+      <li>Haz clic en "Seleccionar y Máscara" → exportar a "Nueva capa con máscara de capa"</li>
+      <li>Añade una capa de color sólido blanco debajo de la capa del producto con máscara</li>
+      <li>Aplana la imagen y exporta como JPEG</li>
+    </ol>
+
+    <h3>Alternativas gratuitas</h3>
+    <ul>
+      <li><strong>remove.bg</strong>: eliminación de fondo con IA, gratuita para baja resolución</li>
+      <li><strong>GIMP</strong>: editor gratuito de código abierto con herramientas "Selección difusa" y "Rutas" para selección manual</li>
+      <li><strong>Background Eraser app</strong>: aplicación móvil para eliminación rápida en fotos de teléfono</li>
+    </ul>
+
+    <h2>Verificar el blanco puro (RGB 255,255,255)</h2>
+    <p>Tras el procesado, verifica que el fondo es verdaderamente blanco puro, no crema ni gris claro. Esto es crítico para el cumplimiento con Amazon.</p>
+    <p>En Photoshop: usa la <strong>Herramienta de muestreo de color</strong> (Mayús+I) y haz clic en el fondo. El panel Información debe mostrar R:255 G:255 B:255. Si ves valores como 248,248,248, tu fondo es ligeramente gris y fallará la comprobación automatizada de Amazon.</p>
+    <p>Solución rápida: usa <strong>Imagen → Ajustes → Niveles</strong> y arrastra el regulador de salida blanca hasta que el fondo marque 255,255,255, o usa <strong>Seleccionar rango de color → Iluminaciones → Reemplazar por blanco</strong>.</p>
+
+    <h2>Tratamiento de bordes del producto y sombras</h2>
+    <p>Los bordes duros del producto son fáciles de enmascarar, pero los objetos orgánicos (pelo, pelaje, tela) son más difíciles. Consejos:</p>
+    <ul>
+      <li><strong>Perfeccionar Borde / Seleccionar y Máscara</strong> en Photoshop gestiona los bordes suaves, el pelaje y el cabello mucho mejor que una selección simple</li>
+      <li><strong>Mantén una sombra paralela sutil</strong>: una sombra suave apenas visible (2–5% de opacidad) en la base del producto queda más realista que los objetos "flotantes" sobre un fondo blanco plano</li>
+      <li><strong>Para productos reflectantes</strong> (joyería, electrónica): usa filtros polarizadores para reducir el brillo, o fotografía sobre acrílico blanco para obtener reflexión del suelo integrada</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Consejo de consistencia:</strong> Si fotografías varios productos, mantén tu configuración de iluminación idéntica en todas las sesiones. La exposición, el ángulo y la proporción de recorte consistentes hacen que tu cuadrícula de productos luzca profesional y cohesionada, independientemente de los productos individuales.
+    </div>
+
+    <h2>Configuración de exportación para imágenes de marketplace</h2>
+    <ul>
+      <li>Aplana todas las capas antes de exportar</li>
+      <li>Exporta como JPEG, calidad 85–90</li>
+      <li>Espacio de color: sRGB</li>
+      <li>Dimensiones: 2000 × 2000 px</li>
+      <li>Elimina los metadatos EXIF</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> El mejor fondo blanco viene de una configuración de estudio con dos luces, iluminación separada para el producto y el fondo. Para el postprocesado, usa "Seleccionar Sujeto" de Photoshop + una capa blanca, y verifica que el fondo final sea exactamente RGB 255,255,255. Exporta a 2000×2000 JPEG q85 en sRGB.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Redimensionar a 2000×2000</a>
+      <a href="/tools/effects" class="guide-cta-link secondary">Aplicar Efectos</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/imagenes-productos-amazon" class="guide-related-card">
+        <strong>Imágenes de Producto en Amazon</strong>
+        <span>Los requisitos exactos de Amazon para listados de producto conformes.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/imagenes-productos-ecommerce" class="guide-related-card">
+        <strong>Imágenes de Productos para E-commerce</strong>
+        <span>Guía completa de fotografía de producto para tiendas online.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/zoom-producto-interactivo" class="guide-related-card">
+        <strong>Zoom Interactivo de Producto</strong>
+        <span>Cómo implementar visores de zoom para tus imágenes de producto.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Fotos de Producto con Fondo Blanco: Guía DIY 2026",
+  "description": "Consigue fotos de producto con fondo blanco profesional en casa o en postprocesado. Equipamiento, configuración de iluminación y técnicas de Photoshop para fondos RGB 255,255,255.",
+  "url": "https://imgpact.com/guides/fotos-producto-fondo-blanco",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

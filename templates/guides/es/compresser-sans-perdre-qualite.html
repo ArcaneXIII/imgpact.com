@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Cómo Comprimir Imágenes sin Perder Calidad | imgpact{% endblock %}
+{% block meta_description %}Comprime imágenes un 50–80 % sin pérdida de calidad visible. Técnicas prácticas: elige el formato correcto, apunta al ajuste de calidad adecuado y usa compresión perceptual.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/compresion-con-perdida-sin-perdida">Compresión</a>
+    <span>›</span>
+    Comprimir sin Perder Calidad
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜 Compresión</div>
+    <h1>Cómo Comprimir Imágenes sin Perder Calidad</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>"Comprimir sin perder calidad" suena a una contradicción, y técnicamente lo es para los formatos con pérdida. Pero en la práctica, el umbral visual en el que la compresión se vuelve perceptible es mucho más bajo de lo que la mayoría de la gente asume. Con el formato y la configuración correctos, puedes reducir el tamaño de los archivos de imagen un 60–80 % sin ninguna diferencia visible para el ojo humano.</p>
+
+    <h2>Entiende el punto óptimo de calidad</h2>
+    <p>Todo formato con pérdida tiene un rango de calidad donde la compresión es agresiva pero el resultado luce idéntico al original. Para fotos:</p>
+    <ul>
+      <li><strong>JPEG calidad 75–85</strong>: pérdida imperceptible para la mayoría de fotos a tamaños de visualización web</li>
+      <li><strong>WebP calidad 75–85</strong>: misma calidad visual que JPEG q85 con un archivo un 25–35 % más pequeño</li>
+      <li><strong>AVIF calidad 60–75</strong>: misma calidad visual que JPEG q85 con un archivo un 40–50 % más pequeño</li>
+    </ul>
+    <p>El ahorro entre calidad 100 y calidad 80 en JPEG es enorme, a menudo un factor de 3 a 5, sin diferencia perceptible. Los valores de calidad superiores a 85 producen rendimientos decrecientes.</p>
+
+    <div class="tip-box">
+      <strong>Prueba al tamaño de visualización real:</strong> Siempre juzga las imágenes comprimidas al tamaño en que aparecerán en pantalla. Haz zoom o descarga el archivo y amplíalo en un editor de fotos. Los artefactos invisibles al 100 % de visualización web son a menudo obvios al 400 %; pero tus usuarios nunca hacen zoom al 400 %.
+    </div>
+
+    <h2>Elige un formato moderno</h2>
+    <p>Cambiar de JPEG a un formato moderno es la mayor fuente de ganancias de compresión "gratuitas":</p>
+    <table>
+      <thead>
+        <tr><th>Formato</th><th>¿Qué tamaño vs JPEG con la misma calidad?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>JPEG (base)</td><td>100 %</td></tr>
+        <tr><td>WebP</td><td>65–75 %</td></tr>
+        <tr><td>AVIF</td><td>45–60 %</td></tr>
+      </tbody>
+    </table>
+    <p>Convertir un JPEG de 300 KB a AVIF con calidad equivalente produce típicamente un archivo de 130–180 KB. Sin cambio de calidad, reducción de tamaño del 40–55 %.</p>
+
+    <h2>Redimensiona antes de comprimir</h2>
+    <p>Comprimir una imagen de 4000 px de ancho que se mostrará a 800 px es un desperdicio. Redimensiona primero a las dimensiones de visualización y luego comprime. Una imagen de 800×600 a JPEG q80 será dramáticamente más pequeña que una imagen de 4000×3000 a JPEG q95, y lucirá idéntica a tamaños de visualización web.</p>
+
+    <h2>Elimina los metadatos</h2>
+    <p>Los archivos JPEG y PNG a menudo contienen metadatos incrustados: coordenadas GPS, modelo de cámara, perfiles de color, historial de edición, cadenas de copyright. Estos datos pueden añadir 20–150 KB a un archivo. Para uso web, elimina todos los metadatos:</p>
+    <ul>
+      <li><strong>JPEG</strong>: elimina EXIF, IPTC, XMP, ahorra normalmente 5–50 KB</li>
+      <li><strong>PNG</strong>: elimina fragmentos tEXt, iTXt, zTXt, gAMA, cHRM, ahorra 1–20 KB</li>
+    </ul>
+    <p>La mayoría de las herramientas de compresión y los CDN de imágenes eliminan los metadatos automáticamente. Verifica con una herramienta como exiftool o DevTools del navegador (tamaño del archivo antes/después) que los metadatos hayan sido eliminados.</p>
+
+    <h2>Usa JPEG progresivo para imágenes grandes</h2>
+    <p>El JPEG progresivo codifica la imagen en múltiples pasadas, entregando rápidamente una vista previa borrosa a tamaño completo que se va definiendo a medida que llegan más datos. Para imágenes de más de 10 KB, el JPEG progresivo es típicamente un 2–10 % más pequeño que el JPEG de línea base con la misma calidad. También proporciona una mejor experiencia de carga percibida en conexiones lentas.</p>
+
+    <h2>Optimización PNG sin pérdida de calidad</h2>
+    <p>Para archivos PNG (capturas de pantalla, gráficos con transparencia), aplica optimización sin pérdida:</p>
+    <ul>
+      <li><strong>Reduce la profundidad de color</strong>: si la imagen usa menos de 256 colores, convierte a PNG-8 (color indexado). Esto puede reducir el tamaño del archivo un 60–70 % sin ningún cambio visual</li>
+      <li><strong>Ejecuta pngcrush u oxipng</strong>: estas herramientas encuentran los parámetros óptimos de compresión DEFLATE sin cambiar ningún valor de píxel</li>
+      <li><strong>Considera WebP sin pérdida</strong>: WebP sin pérdida es típicamente un 26 % más pequeño que PNG con datos de píxeles idénticos</li>
+    </ul>
+
+    <h2>Flujo de trabajo de compresión para imágenes web</h2>
+    <ol>
+      <li>Redimensiona a las dimensiones de visualización</li>
+      <li>Elige el formato: AVIF → WebP → JPEG/PNG según las necesidades de compatibilidad del navegador</li>
+      <li>Para fotos: comienza con calidad 80, reduce a 70 si el archivo sigue siendo demasiado grande, para en 65</li>
+      <li>Elimina los metadatos</li>
+      <li>Verificación visual al tamaño de visualización real</li>
+      <li>Compara los tamaños de archivo antes y después</li>
+    </ol>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> Puedes comprimir imágenes un 50–80 % sin diferencia de calidad visible: (1) usando AVIF o WebP en lugar de JPEG, (2) apuntando a calidad 75–85 en lugar de 90–100, (3) redimensionando a las dimensiones de visualización reales y (4) eliminando los metadatos. La "pérdida de calidad" que la gente teme suele aparecer solo al 400 % de zoom, tus usuarios nunca la ven.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimizar Imágenes</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/compresion-con-perdida-sin-perdida" class="guide-related-card">
+        <strong>Compresión con Pérdida vs Sin Pérdida</strong>
+        <span>Comprende los tipos fundamentales de compresión de imagen.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/compresion-webp-vs-jpeg" class="guide-related-card">
+        <strong>Compresión WebP vs JPEG</strong>
+        <span>Comparativa detallada de los dos formatos web más comunes.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/optimizar-imagenes-web" class="guide-related-card">
+        <strong>Cómo Optimizar Imágenes para la Web</strong>
+        <span>La lista de verificación completa de optimización de imágenes para 2026.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cómo Comprimir Imágenes sin Perder Calidad",
+  "description": "Comprime imágenes un 50–80 % sin pérdida de calidad visible. Técnicas prácticas: elige el formato correcto, apunta al ajuste de calidad adecuado y usa compresión perceptual.",
+  "url": "https://imgpact.com/guides/comprimir-sin-perder-calidad",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

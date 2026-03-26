@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}Amazon Product Images: Requirements and Best Practices 2026 | imgpact{% endblock %}
+{% block meta_description %}Amazon has strict image requirements. Learn the exact specs: white background, 2000×2000 px, no watermarks. Plus best practices for images that rank and convert.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/ecommerce-product-images">E-commerce</a>
+    <span>›</span>
+    Amazon Product Images
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>Amazon Product Images: Requirements and Best Practices 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Amazon is the world's largest marketplace, and its image requirements are among the strictest in e-commerce. Non-compliant images can get your listings suppressed. Beyond compliance, the quality and variety of your images directly impact click-through rate, conversion rate, and organic ranking in Amazon search.</p>
+
+    <h2>Amazon main image (MAIN) requirements</h2>
+    <p>The main product image has the most rules and the biggest impact on performance:</p>
+    <ul>
+      <li><strong>White background</strong>: pure white (RGB 255,255,255), mandatory for the MAIN image</li>
+      <li><strong>Product fills 85%+ of the frame</strong>: the product must occupy at least 85% of the image area</li>
+      <li><strong>No watermarks, logos, text, or graphics</strong> on the MAIN image</li>
+      <li><strong>No mannequins</strong> for certain categories (apparel: use flat lay or invisible mannequin)</li>
+      <li><strong>No props or accessories</strong> not included in the product</li>
+      <li><strong>No borders, frames, or coloured backgrounds</strong></li>
+    </ul>
+
+    <h2>Technical specifications</h2>
+    <table>
+      <thead><tr><th>Requirement</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Minimum dimensions</td><td>1000 × 1000 px (to enable zoom)</td></tr>
+        <tr><td>Recommended dimensions</td><td>2000 × 2000 px</td></tr>
+        <tr><td>Maximum dimensions</td><td>10 000 × 10 000 px</td></tr>
+        <tr><td>Aspect ratio</td><td>Square (1:1) recommended</td></tr>
+        <tr><td>Accepted formats</td><td>JPEG (.jpg), TIFF (.tif), PNG (.png), GIF (.gif)</td></tr>
+        <tr><td>Preferred format</td><td>JPEG</td></tr>
+        <tr><td>Maximum file size</td><td>10 MB</td></tr>
+        <tr><td>Colour mode</td><td>sRGB or CMYK</td></tr>
+      </tbody>
+    </table>
+    <p>Minimum 1000×1000 px is required to enable Amazon's hover-zoom feature. At 1000 px, zoom is acceptable; at 2000 px, it is crisp and professional. Always upload at 2000×2000 px.</p>
+
+    <h2>Secondary images (non-MAIN)</h2>
+    <p>Secondary images (SWATCH, PT01, PT02, etc.) have fewer restrictions and are crucial for conversion:</p>
+    <ul>
+      <li>Can show lifestyle, contextual, in-use shots</li>
+      <li>Can include text overlays explaining features</li>
+      <li>Can show the product from multiple angles</li>
+      <li>Can include infographics, comparison charts, size guides</li>
+      <li>Should still be at 2000×2000 px minimum</li>
+    </ul>
+    <p>Amazon allows up to 9 images per listing (7 visible in the image gallery + 2 for video slots on some categories). Use all available slots.</p>
+
+    <h2>Impact on ranking and conversion</h2>
+    <p>Amazon's A9 algorithm considers <strong>conversion rate</strong> as a key ranking signal. Listings with better images convert better → rank higher → get more traffic → convert more. High-quality images are not just compliance, they are an SEO lever.</p>
+    <p>Specific improvements known to increase CTR and conversion:</p>
+    <ul>
+      <li>Zoom-quality main image (2000+ px) → customers use zoom, spend more time on listing</li>
+      <li>Lifestyle image as 2nd image → shows scale and context</li>
+      <li>Infographic with key features → reduces questions, increases confidence</li>
+      <li>Size chart image → reduces returns, increases purchase confidence</li>
+    </ul>
+
+    <h2>How to achieve a clean white background</h2>
+    <p>There are several approaches, from professional to DIY:</p>
+    <ul>
+      <li><strong>Professional photo studio</strong>: use a white seamless paper backdrop with proper lighting, the most reliable method</li>
+      <li><strong>Lightbox/light tent</strong>: compact shooting environment for small products, available from ~$30</li>
+      <li><strong>Post-processing</strong>: shoot on near-white background, use Photoshop "Select Subject" or background removal tools to isolate the product, place on pure white. Use RGB 255,255,255, not 250,250,250 (cream will fail Amazon's review)</li>
+    </ul>
+
+    <div class="warning-box">
+      <strong>Amazon's white background check:</strong> Amazon increasingly uses automated image scanning to detect off-white backgrounds. A background with RGB values below 250 may trigger a rejection. Use the eyedropper tool in Photoshop to verify your white is exactly 255,255,255.
+    </div>
+
+    <h2>Common Amazon image rejection reasons</h2>
+    <ul>
+      <li>Background is off-white (e.g., grey, cream, or light blue)</li>
+      <li>Product does not fill 85% of the frame (too much white space)</li>
+      <li>Watermark, logo, or text on the main image</li>
+      <li>Multiple products shown when listing is for a single item</li>
+      <li>Image is too small (below 1000 px on shortest side)</li>
+      <li>Lifestyle/contextual image used as MAIN</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> Amazon MAIN image = 2000×2000 px, pure white background (RGB 255,255,255), product fills 85%+ of frame, JPEG format. Secondary images can show lifestyle, infographics, and details, use all 7–9 available slots. Image quality directly impacts your Amazon ranking.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize to 2000×2000</a>
+      <a href="/tools/optimize" class="guide-cta-link secondary">Optimize Images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/product-photos-white-background" class="guide-related-card">
+        <strong>White Background Product Photos</strong>
+        <span>Step-by-step guide to clean white backgrounds.</span>
+      </a>
+      <a href="/{{ lang }}/guides/ecommerce-product-images" class="guide-related-card">
+        <strong>E-commerce Product Images</strong>
+        <span>The complete guide to product photography for online stores.</span>
+      </a>
+      <a href="/{{ lang }}/guides/shopify-image-sizes" class="guide-related-card">
+        <strong>Shopify Image Optimization</strong>
+        <span>Specific sizes and best practices for Shopify stores.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Amazon Product Images: Requirements and Best Practices 2026",
+  "description": "Amazon has strict image requirements. Learn the exact specs: white background, 2000×2000 px, no watermarks. Plus best practices for images that rank and convert.",
+  "url": "https://imgpact.com/guides/amazon-product-images",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

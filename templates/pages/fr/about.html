@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}À propos d'imgpact. Outils d'image gratuits dans le navigateur{% endblock %}
+{% block meta_description %}imgpact est une collection gratuite d'outils d'image, GIF et vidéo basés sur le navigateur, propulsés par WebAssembly. Aucun envoi de fichiers, aucune inscription, 100 % privé.{% endblock %}
+{% block content %}
+<div class="info-page">
+  <div class="info-header">
+    <h1>À propos d'imgpact</h1>
+    <p class="info-lead">imgpact est une collection d'outils d'image et GIF gratuits, fonctionnant dans le navigateur. Aucun compte, aucun envoi de fichiers, aucune limite.</p>
+  </div>
+  <div class="info-body">
+    <h2>Comment ça fonctionne</h2>
+    <p>Chaque outil d'imgpact s'exécute entièrement dans votre navigateur grâce à <strong>WebAssembly (WASM)</strong>. Vos fichiers ne quittent jamais votre appareil, aucun serveur ne traite vos images, pas de stockage en nuage, et aucune collecte de données liée à vos fichiers.</p>
+
+    <h2>Pourquoi imgpact ?</h2>
+    <ul>
+      <li><strong>Aucune limite de taille de fichier</strong>, traitez des fichiers aussi volumineux que la mémoire de votre navigateur le permet.</li>
+      <li><strong>Aucune limite de nombre de fichiers</strong>, convertissez ou optimisez autant de fichiers que vous le souhaitez en lot.</li>
+      <li><strong>100 % privé</strong>, vos images restent sur votre machine.</li>
+      <li><strong>Instantané</strong>, pas d'attente liée à l'envoi, pas de file d'attente.</li>
+      <li><strong>Gratuit</strong>, tous les outils sont gratuits, pour toujours.</li>
+    </ul>
+
+    <h2>Les outils</h2>
+    <p><strong>Outils image</strong></p>
+    <ul>
+      <li><a href="/tools/optimize">Compresser &amp; Optimiser</a>, réduire la taille des fichiers en préservant la qualité (JPEG, PNG, WebP)</li>
+      <li><a href="/tools/resize">Redimensionner</a>, redimensionner par dimensions ou pourcentage</li>
+      <li><a href="/tools/crop">Recadrer</a>, recadrage libre ou selon un ratio</li>
+      <li><a href="/tools/add-text">Ajouter du texte</a>, superposer du texte personnalisé avec contrôle de la police et de la couleur</li>
+      <li><a href="/tools/effects">Effets</a>, niveaux de gris, flou, luminosité, contraste, sépia, et plus</li>
+      <li><a href="/tools/transform">Transformer</a>, pivoter, retourner et convertir le format</li>
+    </ul>
+    <p><strong>Outils GIF &amp; vidéo</strong></p>
+    <ul>
+      <li><a href="/tools/gif-maker">Créateur de GIF</a>, créer un GIF animé à partir d'une série d'images</li>
+      <li><a href="/tools/gif-editor">Éditeur de GIF</a>, réorganiser les images, ajuster la durée, recadrer, pivoter, retourner, inverser</li>
+      <li><a href="/tools/gif-analyzer">Analyseur de GIF</a>, inspecter le nombre d'images, les délais, les dimensions et la palette</li>
+      <li><a href="/tools/gif-split">Découper un GIF</a>, extraire les images individuelles d'un GIF animé</li>
+      <li><a href="/tools/gif-to-mp4">GIF en MP4</a>, convertir un GIF animé en vidéo MP4</li>
+      <li><a href="/tools/gif-to-webm">GIF en WebM</a>, convertir un GIF animé en vidéo WebM</li>
+      <li><a href="/tools/gif-to-mov">GIF en MOV</a>, convertir un GIF animé en QuickTime MOV</li>
+      <li><a href="/tools/video-to-gif">Vidéo en GIF</a>, convertir un extrait vidéo (MP4, WebM, MOV) en GIF animé</li>
+    </ul>
+
+    <h2>Statistiques d'utilisation</h2>
+    <p>imgpact enregistre des événements d'utilisation anonymes pour comprendre quels outils sont les plus utiles et orienter le développement futur. Aucune donnée de fichier ni information personnelle n'est collectée, uniquement l'outil utilisé et un identifiant de session aléatoire généré par le navigateur. Toutes les statistiques agrégées sont publiquement visibles sur la <a href="/fr/stats">page Statistiques</a>.</p>
+
+    <h2>Technologie</h2>
+    <p>imgpact est construit avec <strong>Rust</strong> compilé en WebAssembly pour le traitement d'images, et <strong>Axum</strong> pour le service des pages. Le moteur d'image utilise la crate <code>image</code> pour la conversion de formats et la crate <code>gif</code> pour la manipulation de GIF. Le traitement vidéo utilise <strong>FFmpeg.wasm</strong>. Les événements d'utilisation anonymes sont stockés dans une base de données <strong>SQLite</strong> légère sur le serveur.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About imgpact",
+  "url": "https://imgpact.com/about",
+  "description": "imgpact is a free collection of browser-based image, GIF, and video tools powered by WebAssembly. No uploads, no signup, 100% private.",
+  "mainEntity": {
+    "@type": "WebApplication",
+    "name": "imgpact",
+    "url": "https://imgpact.com",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+}
+</script>
+{% endblock %}

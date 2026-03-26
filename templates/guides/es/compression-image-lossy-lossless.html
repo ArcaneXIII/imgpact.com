@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Compresión de Imagen con Pérdida vs Sin Pérdida: Comparativa Completa | imgpact{% endblock %}
+{% block meta_description %}La compresión con pérdida reduce el tamaño del archivo descartando datos. La compresión sin pérdida conserva cada píxel. Aprende qué tipo elegir para fotos, gráficos, logotipos e imágenes web.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/{{ guides_section }}/compresion-con-perdida-sin-perdida">Compresión</a>
+    <span>›</span>
+    Con Pérdida vs Sin Pérdida
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🗜 Compresión</div>
+    <h1>Compresión de Imagen con Pérdida vs Sin Pérdida</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Todas las imágenes en la web han sido comprimidas; pero no toda compresión es igual. Entender la diferencia entre compresión con pérdida y sin pérdida es la base de todo el trabajo de optimización de imágenes. Determina qué formato elegir, cuánta calidad puedes sacrificar y cuándo dejar de comprimir.</p>
+
+    <h2>¿Qué es la compresión con pérdida?</h2>
+    <p>La compresión con pérdida <strong>elimina datos de forma permanente</strong> de la imagen. El algoritmo analiza la imagen y descarta la información que el ojo humano tiene menos probabilidad de notar, textura fina en áreas suaves, degradados de color sutiles, detalles de alta frecuencia. El resultado es un archivo más pequeño a costa de algo de fidelidad.</p>
+    <p>La característica clave: <strong>la pérdida de calidad es irreversible</strong>. Una vez que guardas un JPEG, los datos descartados desaparecen. Volver a guardar ese JPEG causa otra ronda de pérdida de calidad, esto se llama "pérdida de generación".</p>
+    <p><strong>Formatos que usan compresión con pérdida:</strong> JPEG, WebP (modo con pérdida), AVIF (modo con pérdida), HEIC (modo con pérdida)</p>
+
+    <h2>¿Qué es la compresión sin pérdida?</h2>
+    <p>La compresión sin pérdida <strong>preserva cada píxel</strong> de la imagen original. El algoritmo encuentra patrones redundantes en los datos y los codifica de forma más eficiente, como la compresión ZIP para archivos; pero la imagen descomprimida es idéntica bit a bit al original. Nunca se descarta información visual.</p>
+    <p><strong>Formatos que usan compresión sin pérdida:</strong> PNG, GIF, WebP (modo sin pérdida), AVIF (modo sin pérdida), BMP (sin comprimir)</p>
+
+    <h2>Comparativa lado a lado</h2>
+    <table>
+      <thead>
+        <tr><th>Propiedad</th><th>Con pérdida</th><th>Sin pérdida</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Preservación de datos</td><td>Parcial (irreversible)</td><td>Completa (perfecta)</td></tr>
+        <tr><td>Tamaño del archivo</td><td>El más pequeño</td><td>Mayor</td></tr>
+        <tr><td>Calidad al volver a guardar</td><td>Se degrada</td><td>Sin cambios</td></tr>
+        <tr><td>Ideal para</td><td>Fotografías, imágenes complejas</td><td>Gráficos, logotipos, texto, capturas de pantalla</td></tr>
+        <tr><td>Formatos comunes</td><td>JPEG, WebP con pérdida, AVIF</td><td>PNG, WebP sin pérdida, GIF</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Cuándo usar compresión con pérdida</h2>
+    <p>La compresión con pérdida es la elección correcta cuando:</p>
+    <ul>
+      <li><strong>Estás comprimiendo fotografías</strong>: las fotos tienen patrones de píxeles complejos e irregulares donde alguna pérdida de datos es imperceptible</li>
+      <li><strong>El tamaño del archivo es crítico</strong>: imágenes hero, fotos de productos, fondos de página</li>
+      <li><strong>La imagen se verá a un tamaño fijo</strong> y controlas la calidad final de salida</li>
+      <li><strong>No vas a editar la imagen de nuevo</strong>: la compresión con pérdida debe ser el último paso antes de publicar</li>
+    </ul>
+
+    <h2>Cuándo usar compresión sin pérdida</h2>
+    <p>La compresión sin pérdida es necesaria cuando:</p>
+    <ul>
+      <li><strong>La imagen contiene bordes nítidos o texto</strong>: la compresión con pérdida crea artefactos visibles (halos, desenfoque) alrededor de los bordes de alto contraste</li>
+      <li><strong>Se requiere transparencia</strong>: PNG con canal alfa</li>
+      <li><strong>La imagen es un archivo fuente que se editará</strong>: trabaja siempre en formatos sin pérdida; aplica la compresión con pérdida solo al exportar</li>
+      <li><strong>La precisión a nivel de píxel es importante</strong>: capturas de pantalla, maquetas de UI, diagramas técnicos</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Regla de trabajo:</strong> Usa compresión con pérdida para fotografías y fondos visuales. Usa compresión sin pérdida para cualquier cosa que tenga texto, transparencia o formas geométricas nítidas. En caso de duda, compara ambas al tamaño de archivo objetivo y juzga visualmente.
+    </div>
+
+    <h2>Ajustes de calidad en compresión con pérdida</h2>
+    <p>Los formatos con pérdida (JPEG, WebP, AVIF) tienen un parámetro de calidad, normalmente en una escala de 0 a 100. No es una escala lineal, la relación entre el valor de calidad y el tamaño del archivo no es proporcional:</p>
+    <ul>
+      <li><strong>JPEG 90–100</strong>: calidad muy alta, archivo grande. Raramente justificado para uso web</li>
+      <li><strong>JPEG 75–85</strong>: excelente para fotos, pérdida de calidad imperceptible, objetivo típico para web</li>
+      <li><strong>JPEG 60–75</strong>: artefactos visibles en inspección cercana, pero aceptable para miniaturas</li>
+      <li><strong>JPEG por debajo de 60</strong>: degradación visible, solo apto para imágenes muy pequeñas</li>
+    </ul>
+    <p>WebP y AVIF producen mejores resultados con el mismo ajuste de calidad, AVIF q60 generalmente se ve mejor que JPEG q80 con un tamaño de archivo menor.</p>
+
+    <h2>Optimización PNG sin pérdida</h2>
+    <p>Incluso los archivos PNG sin pérdida pueden reducirse significativamente de tamaño sin ninguna pérdida de calidad mediante:</p>
+    <ul>
+      <li>Reducir la profundidad de color: PNG-8 (256 colores) vs PNG-24 (16 millones de colores), usa PNG-8 para gráficos simples</li>
+      <li>Aplicar compresión DEFLATE más agresiva (pngcrush, oxipng)</li>
+      <li>Eliminar metadatos (perfiles ICC, fragmentos de texto, marcas de tiempo de creación)</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Conclusión clave:</strong> La compresión con pérdida es ideal para fotografías (archivos más pequeños, pérdida imperceptible con calidad 75–85). La compresión sin pérdida es necesaria para gráficos con texto, bordes nítidos o transparencia. En flujos de trabajo de edición, conserva siempre los archivos fuente sin pérdida y aplica la compresión con pérdida solo como último paso de exportación.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimizar Imágenes</a>
+      <a href="/tools/convert/webp" class="guide-cta-link secondary">Convertir a WebP</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/{{ guides_section }}/comprimir-sin-perder-calidad" class="guide-related-card">
+        <strong>Cómo Comprimir sin Perder Calidad</strong>
+        <span>Técnicas prácticas para maximizar la compresión preservando la fidelidad visual.</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/compresion-webp-vs-jpeg" class="guide-related-card">
+        <strong>Compresión WebP vs JPEG</strong>
+        <span>¿Qué formato ofrece mejores resultados para imágenes web?</span>
+      </a>
+      <a href="/{{ lang }}/{{ guides_section }}/jpeg-vs-png" class="guide-related-card">
+        <strong>JPEG vs PNG</strong>
+        <span>Los dos formatos más comunes para imágenes web con y sin pérdida.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Compresión de Imagen con Pérdida vs Sin Pérdida",
+  "description": "La compresión con pérdida reduce el tamaño del archivo descartando datos. La compresión sin pérdida conserva cada píxel. Aprende qué tipo elegir para fotos, gráficos, logotipos e imágenes web.",
+  "url": "https://imgpact.com/guides/compresion-con-perdida-sin-perdida",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

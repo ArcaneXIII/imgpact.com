@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% block title %}Lazy loading des images : le guide complet 2026 | imgpact{% endblock %}
+{% block meta_description %}Découvrez comment implémenter le lazy loading des images avec loading="lazy" et l'Intersection Observer API pour accélérer vos pages web en 2026.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">Guides</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/optimiser-images-site-web">Optimisation web</a>
+    <span>›</span>
+    Lazy loading
+  </nav>
+
+  <header class="guide-header">
+    <div class="guide-pillar-badge">⚡ Optimisation web</div>
+    <h1>Lazy loading des images : le guide complet 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 5 min de lecture</span>
+      <span>📅 Mis à jour mars 2026</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>Le lazy loading (chargement différé) est une technique qui consiste à ne charger les images que lorsqu'elles sont sur le point d'entrer dans le viewport de l'utilisateur. Sur une page longue contenant 20 images, un visiteur qui ne scroll pas n'a aucune raison de télécharger les 15 images situées en bas de page. Le lazy loading élimine ce gaspillage.</p>
+
+    <h2>Qu'est-ce que le lazy loading ?</h2>
+
+    <p>Par défaut, un navigateur charge toutes les images d'une page dès qu'il analyse le HTML, qu'elles soient visibles ou non. C'est le comportement <em>eager</em> (empressé). Le lazy loading inverse ce comportement : les images sont chargées à la demande, juste avant d'être affichées.</p>
+
+    <p>Les bénéfices sont immédiats :</p>
+    <ul>
+      <li><strong>Réduction du volume de données téléchargées</strong> lors du chargement initial</li>
+      <li><strong>Amélioration du Time to Interactive</strong> : moins de ressources à charger = page interactive plus tôt</li>
+      <li><strong>Économies de bande passante</strong> pour les utilisateurs mobiles et votre serveur</li>
+      <li><strong>Meilleur score Lighthouse</strong> sur les métriques de performance</li>
+    </ul>
+
+    <h2>L'attribut HTML natif <code>loading="lazy"</code></h2>
+
+    <p>Depuis Chrome 76 (2019), Firefox 75 et Edge 79, le navigateur supporte nativement le lazy loading via l'attribut <code>loading</code>. Son utilisation est triviale :</p>
+
+    <pre><code>&lt;img
+  src="photo-produit.webp"
+  alt="Chaussure de running modèle X200"
+  loading="lazy"
+  width="600"
+  height="400"&gt;</code></pre>
+
+    <p>Trois valeurs sont disponibles :</p>
+    <ul>
+      <li><code>lazy</code> : chargement différé, l'image se charge quand elle approche du viewport</li>
+      <li><code>eager</code> : comportement par défaut, chargement immédiat</li>
+      <li><code>auto</code> : laisse le navigateur décider (généralement équivalent à <code>eager</code>)</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Bonne pratique :</strong> Ajoutez systématiquement <code>loading="lazy"</code> à toutes vos images below-the-fold. C'est une modification d'une ligne, sans dépendance JavaScript, et le gain est immédiat.
+    </div>
+
+    <h2>Above-the-fold : l'exception critique</h2>
+
+    <p>Le lazy loading ne doit <strong>jamais</strong> être appliqué aux images situées above-the-fold, c'est-à-dire visibles dès le chargement de la page, sans scroll. Cela inclut :</p>
+    <ul>
+      <li>L'image hero en haut de page</li>
+      <li>Le logo si c'est une image</li>
+      <li>Les premières illustrations d'un article</li>
+      <li>Tout élément visuel immédiatement visible</li>
+    </ul>
+
+    <p>Appliquer <code>loading="lazy"</code> à ces images retarde leur chargement, ce qui dégrade directement le <strong>Largest Contentful Paint (LCP)</strong>, la métrique Core Web Vitals la plus importante pour les images. L'image hero est très souvent l'élément LCP d'une page.</p>
+
+    <div class="warning-box">
+      <strong>Erreur critique à éviter :</strong> Mettre <code>loading="lazy"</code> sur l'image hero. Certains frameworks et plugins CMS l'appliquent à toutes les images par défaut, vérifiez et excluez explicitement les images above-the-fold.
+    </div>
+
+    <h2>L'Intersection Observer API</h2>
+
+    <p>Avant la standardisation de <code>loading="lazy"</code>, les développeurs implémentaient le lazy loading manuellement via l'Intersection Observer API. Cette approche reste utile pour des cas avancés : arrière-plans CSS, images dans des iframes, ou contrôle fin de la marge de déclenchement.</p>
+
+    <pre><code>// Sélectionner toutes les images avec data-src
+const images = document.querySelectorAll('img[data-src]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      observer.unobserve(img);
+    }
+  });
+}, {
+  rootMargin: '200px' // Commence à charger 200px avant l'entrée dans le viewport
+});
+
+images.forEach(img => observer.observe(img));</code></pre>
+
+    <p>En HTML, les images non-chargées utilisent un attribut <code>data-src</code> à la place de <code>src</code> :</p>
+
+    <pre><code>&lt;img
+  data-src="photo.webp"
+  src="placeholder-tiny.webp"
+  alt="Description"
+  width="800"
+  height="500"&gt;</code></pre>
+
+    <div class="info-box">
+      <strong>À noter :</strong> L'attribut natif <code>loading="lazy"</code> est préférable dans la grande majorité des cas. L'Intersection Observer API n'est à utiliser que pour des besoins non couverts par l'attribut natif.
+    </div>
+
+    <h2>Impact sur le LCP</h2>
+
+    <p>Le lazy loading a un effet direct sur le LCP. Bien utilisé, il améliore les performances globales de la page en réduisant les ressources chargées au démarrage. Mal utilisé (sur l'image LCP), il le dégrade significativement.</p>
+
+    <p>Voici les règles à suivre :</p>
+    <ul>
+      <li><strong>Image LCP :</strong> <code>fetchpriority="high"</code>, sans <code>loading="lazy"</code>, avec <code>&lt;link rel="preload"&gt;</code> dans le <code>&lt;head&gt;</code></li>
+      <li><strong>Images 1 à 3 (above-the-fold) :</strong> chargement <code>eager</code> (défaut)</li>
+      <li><strong>Toutes les autres images :</strong> <code>loading="lazy"</code></li>
+    </ul>
+
+    <h2>Support navigateurs en 2026</h2>
+
+    <p>L'attribut <code>loading="lazy"</code> est supporté par tous les navigateurs modernes :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navigateur</th>
+          <th>Support depuis</th>
+          <th>Version minimale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chrome / Edge</td>
+          <td>Juillet 2019</td>
+          <td>76+</td>
+        </tr>
+        <tr>
+          <td>Firefox</td>
+          <td>Avril 2020</td>
+          <td>75+</td>
+        </tr>
+        <tr>
+          <td>Safari</td>
+          <td>Septembre 2021</td>
+          <td>15.4+</td>
+        </tr>
+        <tr>
+          <td>Samsung Internet</td>
+          <td>2020</td>
+          <td>12+</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>La couverture mondiale dépasse 95 % en 2026. Les quelques navigateurs non supportés chargent simplement toutes les images (comportement par défaut), sans erreur.</p>
+
+    <h2>Exemples CSS : lazy loading des arrière-plans</h2>
+
+    <p>L'attribut <code>loading="lazy"</code> ne s'applique qu'aux balises <code>&lt;img&gt;</code>. Pour les images de fond CSS, il faut utiliser l'Intersection Observer API ou une classe CSS conditionnelle :</p>
+
+    <pre><code>/* L'image de fond ne se charge pas tant que .loaded n'est pas ajouté */
+.hero-bg {
+  background-image: none;
+}
+
+.hero-bg.loaded {
+  background-image: url('background.webp');
+}</code></pre>
+
+    <pre><code>// Ajouter la classe .loaded quand l'élément entre dans le viewport
+const bgElements = document.querySelectorAll('.hero-bg');
+
+const bgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('loaded');
+      bgObserver.unobserve(entry.target);
+    }
+  });
+});
+
+bgElements.forEach(el => bgObserver.observe(el));</code></pre>
+
+    <div class="tip-box">
+      <strong>Recommandation :</strong> Évitez les images de fond CSS pour les contenus importants. Préférez les balises <code>&lt;img&gt;</code> qui bénéficient du lazy loading natif, sont indexées par Google et peuvent recevoir un attribut <code>alt</code>.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>Essayez les outils imgpact</h3>
+    <p>Avant de lazy-loader, assurez-vous que vos images sont déjà optimisées. Compressez et convertissez en WebP en un clic.</p>
+    <div class="guide-cta-links">
+      <a href="/tools/optimize" class="guide-cta-link">Optimiser mes images</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>Articles liés</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/optimiser-images-site-web" class="guide-related-card">
+        <strong>Comment optimiser les images pour votre site web : le guide complet</strong>
+        <span>Toutes les techniques d'optimisation des images web en un seul guide.</span>
+      </a>
+      <a href="/{{ lang }}/guides/images-core-web-vitals" class="guide-related-card">
+        <strong>Images et Core Web Vitals : optimiser LCP, CLS et FID</strong>
+        <span>Comment les images impactent vos métriques Google et comment les améliorer.</span>
+      </a>
+      <a href="/{{ lang }}/guides/responsive-images-srcset-sizes" class="guide-related-card">
+        <strong>Images responsives avec srcset et sizes : guide pratique</strong>
+        <span>Servir la bonne image à chaque écran avec srcset, sizes et &lt;picture&gt;.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lazy loading des images : le guide complet 2026",
+  "description": "Découvrez comment implémenter le lazy loading des images avec loading=\"lazy\" et l'Intersection Observer API pour accélérer vos pages web en 2026.",
+  "url": "https://imgpact.com/guides/lazy-loading-images",
+  "dateModified": "2026-03-22",
+  "publisher": {
+    "@type": "Organization",
+    "name": "imgpact",
+    "url": "https://imgpact.com"
+  }
+}
+</script>
+{% endblock %}

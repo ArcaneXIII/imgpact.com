@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}White Background Product Photos: DIY Guide 2026 | imgpact{% endblock %}
+{% block meta_description %}Achieve professional white background product photos at home or in post-processing. Equipment, lighting setup, and Photoshop techniques for RGB 255,255,255 backgrounds.{% endblock %}
+{% block content %}
+<article class="guide-article">
+  <nav class="guide-breadcrumb">
+    <a href="/">imgpact</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides">{{ t.guide_breadcrumb_guides }}</a>
+    <span>›</span>
+    <a href="/{{ lang }}/guides/ecommerce-product-images">E-commerce</a>
+    <span>›</span>
+    White Background Photos
+  </nav>
+  <header class="guide-header">
+    <div class="guide-pillar-badge">🛒 E-commerce</div>
+    <h1>White Background Product Photos: DIY Guide 2026</h1>
+    <div class="guide-meta">
+      <span>⏱ 6 {{ t.guide_min_read }}</span>
+      <span>📅 {{ t.guide_updated }}</span>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    <p>White background product photos are required for Amazon, most marketplaces, and professional e-commerce stores. Pure white (RGB 255,255,255) backgrounds look clean, are marketplace-compliant, and allow customers to focus entirely on the product. Here is how to achieve them, whether in a photo setup or in post-processing.</p>
+
+    <h2>Method 1: In-camera white background</h2>
+    <p>The cleanest approach. Get the white background right at the time of shooting and post-processing becomes minimal.</p>
+
+    <h3>Equipment needed</h3>
+    <ul>
+      <li><strong>White seamless paper</strong> or white foam board (backdrop)</li>
+      <li><strong>Two softbox lights</strong> or ring light (or use a window with diffused natural light)</li>
+      <li><strong>Camera</strong> or modern smartphone with manual exposure controls</li>
+      <li><strong>Optional: lightbox/light tent</strong> for small products (~$30 on Amazon)</li>
+    </ul>
+
+    <h3>Lighting setup</h3>
+    <p>The classic two-light setup:</p>
+    <ol>
+      <li>Place white backdrop behind and below the product (create a "sweep", no sharp corner between floor and wall)</li>
+      <li>Position one main light at 45° to the left or right of the product, slightly above</li>
+      <li>Position a fill light on the opposite side at lower power (1:2 ratio with main) to reduce harsh shadows</li>
+      <li>Add a backlight aimed at the backdrop (not the product) to blow out the background to pure white</li>
+    </ol>
+    <p>The key is <strong>separating the product lighting from the background lighting</strong>. The background needs to be overexposed relative to the product.</p>
+
+    <h3>Camera settings</h3>
+    <ul>
+      <li>Set white balance to "Custom" using a white card in your setup</li>
+      <li>Shoot in RAW format if possible for maximum post-processing flexibility</li>
+      <li>Use a tripod for sharp images, especially for small products</li>
+    </ul>
+
+    <h2>Method 2: Post-processing (background removal)</h2>
+    <p>If you cannot set up a proper studio, shoot against the lightest background you can find (grey or light beige works) and remove the background in software.</p>
+
+    <h3>Photoshop: Select Subject + Background removal</h3>
+    <ol>
+      <li>Open your product photo in Photoshop</li>
+      <li>Go to <strong>Select → Subject</strong> (AI-powered, works well for clear products)</li>
+      <li>Review and refine the selection with "Select and Mask"</li>
+      <li>Click "Select and Mask" → output to "New Layer with Layer Mask"</li>
+      <li>Add a white solid color layer below the masked product layer</li>
+      <li>Flatten the image and export as JPEG</li>
+    </ol>
+
+    <h3>Free alternatives</h3>
+    <ul>
+      <li><strong>remove.bg</strong>: AI-powered background removal, free for low resolution</li>
+      <li><strong>GIMP</strong>: free open-source editor with "Fuzzy Select" and "Paths" tools for manual selection</li>
+      <li><strong>Background Eraser app</strong>: mobile app for quick removal on phone photos</li>
+    </ul>
+
+    <h2>Verifying pure white (RGB 255,255,255)</h2>
+    <p>After processing, verify the background is truly pure white, not off-white or light grey. This is critical for Amazon compliance.</p>
+    <p>In Photoshop: use the <strong>Color Sampler Tool</strong> (Shift+I) and click on the background. The Info panel should show R:255 G:255 B:255. If you see values like 248,248,248, your background is slightly grey and will fail Amazon's automated check.</p>
+    <p>Quick fix: use <strong>Image → Adjustments → Levels</strong> and drag the white output slider until the background reads 255,255,255, or use <strong>Select Color Range → Highlights → Replace with white</strong>.</p>
+
+    <h2>Dealing with product edges and shadows</h2>
+    <p>Hard product edges are easy to mask but organic objects (hair, fur, fabric) are harder. Tips:</p>
+    <ul>
+      <li><strong>Refine Edge / Select and Mask</strong> in Photoshop handles soft edges, fur, and hair much better than simple selection</li>
+      <li><strong>Keep a subtle drop shadow</strong>: a barely visible soft shadow (2–5% opacity) at the base of the product looks more realistic than "floating" objects on a flat white background</li>
+      <li><strong>For reflective products</strong> (jewellery, electronics): use polarising filters to reduce glare, or photograph on white acrylic for built-in ground reflection</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Consistency tip:</strong> If photographing multiple products, keep your lighting setup identical across all sessions. Consistent exposure, angle, and crop ratio makes your product grid look professional and cohesive, regardless of the individual products.
+    </div>
+
+    <h2>Export settings for marketplace images</h2>
+    <ul>
+      <li>Flatten all layers before export</li>
+      <li>Export as JPEG, quality 85–90</li>
+      <li>Colour space: sRGB</li>
+      <li>Dimensions: 2000 × 2000 px</li>
+      <li>Strip EXIF metadata</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Key takeaway:</strong> The best white background comes from a proper two-light studio setup, separate lighting for the product and background. For post-processing, use Photoshop's "Select Subject" + a white layer, and verify the final background is exactly RGB 255,255,255. Export at 2000×2000 JPEG q85 in sRGB.
+    </div>
+
+  </div>
+
+  <div class="guide-cta">
+    <h3>{{ t.guide_cta_title }}</h3>
+    <p>{{ t.guide_cta_subtitle }}</p>
+    <div class="guide-cta-links">
+      <a href="/tools/resize" class="guide-cta-link">Resize to 2000×2000</a>
+      <a href="/tools/effects" class="guide-cta-link secondary">Apply Effects</a>
+    </div>
+  </div>
+
+  <div class="guide-related">
+    <h2>{{ t.guide_related_title }}</h2>
+    <div class="guide-related-grid">
+      <a href="/{{ lang }}/guides/amazon-product-images" class="guide-related-card">
+        <strong>Amazon Product Images</strong>
+        <span>Amazon's exact requirements for compliant product listings.</span>
+      </a>
+      <a href="/{{ lang }}/guides/ecommerce-product-images" class="guide-related-card">
+        <strong>E-commerce Product Images</strong>
+        <span>Complete guide to product photography for online stores.</span>
+      </a>
+      <a href="/{{ lang }}/guides/interactive-product-zoom" class="guide-related-card">
+        <strong>Interactive Product Zoom</strong>
+        <span>How to implement zoom viewers for your product images.</span>
+      </a>
+    </div>
+  </div>
+</article>
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "White Background Product Photos: DIY Guide 2026",
+  "description": "Achieve professional white background product photos at home or in post-processing. Equipment, lighting setup, and Photoshop techniques for RGB 255,255,255 backgrounds.",
+  "url": "https://imgpact.com/guides/product-photos-white-background",
+  "dateModified": "2026-03-22",
+  "publisher": { "@type": "Organization", "name": "imgpact", "url": "https://imgpact.com" }
+}
+</script>
+{% endblock %}

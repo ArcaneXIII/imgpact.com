@@ -1,0 +1,127 @@
+{%- extends "base.html" -%}
+
+{% block content %}
+<div class="tool-page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{ t.breadcrumb_home }}</a><span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>{{ t.tool_crop_title }}</span>
+  </nav>
+  <div class="tool-header">
+    <h1><i data-lucide="crop"></i> {{ t.tool_crop_title }}</h1>
+    <p>{{ t.tool_crop_desc }}</p>
+  </div>
+
+  <div class="upload-zone" id="upload-zone">
+    <div class="upload-icon"><i data-lucide="image"></i></div>
+    <div class="upload-text">{{ t.upload_drop_image }}</div>
+    <div class="upload-hint">PNG, JPG, WebP, GIF, BMP</div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+  </div>
+  <div id="file-info-bar" style="display:none" class="file-info-bar"></div>
+
+  <div id="tool-controls" class="hidden">
+    <div class="controls-panel">
+      <div class="control-row">
+        <div class="control-group">
+          <label>{{ t.label_aspect_ratio }}</label>
+          <select id="aspect-select">
+            <option value="free">{{ t.option_free }}</option>
+            <option value="1:1">1:1 Square</option>
+            <option value="4:3">4:3</option>
+            <option value="16:9">16:9</option>
+            <option value="3:2">3:2</option>
+            <option value="custom">{{ t.label_custom }}…</option>
+          </select>
+        </div>
+        <div class="control-group" id="custom-ratio-wrap" style="display:none">
+          <label>W : H</label>
+          <div style="display:flex;gap:0.4rem;align-items:center">
+            <input type="number" id="ratio-w" value="16" min="1" style="width:56px">
+            <span style="color:var(--text-secondary)">:</span>
+            <input type="number" id="ratio-h" value="9" min="1" style="width:56px">
+          </div>
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_output_format }}</label>
+          <select id="out-format">
+            <option value="same">{{ t.option_same_as_input }}</option>
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="crop-canvas"></canvas>
+      </div>
+
+      <div class="control-row" style="margin-top:0.5rem">
+        <div class="control-group">
+          <label>X</label>
+          <input type="number" id="crop-x" value="0" min="0">
+        </div>
+        <div class="control-group">
+          <label>Y</label>
+          <input type="number" id="crop-y" value="0" min="0">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_width }}</label>
+          <input type="number" id="crop-w" value="100" min="1">
+        </div>
+        <div class="control-group">
+          <label>{{ t.label_height }}</label>
+          <input type="number" id="crop-h" value="100" min="1">
+        </div>
+      </div>
+
+      <button class="btn-process" id="btn-crop"><i data-lucide="crop"></i> {{ t.btn_crop_image }}</button>
+    </div>
+  </div>
+
+  <div id="output-section" class="output-section hidden">
+    <div class="before-after" id="before-after"></div>
+    <div class="stats-bar" id="stats-bar"></div>
+    <button class="btn-download" id="btn-download"><i data-lucide="download"></i> {{ t.btn_download }}</button>
+  </div>
+</div>
+
+<script src="/static/js/tool-common.js"></script>
+<script src="/static/js/tools/crop.js"></script>
+
+{%- if lang == "fr" -%}
+{%- include "tools/seo/crop/fr.html" ignore missing -%}
+{%- elif lang == "es" -%}
+{%- include "tools/seo/crop/es.html" ignore missing -%}
+{%- elif lang == "ru" -%}
+{%- include "tools/seo/crop/ru.html" ignore missing -%}
+{%- else -%}
+{%- include "tools/seo/crop/en.html" ignore missing -%}
+{%- endif -%}
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Crop Image",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "url": "https://imgpact.com/tools/crop",
+    "description": "Crop images to any size or aspect ratio with visual drag handles. Free, no upload required.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "imgpact", "url": "https://imgpact.com" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",        "item": "https://imgpact.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Crop Image",  "item": "https://imgpact.com/tools/crop" }
+    ]
+  }
+]
+</script>
+{% endblock %}
